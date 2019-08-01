@@ -6,7 +6,7 @@
   "author": "ZEIW",
   "scripts": {
     "start": "yarn build && npx serve dist",
-    "build": "parcel build src/index.html --experimental-scope-hoisting"
+    "build": "parcel build src/*.html --experimental-scope-hoisting"
   },
   "husky": {
     "hooks": {
