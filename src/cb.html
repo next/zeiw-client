@@ -4,7 +4,7 @@
     <title>Redirecting …</title>
   </head>
 
-  <script async nonce="{{ nonce }}">
+  <script async>
     const qs = new URLSearchParams(window.location.search)
     window.addEventListener('load', function() {
       if (qs.has('uc')) {
