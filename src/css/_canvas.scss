@@ -1,0 +1,8 @@
+canvas {
+  width: 45%;
+  position: relative;
+  border-color: var(--primary);
+}
+canvas:before {
+  padding-top: 100%;
+}

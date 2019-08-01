@@ -1,0 +1,34 @@
+.badge {
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: 50%;
+  width: 24px;
+  height: 24px;
+}
+
+#dev {
+  background-image: url(https://cdn.zeiw.me/badge/dev.svg);
+}
+
+#mod {
+  background-image: url(https://cdn.zeiw.me/badge/mod.svg);
+}
+
+#tp {
+  background-image: url(https://cdn.zeiw.me/badge/tp.svg);
+}
+
+#pr,
+#prc {
+  background-image: url(https://cdn.zeiw.me/badge/pr.svg);
+}
+
+#wd,
+#wdc {
+  background-image: url(https://cdn.zeiw.me/badge/wd.svg);
+}
+
+#db,
+#dbc {
+  background-image: url(https://cdn.zeiw.me/badge/db.svg);
+}

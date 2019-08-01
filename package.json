@@ -1,0 +1,32 @@
+{
+  "name": "client",
+  "version": "1.0.0",
+  "repository": "git@github.com:ZEIW/client.git",
+  "license": "MIT",
+  "author": "ZEIW",
+  "scripts": {
+    "start": "yarn build && npx serve dist",
+    "build": "parcel build src/index.html --experimental-scope-hoisting"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "pretty-quick --staged"
+    }
+  },
+  "dependencies": {
+    "clipboard": "^2.0.4",
+    "howler": "^2.1.2",
+    "micromodal": "^0.4.0",
+    "socket.io-client": "^2.2.0",
+    "tippy.js": "^4.3.4"
+  },
+  "devDependencies": {
+    "husky": "^3.0.2",
+    "parcel-bundler": "^1.12.3",
+    "parcel-plugin-purgecss": "^2.1.2",
+    "parcel-plugin-static-files-copy": "^2.2.0",
+    "prettier": "^1.18.2",
+    "pretty-quick": "^1.11.1",
+    "sass": "^1.22.9"
+  }
+}

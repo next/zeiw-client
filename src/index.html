@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="ie=edge" http-equiv="x-ua-compatible" />
+    <title>ZEIW</title>
+    <meta content="Open source community-based game 🏓" name="description" />
+    <meta content="width=device-width, initial-scale=1" name="viewport" />
+    <link
+      href="https://cdn.zeiw.me/favicon/apple-touch-icon.png"
+      rel="apple-touch-icon"
+      sizes="180x180"
+    />
+    <link
+      href="https://cdn.zeiw.me/favicon/favicon-32x32.png"
+      rel="icon"
+      sizes="32x32"
+      type="image/png"
+    />
+    <link
+      href="https://cdn.zeiw.me/favicon/favicon-16x16.png"
+      rel="icon"
+      sizes="16x16"
+      type="image/png"
+    />
+    <link href="https://cdn.zeiw.me/favicon/site.webmanifest" rel="manifest" />
+    <link
+      href="https://cdn.zeiw.me/favicon/safari-pinned-tab.svg"
+      rel="mask-icon"
+    />
+    <link href="https://cdn.zeiw.me/favicon/favicon.ico" rel="shortcut icon" />
+    <meta content="ZEIW" name="apple-mobile-web-app-title" />
+    <meta content="ZEIW" name="application-name" />
+    <meta content="#0066ff" name="msapplication-TileColor" />
+    <meta
+      content="https://cdn.zeiw.me/favicon/browserconfig.xml"
+      name="msapplication-config"
+    />
+    <meta content="#0066ff" name="theme-color" />
+    <meta content="279" property="og:image:width" />
+    <meta content="279" property="og:image:height" />
+    <meta
+      content="Open source community-based game 🏓"
+      property="og:description"
+    />
+    <meta content="ZEIW" property="og:title" />
+    <meta
+      content="https://cdn.zeiw.me/favicon/og-image.jpg"
+      property="og:image"
+    />
+    <meta content="https://play.zeiw.me" property="og:url" />
+    <script type="application/ld+json">
+      {
+        "@context": "http://schema.org",
+        "@type": "VideoGame",
+        "name": "ZEIW",
+        "url": "https://play.zeiw.me",
+        "playMode": "MultiPlayer",
+        "image": "https://zeiw.me/cover.png",
+        "description": "Open source community-based game 🏓",
+        "author": {
+          "@type": "Organization",
+          "name": "ZEIW",
+          "url": "https://zeiw.me"
+        },
+        "publisher": "ZEIW",
+        "genre": ["Action", "Sports", "Strategy", "Multiplayer"],
+        "gamePlatform": ["Web", "Windows", "macOS", "Linux"],
+        "applicationCategory": ["Multiplayer Game"],
+        "operatingSystem": ["Windows", "macOS", "Linux", "Chrome OS"]
+      }
+    </script>
+    <link
+      href="https://fonts.googleapis.com/css?family=Asap&display=swap"
+      rel="stylesheet"
+      nonce="{{ nonce }}"
+    />
+    <link href="css/app.scss" rel="stylesheet" />
+  </head>
+  <body>
+    <div id="notification"></div>
+    <div class="center">
+      <div class="cf w-100">
+        <div class="fl w-10 bg vh-100 dt">
+          <div class="dtc v-mid tc sidebar">
+            <img
+              alt=""
+              class="w-50 pointer"
+              data-tippy="Return Home"
+              data-tippy-placement="right"
+              id="rh"
+              src="https://cdn.zeiw.me/icon/home.svg"
+            />
+            <img
+              alt=""
+              class="w-50 pointer"
+              data-micromodal-trigger="modal-da"
+              data-tippy="Player Settings"
+              data-tippy-placement="right"
+              id="psb"
+              src="https://cdn.zeiw.me/icon/ps.svg"
+            />
+            <img
+              alt=""
+              class="w-50 pointer"
+              data-micromodal-trigger="modal-gs"
+              data-tippy="Game Settings"
+              data-tippy-placement="right"
+              src="https://cdn.zeiw.me/icon/gs.svg"
+            />
+            <img
+              alt=""
+              class="w-50 pointer hidden"
+              data-micromodal-trigger="modal-ds"
+              data-tippy="Developer Tools"
+              data-tippy-placement="right"
+              id="ds"
+              src="https://cdn.zeiw.me/icon/ds.svg"
+            />
+            <a href="https://discord.gg/h7NxqBe" rel="noopener" target="_blank"
+              ><img
+                alt=""
+                class="w-50 pointer"
+                data-tippy="Join our Discord"
+                data-tippy-placement="right"
+                src="https://cdn.zeiw.me/brand/discord.svg"
+            /></a>
+          </div>
+        </div>
+        <div class="fl w-90 vh-100 dt">
+          <div class="dtc tc v-mid hidden" id="match">
+            <h1>Matchmaking</h1>
+            <div class="spinner">
+              <div class="cube1"></div>
+              <div class="cube2"></div>
+            </div>
+          </div>
+          <div class="dtc tc v-mid hidden" id="wait">
+            <div
+              class="copy pointer"
+              data-tippy="Copy to Clipboard"
+              data-tippy-placement="top"
+              id="pcpb"
+            ></div>
+            <div class="spinner">
+              <div class="cube1"></div>
+              <div class="cube2"></div>
+            </div>
+          </div>
+          <div class="dtc tc v-mid hidden" id="game">
+            <div class="f4">
+              Time Played: <span id="stopwatch">N/A</span> Seconds
+            </div>
+            <div class="hidden items-center ma4">
+              <canvas class="br3 ba bw3 ma2 mb2 shadow-4" id="canvas"></canvas>
+            </div>
+            <div id="countdown"></div>
+          </div>
+          <div class="dtc tc v-mid" id="home">
+            <img alt="" class="w-30" src="https://cdn.zeiw.me/image/zeiw.png" />
+            <h1 class="f4 ttu tracked mt0 mt4" id="online">
+              ??? ONLINE
+            </h1>
+            <img
+              alt=""
+              class="w4 pointer bg br3 pa4 ma2 shadow-4"
+              data-tippy="Find Match"
+              data-tippy-placement="bottom"
+              id="playBtn"
+              src="https://cdn.zeiw.me/icon/find.svg"
+            />
+            <img
+              alt=""
+              class="w4 pointer bg br3 pa4 ma2 shadow-4"
+              data-tippy="Host Party"
+              data-tippy-placement="bottom"
+              id="hostBtn"
+              src="https://cdn.zeiw.me/icon/host.svg"
+            />
+            <img
+              alt=""
+              class="w4 pointer bg br3 pa4 ma2 shadow-4"
+              data-tippy="Join Party"
+              data-tippy-placement="bottom"
+              id="tabJoinBtn"
+              src="https://cdn.zeiw.me/icon/join.svg"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+    <div aria-hidden="true" class="modal slide" id="modal-da">
+      <div class="overlay" data-micromodal-close="" tabindex="-1">
+        <div class="container" role="dialog">
+          <div class="header">
+            <h2 class="title">Authenticate</h2>
+            <button class="close pointer" data-micromodal-close=""></button>
+          </div>
+          <div class="content">
+            <a
+              class="no-underline white bg-blurple inline-flex items-center tc br2 pa2"
+              href="#"
+              id="dab"
+              >Sign in with
+              <img
+                alt=""
+                class="h1 pl1"
+                src="https://cdn.zeiw.me/image/discord.png"
+            /></a>
+          </div>
+          <div class="footer">
+            <button class="btn" data-micromodal-close="">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div aria-hidden="true" class="modal slide" id="modal-gs">
+      <div class="overlay" data-micromodal-close="" tabindex="-1">
+        <div class="container" role="dialog">
+          <div class="header">
+            <h2 class="title">Game Settings</h2>
+            <button class="close pointer" data-micromodal-close=""></button>
+          </div>
+          <div class="content">
+            <div class="audio switch-wrapper">
+              <p>Play Audio</p>
+              <label class="switch" for="audio"
+                ><input id="audio" type="checkbox"/>
+                <span class="slider round"></span
+              ></label>
+            </div>
+            <div class="devmode switch-wrapper hidden">
+              <p>Developer Mode</p>
+              <label class="switch" for="devmode"
+                ><input id="devmode" type="checkbox"/>
+                <span class="slider round"></span
+              ></label>
+            </div>
+          </div>
+          <div class="footer">
+            <button class="btn" data-micromodal-close="">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div aria-hidden="true" class="modal slide" id="modal-ds">
+      <div class="overlay" data-micromodal-close="" tabindex="-1">
+        <div class="container" role="dialog">
+          <div class="header">
+            <h2 class="title">Developer Tools</h2>
+            <button class="close pointer" data-micromodal-close=""></button>
+          </div>
+          <div class="content">
+            No Options Yet!
+          </div>
+          <div class="footer">
+            <button class="btn" data-micromodal-close="">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div aria-hidden="true" class="modal slide" id="modal-ps">
+      <div class="overlay" data-micromodal-close="" tabindex="-1">
+        <div class="container" role="dialog">
+          <div class="header">
+            <h2 class="title">Player Settings</h2>
+            <button class="close pointer" data-micromodal-close=""></button>
+          </div>
+          <div class="content center dt">
+            <div class="dtc tc v-mid">
+              <img
+                alt=""
+                class="br-100 pa1 ba b--black-10 w4"
+                id="pfp"
+                src=""
+              />
+              <h1 class="" id="uname"></h1>
+              <div class="flex flex justify-center">
+                <div
+                  class="badge badgeh ma2"
+                  data-tippy="ZEIW Developer"
+                  data-tippy-placement="top"
+                  id="dev"
+                ></div>
+                <div
+                  class="badge badgeh ma2"
+                  data-tippy="ZEIW Moderator"
+                  data-tippy-placement="top"
+                  id="mod"
+                ></div>
+                <div
+                  class="badge badgeh ma2"
+                  data-tippy="ZEIW Testpilot"
+                  data-tippy-placement="top"
+                  id="tp"
+                ></div>
+                <div
+                  class="badge badgeh ma2"
+                  data-tippy="Phoenix Riders"
+                  data-tippy-placement="top"
+                  id="pr"
+                ></div>
+                <div
+                  class="badge badgeh ma2"
+                  data-tippy="Winter Dragons"
+                  data-tippy-placement="top"
+                  id="wd"
+                ></div>
+                <div
+                  class="badge badgeh ma2"
+                  data-tippy="Demon Brigade"
+                  data-tippy-placement="top"
+                  id="db"
+                ></div>
+              </div>
+            </div>
+          </div>
+          <div class="footer">
+            <button
+              class="btn btn-danger ma2"
+              data-micromodal-trigger="modal-logout"
+            >
+              Sign Out
+            </button>
+            <button class="btn" data-micromodal-trigger="modal-fac">
+              Choose Faction
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div aria-hidden="true" class="modal slide" id="modal-logout">
+      <div class="overlay" data-micromodal-close="" tabindex="-1">
+        <div class="container" role="dialog">
+          <div class="header">
+            <h2 class="title">Sign Out</h2>
+            <button class="close pointer" data-micromodal-close=""></button>
+          </div>
+          <div class="content">
+            Are you sure you want to sign out?
+          </div>
+          <div class="footer">
+            <button class="btn" data-micromodal-close="">Close</button>
+            <button class="btn btn-danger" id="logoutBtn">
+              Sign Out
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div aria-hidden="true" class="modal slide" id="modal-oauth-unauth-error">
+      <div class="overlay" data-micromodal-close="" tabindex="-1">
+        <div class="container" role="dialog">
+          <div class="header">
+            <h2 class="title">Authorization Failed</h2>
+            <button class="close pointer" data-micromodal-close=""></button>
+          </div>
+          <div class="content">
+            You can login by authorizing ZEIW on Discord.
+          </div>
+        </div>
+      </div>
+    </div>
+    <div aria-hidden="true" class="modal slide" id="modal-oauth-conn-error">
+      <div class="overlay" data-micromodal-close="" tabindex="-1">
+        <div class="container" role="dialog">
+          <div class="header">
+            <h2 class="title">Authorization Failed</h2>
+            <button class="close pointer" data-micromodal-close=""></button>
+          </div>
+          <div class="content">
+            We couldn't connect to Discord. Make sure your Discord app is
+            running.
+          </div>
+        </div>
+      </div>
+    </div>
+    <div aria-hidden="true" class="modal slide" id="modal-fac">
+      <div class="overlay" data-micromodal-close="" tabindex="-1">
+        <div class="container" role="dialog">
+          <div class="header">
+            <h2 class="title">Choose Faction</h2>
+            <button class="close pointer" data-micromodal-close=""></button>
+          </div>
+          <div class="content center dt">
+            <div class="dtc tc">
+              <div class="factions flex flex-row justify-center">
+                <div
+                  class="badge ma2 pointer"
+                  data-tippy="Phoenix Riders"
+                  data-tippy-placement="top"
+                  id="prc"
+                ></div>
+                <div
+                  class="badge ma2 pointer"
+                  data-tippy="Winter Dragons"
+                  data-tippy-placement="top"
+                  id="wdc"
+                ></div>
+                <div
+                  class="badge ma2 pointer"
+                  data-tippy="Demon Brigade"
+                  data-tippy-placement="top"
+                  id="dbc"
+                ></div>
+              </div>
+            </div>
+          </div>
+          <div class="footer">
+            <button class="btn" data-micromodal-close="">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div aria-hidden="true" class="modal slide" id="modal-rm">
+      <div class="overlay" data-micromodal-close="" tabindex="-1">
+        <div class="container" role="dialog">
+          <div class="header">
+            <h2 class="title" id="modal-rm-title">Rematch?</h2>
+            <button class="close pointer" data-micromodal-close=""></button>
+          </div>
+          <div class="content">
+            Would you like to rematch?
+          </div>
+          <div class="footer">
+            <button
+              class="btn btn-primary"
+              data-micromodal-close=""
+              id="rematch"
+            >
+              Yes
+            </button>
+            <button class="btn" data-micromodal-close="" id="returnHome">
+              Return Home
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div aria-hidden="true" class="modal slide" id="modal-mj">
+      <div class="overlay" data-micromodal-close="" tabindex="-1">
+        <div class="container" role="dialog">
+          <div class="header">
+            <h2 class="title">Join Party</h2>
+            <button class="close pointer" data-micromodal-close=""></button>
+          </div>
+          <div class="content">
+            <label for="joinID"></label>
+            <input
+              autocomplete="off"
+              class="input-reset ba b--black-20 pa2 mb2 db w-100"
+              id="joinID"
+              maxlength="7"
+              placeholder="abcd123"
+              spellcheck="false"
+              type="text"
+            />
+          </div>
+          <div class="footer">
+            <button class="btn btn-primary" id="joinBtn">Connect</button>
+            <button class="btn" data-micromodal-close="">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script async src="js/app.js"></script>
+  </body>
+</html>
