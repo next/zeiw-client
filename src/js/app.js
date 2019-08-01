@@ -36,7 +36,7 @@ window.addEventListener('load', function() {
   if (window.location.hash !== '') {
     h = window.location.hash.split('#')[1]
     document.getElementById('joinID').value = h
-    MicroModal.show('modal-mj')
+    jm()
   }
 
   if (window.localStorage.getItem('auth') !== null) {
@@ -639,6 +639,11 @@ function rematch() {
   user.findGame()
 }
 
+function jm() {
+  MicroModal.show('modal-mj')
+  document.getElementById('joinID').focus()
+}
+
 document.getElementById('logoutBtn').addEventListener('click', () => signOut())
 document.getElementById('rh').addEventListener('click', () => goHome())
 document.getElementById('returnHome').addEventListener('click', () => goHome())
@@ -650,9 +655,7 @@ document
 document
   .getElementById('playBtn')
   .addEventListener('click', () => user.findGame())
-document
-  .getElementById('tabJoinBtn')
-  .addEventListener('click', () => MicroModal.show('modal-mj'))
+document.getElementById('tabJoinBtn').addEventListener('click', () => jm())
 document.getElementById('hostBtn').addEventListener('click', () => user.host())
 document
   .getElementById('joinBtn')
@@ -678,7 +681,7 @@ document.onkeyup = function(e) {
     } else if (e.which === 50) {
       user.host()
     } else if (e.which === 51) {
-      MicroModal.show('modal-mj')
+      jm()
     }
   }
 }
