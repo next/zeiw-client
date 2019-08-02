@@ -18,7 +18,7 @@
     "howler": "^2.1.2",
     "micromodal": "^0.4.0",
     "socket.io-client": "^2.2.0",
-    "tippy.js": "^4.3.4"
+    "tippy.js": "^4.3.5"
   },
   "devDependencies": {
     "husky": "^3.0.2",
