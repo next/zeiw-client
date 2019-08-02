@@ -18,6 +18,7 @@ let kd = false,
   cl = false,
   nd = false,
   gc = false
+let jgl = false
 
 let notifTimer,
   notifs = {}
@@ -337,7 +338,7 @@ function keydown(e) {
 
 function keyup(e) {
   kd = false
-  if (e.key === 'Escape' && tab !== 'home') {
+  if (e.key === 'Escape' && tab !== 'home' && !jgl) {
     user.leaveGame()
     goHome()
   }
@@ -408,6 +409,7 @@ function setSocketEvents() {
 
   socket.on('gameUpdate', function(g) {
     user.game = Object.assign({}, g)
+    jgl = false
     if (g.hosted === true) {
       let c = g.code
       self.location.href = '#' + c
@@ -515,6 +517,7 @@ class User {
 
   findGame() {
     if (!user.game) {
+      jgl = true
       gc = false
       socket.emit('findGame', this.id)
       document.getElementById('pcpb').style.display = 'none'
@@ -573,6 +576,7 @@ class User {
 
   host() {
     if (!user.game) {
+      jgl = true
       gc = false
       socket.emit('host')
       tabTo('wait')
@@ -583,6 +587,7 @@ class User {
 
   join(c) {
     if (!user.game) {
+      jgl = true
       gc = false
       MicroModal.close('modal-mj')
       waitMsg('Joining')
