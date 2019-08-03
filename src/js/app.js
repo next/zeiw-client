@@ -616,7 +616,7 @@ function drawPaddle(p) {
   } else if (p.y + p.h / 2 > canvas.height) {
     p.y = canvas.height - p.h / 2
   }
-  ctx.fillStyle = p.id === user.id ? '#ff9900' : '#ff9900'
+  ctx.fillStyle = p.id === user.id ? '#ff9900' : '#cccccc'
   ctx.fillRect(p.x - p.w / 2, p.y - p.h / 2, p.w, p.h)
 }
 
