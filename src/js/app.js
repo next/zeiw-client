@@ -520,13 +520,18 @@ class User {
     this.id = id
     this.paddle = null
     this.game = null
+    this.previousGameOpponentId = null
   }
 
-  findGame() {
+  findGame(opponentId) {
     if (!user.game) {
       jgl = true
       gc = false
-      socket.emit('findGame', this.id)
+      if (opponentId !== undefined) {
+        socket.emit('findGame', this.id, opponentId)
+      } else {
+        socket.emit('findGame', this.id)
+      }
       document.getElementById('pcpb').style.display = 'none'
       waitMsg('Matchmaking')
     } else {
@@ -537,6 +542,11 @@ class User {
   startGame() {
     tabTo('game')
     const self = this
+    if (this.id === this.game.p1.id) {
+      this.previousGameOpponentId = this.game.p2.id
+    } else {
+      this.previousGameOpponentId = this.game.p1.id
+    }
     nd = false
     document.getElementById('game').classList.remove('hidden')
     document.getElementById('game').children[1].classList.remove('hidden')
@@ -652,7 +662,7 @@ function message(msg) {
 
 function rematch() {
   goHome()
-  user.findGame()
+  user.findGame(user.previousGameOpponentId)
 }
 
 function jm() {
