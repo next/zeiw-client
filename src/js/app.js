@@ -501,13 +501,10 @@ function setSocketEvents() {
       user.startGame()
     }
     if (t === 'readyuped') {
-      const parent = document.getElementById('parent')
       const cd = document.getElementById('countdown')
-      parent.style.display = 'block'
       cd.style.display = 'block'
       cd.textContent = 'GO'
       setTimeout(function() {
-        parent.style.display = 'none'
         cd.style.display = 'none'
       }, 1000)
     }
