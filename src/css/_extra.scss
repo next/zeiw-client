@@ -1,25 +1,20 @@
-// the one background color to rule them all
 .bg {
   background: var(--primary);
 }
 
-// badgeh obviously means badge hidden
 .badgeh {
   display: none;
 }
 
-// blurple background for discord stuff
 .bg-blurple {
   background-color: #7289da;
 }
 
-// ultimate class to hide stuff
 .hidden,
 .hidden > * {
   display: none !important;
 }
 
-// hack to fix chrome rendering bug
 [class^='tippy'] {
   -webkit-backface-visibility: hidden;
   -webkit-transform: translateZ(0) scale(1, 1);

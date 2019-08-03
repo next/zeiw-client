@@ -9,9 +9,8 @@
   justify-content: center;
   align-items: center;
 }
-
 .container {
-  background-color: #fff;
+  background-color: var(--white);
   padding: 30px;
   max-width: 500px;
   max-height: 100vh;
@@ -19,13 +18,11 @@
   overflow-y: auto;
   box-sizing: border-box;
 }
-
 .header {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
-
 .title {
   margin-top: 0;
   margin-bottom: 0;
@@ -35,32 +32,28 @@
   color: var(--secondary);
   box-sizing: border-box;
 }
-
 .close {
   background: transparent;
   border: 0;
 }
-
 .header .close:before {
   content: '\2715';
-  color: black;
+  color: var(--black);
 }
-
 .content {
   margin-top: 2rem;
   margin-bottom: 2rem;
   line-height: 1.5;
-  color: rgba(0, 0, 0, 0.8);
+  color: var(--black);
 }
-
 .btn {
   font-size: 0.875rem;
   padding-left: 1rem;
   padding-right: 1rem;
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
-  background-color: #e6e6e6;
-  color: rgba(0, 0, 0, 0.8);
+  background-color: var(--gray);
+  color: var(--black);
   border-radius: 0.25rem;
   border-style: none;
   border-width: 0;
@@ -80,17 +73,14 @@
   transition: transform 0.25s ease-out;
   transition: transform 0.25s ease-out, -webkit-transform 0.25s ease-out;
 }
-
 .btn-primary {
   background-color: var(--secondary);
-  color: #fff;
+  color: var(--white);
 }
-
 .btn-danger {
-  background-color: #f04747;
-  color: #fff;
+  background-color: var(--danger);
+  color: var(--white);
 }
-
 @keyframes mmfadeIn {
   from {
     opacity: 0;
@@ -99,7 +89,6 @@
     opacity: 1;
   }
 }
-
 @keyframes mmfadeOut {
   from {
     opacity: 1;
@@ -108,7 +97,6 @@
     opacity: 0;
   }
 }
-
 @keyframes mmslideIn {
   from {
     transform: translateY(15%);
@@ -117,7 +105,6 @@
     transform: translateY(0);
   }
 }
-
 @keyframes mmslideOut {
   from {
     transform: translateY(0);
@@ -126,31 +113,24 @@
     transform: translateY(-10%);
   }
 }
-
 .slide {
   display: none;
 }
-
 .slide.is-open {
   display: block;
 }
-
 .slide[aria-hidden='false'] .overlay {
   animation: mmfadeIn 0.3s cubic-bezier(0, 0, 0.2, 1);
 }
-
 .slide[aria-hidden='false'] .container {
   animation: mmslideIn 0.3s cubic-bezier(0, 0, 0.2, 1);
 }
-
 .slide[aria-hidden='true'] .overlay {
   animation: mmfadeOut 0.3s cubic-bezier(0, 0, 0.2, 1);
 }
-
 .slide[aria-hidden='true'] .container {
   animation: mmslideOut 0.3s cubic-bezier(0, 0, 0.2, 1);
 }
-
 .slide .container,
 .slide .overlay {
   will-change: transform;

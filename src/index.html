@@ -2,74 +2,50 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta content="ie=edge" http-equiv="x-ua-compatible" />
     <title>ZEIW</title>
+    <meta content="ZEIW" name="title" />
     <meta content="Open source community-based game 🏓" name="description" />
     <meta content="width=device-width, initial-scale=1" name="viewport" />
+    <meta content="website" property="og:type" />
+    <meta content="https://play.zeiw.me" property="og:url" />
+    <meta content="ZEIW" property="og:title" />
+    <meta
+      content="Open source community-based game 🏓"
+      property="og:description"
+    />
+    <meta
+      content="https://res.cloudinary.com/zeiw/image/upload/v1564824712/img/cover.png"
+      property="og:image"
+    />
+    <meta content="summary_large_image" property="twitter:card" />
+    <meta content="https://play.zeiw.me" property="twitter:url" />
+    <meta content="ZEIW" property="twitter:title" />
+    <meta
+      content="Open source community-based game 🏓"
+      property="twitter:description"
+    />
+    <meta
+      content="https://res.cloudinary.com/zeiw/image/upload/v1564824712/img/cover.png"
+      property="twitter:image"
+    />
     <link
-      href="https://cdn.zeiw.me/favicon/apple-touch-icon.png"
+      href="https://res.cloudinary.com/zeiw/image/upload/v1564824186/favicon/apple-touch-icon.png"
       rel="apple-touch-icon"
       sizes="180x180"
     />
     <link
-      href="https://cdn.zeiw.me/favicon/favicon-32x32.png"
+      href="https://res.cloudinary.com/zeiw/image/upload/v1564824186/favicon/favicon-32x32.png"
       rel="icon"
       sizes="32x32"
       type="image/png"
     />
     <link
-      href="https://cdn.zeiw.me/favicon/favicon-16x16.png"
+      href="https://res.cloudinary.com/zeiw/image/upload/v1564824186/favicon/favicon-16x16.png"
       rel="icon"
       sizes="16x16"
       type="image/png"
     />
-    <link href="https://cdn.zeiw.me/favicon/site.webmanifest" rel="manifest" />
-    <link
-      href="https://cdn.zeiw.me/favicon/safari-pinned-tab.svg"
-      rel="mask-icon"
-    />
-    <link href="https://cdn.zeiw.me/favicon/favicon.ico" rel="shortcut icon" />
-    <meta content="ZEIW" name="apple-mobile-web-app-title" />
-    <meta content="ZEIW" name="application-name" />
-    <meta content="#0066ff" name="msapplication-TileColor" />
-    <meta
-      content="https://cdn.zeiw.me/favicon/browserconfig.xml"
-      name="msapplication-config"
-    />
-    <meta content="#0066ff" name="theme-color" />
-    <meta content="279" property="og:image:width" />
-    <meta content="279" property="og:image:height" />
-    <meta
-      content="Open source community-based game 🏓"
-      property="og:description"
-    />
-    <meta content="ZEIW" property="og:title" />
-    <meta
-      content="https://cdn.zeiw.me/favicon/og-image.jpg"
-      property="og:image"
-    />
-    <meta content="https://play.zeiw.me" property="og:url" />
-    <script type="application/ld+json">
-      {
-        "@context": "http://schema.org",
-        "@type": "VideoGame",
-        "name": "ZEIW",
-        "url": "https://play.zeiw.me",
-        "playMode": "MultiPlayer",
-        "image": "https://cdn.zeiw.me/image/cover.png",
-        "description": "Open source community-based game 🏓",
-        "author": {
-          "@type": "Organization",
-          "name": "ZEIW",
-          "url": "https://zeiw.me"
-        },
-        "publisher": "ZEIW",
-        "genre": ["Action", "Sports", "Strategy", "Multiplayer"],
-        "gamePlatform": ["Web", "Windows", "macOS", "Linux"],
-        "applicationCategory": ["Multiplayer Game"],
-        "operatingSystem": ["Windows", "macOS", "Linux", "Chrome OS"]
-      }
-    </script>
+    <link href="app.webmanifest" rel="manifest" />
     <link
       href="https://fonts.googleapis.com/css?family=Asap&display=swap"
       rel="stylesheet"
@@ -88,7 +64,7 @@
               data-tippy="Return Home"
               data-tippy-placement="right"
               id="rh"
-              src="https://cdn.zeiw.me/icon/home.svg"
+              src="https://res.cloudinary.com/zeiw/image/upload/v1564825249/icon/home.svg"
             />
             <img
               alt=""
@@ -97,7 +73,7 @@
               data-tippy="Player Settings"
               data-tippy-placement="right"
               id="psb"
-              src="https://cdn.zeiw.me/icon/ps.svg"
+              src="https://res.cloudinary.com/zeiw/image/upload/v1564825220/icon/player.svg"
             />
             <img
               alt=""
@@ -105,7 +81,7 @@
               data-micromodal-trigger="modal-gs"
               data-tippy="Game Settings"
               data-tippy-placement="right"
-              src="https://cdn.zeiw.me/icon/gs.svg"
+              src="https://res.cloudinary.com/zeiw/image/upload/v1564825185/icon/settings.svg"
             />
             <img
               alt=""
@@ -114,7 +90,7 @@
               data-tippy="Developer Tools"
               data-tippy-placement="right"
               id="ds"
-              src="https://cdn.zeiw.me/icon/ds.svg"
+              src="https://res.cloudinary.com/zeiw/image/upload/v1564825156/icon/code.svg"
             />
             <a href="https://discord.gg/h7NxqBe" rel="noopener" target="_blank"
               ><img
@@ -122,7 +98,7 @@
                 class="w-50 pointer"
                 data-tippy="Join our Discord"
                 data-tippy-placement="right"
-                src="https://cdn.zeiw.me/brand/discord.svg"
+                src="https://res.cloudinary.com/zeiw/image/upload/v1564825112/icon/discord.svg"
             /></a>
           </div>
         </div>
@@ -153,20 +129,22 @@
             <div class="hidden items-center ma4">
               <canvas class="br3 ba bw3 ma2 mb2 shadow-4" id="canvas"></canvas>
             </div>
-            <div id="countdown"></div>
+            <div class="overlay" id="parent"><div id="countdown"></div></div>
           </div>
           <div class="dtc tc v-mid" id="home">
-            <img alt="" class="w-30" src="https://cdn.zeiw.me/image/zeiw.png" />
-            <h1 class="f4 ttu tracked mt0 mt4" id="online">
-              ??? ONLINE
-            </h1>
+            <img
+              alt=""
+              class="w-30"
+              src="https://res.cloudinary.com/zeiw/image/upload/v1564824906/img/logo.png"
+            />
+            <h1 class="f4 ttu tracked mt0 mt4" id="online">??? ONLINE</h1>
             <img
               alt=""
               class="w4 pointer bg br3 pa4 ma2 shadow-4"
               data-tippy="Find Match"
               data-tippy-placement="bottom"
               id="playBtn"
-              src="https://cdn.zeiw.me/icon/find.svg"
+              src="https://res.cloudinary.com/zeiw/image/upload/v1564825429/icon/find.svg"
             />
             <img
               alt=""
@@ -174,7 +152,7 @@
               data-tippy="Host Party"
               data-tippy-placement="bottom"
               id="hostBtn"
-              src="https://cdn.zeiw.me/icon/host.svg"
+              src="https://res.cloudinary.com/zeiw/image/upload/v1564825427/icon/host.svg"
             />
             <img
               alt=""
@@ -182,7 +160,7 @@
               data-tippy="Join Party"
               data-tippy-placement="bottom"
               id="tabJoinBtn"
-              src="https://cdn.zeiw.me/icon/join.svg"
+              src="https://res.cloudinary.com/zeiw/image/upload/v1564825425/icon/join.svg"
             />
           </div>
         </div>
@@ -204,7 +182,7 @@
               <img
                 alt=""
                 class="h1 pl1"
-                src="https://cdn.zeiw.me/image/discord.png"
+                src="https://res.cloudinary.com/zeiw/image/upload/v1564824906/img/discord.png"
             /></a>
           </div>
           <div class="footer">
@@ -340,9 +318,7 @@
           </div>
           <div class="footer">
             <button class="btn" data-micromodal-close="">Close</button>
-            <button class="btn btn-danger" id="logoutBtn">
-              Sign Out
-            </button>
+            <button class="btn btn-danger" id="logoutBtn">Sign Out</button>
           </div>
         </div>
       </div>

@@ -18,7 +18,7 @@
   display: none;
 }
 .slider {
-  background-color: #ccc;
+  background-color: var(--gray);
   bottom: 0;
   cursor: pointer;
   left: 0;
@@ -28,7 +28,7 @@
   transition: 0.4s;
 }
 .slider:before {
-  background-color: #fff;
+  background-color: var(--white);
   bottom: 4px;
   content: '';
   height: 26px;
@@ -38,7 +38,7 @@
   width: 26px;
 }
 input:checked + .slider {
-  background-color: #66bb6a;
+  background-color: var(--secondary);
 }
 input:checked + .slider:before {
   -webkit-transform: translateX(26px);

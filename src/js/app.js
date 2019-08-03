@@ -6,7 +6,8 @@ import { Howl } from 'howler/dist/howler.min.js'
 
 tippy.setDefaults({
   animation: 'fade',
-  arrow: true
+  arrow: true,
+  a11y: false
 })
 
 new ClipboardJS('.copy')
@@ -192,9 +193,9 @@ function notification(title, content, error) {
   document.getElementById('notification').innerHTML =
     '<h3>' + title + '</h3><p>' + content + '</p>'
   if (error) {
-    document.getElementById('notification').style.borderColor = '#f00'
+    document.getElementById('notification').style.borderColor = '#f04747'
   } else {
-    document.getElementById('notification').style.borderColor = '#6c3'
+    document.getElementById('notification').style.borderColor = '#19a974'
   }
   document.getElementById('notification').style.left =
     'calc(100% - ' + document.getElementById('notification').offsetWidth + 'px)'
@@ -494,10 +495,13 @@ function setSocketEvents() {
       user.startGame()
     }
     if (t === 'readyuped') {
+      const parent = document.getElementById('parent')
       const cd = document.getElementById('countdown')
+      parent.style.display = 'block'
       cd.style.display = 'block'
       cd.textContent = 'GO'
       setTimeout(function() {
+        parent.style.display = 'none'
         cd.style.display = 'none'
       }, 1000)
     }
