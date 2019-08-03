@@ -26,7 +26,9 @@ let notifTimer,
 
 window.addEventListener('load', function() {
   new Howl({
-    src: ['https://cdn.zeiw.me/sound/theme.mp3'],
+    src: [
+      'https://res.cloudinary.com/zeiw/video/upload/f_auto,q_auto:eco/v1564827948/sound/theme.mp3'
+    ],
     autoplay: true,
     volume: 0.5,
     loop: true
@@ -458,7 +460,9 @@ function setSocketEvents() {
   socket.on('hit-p1', function() {
     if (!nd && user.game) {
       const p1 = new Howl({
-        src: ['https://cdn.zeiw.me/sound/p1-hit.mp3']
+        src: [
+          'https://res.cloudinary.com/zeiw/video/upload/q_auto:eco/v1564828068/sound/p1-hit.wav'
+        ]
       })
       p1.play()
     }
@@ -467,7 +471,9 @@ function setSocketEvents() {
   socket.on('hit-p2', function() {
     if (!nd && user.game) {
       const p2 = new Howl({
-        src: ['https://cdn.zeiw.me/sound/p2-hit.mp3']
+        src: [
+          'https://res.cloudinary.com/zeiw/video/upload/q_auto:eco/v1564828067/sound/p2-hit.wav'
+        ]
       })
       p2.play()
     }
@@ -559,7 +565,9 @@ class User {
         case 'You Win':
           if (!gc) {
             const win = new Howl({
-              src: ['https://cdn.zeiw.me/sound/win.mp3']
+              src: [
+                'https://res.cloudinary.com/zeiw/video/upload/q_auto:eco/v1564828064/sound/win.wav'
+              ]
             })
             win.play()
           }
@@ -567,7 +575,9 @@ class User {
         case 'You Lose':
           if (!gc) {
             const lose = new Howl({
-              src: ['https://cdn.zeiw.me/sound/lose.mp3']
+              src: [
+                'https://res.cloudinary.com/zeiw/video/upload/q_auto:eco/v1564828066/sound/lose.wav'
+              ]
             })
             lose.play()
           }
