@@ -2,7 +2,7 @@ import io from 'socket.io-client/dist/socket.io.slim.js'
 import tippy from 'tippy.js/esm/index.min.js'
 import MicroModal from 'micromodal/dist/micromodal.min.js'
 import ClipboardJS from 'clipboard/dist/clipboard.min.js'
-import { Howl } from 'howler/dist/howler.min.js'
+import { Howl, Howler } from 'howler/dist/howler.min.js'
 
 tippy.setDefaults({
   animation: 'fade',
