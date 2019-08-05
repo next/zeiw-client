@@ -307,7 +307,7 @@ function hmnh() {
 function au() {
   if (window._zeiwNative !== undefined) {
     _zeiwNative
-      .getDiscordOauthCode('556724399164620812')
+      .getDiscordOauthCode()
       .then(code => {
         const el = document.createElement('iframe')
         el.src =
@@ -320,7 +320,7 @@ function au() {
         })
       })
       .catch(e => {
-        if (e instanceof Error) {
+        if (e.kind === 'net') {
           MicroModal.show('modal-oauth-conn-error')
         } else {
           MicroModal.show('modal-oauth-unauth-error')
