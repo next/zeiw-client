@@ -3,7 +3,7 @@
   X-Xss-Protection: 1; mode=block
   X-Content-Type-Options: nosniff
   X-Frame-Options: SAMEORIGIN
-  Content-Security-Policy: default-src 'self'; script-src 'self'; object-src 'none'; base-uri 'none'; style-src 'self' https://fonts.googleapis.com; img-src https://res.cloudinary.com https://cdn.discordapp.com; media-src 'self' https://res.cloudinary.com; frame-src 'self'; font-src 'self' https://fonts.gstatic.com; connect-src 'self' https://*.zeiw.me wss://*.zeiw.me https://res.cloudinary.com
+  Content-Security-Policy: default-src 'self'; script-src 'self'; object-src 'none'; base-uri 'none'; style-src 'self' https://fonts.googleapis.com; img-src https://res.cloudinary.com https://cdn.discordapp.com; media-src 'self' https://res.cloudinary.com; frame-src 'self' https://*.zeiw.me; font-src 'self' https://fonts.gstatic.com; connect-src 'self' https://*.zeiw.me wss://*.zeiw.me https://res.cloudinary.com
   Referrer-Policy: strict-origin-when-cross-origin
   Cache-Control: public, max-age=15, must-revalidate
   Feature-Policy: accelerometer 'none'; ambient-light-sensor 'none'; autoplay 'self'; camera 'none'; encrypted-media 'none'; fullscreen 'self'; geolocation 'none'; gyroscope 'none'; magnetometer 'none'; microphone 'none'; midi 'none'; payment 'none'; picture-in-picture *; speaker 'none'; sync-xhr 'none'; usb 'none'; vr 'none'
