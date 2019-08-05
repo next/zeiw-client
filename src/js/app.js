@@ -15,11 +15,12 @@ console.log(
  d88P       888          888   8888P   Y8888
 d8888888888 8888888888 8888888 888P     Y888
 `,
-  'font-weight:bold;color:#06f'
+  'color:#06f;font-weight:bold'
 )
+
 console.log(
-  "%cDon't paste stuff in here!\n",
-  'font-weight:bold;font-size:50px;color:red;text-shadow:3px 3px 0 #d91f26,6px 6px 0 #e25b0e,9px 9px 0 #f5dd08,12px 12px 0 #059444,15px 15px 0 #0287ce,18px 18px 0 #044d91,21px 21px 0 #2a1571'
+  "%c⚠ Don't paste stuff in here!",
+  'color:red;font-family:system-ui;font-size:2rem;-webkit-text-stroke: 1px black;font-weight:bold'
 )
 
 tippy.setDefaults({
