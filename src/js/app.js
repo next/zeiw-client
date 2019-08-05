@@ -4,6 +4,24 @@ import MicroModal from 'micromodal/dist/micromodal.min.js'
 import ClipboardJS from 'clipboard/dist/clipboard.min.js'
 import { Howl, Howler } from 'howler/dist/howler.min.js'
 
+console.log(
+  `%c
+8888888888P 8888888888 8888888 888       888
+      d88P  888          888   888   o   888
+     d88P   888          888   888  d8b  888
+    d88P    8888888      888   888 d888b 888
+   d88P     888          888   888d88888b888
+  d88P      888          888   88888P Y88888
+ d88P       888          888   8888P   Y8888
+d8888888888 8888888888 8888888 888P     Y888
+`,
+  'font-weight:bold;color:#06f'
+)
+console.log(
+  "%cDon't paste stuff in here!\n",
+  'font-weight:bold;font-size:50px;color:red;text-shadow:3px 3px 0 #d91f26,6px 6px 0 #e25b0e,9px 9px 0 #f5dd08,12px 12px 0 #059444,15px 15px 0 #0287ce,18px 18px 0 #044d91,21px 21px 0 #2a1571'
+)
+
 tippy.setDefaults({
   animation: 'fade',
   arrow: true,
