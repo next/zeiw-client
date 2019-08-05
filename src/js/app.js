@@ -20,7 +20,7 @@ d8888888888 8888888888 8888888 888P     Y888
 
 console.log(
   "%c⚠ Don't paste stuff in here!",
-  'color:red;font-family:system-ui;font-size:2rem;-webkit-text-stroke: 1px black;font-weight:bold'
+  'color:red;font-family:cursive;font-size:2rem;font-weight:bold'
 )
 
 tippy.setDefaults({
