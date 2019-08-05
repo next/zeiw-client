@@ -19,7 +19,10 @@ d8888888888 8888888888 8888888 888P     Y888
 )
 
 console.log(
-  "%c⚠ Don't paste stuff in here!",
+  `%c
+  ⚠ Hackers may entice you to paste code here.
+  Stay aware.
+  `,
   'color:red;font-family:cursive;font-size:2rem;font-weight:bold'
 )
 
