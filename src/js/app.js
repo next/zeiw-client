@@ -42,6 +42,7 @@ let kd = false,
   nd = false,
   gc = false
 let jgl = false
+let native = false
 
 let notifTimer,
   notifs = {}
@@ -165,6 +166,9 @@ window.addEventListener('load', function() {
       socket.emit('getOnline')
     }
   }, 3500)
+  if (window._zeiwNative !== undefined) {
+    native = true
+  }
 })
 
 function f(c) {
@@ -238,6 +242,29 @@ function deleteNotification() {
   }
 }
 
+function presenceUpdate(s, t, e) {
+  if (native) {
+    t = t || false
+    e = e || false
+    a = {
+      details: 'Competitive Pong',
+      assets: {
+        large_image: 'zeiw',
+        large_text: 'ZEIW'
+      },
+      state: s
+    }
+    if (t) {
+      a.timestamps = {}
+      a.timestamps.start = t
+      if (e) {
+        a.timestamps.end = e
+      }
+    }
+    _zeiwNative.setDiscordPresence(a)
+  }
+}
+
 const devmode = localStorage.getItem('devmode')
 const dmSwitch = document.querySelector('#devmode')
 
@@ -300,6 +327,7 @@ function goHome() {
 }
 
 function hmnh() {
+  presenceUpdate('Staring at the Menu Screen')
   tabTo('home')
   self.location.href = '#'
   try {
@@ -308,7 +336,7 @@ function hmnh() {
 }
 
 function au() {
-  if (window._zeiwNative !== undefined) {
+  if (native) {
     _zeiwNative
       .getDiscordOauthCode()
       .then(code => {
@@ -556,6 +584,7 @@ class User {
       }
       document.getElementById('pcpb').style.display = 'none'
       waitMsg('Matchmaking')
+      presenceUpdate('Mode: 1v1 (Waiting...)', +new Date())
     } else {
       notification('Error', 'You are already in a game.', true)
     }
@@ -572,6 +601,7 @@ class User {
     nd = false
     document.getElementById('game').classList.remove('hidden')
     document.getElementById('game').children[1].classList.remove('hidden')
+    presenceUpdate('Mode: 1v1 (Readying...)', +new Date(), +new Date() + 3100)
     countdown(3, function() {
       self.readyUp()
     })
@@ -582,6 +612,7 @@ class User {
       socket.emit('readyup', {
         p: this.paddle.player
       })
+      presenceUpdate('Mode: 1v1 (In Game)', +new Date())
     }
   }
 
@@ -592,6 +623,7 @@ class User {
       message(msg)
       switch (msg) {
         case 'You Win':
+          presenceUpdate('Mode: 1v1 (VICTORY!)')
           if (!gc) {
             const win = new Howl({
               src: [
@@ -602,6 +634,7 @@ class User {
           }
           break
         case 'You Lose':
+          presenceUpdate('Mode: 1v1 (Loss)')
           if (!gc) {
             const lose = new Howl({
               src: [
@@ -623,6 +656,7 @@ class User {
       gc = false
       socket.emit('host')
       tabTo('wait')
+      presenceUpdate('Mode: 1v1 (Hosting...)', +new Date())
     } else {
       notification('Error', 'You are already in a game.', true)
     }
