@@ -487,7 +487,9 @@ function setSocketEvents() {
         )
         user.leaveGame('You Win')
       }
-      document.getElementById('stopwatch').innerHTML = user.game.secs
+      if (user.game !== null) {
+        document.getElementById('stopwatch').innerHTML = user.game.secs
+      }
     }
   })
 
