@@ -480,7 +480,8 @@ function setSocketEvents() {
       if (user.game.status === 'disconnected') {
         notification(
           'Opponent Disconnected',
-          'Your opponent has left the game.'
+          'Your opponent has left the game.',
+          true
         )
         user.leaveGame('You Win')
       }

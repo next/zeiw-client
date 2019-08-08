@@ -14,7 +14,7 @@ html {
   overflow: hidden;
 }
 body {
-  background-image: url('https://res.cloudinary.com/zeiw/image/upload/v1564824906/img/stardust.png');
+  background-image: url('https://res.cloudinary.com/zeiw/image/upload/q_auto/v1564824906/img/stardust.png');
   animation: stars 30s linear infinite;
 }
 @keyframes stars {
@@ -53,4 +53,21 @@ a {
   -webkit-text-decoration: none;
   text-decoration: none;
   color: var(--primary);
+}
+.hidden,
+.hidden > * {
+  display: none !important;
+}
+.badgeh {
+  display: none;
+}
+.bg {
+  background: var(--primary);
+}
+.bg-blurple {
+  background-color: #7289da;
+}
+[class^='tippy'] {
+  -webkit-backface-visibility: hidden;
+  -webkit-transform: translateZ(0) scale(1, 1);
 }

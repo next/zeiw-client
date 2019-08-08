@@ -135,3 +135,13 @@
 .slide .overlay {
   will-change: transform;
 }
+.btn-primary,
+.btn-danger {
+  float: left !important;
+}
+.btn {
+  float: right;
+}
+.mr2 {
+  margin-right: 0.5rem !important;
+}
