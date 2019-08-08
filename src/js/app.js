@@ -151,7 +151,7 @@ window.addEventListener('load', function() {
       }
     }, 1000)
   }
-  socket = io.connect('https://server.zeiw.me')
+  socket = io.connect('wss://live.zeiw.me')
   setSocketEvents()
   canvas = document.getElementById('canvas')
   ctx = canvas.getContext('2d')
