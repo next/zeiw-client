@@ -24,7 +24,7 @@
     "husky": "^3.0.3",
     "parcel-bundler": "^1.12.3",
     "parcel-plugin-purgecss": "^2.1.2",
-    "parcel-plugin-static-files-copy": "^2.2.0",
+    "parcel-plugin-static-files-copy": "^2.2.1",
     "prettier": "^1.18.2",
     "pretty-quick": "^1.11.1",
     "sass": "^1.22.9"
