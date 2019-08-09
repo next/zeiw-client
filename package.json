@@ -21,7 +21,7 @@
     "tippy.js": "^4.3.5"
   },
   "devDependencies": {
-    "husky": "^3.0.2",
+    "husky": "^3.0.3",
     "parcel-bundler": "^1.12.3",
     "parcel-plugin-purgecss": "^2.1.2",
     "parcel-plugin-static-files-copy": "^2.2.0",
