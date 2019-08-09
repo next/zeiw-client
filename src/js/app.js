@@ -556,7 +556,7 @@ function setSocketEvents() {
     }
     if (t === 'readyuped') {
       const cd = document.getElementById('countdown')
-      cd.style.display = 'block'
+      cd.style.display = 'flex'
       cd.textContent = 'GO'
       setTimeout(function() {
         cd.style.display = 'none'
@@ -699,7 +699,7 @@ function drawBall(b) {
 
 function countdown(sec, callback) {
   const cd = document.getElementById('countdown')
-  cd.style.display = 'block'
+  cd.style.display = 'flex'
   cd.textContent = sec
   const int = setInterval(function() {
     sec--
