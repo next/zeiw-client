@@ -31,20 +31,23 @@ tippy.setDefaults({
 
 new ClipboardJS('.copy')
 
-let socket, canvas, ctx, user
-const keys = {}
+let socket
+let canvas
+let ctx
+let user
+let keys = {}
 let tab = 'home'
-let kd = false,
-  cl = false,
-  nd = false,
-  gc = false
+let kd = false
+let cl = false
+let nd = false
+let gc = false
 let jgl = false
 let native = false
 
-let notifTimer,
-  notifs = {}
+let notifTimer
+let notifs = {}
 
-window.addEventListener('load', function() {
+window.addEventListener('load', () => {
   new Howl({
     src: [
       'https://res.cloudinary.com/zeiw/video/upload/f_auto,q_auto/v1564827948/sound/theme.mp3'
@@ -64,7 +67,7 @@ window.addEventListener('load', function() {
   }
 
   if (window.localStorage.getItem('auth') !== null) {
-    const r = new XMLHttpRequest()
+    let r = new XMLHttpRequest()
     function ud() {
       let d
       if (r.readyState === 4) {
@@ -77,9 +80,9 @@ window.addEventListener('load', function() {
             disableScroll: true,
             awaitCloseAnimation: true
           })
-          document.getElementById('pfp').src = d['avatar']
-          document.getElementById('uname').textContent = d['uname']
-          d['flags'].forEach(function(e) {
+          document.getElementById('pfp').src = d.avatar
+          document.getElementById('uname').textContent = d.uname
+          d.flags.forEach(e => {
             switch (e) {
               case 'DEV':
                 document.getElementById('dev').classList.remove('badgeh')
@@ -105,8 +108,8 @@ window.addEventListener('load', function() {
                 break
             }
           })
-          if (!d['flags'].includes('DEV')) {
-            setInterval(function() {
+          if (!d.flags.includes('DEV')) {
+            setInterval(() => {
               if (localStorage.getItem('devmode')) {
                 document.getElementById('ds').classList.add('hidden')
                 localStorage.removeItem('devmode')
@@ -124,7 +127,7 @@ window.addEventListener('load', function() {
             awaitCloseAnimation: true
           })
           window.localStorage.removeItem('auth')
-          setInterval(function() {
+          setInterval(() => {
             if (localStorage.getItem('devmode')) {
               document.getElementById('ds').classList.add('hidden')
               localStorage.removeItem('devmode')
@@ -134,7 +137,7 @@ window.addEventListener('load', function() {
       }
     }
     r.timeout = 3000
-    const t = window.localStorage.getItem('auth')
+    let t = window.localStorage.getItem('auth')
     r.open('GET', 'https://api.zeiw.me/v1/user/')
     r.setRequestHeader('Authentication', t)
     r.send()
@@ -144,7 +147,7 @@ window.addEventListener('load', function() {
       disableScroll: true,
       awaitCloseAnimation: true
     })
-    setInterval(function() {
+    setInterval(() => {
       if (localStorage.getItem('devmode')) {
         document.getElementById('ds').classList.add('hidden')
         localStorage.removeItem('devmode')
@@ -158,7 +161,7 @@ window.addEventListener('load', function() {
   window.addEventListener('keydown', keydown)
   window.addEventListener('keyup', keyup)
   socket.emit('getOnline')
-  setInterval(function() {
+  setInterval(() => {
     if (tab === 'home') {
       socket.emit('getOnline')
     }
@@ -172,7 +175,6 @@ function f(c) {
   let r
   r = new XMLHttpRequest()
   function ud() {
-    let d
     if (r.readyState === 4) {
       if (r.status !== 200) {
         notification('Error', 'Failed to set faction', true)
@@ -200,7 +202,7 @@ function f(c) {
     }
   }
   r.timeout = 3000
-  const t = window.localStorage.getItem('auth')
+  let t = window.localStorage.getItem('auth')
   r.open('PATCH', 'https://api.zeiw.me/v1/user/')
   r.setRequestHeader('Authentication', t)
   r.send(JSON.stringify({ faction: c }))
@@ -215,16 +217,18 @@ function notification(title, content, error) {
     notifs[Object.keys(notifs).length] = [title, content, error]
     return
   }
-  document.getElementById('notification').innerHTML =
-    '<h3>' + title + '</h3><p>' + content + '</p>'
+  document.getElementById(
+    'notification'
+  ).innerHTML = `<h3>${title}</h3><p>${content}</p>`
   if (error) {
     document.getElementById('notification').style.borderColor = '#f04747'
   } else {
     document.getElementById('notification').style.borderColor = '#19a974'
   }
-  document.getElementById('notification').style.left =
-    'calc(100% - ' + document.getElementById('notification').offsetWidth + 'px)'
-  notifTimer = setTimeout(function() {
+  document.getElementById('notification').style.left = `calc(100% - ${
+    document.getElementById('notification').offsetWidth
+  }px)`
+  notifTimer = setTimeout(() => {
     deleteNotification()
   }, 4000)
 }
@@ -233,7 +237,7 @@ function deleteNotification() {
   document.getElementById('notification').style.left = 'calc(100% + 6px)'
   clearTimeout(notifTimer)
   if (Object.keys(notifs).length > 0) {
-    const next = notifs[Object.keys(notifs)[0]]
+    let next = notifs[Object.keys(notifs)[0]]
     notification(next[0], next[1], next[2])
     delete notifs[Object.keys(notifs)[0]]
   }
@@ -262,8 +266,8 @@ function presenceUpdate(s, t, e) {
   }
 }
 
-const devmode = localStorage.getItem('devmode')
-const dmSwitch = document.querySelector('#devmode')
+let devmode = localStorage.getItem('devmode')
+let dmSwitch = document.querySelector('#devmode')
 
 if (devmode) {
   dmSwitch.checked = devmode === 'true'
@@ -274,8 +278,8 @@ if (devmode) {
   dmSwitch.checked = false
 }
 
-function devmodeu(e) {
-  if (e.target.checked) {
+function devmodeu({ target }) {
+  if (target.checked) {
     localStorage.setItem('devmode', true)
     document.getElementById('ds').classList.remove('hidden')
   } else {
@@ -286,8 +290,8 @@ function devmodeu(e) {
 
 dmSwitch.addEventListener('change', devmodeu, false)
 
-const audio = localStorage.getItem('audiomuted')
-const audioSwitch = document.querySelector('#audio')
+let audio = localStorage.getItem('audiomuted')
+let audioSwitch = document.querySelector('#audio')
 
 if (audio) {
   document.documentElement.setAttribute('data-audio', audio)
@@ -295,8 +299,8 @@ if (audio) {
 } else {
   audioSwitch.checked = true
 }
-function switchAudio(e) {
-  if (e.target.checked == true) {
+function switchAudio({ target }) {
+  if (target.checked == true) {
     document.documentElement.setAttribute('data-audio', false)
     localStorage.setItem('audiomuted', false)
     Howler.mute(false)
@@ -329,7 +333,7 @@ function hmnh() {
   self.location.href = '#'
   try {
     MicroModal.close('modal-mj')
-  } catch {}
+  } catch (e) {}
 }
 
 function au() {
@@ -337,9 +341,10 @@ function au() {
     _zeiwNative
       .getDiscordOauthCode()
       .then(code => {
-        const el = document.createElement('iframe')
-        el.src =
-          'https://api.zeiw.me/v1/login/?code=' + encodeURIComponent(code)
+        let el = document.createElement('iframe')
+        el.src = `https://api.zeiw.me/v1/login/?code=${encodeURIComponent(
+          code
+        )}`
         document.body.appendChild(el)
         window.addEventListener('storage', () => {
           if (localStorage.auth !== undefined) {
@@ -347,20 +352,20 @@ function au() {
           }
         })
       })
-      .catch(e => {
-        if (e.kind === 'net') {
+      .catch(({ kind }) => {
+        if (kind === 'net') {
           MicroModal.show('modal-oauth-conn-error')
         } else {
           MicroModal.show('modal-oauth-unauth-error')
         }
       })
   } else {
-    const w = window.open(
+    let w = window.open(
       'https://api.zeiw.me/v1/login/',
       'ZEIW Login',
       'menubar=no,location=no,resizable=no,scrollbars=yes,status=yes,width=550,height=850'
     )
-    setInterval(function() {
+    setInterval(() => {
       if (w.closed) {
         window.location.reload()
       }
@@ -438,32 +443,32 @@ function draw() {
 }
 
 function waitMsg(msg) {
-  const w = document.getElementById('wait')
+  let w = document.getElementById('wait')
   w.children[0].textContent = msg
   tabTo('wait')
 }
 
 function setSocketEvents() {
-  socket.on('load', function(data) {
-    user = new User(data.id)
-    canvas.width = data.w
-    canvas.height = data.h
-    let onlineusers = data.uonl
-    document.getElementById('online').innerHTML = onlineusers + ' ONLINE'
+  socket.on('load', ({ id, w, h, uonl }) => {
+    user = new User(id)
+    canvas.width = w
+    canvas.height = h
+    let onlineusers = uonl
+    document.getElementById('online').innerHTML = `${onlineusers} ONLINE`
     draw()
   })
 
-  socket.on('err', function(err) {
+  socket.on('err', err => {
     notification('Error', err, true)
   })
 
-  socket.on('gameUpdate', function(g) {
+  socket.on('gameUpdate', g => {
     user.game = Object.assign({}, g)
     jgl = false
     if (g.hosted === true) {
       let c = g.code
-      self.location.href = '#' + c
-      let url = 'https://play.zeiw.me/#' + c
+      self.location.href = `#${c}`
+      let url = `https://play.zeiw.me/#${c}`
       document.getElementById('pcpb').style.display = 'block'
       document.getElementById(
         'wait'
@@ -491,25 +496,25 @@ function setSocketEvents() {
     }
   })
 
-  socket.on('gameTimeUpdate', function(d) {
+  socket.on('gameTimeUpdate', d => {
     document.getElementById('stopwatch').innerHTML = d
   })
 
-  socket.on('paddle', function(p) {
+  socket.on('paddle', p => {
     if (!nd && user.game) {
       user.game[p.player] = Object.assign(user.game[p.player], p)
     }
   })
 
-  socket.on('ball', function(b) {
+  socket.on('ball', b => {
     if (!nd && user.game) {
       user.game.ball = b
     }
   })
 
-  socket.on('hit-p1', function() {
+  socket.on('hit-p1', () => {
     if (!nd && user.game) {
-      const p1 = new Howl({
+      let p1 = new Howl({
         src: [
           'https://res.cloudinary.com/zeiw/video/upload/q_auto/v1564828068/sound/p1-hit.wav'
         ]
@@ -518,9 +523,9 @@ function setSocketEvents() {
     }
   })
 
-  socket.on('hit-p2', function() {
+  socket.on('hit-p2', () => {
     if (!nd && user.game) {
-      const p2 = new Howl({
+      let p2 = new Howl({
         src: [
           'https://res.cloudinary.com/zeiw/video/upload/q_auto/v1564828067/sound/p2-hit.wav'
         ]
@@ -529,19 +534,19 @@ function setSocketEvents() {
     }
   })
 
-  socket.on('end', function(id) {
-    const msg = user.id === id ? 'You Win' : 'You Lose'
+  socket.on('end', id => {
+    let msg = user.id === id ? 'You Win' : 'You Lose'
     nd = true
     user.leaveGame(msg)
   })
 
-  socket.on('failjoin', function(msg) {
+  socket.on('failjoin', msg => {
     tabTo('home')
     self.location.href = '#'
     notification('Error', msg, true)
   })
 
-  socket.on('disconnection', function() {
+  socket.on('disconnection', () => {
     notification(
       'Opponent Disconected',
       'Your opponent has left the game.',
@@ -550,22 +555,22 @@ function setSocketEvents() {
     user.leaveGame('You Win')
   })
 
-  socket.on('clientTrigger', function(t) {
+  socket.on('clientTrigger', t => {
     if (t === 'gameready') {
       user.startGame()
     }
     if (t === 'readyuped') {
-      const cd = document.getElementById('countdown')
+      let cd = document.getElementById('countdown')
       cd.style.display = 'flex'
       cd.textContent = 'GO'
-      setTimeout(function() {
+      setTimeout(() => {
         cd.style.display = 'none'
       }, 1000)
     }
   })
 
-  socket.on('uonl', function(u) {
-    document.getElementById('online').innerHTML = u + ' ONLINE'
+  socket.on('uonl', u => {
+    document.getElementById('online').innerHTML = `${u} ONLINE`
   })
 }
 
@@ -596,7 +601,7 @@ class User {
 
   startGame() {
     tabTo('game')
-    const self = this
+    let self = this
     if (this.id === this.game.p1.id) {
       this.previousGameOpponentId = this.game.p2.id
     } else {
@@ -606,7 +611,7 @@ class User {
     document.getElementById('game').classList.remove('hidden')
     document.getElementById('game').children[1].classList.remove('hidden')
     presenceUpdate('Mode: 1v1 (Readying...)', +new Date(), +new Date() + 3100)
-    countdown(3, function() {
+    countdown(3, () => {
       self.readyUp()
     })
   }
@@ -629,7 +634,7 @@ class User {
         case 'You Win':
           presenceUpdate('Mode: 1v1 (VICTORY!)')
           if (!gc) {
-            const win = new Howl({
+            let win = new Howl({
               src: [
                 'https://res.cloudinary.com/zeiw/video/upload/q_auto/v1564828064/sound/win.wav'
               ]
@@ -640,7 +645,7 @@ class User {
         case 'You Lose':
           presenceUpdate('Mode: 1v1 (Loss)')
           if (!gc) {
-            const lose = new Howl({
+            let lose = new Howl({
               src: [
                 'https://res.cloudinary.com/zeiw/video/upload/q_auto/v1564828066/sound/lose.wav'
               ]
@@ -690,18 +695,18 @@ function drawPaddle(p) {
   ctx.fillRect(p.x - p.w / 2, p.y - p.h / 2, p.w, p.h)
 }
 
-function drawBall(b) {
-  ctx.fillStyle = b.color
+function drawBall({ color, x, y, r }) {
+  ctx.fillStyle = color
   ctx.beginPath()
-  ctx.arc(b.x, b.y, b.r, 0, Math.PI * 2)
+  ctx.arc(x, y, r, 0, Math.PI * 2)
   ctx.fill()
 }
 
 function countdown(sec, callback) {
-  const cd = document.getElementById('countdown')
+  let cd = document.getElementById('countdown')
   cd.style.display = 'flex'
   cd.textContent = sec
-  const int = setInterval(function() {
+  let int = setInterval(() => {
     sec--
     if (sec === 0) {
       clearInterval(int)
@@ -751,22 +756,22 @@ document
 document.getElementById('prc').addEventListener('click', () => f(0))
 document.getElementById('wdc').addEventListener('click', () => f(1))
 document.getElementById('dbc').addEventListener('click', () => f(2))
-document.getElementById('joinID').addEventListener('keyup', evt => {
+document.getElementById('joinID').addEventListener('keyup', () => {
   if (event.keyCode === 13) {
     user.join(document.getElementById('joinID').value)
   }
 })
 
-document.onkeyup = function(e) {
+document.onkeyup = ({ which }) => {
   if (
     tab === 'home' &&
     !document.getElementById('modal-mj').classList.contains('is-open')
   ) {
-    if (e.which === 49) {
+    if (which === 49) {
       user.findGame()
-    } else if (e.which === 50) {
+    } else if (which === 50) {
       user.host()
-    } else if (e.which === 51) {
+    } else if (which === 51) {
       jm()
     }
   }

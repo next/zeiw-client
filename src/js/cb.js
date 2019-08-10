@@ -1,5 +1,5 @@
 const qs = new URLSearchParams(window.location.search)
-window.addEventListener('load', function() {
+window.addEventListener('load', () => {
   if (qs.has('uc')) {
     uc = qs.get('uc')
     window.localStorage.setItem('auth', uc)
