@@ -548,7 +548,7 @@ function setSocketEvents() {
 
   socket.on('disconnection', () => {
     notification(
-      'Opponent Disconected',
+      'Opponent Disconnected',
       'Your opponent has left the game.',
       true
     )
