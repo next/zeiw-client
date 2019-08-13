@@ -31,7 +31,6 @@ tippy.setDefaults({
 
 new ClipboardJS('.copy')
 
-let _zeiwNative
 let canvas
 let cl = false
 let ctx
