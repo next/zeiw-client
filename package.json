@@ -25,7 +25,7 @@
     "eslint": "^6.1.0",
     "eslint-config-prettier": "^6.0.0",
     "husky": "^3.0.3",
-    "parcel-bundler": "^1.10.3",
+    "parcel-bundler": "^1.12.3",
     "parcel-plugin-purgecss": "^2.1.2",
     "parcel-plugin-static-files-copy": "^2.2.1",
     "prettier": "^1.18.2",
