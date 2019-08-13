@@ -1,16 +1,17 @@
 :root {
-  --primary: rgb(255, 153, 0);
-  --secondary: rgb(0, 102, 255);
-  --success: rgb(25, 169, 116);
-  --danger: rgb(240, 71, 71);
-  --white: rgb(238, 238, 238);
-  --gray: rgb(204, 204, 204);
-  --black: rgb(17, 17, 17);
+  --primary: #ff9900;
+  --secondary: #0066ff;
+  --success: #19a974;
+  --danger: #f04747;
+  --white: #eeeeee;
+  --gray: #cccccc;
+  --black: #111111;
 }
 html {
   background: var(--black);
   color: var(--white);
-  font-family: 'Asap', sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica,
+    Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
   overflow: hidden;
 }
 body {
