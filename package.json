@@ -5,8 +5,9 @@
   "license": "MIT",
   "author": "ZEIW",
   "scripts": {
-    "start": "yarn build && npx serve dist",
-    "build": "parcel build src/*.html --experimental-scope-hoisting"
+    "build": "parcel build src/*.html --experimental-scope-hoisting",
+    "lint": "eslint --fix src/js/*",
+    "start": "yarn build && serve dist"
   },
   "husky": {
     "hooks": {
@@ -21,12 +22,15 @@
     "tippy.js": "^4.3.5"
   },
   "devDependencies": {
+    "eslint": "^6.1.0",
+    "eslint-config-prettier": "^6.0.0",
     "husky": "^3.0.3",
     "parcel-bundler": "^1.12.3",
     "parcel-plugin-purgecss": "^2.1.2",
     "parcel-plugin-static-files-copy": "^2.2.1",
     "prettier": "^1.18.2",
     "pretty-quick": "^1.11.1",
-    "sass": "^1.22.9"
+    "sass": "^1.22.9",
+    "serve": "^11.1.0"
   }
 }
