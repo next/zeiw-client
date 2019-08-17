@@ -4,15 +4,10 @@ import io from 'socket.io-client/dist/socket.io.slim.js'
 import tippy from 'tippy.js/esm/index.min.js'
 import { Howl, Howler } from 'howler/dist/howler.min.js'
 
-const $ = function(selector, parent) {
-  return (parent ? parent : document).querySelector(selector)
-}
+const $ = (selector, parent = document) => parent.querySelector(selector)
 
-const $$ = function(selector, parent) {
-  return Array.prototype.slice.call(
-    (parent ? parent : document).querySelectorAll(selector)
-  )
-}
+const $$ = (selector, parent) =>
+  Array.prototype.slice.call(parent.querySelectorAll(selector))
 
 console.log(
   `%c
@@ -349,8 +344,8 @@ dMSwitch.addEventListener('change', designModeu, false)
 function tabTo(t) {
   const ct = tab
   tab = t
-  $(ct).className = 'dtc tc v-mid hidden'
-  $(t).className = 'dtc tc v-mid'
+  $('#' + ct).className = 'dtc tc v-mid hidden'
+  $('#' + t).className = 'dtc tc v-mid'
 }
 
 function goHome() {
