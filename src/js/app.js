@@ -23,11 +23,6 @@ console.log(
   'color:red;font-family:cursive;font-size:2em;font-weight:bold'
 )
 
-socket.emit('latency', Date.now(), function(startTime) {
-  var latency = Date.now() - startTime
-  console.log(latency)
-})
-
 tippy.setDefaults({
   animation: 'fade',
   arrow: true,
@@ -69,6 +64,11 @@ window.addEventListener('load', () => {
     document.getElementById('joinID').value = h
     jm()
   }
+
+  socket.emit('latency', Date.now(), function(startTime) {
+    var latency = Date.now() - startTime
+    console.log(latency)
+  })
 
   if (null !== window.localStorage.getItem('auth')) {
     const r = new XMLHttpRequest()
