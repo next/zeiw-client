@@ -4,15 +4,13 @@ import io from 'socket.io-client/dist/socket.io.slim.js'
 import tippy from 'tippy.js/esm/index.min.js'
 import { Howl, Howler } from 'howler/dist/howler.min.js'
 
-const $ = function(selector, parent) {
-  return (parent ? parent : document).querySelector(selector)
-}
+const $ = (selector, parent) =>
+  (parent ? parent : document).querySelector(selector)
 
-const $$ = function(selector, parent) {
-  return Array.prototype.slice.call(
+const $$ = (selector, parent) =>
+  Array.prototype.slice.call(
     (parent ? parent : document).querySelectorAll(selector)
   )
-}
 
 console.log(
   `%c
@@ -165,7 +163,7 @@ window.addEventListener('load', () => {
   socket.emit('latency', Date.now(), startTime => {
     const latency = Date.now() - startTime
     console.log(
-      '%c[WEBSOCKET]%c ' + 'Connected in %c' + latency + 'ms%c',
+      `%c[WEBSOCKET]%c Connected in %c${latency}ms%c`,
       'color:#06f;font-weight:bold',
       'color:gray',
       'color:red;font-weight:bold',
