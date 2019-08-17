@@ -4,6 +4,11 @@ import io from 'socket.io-client/dist/socket.io.slim.js'
 import tippy from 'tippy.js/esm/index.min.js'
 import { Howl, Howler } from 'howler/dist/howler.min.js'
 
+const $ = (selector, parent = document) => parent.querySelector(selector)
+
+const $$ = (selector, parent) =>
+  Array.prototype.slice.call(parent.querySelectorAll(selector))
+
 console.log(
   `%c
 8888888888P 8888888888 8888888 888       888
@@ -61,7 +66,7 @@ window.addEventListener('load', () => {
   let h
   if ('' !== window.location.hash) {
     h = window.location.hash.split('#')[1]
-    document.getElementById('joinID').value = h
+    $('#joinID').value = h
     jm()
   }
 
@@ -72,45 +77,42 @@ window.addEventListener('load', () => {
       if (4 === r.readyState) {
         if (200 === r.status) {
           d = JSON.parse(r.responseText)
-          document
-            .getElementById('psb')
-            .setAttribute('data-micromodal-trigger', 'modal-ps')
+          $('#psb').setAttribute('data-micromodal-trigger', 'modal-ps')
           MicroModal.init({
             disableScroll: true,
             awaitCloseAnimation: true
           })
-          document.getElementById('pfp').src = d.avatar
-          document.getElementById('uname').textContent = d.uname
+          $('#pfp').src = d.avatar
+          $('#uname').textContent = d.uname
           d.flags.forEach(e => {
             switch (e) {
               case 'DEV':
-                document.getElementById('dev').classList.remove('badgeh')
-                document
-                  .getElementsByClassName('devmode')
+                $('#dev').classList.remove('badgeh')
+                $$('.devmode')
                   .item(0)
                   .classList.remove('hidden')
                 break
               case 'MOD':
-                document.getElementById('mod').classList.remove('badgeh')
+                $('#mod').classList.remove('badgeh')
                 break
               case 'BETA':
-                document.getElementById('tp').classList.remove('badgeh')
+                $('#tp').classList.remove('badgeh')
                 break
               case 'PHOENIX_RIDERS':
-                document.getElementById('pr').classList.remove('badgeh')
+                $('#pr').classList.remove('badgeh')
                 break
               case 'WINTER_DRAGONS':
-                document.getElementById('wd').classList.remove('badgeh')
+                $('#wd').classList.remove('badgeh')
                 break
               case 'DEMON_BRIGADE':
-                document.getElementById('db').classList.remove('badgeh')
+                $('#db').classList.remove('badgeh')
                 break
             }
           })
           if (!d.flags.includes('DEV')) {
             setInterval(() => {
               if (localStorage.getItem('devmode')) {
-                document.getElementById('ds').classList.add('hidden')
+                $('#ds').classList.add('hidden')
                 localStorage.removeItem('devmode')
               }
             }, 1000)
@@ -128,7 +130,7 @@ window.addEventListener('load', () => {
           window.localStorage.removeItem('auth')
           setInterval(() => {
             if (localStorage.getItem('devmode')) {
-              document.getElementById('ds').classList.add('hidden')
+              $('#ds').classList.add('hidden')
               localStorage.removeItem('devmode')
             }
           }, 1000)
@@ -148,7 +150,7 @@ window.addEventListener('load', () => {
     })
     setInterval(() => {
       if (localStorage.getItem('devmode')) {
-        document.getElementById('ds').classList.add('hidden')
+        $('#ds').classList.add('hidden')
         localStorage.removeItem('devmode')
       }
     }, 1000)
@@ -158,14 +160,14 @@ window.addEventListener('load', () => {
   socket.emit('latency', Date.now(), startTime => {
     const latency = Date.now() - startTime
     console.log(
-      '%c[WEBSOCKET]%c ' + 'Connected in %c' + latency + 'ms%c',
+      `%c[WEBSOCKET]%c Connected in %c${latency}ms%c`,
       'color:#06f;font-weight:bold',
       'color:gray',
       'color:red;font-weight:bold',
       'color:gray'
     )
   })
-  canvas = document.getElementById('canvas')
+  canvas = $('#canvas')
   ctx = canvas.getContext('2d')
   window.addEventListener('keydown', keydown)
   window.addEventListener('keyup', keyup)
@@ -192,19 +194,19 @@ function f(c) {
           'You have successfully switched faction.',
           false
         )
-        document.getElementById('modal-fac').classList.remove('is-open')
-        document.getElementById('pr').classList.add('badgeh')
-        document.getElementById('wd').classList.add('badgeh')
-        document.getElementById('db').classList.add('badgeh')
+        $('#modal-fac').classList.remove('is-open')
+        $('#pr').classList.add('badgeh')
+        $('#wd').classList.add('badgeh')
+        $('#db').classList.add('badgeh')
         switch (c) {
           case 0:
-            document.getElementById('pr').classList.remove('badgeh')
+            $('#pr').classList.remove('badgeh')
             break
           case 1:
-            document.getElementById('wd').classList.remove('badgeh')
+            $('#wd').classList.remove('badgeh')
             break
           case 2:
-            document.getElementById('db').classList.remove('badgeh')
+            $('#db').classList.remove('badgeh')
         }
       }
     }
@@ -218,23 +220,18 @@ function f(c) {
 }
 
 function notification(title, content, error) {
-  if (
-    document.getElementById('notification').offsetLeft <
-    document.body.offsetWidth
-  ) {
+  if ($('#notification').offsetLeft < document.body.offsetWidth) {
     notifs[Object.keys(notifs).length] = [title, content, error]
     return
   }
-  document.getElementById(
-    'notification'
-  ).innerHTML = `<h3>${title}</h3><p>${content}</p>`
+  $('#notification').innerHTML = `<h3>${title}</h3><p>${content}</p>`
   if (error) {
-    document.getElementById('notification').style.borderColor = '#f04747'
+    $('#notification').style.borderColor = '#f04747'
   } else {
-    document.getElementById('notification').style.borderColor = '#19a974'
+    $('#notification').style.borderColor = '#19a974'
   }
-  document.getElementById('notification').style.left = `calc(100% - ${
-    document.getElementById('notification').offsetWidth
+  $('#notification').style.left = `calc(100% - ${
+    $('#notification').offsetWidth
   }px)`
   notifTimer = setTimeout(() => {
     deleteNotification()
@@ -242,7 +239,7 @@ function notification(title, content, error) {
 }
 
 function deleteNotification() {
-  document.getElementById('notification').style.left = 'calc(100% + 6px)'
+  $('#notification').style.left = 'calc(100% + 6px)'
   clearTimeout(notifTimer)
   if (0 < Object.keys(notifs).length) {
     const next = notifs[Object.keys(notifs)[0]]
@@ -275,12 +272,12 @@ function presenceUpdate(s, t, e) {
 }
 
 const devmode = localStorage.getItem('devmode')
-const dmSwitch = document.querySelector('#devmode')
+const dmSwitch = $('#devmode')
 
 if (devmode) {
   dmSwitch.checked = 'true' === devmode
   if ('true' === devmode) {
-    document.getElementById('ds').classList.remove('hidden')
+    $('#ds').classList.remove('hidden')
   }
 } else {
   dmSwitch.checked = false
@@ -289,17 +286,17 @@ if (devmode) {
 function devmodeu({ target }) {
   if (target.checked) {
     localStorage.setItem('devmode', true)
-    document.getElementById('ds').classList.remove('hidden')
+    $('#ds').classList.remove('hidden')
   } else {
     localStorage.setItem('devmode', false)
-    document.getElementById('ds').classList.add('hidden')
+    $('#ds').classList.add('hidden')
   }
 }
 
 dmSwitch.addEventListener('change', devmodeu, false)
 
 const audio = localStorage.getItem('audiomuted')
-const audioSwitch = document.querySelector('#audio')
+const audioSwitch = $('#audio')
 
 if (audio) {
   document.documentElement.setAttribute('data-audio', audio)
@@ -321,7 +318,7 @@ function switchAudio({ target }) {
 audioSwitch.addEventListener('change', switchAudio, false)
 
 const designMode = localStorage.getItem('designMode')
-const dMSwitch = document.querySelector('#designMode')
+const dMSwitch = $('#designMode')
 
 if (designMode) {
   dMSwitch.checked = 'true' === designMode
@@ -347,8 +344,8 @@ dMSwitch.addEventListener('change', designModeu, false)
 function tabTo(t) {
   const ct = tab
   tab = t
-  document.getElementById(ct).className = 'dtc tc v-mid hidden'
-  document.getElementById(t).className = 'dtc tc v-mid'
+  $('#' + ct).className = 'dtc tc v-mid hidden'
+  $('#' + t).className = 'dtc tc v-mid'
 }
 
 function goHome() {
@@ -356,7 +353,7 @@ function goHome() {
     user.leaveGame()
   }
   hmnh()
-  document.getElementById('pcpb').style.display = 'none'
+  $('#pcpb').style.display = 'none'
 }
 
 function hmnh() {
@@ -472,7 +469,7 @@ function draw() {
 }
 
 function waitMsg(msg) {
-  const w = document.getElementById('wait')
+  const w = $('#wait')
   w.children[0].textContent = msg
   tabTo('wait')
 }
@@ -483,7 +480,7 @@ function setSocketEvents() {
     canvas.width = w
     canvas.height = h
     const onlineusers = uonl
-    document.getElementById('online').innerHTML = `${onlineusers} ONLINE`
+    $('#online').innerHTML = `${onlineusers} ONLINE`
     draw()
   })
 
@@ -498,11 +495,9 @@ function setSocketEvents() {
       const c = g.code
       self.location.href = `#${c}`
       const url = `https://play.zeiw.me/#${c}`
-      document.getElementById('pcpb').style.display = 'block'
-      document.getElementById(
-        'wait'
-      ).children[0].textContent = `Party URL: ${url}`
-      document.getElementById('pcpb').setAttribute('data-clipboard-text', url)
+      $('#pcpb').style.display = 'block'
+      $('wait').children[0].textContent = `Party URL: ${url}`
+      $('#pcpb').setAttribute('data-clipboard-text', url)
     }
 
     if (!nd) {
@@ -520,13 +515,13 @@ function setSocketEvents() {
         user.leaveGame('You Win')
       }
       if (null !== user.game) {
-        document.getElementById('stopwatch').innerHTML = user.game.secs
+        $('#stopwatch').innerHTML = user.game.secs
       }
     }
   })
 
   socket.on('gameTimeUpdate', d => {
-    document.getElementById('stopwatch').innerHTML = d
+    $('#stopwatch').innerHTML = d
   })
 
   socket.on('paddle', p => {
@@ -589,7 +584,7 @@ function setSocketEvents() {
       user.startGame()
     }
     if ('readyuped' === t) {
-      const cd = document.getElementById('countdown')
+      const cd = $('#countdown')
       cd.style.display = 'flex'
       cd.textContent = 'GO'
       setTimeout(() => {
@@ -599,7 +594,7 @@ function setSocketEvents() {
   })
 
   socket.on('uonl', u => {
-    document.getElementById('online').innerHTML = `${u} ONLINE`
+    $('#online').innerHTML = `${u} ONLINE`
   })
 }
 
@@ -620,7 +615,7 @@ class User {
       } else {
         socket.emit('findGame', this.id)
       }
-      document.getElementById('pcpb').style.display = 'none'
+      $('#pcpb').style.display = 'none'
       waitMsg('Matchmaking')
       presenceUpdate('Mode: 1v1 (Waiting...)', Number(new Date()))
     } else {
@@ -637,8 +632,8 @@ class User {
       this.previousGameOpponentId = this.game.p1.id
     }
     nd = false
-    document.getElementById('game').classList.remove('hidden')
-    document.getElementById('game').children[1].classList.remove('hidden')
+    $('#game').classList.remove('hidden')
+    $('#game').children[1].classList.remove('hidden')
     presenceUpdate(
       'Mode: 1v1 (Readying...)',
       Number(new Date()),
@@ -711,7 +706,7 @@ class User {
       gc = false
       MicroModal.close('modal-mj')
       waitMsg('Joining')
-      document.getElementById('joinID').value = ''
+      $('#joinID').value = ''
       socket.emit('join', encodeURIComponent(c))
     } else {
       notification('Error', 'You are already in a game.', true)
@@ -737,7 +732,7 @@ function drawBall({ color, x, y, r }) {
 }
 
 function countdown(sec, callback) {
-  const cd = document.getElementById('countdown')
+  const cd = $('#countdown')
   cd.style.display = 'flex'
   cd.textContent = sec
   const int = setInterval(() => {
@@ -755,7 +750,7 @@ function countdown(sec, callback) {
 }
 
 function message(msg) {
-  document.getElementById('modal-rm-title').textContent = msg
+  $('#modal-rm-title').textContent = msg
   MicroModal.show('modal-rm')
 }
 
@@ -766,41 +761,30 @@ function rematch() {
 
 function jm() {
   MicroModal.show('modal-mj')
-  document.getElementById('joinID').focus()
+  $('#joinID').focus()
 }
 
-document.getElementById('logoutBtn').addEventListener('click', () => signOut())
-document.getElementById('rh').addEventListener('click', () => goHome())
-document.getElementById('returnHome').addEventListener('click', () => goHome())
-document.getElementById('rematch').addEventListener('click', () => rematch())
-document.getElementById('dab').addEventListener('click', () => au())
-document
-  .getElementById('notification')
-  .addEventListener('click', () => deleteNotification())
-document
-  .getElementById('playBtn')
-  .addEventListener('click', () => user.findGame())
-document.getElementById('tabJoinBtn').addEventListener('click', () => jm())
-document.getElementById('hostBtn').addEventListener('click', () => user.host())
-document
-  .getElementById('joinBtn')
-  .addEventListener('click', () =>
-    user.join(document.getElementById('joinID').value)
-  )
-document.getElementById('prc').addEventListener('click', () => f(0))
-document.getElementById('wdc').addEventListener('click', () => f(1))
-document.getElementById('dbc').addEventListener('click', () => f(2))
-document.getElementById('joinID').addEventListener('keyup', () => {
+$('#logoutBtn').addEventListener('click', () => signOut())
+$('#rh').addEventListener('click', () => goHome())
+$('#returnHome').addEventListener('click', () => goHome())
+$('#rematch').addEventListener('click', () => rematch())
+$('#dab').addEventListener('click', () => au())
+$('#notification').addEventListener('click', () => deleteNotification())
+$('#playBtn').addEventListener('click', () => user.findGame())
+$('#tabJoinBtn').addEventListener('click', () => jm())
+$('#hostBtn').addEventListener('click', () => user.host())
+$('#joinBtn').addEventListener('click', () => user.join($('#joinID').value))
+$('#prc').addEventListener('click', () => f(0))
+$('#wdc').addEventListener('click', () => f(1))
+$('#dbc').addEventListener('click', () => f(2))
+$('#joinID').addEventListener('keyup', () => {
   if (13 === event.keyCode) {
-    user.join(document.getElementById('joinID').value)
+    user.join($('#joinID').value)
   }
 })
 
 document.onkeyup = ({ which }) => {
-  if (
-    'home' === tab &&
-    !document.getElementById('modal-mj').classList.contains('is-open')
-  ) {
+  if ('home' === tab && !$('#modal-mj').classList.contains('is-open')) {
     if (49 === which) {
       user.findGame()
     } else if (50 === which) {

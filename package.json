@@ -5,7 +5,7 @@
   "license": "MIT",
   "author": "ZEIW",
   "scripts": {
-    "build": "parcel build src/*.html --experimental-scope-hoisting",
+    "build": "parcel build src/*.html",
     "lint": "eslint --fix src/js/*",
     "start": "yarn build && serve dist"
   },
