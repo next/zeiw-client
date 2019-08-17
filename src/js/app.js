@@ -277,7 +277,7 @@ function presenceUpdate(s, t, e) {
 }
 
 const devmode = localStorage.getItem('devmode')
-const dmSwitch = document.querySelector('#devmode')
+const dmSwitch = $('#devmode')
 
 if (devmode) {
   dmSwitch.checked = 'true' === devmode
@@ -301,7 +301,7 @@ function devmodeu({ target }) {
 dmSwitch.addEventListener('change', devmodeu, false)
 
 const audio = localStorage.getItem('audiomuted')
-const audioSwitch = document.querySelector('#audio')
+const audioSwitch = $('#audio')
 
 if (audio) {
   document.documentElement.setAttribute('data-audio', audio)
@@ -323,7 +323,7 @@ function switchAudio({ target }) {
 audioSwitch.addEventListener('change', switchAudio, false)
 
 const designMode = localStorage.getItem('designMode')
-const dMSwitch = document.querySelector('#designMode')
+const dMSwitch = $('#designMode')
 
 if (designMode) {
   dMSwitch.checked = 'true' === designMode
