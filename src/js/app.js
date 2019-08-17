@@ -155,9 +155,9 @@ window.addEventListener('load', () => {
   }
   socket = io.connect('wss://live.zeiw.me')
   setSocketEvents()
-  socket.emit('latency', Date.now(), function(startTime) {
-    var latency = Date.now() - startTime
-    console.log(latency)
+  socket.emit('latency', Date.now(), startTime => {
+    const latency = Date.now() - startTime
+    console.log('[WEBSOCKET] Connected in ' + latency + 'ms')
   })
   canvas = document.getElementById('canvas')
   ctx = canvas.getContext('2d')
