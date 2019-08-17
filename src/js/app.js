@@ -320,6 +320,30 @@ function switchAudio({ target }) {
 }
 audioSwitch.addEventListener('change', switchAudio, false)
 
+const designMode = localStorage.getItem('designMode')
+const dMSwitch = document.querySelector('#designMode')
+
+if (designMode) {
+  dMSwitch.checked = 'true' === designMode
+  if ('true' === designMode) {
+    document.designMode = 'on'
+  }
+} else {
+  dMSwitch.checked = false
+}
+
+function designModeu({ target }) {
+  if (target.checked) {
+    localStorage.setItem('designMode', true)
+    document.designMode = 'on'
+  } else {
+    localStorage.setItem('designMode', false)
+    document.designMode = 'off'
+  }
+}
+
+dMSwitch.addEventListener('change', designModeu, false)
+
 function tabTo(t) {
   const ct = tab
   tab = t
