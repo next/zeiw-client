@@ -6,7 +6,7 @@ import { Howl, Howler } from 'howler/dist/howler.min.js'
 
 const $ = (selector, parent = document) => parent.querySelector(selector)
 
-const $$ = (selector, parent) =>
+const $$ = (selector, parent = document) =>
   Array.prototype.slice.call(parent.querySelectorAll(selector))
 
 console.log(
