@@ -157,7 +157,13 @@ window.addEventListener('load', () => {
   setSocketEvents()
   socket.emit('latency', Date.now(), startTime => {
     const latency = Date.now() - startTime
-    console.log('[WEBSOCKET] Connected in ' + latency + 'ms')
+    console.log(
+      '%c[WEBSOCKET]%c ' + 'Connected in %c' + latency + 'ms%c',
+      'color:#06f;font-weight:bold',
+      'color:gray',
+      'color:red;font-weight:bold',
+      'color:gray'
+    )
   })
   canvas = document.getElementById('canvas')
   ctx = canvas.getContext('2d')
