@@ -160,7 +160,7 @@ window.addEventListener('load', () => {
   socket.emit('latency', Date.now(), startTime => {
     const latency = Date.now() - startTime
     console.log(
-      '%c[WEBSOCKET]%c ' + 'Connected in %c' + latency + 'ms%c',
+      `%c[WEBSOCKET]%c Connected in %c${latency}ms%c`,
       'color:#06f;font-weight:bold',
       'color:gray',
       'color:red;font-weight:bold',
