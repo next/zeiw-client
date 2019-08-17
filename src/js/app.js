@@ -88,9 +88,7 @@ window.addEventListener('load', () => {
             switch (e) {
               case 'DEV':
                 $('#dev').classList.remove('badgeh')
-                $$('.devmode')
-                  .item(0)
-                  .classList.remove('hidden')
+                $$('.devmode')[0].classList.remove('hidden')
                 break
               case 'MOD':
                 $('#mod').classList.remove('badgeh')
