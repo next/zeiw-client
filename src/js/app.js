@@ -342,8 +342,8 @@ dMSwitch.addEventListener('change', designModeu, false)
 function tabTo(t) {
   const ct = tab
   tab = t
-  $('#' + ct).className = 'dtc tc v-mid hidden'
-  $('#' + t).className = 'dtc tc v-mid'
+  $(`#${ct}`).className = 'dtc tc v-mid hidden'
+  $(`#${t}`).className = 'dtc tc v-mid'
 }
 
 function goHome() {
