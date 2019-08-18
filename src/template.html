@@ -14,6 +14,7 @@
     />
     <meta content="ZEIW" property="og:title" />
     <meta content="https://play.zeiw.me" property="og:url" />
+    <link rel="manifest" href="/manifest.webmanifest" />
     <meta
       content="https://res.cloudinary.com/zeiw/image/upload/q_auto,c_scale,w_279/v1564824906/img/icon.jpg"
       property="og:image"
@@ -43,11 +44,6 @@
       rel="preload"
       href="<%= htmlWebpackPlugin.files.publicPath + file %>"
       as="<%= file.match(/\.css$/)?'style':'script' %>"
-    />
-    <% } else if (file.match(/manifest\.json$/)) { %>
-    <link
-      rel="manifest"
-      href="<%= htmlWebpackPlugin.files.publicPath + file %>"
     />
     <% } %> <% } %> <% } %>
   </head>

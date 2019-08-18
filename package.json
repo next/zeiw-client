@@ -2,7 +2,7 @@
   "name": "client",
   "version": "0.0.0",
   "scripts": {
-    "build": "preact build --no-prerender --no-service-worker --template src/template.html && rm -r build/assets/icon.png build/manifest.json build/push-manifest.json build/assets",
+    "build": "preact build --no-prerender --no-service-worker --template src/template.html && rm -r build/assets/icon.png build/manifest.json build/push-manifest.json build/assets build/polyfills* && cp src/assets/* build",
     "dev": "preact watch --template src/template.html",
     "serve": "preact build && preact serve",
     "start": "if-env NODE_ENV=production && npm run -s serve || npm run -s dev"
@@ -17,7 +17,6 @@
     "tippy.js": "^4.3.5"
   },
   "devDependencies": {
-    "copy-webpack-plugin": "4.6.0",
     "if-env": "^1.0.0",
     "preact-cli": "^2.0.0",
     "prettier": "^1.18.2"
