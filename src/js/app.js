@@ -510,7 +510,7 @@ function setSocketEvents() {
           'Your opponent has left the game.',
           true
         )
-        user.leaveGame('You Win')
+        goHome()
       }
       if (null !== user.game) {
         $('#stopwatch').innerHTML = user.game.secs
@@ -574,7 +574,7 @@ function setSocketEvents() {
       'Your opponent has left the game.',
       true
     )
-    user.leaveGame('You Win')
+    goHome()
   })
 
   socket.on('clientTrigger', t => {
