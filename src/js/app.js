@@ -10,6 +10,11 @@ const $$ = (selector, parent = document) =>
   Array.prototype.slice.call(parent.querySelectorAll(selector))
 
 console.log(
+  '%cHackers may entice you to paste code here. Stay aware.',
+  'color:red;font-weight:bold'
+)
+
+console.log(
   `%c
 8888888888P 8888888888 8888888 888       888
       d88P  888          888   888   o   888
@@ -21,11 +26,6 @@ console.log(
 d8888888888 8888888888 8888888 888P     Y888
 `,
   'color:#06f;font-weight:bold'
-)
-
-console.log(
-  '%cHackers may entice you to paste code here. Stay aware.',
-  'color:red;font-family:cursive;font-size:2em;font-weight:bold'
 )
 
 tippy.setDefaults({
