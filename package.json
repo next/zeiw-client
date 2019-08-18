@@ -1,36 +1,26 @@
 {
   "name": "client",
-  "version": "1.0.0",
-  "repository": "git@github.com:ZEIW/client.git",
-  "license": "MIT",
-  "author": "ZEIW",
+  "version": "0.0.0",
   "scripts": {
-    "build": "parcel build src/*.html",
-    "lint": "eslint --fix src/js/*",
-    "start": "yarn build && serve dist"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "pretty-quick --staged"
-    }
+    "build": "preact build --no-prerender --no-service-worker --template src/template.html && rm -r build/assets/icon.png build/manifest.json build/push-manifest.json build/assets",
+    "dev": "preact watch --template src/template.html",
+    "lint": "eslint src",
+    "serve": "preact build && preact serve",
+    "start": "if-env NODE_ENV=production && npm run -s serve || npm run -s dev"
   },
   "dependencies": {
     "clipboard": "^2.0.4",
     "howler": "^2.1.2",
     "micromodal": "^0.4.0",
+    "preact": "^8.2.1",
     "socket.io-client": "^2.2.0",
+    "tachyons": "^4.11.1",
     "tippy.js": "^4.3.5"
   },
   "devDependencies": {
-    "eslint": "^6.1.0",
-    "eslint-config-prettier": "^6.0.0",
-    "husky": "^3.0.3",
-    "parcel-bundler": "^1.12.3",
-    "parcel-plugin-purgecss": "^2.1.2",
-    "parcel-plugin-static-files-copy": "^2.2.1",
-    "prettier": "^1.18.2",
-    "pretty-quick": "^1.11.1",
-    "sass": "^1.22.9",
-    "serve": "^11.1.0"
+    "copy-webpack-plugin": "4.6.0",
+    "if-env": "^1.0.0",
+    "preact-cli": "^2.0.0",
+    "prettier": "^1.18.2"
   }
 }
