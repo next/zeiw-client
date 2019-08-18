@@ -494,7 +494,7 @@ function setSocketEvents() {
       self.location.href = `#${c}`
       const url = `https://play.zeiw.me/#${c}`
       $('#pcpb').style.display = 'block'
-      $('wait').children[0].textContent = `Party URL: ${url}`
+      $('#wait').children[0].textContent = `Party URL: ${url}`
       $('#pcpb').setAttribute('data-clipboard-text', url)
     }
 
