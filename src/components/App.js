@@ -363,6 +363,11 @@ export default () => {
 
   function au() {
     if (native) {
+      window.addEventListener('DOMContentLoaded', () => {
+        for (const type of ['chrome', 'node', 'electron']) {
+          console.log(`${type}-version`, process.versions[type])
+        }
+      })
       _zeiwNative
         .getDiscordOauthCode()
         .then(code => {
