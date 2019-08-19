@@ -35,11 +35,11 @@ const Nav = () => (
         data-micromodal-trigger="modal-ds"
         data-tippy="Developer Tools"
         data-tippy-placement="right"
-        id="ds"
       >
         <img
           alt=""
           className="w-50 pointer hidden"
+          id="ds"
           src="https://res.cloudinary.com/zeiw/image/upload/q_auto/v1564825156/icon/code.svg"
         />
       </div>
