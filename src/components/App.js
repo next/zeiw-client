@@ -1,8 +1,8 @@
 import ClipboardJS from 'clipboard'
 import MicroModal from 'micromodal'
-import io from 'socket.io-client/dist/socket.io.slim.js'
+import io from 'socket.io-client'
 import tippy from 'tippy.js/esm/index.min.js'
-import { Howl, Howler } from 'howler/dist/howler.min.js'
+import { Howl, Howler } from 'howler'
 
 export default () => {
   const $ = (selector, parent = document) => parent.querySelector(selector)
