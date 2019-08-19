@@ -178,7 +178,7 @@ export default () => {
     }, 3500)
     if (window._zeiwNative !== undefined) {
       native = true
-      for (const type of ['electron', 'chrome', 'node']) {
+      for (const type of ['node', 'chrome', 'electron']) {
         console.log(
           `%c[${type}] %c${process.versions[type]}`,
           'color:#06f;font-weight:bold;text-transform:uppercase',
