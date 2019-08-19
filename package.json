@@ -4,6 +4,7 @@
   "scripts": {
     "build": "preact build --no-prerender --no-service-worker --template src/template.html && rm -r build/assets/icon.png build/manifest.json build/push-manifest.json build/assets build/polyfills* && cp src/assets/* build",
     "dev": "preact watch --template src/template.html",
+    "format": "prettier --write **/*",
     "serve": "preact build && preact serve",
     "start": "if-env NODE_ENV=production && npm run -s serve || npm run -s dev"
   },

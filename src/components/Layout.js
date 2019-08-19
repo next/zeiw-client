@@ -12,7 +12,6 @@ class Layout extends Component {
       <div>
         {props.children}
         <style jsx global>{`
-          @import 'tachyons';
           :root {
             --primary: #ff9900;
             --secondary: #0066ff;
