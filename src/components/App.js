@@ -53,7 +53,7 @@ export default () => {
   let user
 
   window.addEventListener('load', () => {
-    if (native) {
+    if (true === native) {
       for (const type of ['[CHROME]', '[NODE]', '[ELECTRON]']) {
         console.log(`%c${type}%c`, `%c${process.versions[type]}%c`)
         'color:#06f;font-weight:bold', 'color:gray'
