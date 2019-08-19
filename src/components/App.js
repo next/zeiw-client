@@ -53,6 +53,12 @@ export default () => {
   let user
 
   window.addEventListener('load', () => {
+    if (native) {
+      for (const type of ['[CHROME]', '[NODE]', '[ELECTRON]']) {
+        console.log(`%c${type}%c`, `%c${process.versions[type]}%c`)
+        'color:#06f;font-weight:bold', 'color:gray'
+      }
+    }
     new Howl({
       src: [
         'https://res.cloudinary.com/zeiw/video/upload/f_auto,q_auto/v1564827948/sound/theme.mp3'
