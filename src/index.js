@@ -1,4 +1,3 @@
-// import './components/App'
 import Layout from './components/Layout'
 import Tooltip from './components/Tooltip'
 import Spinner from './components/Spinner'
@@ -20,9 +19,13 @@ import Logout from './components/Logout'
 import Rematch from './components/Rematch'
 import Settings from './components/Settings'
 import UnauthErr from './components/UnauthErr'
+import NativeFrame from './components/NativeFrame'
+
+const isNative = window._zeiwNative !== undefined
 
 export default () => (
   <Layout>
+    {isNative && <NativeFrame />}
     <Modal />
     <Spinner />
     <Tooltip />
