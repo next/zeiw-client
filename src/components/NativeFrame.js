@@ -28,6 +28,8 @@ export default withStyles({
     marginLeft: '4px',
   },
   draggable: {
+    marginTop: '4px',
+    height: 'calc(100% - 4px)',
     WebkitAppRegion: 'drag',
   },
   frameIcon: {
