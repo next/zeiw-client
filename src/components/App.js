@@ -3,13 +3,9 @@ import MicroModal from 'micromodal'
 import io from 'socket.io-client'
 import tippy from 'tippy.js/esm/index.min.js'
 import { Howl, Howler } from 'howler'
+import { $, $$ } from 'trump'
 
 export default () => {
-  const $ = (selector, parent = document) => parent.querySelector(selector)
-
-  const $$ = (selector, parent = document) =>
-    Array.prototype.slice.call(parent.querySelectorAll(selector))
-
   console.log(
     '%cHackers may entice you to paste code here. Stay aware.',
     'color:red;font-weight:bold'
