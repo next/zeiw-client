@@ -9,10 +9,10 @@ jss.use(jssCamelCase(), jssNested(), jssVendorPrefixer())
 
 export default (styles, Wrap) => {
   const sheet = jss.createStyleSheet(styles, {
-    classNamePrefix: '_',
+    classNamePrefix: '_'
   })
   let sheetReferences = 0
-  const handleSheetReferenceChange = (change) => {
+  const handleSheetReferenceChange = change => {
     sheetReferences += change
     if (sheetReferences === 0) {
       sheet.detach()

@@ -14,55 +14,62 @@ const MaximimizeIcon = () => (
 
 const CloseIcon = () => (
   <svg width="12" height="12" viewBox="0 0 12 12">
-    <polygon fill="#ffffff" fill-rule="evenodd" points="11 1.576 6.583 6 11 10.424 10.424 11 6 6.583 1.576 11 1 10.424 5.417 6 1 1.576 1.576 1 6 5.417 10.424 1"></polygon>
+    <polygon
+      fill="#ffffff"
+      fill-rule="evenodd"
+      points="11 1.576 6.583 6 11 10.424 10.424 11 6 6.583 1.576 11 1 10.424 5.417 6 1 1.576 1.576 1 6 5.417 10.424 1"
+    ></polygon>
   </svg>
 )
 
-export default withStyles({
-  root: {
-    display: 'grid',
-    height: '20px',
-    position: 'fixed',
-    width: 'calc(100% - 4px)',
-    gridTemplateColumns: '1fr repeat(3, 25px)',
-    marginLeft: '4px',
-  },
-  draggable: {
-    marginTop: '4px',
-    height: 'calc(100% - 4px)',
-    WebkitAppRegion: 'drag',
-  },
-  frameIcon: {
-    width: '100%',
-    display: 'grid',
-    '& > svg': {
-      margin: 'auto',
+export default withStyles(
+  {
+    root: {
+      display: 'grid',
+      height: '20px',
+      position: 'fixed',
+      width: 'calc(100% - 4px)',
+      gridTemplateColumns: '1fr repeat(3, 25px)',
+      marginLeft: '4px'
     },
-    '&:hover': {
-      background: '#000',
+    draggable: {
+      marginTop: '4px',
+      height: 'calc(100% - 4px)',
+      WebkitAppRegion: 'drag'
     },
+    frameIcon: {
+      width: '100%',
+      display: 'grid',
+      '& > svg': {
+        margin: 'auto'
+      },
+      '&:hover': {
+        background: '#000'
+      }
+    },
+    dangerIcon: {
+      width: '100%',
+      display: 'grid',
+      '& > svg': {
+        margin: 'auto'
+      },
+      '&:hover': {
+        background: '#cf2729'
+      }
+    }
   },
-  dangerIcon: {
-    width: '100%',
-    display: 'grid',
-    '& > svg': {
-      margin: 'auto',
-    },
-    '&:hover': {
-      background: '#cf2729',
-    },
-  },
-}, ({ classes }) => (
-  <div class={classes.root}>
-    <div class={classes.draggable} />
-    <div class={classes.frameIcon} onClick={_zeiwNative.frame.minimize}>
-      <MinimizeIcon />
+  ({ classes }) => (
+    <div class={classes.root}>
+      <div class={classes.draggable} />
+      <div class={classes.frameIcon} onClick={_zeiwNative.frame.minimize}>
+        <MinimizeIcon />
+      </div>
+      <div class={classes.frameIcon} onClick={_zeiwNative.frame.maximize}>
+        <MaximimizeIcon />
+      </div>
+      <div class={classes.dangerIcon} onClick={_zeiwNative.frame.close}>
+        <CloseIcon />
+      </div>
     </div>
-    <div class={classes.frameIcon} onClick={_zeiwNative.frame.maximize}>
-      <MaximimizeIcon />
-    </div>
-    <div class={classes.dangerIcon} onClick={_zeiwNative.frame.close}>
-      <CloseIcon />
-    </div>
-  </div>
-))
+  )
+)
