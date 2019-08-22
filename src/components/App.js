@@ -706,6 +706,9 @@ export default () => {
       if (!user.game) {
         jgl = true
         gc = false
+        if (c.includes('#')) {
+          c = c.split('#')[1]
+        }
         MicroModal.close('modal-mj')
         waitMsg('Joining')
         $('#joinID').value = ''

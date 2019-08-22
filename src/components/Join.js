@@ -12,8 +12,6 @@ const Join = () => (
             autoComplete="off"
             className="input-reset ba b--black-20 pa2 mb2 db w-100"
             id="joinID"
-            maxLength={7}
-            pattern="[a-zA-Z0-9]+"
             placeholder="abcd123"
             required
             spellCheck="false"
