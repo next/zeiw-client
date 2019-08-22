@@ -3,7 +3,7 @@ import MicroModal from 'micromodal'
 import io from 'socket.io-client'
 import tippy from 'tippy.js/esm/index.min.js'
 import { Howl, Howler } from 'howler'
-import { $, $$ } from '@zeiw/trump'
+import { $ } from '@zeiw/trump'
 
 export default () => {
   console.log(
@@ -85,7 +85,7 @@ export default () => {
               switch (e) {
                 case 'DEV':
                   $('#dev').classList.remove('badgeh')
-                  $$('.devmode')[0].classList.remove('hidden')
+                  $('#dmodeswitch').classList.remove('hidden')
                   break
                 case 'MOD':
                   $('#mod').classList.remove('badgeh')
