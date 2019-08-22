@@ -68,10 +68,10 @@
   resolved "https://registry.yarnpkg.com/@types/tmp/-/tmp-0.0.32.tgz#0d3cb31022f8427ea58c008af32b80da126ca4e3"
   integrity sha1-DTyzECL4Qn6ljACK8yuA2hJspOM=
 
-"@zeiw/trump@^1.0.1":
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/@zeiw/trump/-/trump-1.0.1.tgz#5c8ee52bcf4c05256629c0723596bc934f81d7c2"
-  integrity sha512-BS0aW8AEN31a6cQSfjBSlIydt9JV0yfsqpSFDiagbQR9ktOlBcAegCerCFE84xwa/EbqSodgUXyvweIHaoewZw==
+"@zeiw/trump@^1.0.5":
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/@zeiw/trump/-/trump-1.0.5.tgz#e7dfda5ff4a1bab59d8aa1efdb21b37fb94779e3"
+  integrity sha512-t8fVwkuT4L3+5PNd9/H5JdAN6Hx6N8amzrtBAXseQvU4EjRtqKtvhg4ldQq4tai9IsYpQsFZEnSquMOVVNp7QQ==
 
 abbrev@1:
   version "1.1.1"
