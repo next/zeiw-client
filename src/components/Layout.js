@@ -1,6 +1,6 @@
 import { Component } from 'preact'
 import initApp from './App'
-import tachyons from 'tachyons'
+import 'tachyons'
 
 class Layout extends Component {
   componentDidMount() {
