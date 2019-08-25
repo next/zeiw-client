@@ -182,6 +182,11 @@ export default () => {
         )
       }
     }
+    console.log(
+      `%c[zeiw] %c${_zeiwBuild.commitHash}`,
+      'color:#06f;font-weight:bold;text-transform:uppercase',
+      'color:gray'
+    )
   })
 
   function f(c) {
