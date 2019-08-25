@@ -4,6 +4,7 @@ import io from 'socket.io-client'
 import tippy from 'tippy.js/esm/index.min.js'
 import { Howl, Howler } from 'howler'
 import { $ } from '@zeiw/trump'
+import About from './About'
 
 export default () => {
   console.log(
@@ -774,6 +775,11 @@ export default () => {
     $('#joinID').focus()
   }
 
+  function about() {
+    MicroModal.show('modal-about')
+  }
+
+  $('#about').addEventListener('click', () => about())
   $('#logoutBtn').addEventListener('click', () => signOut())
   $('#rh').addEventListener('click', () => goHome())
   $('#returnHome').addEventListener('click', () => goHome())

@@ -68,7 +68,7 @@ class Layout extends Component {
           a {
             -webkit-text-decoration: none;
             text-decoration: none;
-            color: var(--primary);
+            color: var(--secondary);
           }
           .hidden,
           .hidden > * {

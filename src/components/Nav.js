@@ -43,6 +43,17 @@ const Nav = () => (
           src="https://res.cloudinary.com/zeiw/image/upload/q_auto/v1564825156/icon/code.svg"
         />
       </div>
+      <div
+        data-micromodal-trigger="modal-about"
+        data-tippy="About Game"
+        data-tippy-placement="right"
+      >
+        <img
+          alt=""
+          className="w-50 pointer"
+          src="https://res.cloudinary.com/zeiw/image/upload/q_auto/v1566758472/icon/info.svg"
+        />
+      </div>
       <div data-tippy="Join our Discord" data-tippy-placement="right">
         <a href="https://discord.gg/h7NxqBe" rel="noopener" target="_blank">
           <img

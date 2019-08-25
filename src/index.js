@@ -9,6 +9,7 @@ import Game from './components/Game'
 import Main from './components/Main'
 import Nav from './components/Nav'
 
+import About from './components/About'
 import Account from './components/Account'
 import Auth from './components/Auth'
 import ConnErr from './components/ConnErr'
@@ -39,6 +40,7 @@ export default () => (
           <Game />
           <Main />
         </div>
+        <About />
         <Account />
         <Auth />
         <ConnErr />
