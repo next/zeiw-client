@@ -774,11 +774,6 @@ export default () => {
     $('#joinID').focus()
   }
 
-  function about() {
-    MicroModal.show('modal-about')
-  }
-
-  $('#about').addEventListener('click', () => about())
   $('#logoutBtn').addEventListener('click', () => signOut())
   $('#rh').addEventListener('click', () => goHome())
   $('#returnHome').addEventListener('click', () => goHome())
