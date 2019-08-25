@@ -4,7 +4,6 @@ import io from 'socket.io-client'
 import tippy from 'tippy.js/esm/index.min.js'
 import { Howl, Howler } from 'howler'
 import { $ } from '@zeiw/trump'
-import About from './About'
 
 export default () => {
   console.log(
