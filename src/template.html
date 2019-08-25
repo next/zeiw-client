@@ -1,11 +1,42 @@
 <!DOCTYPE html>
+
 <html lang="en">
   <head>
+    <title>Play ZEIW</title>
     <meta charset="utf-8" />
-    <title>ZEIW</title>
-    <meta content="ZEIW" name="title" />
-    <meta content="Open source community-based game 🏓" name="description" />
-    <meta content="width=device-width, initial-scale=1" name="viewport" />
+    <meta
+      content="width=device-width, initial-scale=1.0, user-scalable=no"
+      name="viewport"
+    />
+    <meta
+      content="Open source community-based game 🏓"
+      property="description"
+    />
+
+    <!-- Favicon -->
+    <link
+      href="/img/apple-touch-icon.png"
+      rel="apple-touch-icon"
+      sizes="180x180"
+    />
+    <link
+      href="/img/favicon-32x32.png"
+      rel="icon"
+      sizes="32x32"
+      type="image/png"
+    />
+    <link
+      href="/img/favicon-16x16.png"
+      rel="icon"
+      sizes="16x16"
+      type="image/png"
+    />
+    <link href="/img/site.webmanifest" rel="manifest" />
+    <link href="/img/safari-pinned-tab.svg" rel="mask-icon" />
+    <meta content="#ff9900" name="theme-color" />
+
+    <!-- SEO -->
+    <meta content="/img/og-image.jpg" property="og:image" />
     <meta content="279" property="og:image:width" />
     <meta content="279" property="og:image:height" />
     <meta
@@ -14,28 +45,8 @@
     />
     <meta content="ZEIW" property="og:title" />
     <meta content="https://play.zeiw.me" property="og:url" />
-    <meta
-      content="https://res.cloudinary.com/zeiw/image/upload/q_auto,c_scale,w_279/v1564824906/img/icon.jpg"
-      property="og:image"
-    />
-    <link
-      href="https://res.cloudinary.com/zeiw/image/upload/q_auto/v1564824186/favicon/apple-touch-icon.png"
-      rel="apple-touch-icon"
-      sizes="180x180"
-    />
-    <link
-      href="https://res.cloudinary.com/zeiw/image/upload/q_auto/v1564824186/favicon/favicon-32x32.png"
-      rel="icon"
-      sizes="32x32"
-      type="image/png"
-    />
-    <link
-      href="https://res.cloudinary.com/zeiw/image/upload/q_auto/v1564824186/favicon/favicon-16x16.png"
-      rel="icon"
-      sizes="16x16"
-      type="image/png"
-    />
-    <link href="manifest.json" rel="manifest" />
+
+    <!-- Preact -->
     <% for (var chunk of webpack.chunks) { %> <% if (chunk.names.length === 1 &&
     chunk.names[0] === 'polyfills') continue; %> <% for (var file of
     chunk.files) { %> <% if (htmlWebpackPlugin.options.preload &&
@@ -47,6 +58,7 @@
     />
     <% } %> <% } %> <% } %>
   </head>
+
   <body>
     <script
       defer
