@@ -140,6 +140,10 @@ const About = () => (
               All trademarks are property of their respective owners.
             </small>
           </footer>
+          <footer className="pv4 ph3">
+            <p className="f6 db tc">Build Hash</p>
+            <pre className="f6 db tc">{_zeiwBuild.commitHash}</pre>
+          </footer>
         </div>
         <div className="footer">
           <button className="btn" data-micromodal-close>
