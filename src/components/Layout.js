@@ -1,6 +1,7 @@
 import { Component } from 'preact'
 import initApp from './App'
 import 'tachyons'
+import 'inter-ui'
 
 class Layout extends Component {
   componentDidMount() {
@@ -23,10 +24,8 @@ class Layout extends Component {
           }
           html {
             background: var(--black);
+            font-family: Inter, sans-serif;
             color: var(--white);
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
-              Helvetica, Arial, sans-serif, 'Apple Color Emoji',
-              'Segoe UI Emoji', 'Segoe UI Symbol';
             overflow: hidden;
           }
           body {
@@ -52,23 +51,11 @@ class Layout extends Component {
             padding: 0;
           }
           * {
-            -moz-user-drag: none;
-            -moz-user-select: none;
-            -ms-user-drag: none;
-            -ms-user-select: none;
-            -webkit-touch-callout: none;
-            -webkit-user-drag: none;
-            -webkit-user-select: none;
             user-drag: none;
             user-select: none;
           }
           :focus {
             outline: none;
-          }
-          a {
-            -webkit-text-decoration: none;
-            text-decoration: none;
-            color: var(--secondary);
           }
           .hidden,
           .hidden > * {
@@ -84,8 +71,8 @@ class Layout extends Component {
             background-color: #7289da;
           }
           [class^='tippy'] {
-            -webkit-backface-visibility: hidden;
-            -webkit-transform: translateZ(0) scale(1, 1);
+            backface-visibility: hidden;
+            transform: translateZ(0) scale(1, 1);
           }
         `}</style>
       </div>
