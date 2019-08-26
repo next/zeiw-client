@@ -127,7 +127,7 @@ const About = () => (
           </footer>
           <footer className="mid-gray">
             <small className="f6 db tc">
-              Copyright © ZEIW (
+              Copyright © ZEIW.{' '}
               <a
                 href="https://github.com/ZEIW/client/blob/master/LICENSE"
                 rel="noopener"
@@ -135,7 +135,7 @@ const About = () => (
               >
                 MIT License
               </a>
-              ).
+              .
               <br />
               All trademarks are property of their respective owners.
             </small>
