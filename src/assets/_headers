@@ -6,3 +6,5 @@
   X-Content-Type-Options: nosniff
   X-Frame-Options: sameorigin
   X-XSS-Protection: 1; mode=block
+/cb.html
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline'
