@@ -45,7 +45,7 @@ export default withStyles(
         margin: 'auto'
       },
       '&:hover': {
-        background: '#000'
+        background: 'rgba(255, 255, 255, 0.05)'
       }
     },
     dangerIcon: {
@@ -56,7 +56,7 @@ export default withStyles(
         margin: 'auto'
       },
       '&:hover': {
-        background: '#cf2729'
+        background: '#f04747'
       }
     }
   },
