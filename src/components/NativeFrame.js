@@ -49,6 +49,7 @@ export default withStyles(
       }
     },
     dangerIcon: {
+      cursor: 'pointer',
       width: '100%',
       display: 'grid',
       '& > svg': {
