@@ -1,81 +1,75 @@
 const Modal = () => (
   <div>
-    <style jsx>
+    <style>
       {`
         .overlay {
-          position: fixed;
-          top: 0;
-          left: 0;
-          right: 0;
-          bottom: 0;
+          align-items: center;
           background: rgba(0, 0, 0, 0.6);
+          bottom: 0;
           display: flex;
           justify-content: center;
-          align-items: center;
+          left: 0;
+          position: fixed;
+          right: 0;
+          top: 0;
         }
         .container {
           background-color: var(--white);
-          padding: 30px;
-          max-width: 500px;
-          max-height: 100vh;
           border-radius: 4px;
-          overflow-y: auto;
           box-sizing: border-box;
+          max-height: 100vh;
+          max-width: 500px;
+          overflow-y: auto;
+          padding: 30px;
         }
         .header {
+          align-items: center;
           display: flex;
           justify-content: space-between;
-          align-items: center;
         }
         .title {
-          margin-top: 0;
-          margin-bottom: 0;
-          font-weight: 600;
-          font-size: 1.25rem;
-          line-height: 1.25;
-          color: var(--secondary);
           box-sizing: border-box;
+          color: var(--secondary);
+          font-size: 1.25rem;
+          font-weight: 600;
+          line-height: 1.25;
+          margin-bottom: 0;
+          margin-top: 0;
         }
         .close {
           background: transparent;
           border: 0;
         }
         .header .close:before {
-          content: '✕';
           color: var(--black);
+          content: '✕';
         }
         .content {
-          margin-top: 2rem;
-          margin-bottom: 2rem;
-          line-height: 1.5;
           color: var(--black);
+          line-height: 1.5;
+          margin-bottom: 2rem;
+          margin-top: 2rem;
         }
         .btn {
-          font-size: 0.875rem;
-          padding-left: 1rem;
-          padding-right: 1rem;
-          padding-top: 0.5rem;
-          padding-bottom: 0.5rem;
+          backface-visibility: hidden;
           background-color: var(--gray);
-          color: var(--black);
           border-radius: 0.25rem;
           border-style: none;
           border-width: 0;
+          color: var(--black);
           cursor: pointer;
-          -webkit-appearance: button;
-          text-transform: none;
-          overflow: visible;
+          font-size: 0.875rem;
           line-height: 1.15;
           margin: 0;
-          will-change: transform;
-          -moz-osx-font-smoothing: grayscale;
-          -webkit-backface-visibility: hidden;
-          backface-visibility: hidden;
-          -webkit-transform: translateZ(0);
+          overflow: visible;
+          padding-bottom: 0.5rem;
+          padding-left: 1rem;
+          padding-right: 1rem;
+          padding-top: 0.5rem;
+          text-transform: none;
           transform: translateZ(0);
-          transition: -webkit-transform 0.25s ease-out;
           transition: transform 0.25s ease-out;
-          transition: transform 0.25s ease-out, -webkit-transform 0.25s ease-out;
+          will-change: transform;
         }
         .btn-primary {
           background-color: var(--secondary);
@@ -150,8 +144,8 @@ const Modal = () => (
           margin-right: 0.5rem !important;
         }
         .switch-wrapper {
-          display: flex;
           align-items: center;
+          display: flex;
           justify-content: space-between;
           padding: 0.5em;
         }
@@ -159,9 +153,9 @@ const Modal = () => (
           font-size: 1rem;
         }
         .switch {
-          margin-left: 3rem;
           display: inline-block;
           height: 34px;
+          margin-left: 3rem;
           position: relative;
           width: 60px;
         }
@@ -192,7 +186,6 @@ const Modal = () => (
           background-color: var(--secondary);
         }
         input:checked + .slider:before {
-          -webkit-transform: translateX(26px);
           transform: translateX(26px);
         }
         .slider.round {
@@ -202,11 +195,11 @@ const Modal = () => (
           border-radius: 50%;
         }
         .badge {
+          background-position: 50%;
           background-repeat: no-repeat;
           background-size: contain;
-          background-position: 50%;
-          width: 32px;
           height: 32px;
+          width: 32px;
         }
         #dev {
           background-image: url('https://res.cloudinary.com/zeiw/image/upload/c_scale,h_32/v1564826121/icon/developer.svg');
@@ -217,23 +210,18 @@ const Modal = () => (
         #tp {
           background-image: url('https://res.cloudinary.com/zeiw/image/upload/c_scale,h_32/v1564826121/icon/testpilot.svg');
         }
-        #pr,
-        #prc {
+        #pr, #prc {
           background-image: url('https://res.cloudinary.com/zeiw/image/upload/c_scale,h_32/v1564826121/icon/phoenix-riders.svg');
         }
-        #wd,
-        #wdc {
+        #wd, #wdc {
           background-image: url('https://res.cloudinary.com/zeiw/image/upload/c_scale,h_32/v1564826121/icon/winter-dragons.svg');
         }
-        #db,
-        #dbc {
+        #db, #dbc {
           background-image: url('https://res.cloudinary.com/zeiw/image/upload/c_scale,h_32/v1564826121/icon/demon-brigade.svg');
         }
-        #prc,
-        #wdc,
-        #dbc {
-          width: 48px;
+        #prc, #wdc, #dbc {
           height: 48px;
+          width: 48px;
         }
       `}
     </style>

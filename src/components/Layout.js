@@ -12,25 +12,30 @@ class Layout extends Component {
     return (
       <div>
         {props.children}
-        <style jsx global>{`
+        <style>{`
           :root {
-            --primary: #ff9900;
-            --secondary: #0066ff;
-            --success: #19a974;
+            --black: #111;
             --danger: #f04747;
-            --white: #eeeeee;
-            --gray: #cccccc;
-            --black: #111111;
+            --gray: #ccc;
+            --primary: #f90;
+            --secondary: #06f;
+            --success: #19a974;
+            --white: #eee;
           }
-          html {
-            background: var(--black);
-            font-family: Inter, sans-serif;
-            color: var(--white);
-            overflow: hidden;
+          *, ::after, ::before {
+            box-sizing: border-box;
+            color: inherit;
+            font-family: inherit;
+            font-size: inherit;
+            margin: 0;
+            padding: 0;
           }
           body {
-            background-image: url('https://res.cloudinary.com/zeiw/image/upload/q_auto/v1564824906/img/stardust.png');
             animation: stars 30s linear infinite;
+            background: url('https://res.cloudinary.com/zeiw/image/upload/q_auto/v1564824906/img/stardust.png') var(--black);
+            color: var(--white);
+            font-family: 'Inter', sans-serif;
+            overflow: hidden;
           }
           @keyframes stars {
             0% {
@@ -40,22 +45,19 @@ class Layout extends Component {
               background-position: 798px -798px;
             }
           }
-          *,
-          ::after,
-          ::before {
-            box-sizing: border-box;
-            color: inherit;
-            font-family: inherit;
-            font-size: inherit;
-            margin: 0;
-            padding: 0;
-          }
-          * {
-            user-drag: none;
-            user-select: none;
+          ::selection {
+            background: var(--primary); 
           }
           :focus {
-            outline: none;
+            outline: 0;
+          }
+          img, svg {
+            -moz-user-select: none;
+            -ms-user-select: none;
+            -webkit-user-drag: none;
+            -webkit-user-select: none;
+            user-drag: none;
+            user-select: none;
           }
           .hidden,
           .hidden > * {
@@ -69,10 +71,6 @@ class Layout extends Component {
           }
           .bg-blurple {
             background-color: #7289da;
-          }
-          [class^='tippy'] {
-            backface-visibility: hidden;
-            transform: translateZ(0) scale(1, 1);
           }
         `}</style>
       </div>

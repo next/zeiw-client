@@ -1,5 +1,4 @@
 import Layout from './components/Layout'
-import Tooltip from './components/Tooltip'
 import Spinner from './components/Spinner'
 import Modal from './components/Modal'
 import Alert from './components/Alert'
@@ -29,7 +28,6 @@ export default () => (
     {isNative && <NativeFrame />}
     <Modal />
     <Spinner />
-    <Tooltip />
     <Alert />
     <div className="center">
       <div className="cf w-100">

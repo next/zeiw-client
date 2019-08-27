@@ -1,7 +1,7 @@
 import ClipboardJS from 'clipboard'
 import MicroModal from 'micromodal'
 import io from 'socket.io-client'
-import tippy from 'tippy.js/esm/index.min.js'
+import tippy from 'tippy.js'
 import { Howl, Howler } from 'howler'
 import { $ } from '@zeiw/trump'
 

@@ -17,12 +17,12 @@ export default withStyles(
       top: '5%',
       transition: '1s left ease-in-out',
       '& > h3': {
-        fontSize: '15px',
+        fontSize: '1rem',
         margin: 0
       },
       '& > p': {
         width: '200px',
-        fontSize: '12px',
+        fontSize: '0.875rem',
         margin: '5px 0',
         wordWrap: 'break-word'
       }
