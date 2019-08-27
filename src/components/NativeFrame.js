@@ -38,6 +38,7 @@ export default withStyles(
       WebkitAppRegion: 'drag'
     },
     frameIcon: {
+      cursor: 'pointer',
       width: '100%',
       display: 'grid',
       '& > svg': {
