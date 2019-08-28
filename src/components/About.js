@@ -127,9 +127,9 @@ const About = () => (
           </footer>
           <footer className="mid-gray">
             <small className="f6 db tc">
-              Copyright © ZEIW.{' '}
+              Copyright © Next.{' '}
               <a
-                href="https://github.com/ZEIW/client/blob/master/LICENSE"
+                href="https://github.com/next/zeiw-client/blob/master/LICENSE"
                 rel="noopener"
                 target="_blank"
               >
