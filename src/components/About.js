@@ -63,7 +63,7 @@ const About = () => (
             </a>
             <a
               className="link gray dib br-100 h2 w2 mr3 pa2 bg-near-white ba b--black-10"
-              href="https://github.com/ZEIW"
+              href="https://github.com/next"
               rel="noopener"
               target="_blank"
             >

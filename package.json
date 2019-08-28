@@ -1,9 +1,10 @@
 {
-  "name": "client",
+  "name": "zeiw-client",
   "version": "1.0.0",
-  "repository": "git@github.com:ZEIW/client.git",
+  "repository": "git@github.com:next/zeiw-client.git",
   "license": "MIT",
-  "author": "ZEIW",
+  "author": "Casper <pnfcre@gmail.com>",
+  "main": "index.js",
   "scripts": {
     "build": "preact build --no-prerender --no-service-worker --template src/template.html && rm -rf build/assets build/polyfills* build/*.json && cp -r src/assets/* build",
     "dev": "preact watch --template src/template.html",
