@@ -19,22 +19,38 @@ const About = () => (
           <h1 className="f4 bold center mw5">Important Links</h1>
           <ul className="list pl0 ml0 center mw5 ba b--light-silver br3">
             <li className="ph3 pv2 bb b--light-silver">
-              <a href="https://zeiw.me/terms" rel="noopener" target="_blank">
+              <a
+                href="https://zeiw.me/terms"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 Terms of Service
               </a>
             </li>
             <li className="ph3 pv2 bb b--light-silver">
-              <a href="https://zeiw.me/privacy" rel="noopener" target="_blank">
+              <a
+                href="https://zeiw.me/privacy"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 Privacy Policy
               </a>
             </li>
             <li className="ph3 pv2 bb b--light-silver">
-              <a href="https://zeiw.me/security" rel="noopener" target="_blank">
+              <a
+                href="https://zeiw.me/security"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 Vulnerability Policy
               </a>
             </li>
             <li className="ph3 pv2">
-              <a href="mailto:support@zeiw.me" rel="noopener" target="_blank">
+              <a
+                href="mailto:support@zeiw.me"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 Contact Support
               </a>
             </li>
@@ -43,8 +59,8 @@ const About = () => (
             <a
               className="link gray dib h2 w2 br-100 mr3 pa2 bg-near-white ba b--black-10"
               href="https://discord.gg/h7NxqBe"
-              rel="noopener"
               target="_blank"
+              rel="noopener noreferrer"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -64,8 +80,8 @@ const About = () => (
             <a
               className="link gray dib br-100 h2 w2 mr3 pa2 bg-near-white ba b--black-10"
               href="https://github.com/next"
-              rel="noopener"
               target="_blank"
+              rel="noopener noreferrer"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -85,8 +101,8 @@ const About = () => (
             <a
               className="link gray dib br-100 h2 w2 mr3 pa2 bg-near-white ba b--black-10"
               href="https://medium.com/zeiw"
-              rel="noopener"
               target="_blank"
+              rel="noopener noreferrer"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -106,8 +122,8 @@ const About = () => (
             <a
               className="link gray dib h2 w2 br-100 mr3 pa2 bg-near-white ba b--black-10"
               href="https://twitter.com/zeiwhq"
-              rel="noopener"
               target="_blank"
+              rel="noopener noreferrer"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -130,8 +146,8 @@ const About = () => (
               Copyright © Next.{' '}
               <a
                 href="https://github.com/next/zeiw-client/blob/master/LICENSE"
-                rel="noopener"
                 target="_blank"
+                rel="noopener noreferrer"
               >
                 MIT License
               </a>

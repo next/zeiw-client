@@ -55,7 +55,11 @@ const Nav = () => (
         />
       </div>
       <div data-tippy="Join our Discord" data-tippy-placement="right">
-        <a href="https://discord.gg/h7NxqBe" rel="noopener" target="_blank">
+        <a
+          href="https://discord.gg/h7NxqBe"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           <img
             alt=""
             className="w-50 pointer"
