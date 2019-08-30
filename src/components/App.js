@@ -142,6 +142,10 @@ export default () => {
       if ('home' === tab) {
         socket.emit('getOnline')
       }
+      socket.emit('latency', Date.now(), startTime => {
+        const ping = Date.now() - startTime
+        $('#ping').innerHTML = `${ping} ms`
+      })
     }, 3500)
 
     const style =

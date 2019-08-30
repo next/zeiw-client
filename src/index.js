@@ -26,6 +26,7 @@ const isNative = window._zeiwNative !== undefined
 export default () => (
   <Layout>
     {isNative && <NativeFrame />}
+    <div className="absolute top-2 right-2" id="ping" data-tippy="Websocket Latency" data-tippy-placement="left" style="cursor: default">??? ms</div>
     <Modal />
     <Spinner />
     <Alert />
