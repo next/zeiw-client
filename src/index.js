@@ -8,6 +8,7 @@ import Game from './components/Game'
 import Main from './components/Main'
 import Nav from './components/Nav'
 import Ping from './components/Ping'
+import Build from './components/Build'
 
 import About from './components/About'
 import Account from './components/Account'
@@ -53,5 +54,6 @@ export default () => (
         <UnauthErr />
       </div>
     </div>
+    <Build />
   </Layout>
 )

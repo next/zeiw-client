@@ -16,45 +16,6 @@ const About = () => (
               factions and compete against other factions during events!
             </p>
           </div>
-          <h1 className="f4 bold center mw5">Important Links</h1>
-          <ul className="list pl0 ml0 center mw5 ba b--light-silver br3">
-            <li className="ph3 pv2 bb b--light-silver">
-              <a
-                href="https://zeiw.me/terms"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Terms of Service
-              </a>
-            </li>
-            <li className="ph3 pv2 bb b--light-silver">
-              <a
-                href="https://zeiw.me/privacy"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Privacy Policy
-              </a>
-            </li>
-            <li className="ph3 pv2 bb b--light-silver">
-              <a
-                href="https://zeiw.me/security"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Vulnerability Policy
-              </a>
-            </li>
-            <li className="ph3 pv2">
-              <a
-                href="mailto:support@zeiw.me"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Contact Support
-              </a>
-            </li>
-          </ul>
           <footer className="pv4 ph3 tc">
             <a
               className="link gray dib h2 w2 br-100 mr3 pa2 bg-near-white ba b--black-10"
@@ -154,11 +115,39 @@ const About = () => (
               .
               <br />
               All trademarks are property of their respective owners.
+              <br />
+              <a
+                href="https://zeiw.me/terms"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Terms
+              </a>{' '}
+              |{' '}
+              <a
+                href="https://zeiw.me/privacy"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Privacy
+              </a>{' '}
+              |{' '}
+              <a
+                href="https://zeiw.me/security"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Security
+              </a>{' '}
+              |{' '}
+              <a
+                href="mailto:support@zeiw.me"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Contact
+              </a>
             </small>
-          </footer>
-          <footer className="pv4 ph3">
-            <p className="f6 db tc">Build Hash</p>
-            <pre className="f6 db tc">{_zeiwBuild.commitHash}</pre>
           </footer>
         </div>
         <div className="footer">

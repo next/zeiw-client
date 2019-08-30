@@ -30,6 +30,8 @@ export default () => {
   let user
 
   window.addEventListener('load', () => {
+    let build = _zeiwBuild.commitHash.substring(0, 7)
+    $('#build').innerHTML = `${build}`
     new Howl({
       src: [
         'https://res.cloudinary.com/zeiw/video/upload/f_auto,q_auto/v1564827948/sound/theme.mp3'
