@@ -32,6 +32,7 @@ export default () => {
   window.addEventListener('load', () => {
     let build = _zeiwBuild.commitHash.substring(0, 7)
     $('#build').innerHTML = `${build}`
+    $('#build').classList.remove('loading')
     new Howl({
       src: [
         'https://res.cloudinary.com/zeiw/video/upload/f_auto,q_auto/v1564827948/sound/theme.mp3'
@@ -147,6 +148,7 @@ export default () => {
       socket.emit('latency', Date.now(), startTime => {
         const ping = Date.now() - startTime
         $('#ping').innerHTML = `${ping} ms`
+        $('#ping').classList.remove('loading')
       })
     }, 3500)
 
@@ -466,6 +468,7 @@ export default () => {
       canvas.height = h
       const onlineusers = uonl
       $('#online').innerHTML = `${onlineusers} ONLINE`
+      $('#online').classList.remove('loading')
       draw()
     })
 

@@ -5,8 +5,8 @@ const Main = () => (
       className="w-30"
       src="https://res.cloudinary.com/zeiw/image/upload/q_auto/v1564824906/img/logo.png"
     />
-    <h1 className="f4 ttu tracked mt0 mt4" id="online">
-      ??? ONLINE
+    <h1 className="f4 ttu tracked mt0 mt4">
+      <span className="loading dots" id="online" />
     </h1>
     <img
       alt=""

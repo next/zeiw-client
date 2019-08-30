@@ -1,5 +1,6 @@
 import { Component } from 'preact'
 import initApp from './App'
+import 'text-spinners'
 import 'tachyons'
 import 'inter-ui'
 

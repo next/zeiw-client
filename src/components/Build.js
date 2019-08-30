@@ -1,13 +1,11 @@
 const Build = () => (
   <div
-    className="absolute bottom-2 right-2"
-    id="build"
+    className="absolute bottom-2 right-2 loading dots"
     data-tippy="Build Number"
     data-tippy-placement="left"
     style="cursor: default"
-  >
-    ???
-  </div>
+    id="build"
+  />
 )
 
 export default Build

@@ -7498,6 +7498,11 @@ term-size@^1.2.0:
   dependencies:
     execa "^0.7.0"
 
+text-spinners@^1.0.5:
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/text-spinners/-/text-spinners-1.0.5.tgz#801825e0643c53ff3ab3d990e1e93ddef97cb805"
+  integrity sha1-gBgl4GQ8U/86s9mQ4ek93vl8uAU=
+
 through2@^2.0.0:
   version "2.0.5"
   resolved "https://registry.yarnpkg.com/through2/-/through2-2.0.5.tgz#01c1e39eb31d07cb7d03a96a70823260b23132cd"

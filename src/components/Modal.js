@@ -202,22 +202,22 @@ const Modal = () => (
           width: 32px;
         }
         #dev {
-          background-image: url('https://res.cloudinary.com/zeiw/image/upload/c_scale,h_32/v1564826121/icon/developer.svg');
+          background-image: url('https://res.cloudinary.com/zeiw/image/upload/c_scale,q_auto,h_32/v1567190586/icon/dev.svg');
         }
         #mod {
-          background-image: url('https://res.cloudinary.com/zeiw/image/upload/c_scale,h_32/v1564826121/icon/moderator.svg');
+          background-image: url('https://res.cloudinary.com/zeiw/image/upload/c_scale,q_auto,h_32/v1564826121/icon/moderator.svg');
         }
         #tp {
-          background-image: url('https://res.cloudinary.com/zeiw/image/upload/c_scale,h_32/v1564826121/icon/testpilot.svg');
+          background-image: url('https://res.cloudinary.com/zeiw/image/upload/c_scale,q_auto,h_32/v1564826121/icon/testpilot.svg');
         }
         #pr, #prc {
-          background-image: url('https://res.cloudinary.com/zeiw/image/upload/c_scale,h_32/v1564826121/icon/phoenix-riders.svg');
+          background-image: url('https://res.cloudinary.com/zeiw/image/upload/c_scale,q_auto,h_32/v1564826121/icon/phoenix-riders.svg');
         }
         #wd, #wdc {
-          background-image: url('https://res.cloudinary.com/zeiw/image/upload/c_scale,h_32/v1564826121/icon/winter-dragons.svg');
+          background-image: url('https://res.cloudinary.com/zeiw/image/upload/c_scale,q_auto,h_32/v1564826121/icon/winter-dragons.svg');
         }
         #db, #dbc {
-          background-image: url('https://res.cloudinary.com/zeiw/image/upload/c_scale,h_32/v1564826121/icon/demon-brigade.svg');
+          background-image: url('https://res.cloudinary.com/zeiw/image/upload/c_scale,q_auto,h_32/v1564826121/icon/demon-brigade.svg');
         }
         #prc, #wdc, #dbc {
           height: 48px;
