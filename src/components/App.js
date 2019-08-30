@@ -6,25 +6,6 @@ import { Howl, Howler } from 'howler'
 import { $ } from '@zeiw/trump'
 
 export default () => {
-  console.log(
-    '%cHackers may entice you to paste code here. Stay aware.',
-    'color:red;font-weight:bold'
-  )
-
-  console.log(
-    `%c
-  8888888888P 8888888888 8888888 888       888
-        d88P  888          888   888   o   888
-       d88P   888          888   888  d8b  888
-      d88P    8888888      888   888 d888b 888
-     d88P     888          888   888d88888b888
-    d88P      888          888   88888P Y88888
-   d88P       888          888   8888P   Y8888
-  d8888888888 8888888888 8888888 888P     Y888
-  `,
-    'color:#06f;font-weight:bold'
-  )
-
   tippy.setDefaults({
     animation: 'fade',
     arrow: true,
@@ -152,16 +133,6 @@ export default () => {
     }
     socket = io.connect('wss://live.zeiw.me')
     setSocketEvents()
-    socket.emit('latency', Date.now(), startTime => {
-      const latency = Date.now() - startTime
-      console.log(
-        `%c[WEBSOCKET]%c Connected in %c${latency}ms%c`,
-        'color:#06f;font-weight:bold',
-        'color:gray',
-        'color:red;font-weight:bold',
-        'color:gray'
-      )
-    })
     canvas = $('#canvas')
     ctx = canvas.getContext('2d')
     window.addEventListener('keydown', keydown)
@@ -172,20 +143,27 @@ export default () => {
         socket.emit('getOnline')
       }
     }, 3500)
+
+    const style =
+      'background:#070B13;color:#fff;display:block;padding:0.5em 1em;font-size:1em'
+    socket.emit('latency', Date.now(), startTime => {
+      const ping = Date.now() - startTime
+      console.log(
+        `%c🌑︎ Welcome to ZEIW! 🚀 Websocket Latency: ${ping} ms ⚡️`,
+        style
+      )
+    })
     if (window._zeiwNative !== undefined) {
       native = true
-      for (const type of ['node', 'chrome', 'electron']) {
-        console.log(
-          `%c[${type}] %c${process.versions[type]}`,
-          'color:#06f;font-weight:bold;text-transform:uppercase',
-          'color:gray'
-        )
-      }
+      let c = process.versions['chrome']
+      let e = process.versions['electron']
+      let n = process.versions['node']
+      console.log(`%c🌑︎ Chrome ${c} ~ Electron ${e} ~ Node ${n} 🚧`, style)
     }
+    console.log(`%c🌑︎ Build Hash: ${_zeiwBuild.commitHash} 📌`, style)
     console.log(
-      `%c[ZEIW] %c${_zeiwBuild.commitHash}`,
-      'color:#06f;font-weight:bold',
-      'color:gray'
+      `%c🌑︎ Hackers may entice you to paste code here. Stay aware! ⚠️`,
+      style
     )
   })
 
