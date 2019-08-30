@@ -29,6 +29,7 @@ export default () => (
   <Layout>
     {isNative && <NativeFrame />}
     <Ping />
+    <Build />
     <Modal />
     <Spinner />
     <Alert />
@@ -54,6 +55,5 @@ export default () => (
         <UnauthErr />
       </div>
     </div>
-    <Build />
   </Layout>
 )
