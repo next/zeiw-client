@@ -150,13 +150,7 @@ export default () => {
 
     const style =
       'background:#070B13;color:#fff;display:block;padding:0.5em 1em;font-size:1em'
-    socket.emit('latency', Date.now(), startTime => {
-      const ping = Date.now() - startTime
-      console.log(
-        `%c🌑︎ Welcome to ZEIW! 🚀 Websocket Latency: ${ping} ms ⚡️`,
-        style
-      )
-    })
+
     if (window._zeiwNative !== undefined) {
       native = true
       let c = process.versions['chrome']

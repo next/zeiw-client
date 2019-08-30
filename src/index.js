@@ -7,6 +7,7 @@ import Host from './components/Host'
 import Game from './components/Game'
 import Main from './components/Main'
 import Nav from './components/Nav'
+import Ping from './components/Ping'
 
 import About from './components/About'
 import Account from './components/Account'
@@ -26,7 +27,7 @@ const isNative = window._zeiwNative !== undefined
 export default () => (
   <Layout>
     {isNative && <NativeFrame />}
-    <div className="absolute top-2 right-2" id="ping" data-tippy="Websocket Latency" data-tippy-placement="left" style="cursor: default">??? ms</div>
+    <Ping />
     <Modal />
     <Spinner />
     <Alert />
