@@ -174,7 +174,9 @@ export default () => {
       console.log(`%c🌑︎ Chrome ${c} ~ Electron ${e} ~ Node ${n} 🚧`, primary)
     }
     console.log(`%c🌑︎ Client Hash:  ${_zeiwBuild.commitHash} 📌`, primary)
-    console.log(`%c🌑︎ Desktop Hash: ${_zeiwNative.buildEnv.nativeVersion} 📌`, primary)
+    if (window._zeiwNative !== undefined) {
+      console.log(`%c🌑︎ Desktop Hash: ${_zeiwNative.buildEnv.nativeVersion} 📌`, primary)
+    }
     console.log(
       `%c🌑︎ Hackers may entice you to paste code here. Stay aware! ⚠️`,
       alert
