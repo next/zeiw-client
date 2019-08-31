@@ -152,20 +152,22 @@ export default () => {
       })
     }, 3500)
 
-    const style =
+    const primary =
       'background:#070B13;color:#fff;display:block;padding:0.5em 1em;font-size:1em'
+    const alert =
+      'background:#FFCC4D;color:#000;display:block;padding:0.5em 1em;font-size:1em'
 
     if (window._zeiwNative !== undefined) {
       native = true
       let c = process.versions['chrome']
       let e = process.versions['electron']
       let n = process.versions['node']
-      console.log(`%c🌑︎ Chrome ${c} ~ Electron ${e} ~ Node ${n} 🚧`, style)
+      console.log(`%c🌑︎ Chrome ${c} ~ Electron ${e} ~ Node ${n} 🚧`, primary)
     }
-    console.log(`%c🌑︎ Build Hash: ${_zeiwBuild.commitHash} 📌`, style)
+    console.log(`%c🌑︎ Build Hash: ${_zeiwBuild.commitHash} 📌`, primary)
     console.log(
       `%c🌑︎ Hackers may entice you to paste code here. Stay aware! ⚠️`,
-      style
+      alert
     )
   })
 
