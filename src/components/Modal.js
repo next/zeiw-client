@@ -57,7 +57,6 @@ const Modal = () => (
           border-style: none;
           border-width: 0;
           color: var(--black);
-          cursor: pointer;
           font-size: 0.875rem;
           line-height: 1.15;
           margin: 0;
@@ -165,7 +164,6 @@ const Modal = () => (
         .slider {
           background-color: var(--gray);
           bottom: 0;
-          cursor: pointer;
           left: 0;
           position: absolute;
           right: 0;

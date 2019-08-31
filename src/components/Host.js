@@ -1,7 +1,7 @@
 const Host = () => (
   <div className="dtc tc v-mid hidden" id="wait">
     <div
-      className="copy pointer"
+      className="copy"
       data-tippy="Copy to Clipboard"
       data-tippy-placement="top"
       id="pcpb"

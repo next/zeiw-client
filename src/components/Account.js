@@ -4,7 +4,7 @@ const Account = () => (
       <div className="container" role="dialog">
         <div className="header">
           <h2 className="title">Player Settings</h2>
-          <button className="close pointer" data-micromodal-close />
+          <button className="close" data-micromodal-close />
         </div>
         <div className="content center dt">
           <div className="dtc tc v-mid">

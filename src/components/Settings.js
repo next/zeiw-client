@@ -4,7 +4,7 @@ const Settings = () => (
       <div className="container" role="dialog">
         <div className="header">
           <h2 className="title">Game Settings</h2>
-          <button className="close pointer" data-micromodal-close />
+          <button className="close" data-micromodal-close />
         </div>
         <div className="content">
           <div className="audio switch-wrapper">

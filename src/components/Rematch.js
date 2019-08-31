@@ -6,7 +6,7 @@ const Rematch = () => (
           <h2 className="title" id="modal-rm-title">
             Rematch?
           </h2>
-          <button className="close pointer" data-micromodal-close />
+          <button className="close" data-micromodal-close />
         </div>
         <div className="content">Would you like to rematch?</div>
         <div className="footer">

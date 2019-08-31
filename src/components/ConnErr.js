@@ -4,7 +4,7 @@ const ConnErr = () => (
       <div className="container" role="dialog">
         <div className="header">
           <h2 className="title">Authorization Failed</h2>
-          <button className="close pointer" data-micromodal-close />
+          <button className="close" data-micromodal-close />
         </div>
         <div className="content">
           We couldn't connect to Discord. Make sure your Discord app is running.

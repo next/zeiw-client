@@ -4,25 +4,25 @@ const Faction = () => (
       <div className="container" role="dialog">
         <div className="header">
           <h2 className="title">Choose Faction</h2>
-          <button className="close pointer" data-micromodal-close />
+          <button className="close" data-micromodal-close />
         </div>
         <div className="content center dt">
           <div className="dtc tc">
             <div className="factions flex flex-row justify-center">
               <div
-                className="badge ma2 pointer"
+                className="badge ma2"
                 data-tippy="Phoenix Riders"
                 data-tippy-placement="top"
                 id="prc"
               />
               <div
-                className="badge ma2 pointer"
+                className="badge ma2"
                 data-tippy="Winter Dragons"
                 data-tippy-placement="top"
                 id="wdc"
               />
               <div
-                className="badge ma2 pointer"
+                className="badge ma2"
                 data-tippy="Demon Brigade"
                 data-tippy-placement="top"
                 id="dbc"

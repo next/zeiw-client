@@ -4,7 +4,7 @@ const Nav = () => (
       <div data-tippy="Return Home" data-tippy-placement="right" id="rh">
         <img
           alt=""
-          className="w-50 pointer"
+          className="w-50"
           src="https://res.cloudinary.com/zeiw/image/upload/q_auto/v1564825249/icon/home.svg"
         />
       </div>
@@ -16,7 +16,7 @@ const Nav = () => (
       >
         <img
           alt=""
-          className="w-50 pointer"
+          className="w-50"
           src="https://res.cloudinary.com/zeiw/image/upload/q_auto/v1564825220/icon/player.svg"
         />
       </div>
@@ -27,7 +27,7 @@ const Nav = () => (
       >
         <img
           alt=""
-          className="w-50 pointer"
+          className="w-50"
           src="https://res.cloudinary.com/zeiw/image/upload/q_auto/v1564825185/icon/settings.svg"
         />
       </div>
@@ -38,7 +38,7 @@ const Nav = () => (
       >
         <img
           alt=""
-          className="w-50 pointer hidden"
+          className="w-50 hidden"
           id="ds"
           src="https://res.cloudinary.com/zeiw/image/upload/q_auto/v1564825156/icon/code.svg"
         />
@@ -50,7 +50,7 @@ const Nav = () => (
       >
         <img
           alt=""
-          className="w-50 pointer"
+          className="w-50"
           src="https://res.cloudinary.com/zeiw/image/upload/q_auto/v1566758472/icon/info.svg"
         />
       </div>
@@ -62,7 +62,7 @@ const Nav = () => (
         >
           <img
             alt=""
-            className="w-50 pointer"
+            className="w-50"
             src="https://res.cloudinary.com/zeiw/image/upload/q_auto/v1564825112/icon/discord.svg"
           />
         </a>

@@ -4,7 +4,7 @@ const Join = () => (
       <div className="container" role="dialog">
         <div className="header">
           <h2 className="title">Join Party</h2>
-          <button className="close pointer" data-micromodal-close />
+          <button className="close" data-micromodal-close />
         </div>
         <div className="content">
           <label htmlFor="joinID" />

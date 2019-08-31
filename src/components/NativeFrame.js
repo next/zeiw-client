@@ -38,7 +38,7 @@ export default withStyles(
       WebkitAppRegion: 'drag'
     },
     frameIcon: {
-      cursor: 'pointer',
+      cursor: 'pointer !important',
       width: '100%',
       display: 'grid',
       '& > svg': {
@@ -49,7 +49,7 @@ export default withStyles(
       }
     },
     dangerIcon: {
-      cursor: 'pointer',
+      cursor: 'pointer !important',
       width: '100%',
       display: 'grid',
       '& > svg': {

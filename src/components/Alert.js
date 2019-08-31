@@ -10,7 +10,6 @@ export default withStyles(
       zIndex: '5',
       background: 'var(--white)',
       color: 'var(--black)',
-      cursor: 'pointer',
       left: 'calc(100% + 6px)',
       padding: '15px 20px 15px 15px',
       position: 'fixed',

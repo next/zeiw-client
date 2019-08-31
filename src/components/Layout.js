@@ -46,13 +46,16 @@ class Layout extends Component {
               background-position: 798px -798px;
             }
           }
+          * {
+            cursor: default !important;
+          }
           ::selection {
             background: var(--primary); 
           }
           :focus {
             outline: 0;
           }
-          img, svg {
+          img {
             -moz-user-select: none;
             -ms-user-select: none;
             -webkit-user-drag: none;

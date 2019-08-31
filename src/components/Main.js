@@ -10,7 +10,7 @@ const Main = () => (
     </h1>
     <img
       alt=""
-      className="w4 pointer bg br3 pa4 ma2 shadow-4"
+      className="w4 bg br3 pa4 ma2 shadow-4"
       data-tippy="Find Match"
       data-tippy-placement="bottom"
       id="playBtn"
@@ -18,7 +18,7 @@ const Main = () => (
     />
     <img
       alt=""
-      className="w4 pointer bg br3 pa4 ma2 shadow-4"
+      className="w4 bg br3 pa4 ma2 shadow-4"
       data-tippy="Host Party"
       data-tippy-placement="bottom"
       id="hostBtn"
@@ -26,7 +26,7 @@ const Main = () => (
     />
     <img
       alt=""
-      className="w4 pointer bg br3 pa4 ma2 shadow-4"
+      className="w4 bg br3 pa4 ma2 shadow-4"
       data-tippy="Join Party"
       data-tippy-placement="bottom"
       id="tabJoinBtn"

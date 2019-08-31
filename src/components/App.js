@@ -35,7 +35,8 @@ export default () => {
     <a
       href="https://github.com/next/zeiw-client/commit/${_zeiwBuild.commitHash}"
       target="_blank"
-      rel="noopener noreferrer">
+      rel="noopener noreferrer"
+    >
       ${build}
     </a>
     `

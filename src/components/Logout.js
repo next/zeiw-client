@@ -4,7 +4,7 @@ const Logout = () => (
       <div className="container" role="dialog">
         <div className="header">
           <h2 className="title">Sign Out</h2>
-          <button className="close pointer" data-micromodal-close />
+          <button className="close" data-micromodal-close />
         </div>
         <div className="content">Are you sure you want to sign out?</div>
         <div className="footer">
