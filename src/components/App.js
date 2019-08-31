@@ -171,10 +171,10 @@ export default () => {
       let c = process.versions['chrome']
       let e = process.versions['electron']
       let n = process.versions['node']
-      console.log(`%c🌑︎ Chrome ${c} ~ Electron ${e} ~ Node ${n} 🚧`, primary)
+      console.log(`%c🌑︎ Chrome ${c} ~ Electron ${e} ~ Node ${n}`.padEnd(61) + '🚧', primary)
     }
     console.log(`%c🌑︎ Client Hash:  ${_zeiwBuild.commitHash} 📌`, primary)
-    if (window._zeiwNative !== undefined) {
+    if (native) {
       console.log(`%c🌑︎ Desktop Hash: ${_zeiwNative.buildEnv.nativeVersion} 📌`, primary)
     }
     console.log(
