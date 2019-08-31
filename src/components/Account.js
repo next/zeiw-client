@@ -15,7 +15,7 @@ const Account = () => (
               src=""
             />
             <h1 id="uname" />
-            <div className="flex flex justify-center">
+            <div className="flex justify-center">
               <div
                 className="badge badgeh ma2"
                 data-tippy="ZEIW Developer"
