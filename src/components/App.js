@@ -173,7 +173,8 @@ export default () => {
       let n = process.versions['node']
       console.log(`%c🌑︎ Chrome ${c} ~ Electron ${e} ~ Node ${n} 🚧`, primary)
     }
-    console.log(`%c🌑︎ Build Hash: ${_zeiwBuild.commitHash} 📌`, primary)
+    console.log(`%c🌑︎ Client Hash:  ${_zeiwBuild.commitHash} 📌`, primary)
+    console.log(`%c🌑︎ Desktop Hash: ${_zeiwNative.buildEnv.nativeVersion} 📌`, primary)
     console.log(
       `%c🌑︎ Hackers may entice you to paste code here. Stay aware! ⚠️`,
       alert
