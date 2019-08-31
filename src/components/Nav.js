@@ -1,6 +1,6 @@
 const Nav = () => (
   <div className="fl w-10 bg vh-100 dt">
-    <div className="dtc v-mid tc sidebar">
+    <div className="dtc v-mid tc">
       <ul style="list-style-type:none">
         <li>
           <img
