@@ -16,7 +16,7 @@ const About = () => (
               factions and compete against other factions during events!
             </p>
           </div>
-          <footer className="pv4 ph3 tc">
+          <div className="pv4 ph3 tc">
             <a
               className="dib h2 w2 mr3 pa2"
               href="https://discord.gg/h7NxqBe"
@@ -61,8 +61,8 @@ const About = () => (
                 alt=""
               />
             </a>
-          </footer>
-          <footer className="mid-gray">
+          </div>
+          <div className="mid-gray">
             <small className="f6 db tc">
               Copyright © Next.{' '}
               <a
@@ -108,7 +108,7 @@ const About = () => (
                 Contact
               </a>
             </small>
-          </footer>
+          </div>
         </div>
         <div className="footer">
           <button className="btn" data-micromodal-close>

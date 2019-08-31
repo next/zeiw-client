@@ -766,6 +766,9 @@ export default () => {
     $('#joinID').focus()
   }
 
+  $('#discord').addEventListener('click', () =>
+    window.open('https://discord.gg/h7NxqBe', '_blank')
+  )
   $('#logoutBtn').addEventListener('click', () => signOut())
   $('#rh').addEventListener('click', () => goHome())
   $('#returnHome').addEventListener('click', () => goHome())
