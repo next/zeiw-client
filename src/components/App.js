@@ -31,8 +31,16 @@ export default () => {
 
   window.addEventListener('load', () => {
     let build = _zeiwBuild.commitHash.substring(0, 7)
-    $('#build').innerHTML = `${build}`
+    $('#build').innerHTML = `
+    <a
+      href="https://github.com/next/zeiw-client/commit/${_zeiwBuild.commitHash}"
+      target="_blank"
+      rel="noopener noreferrer">
+      ${build}
+    </a>
+    `
     $('#build').classList.remove('loading')
+
     new Howl({
       src: [
         'https://res.cloudinary.com/zeiw/video/upload/f_auto,q_auto/v1564827948/sound/theme.mp3'

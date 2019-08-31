@@ -3,7 +3,6 @@ const Build = () => (
     className="absolute bottom-2 right-2 loading dots"
     data-tippy="Current Build"
     data-tippy-placement="left"
-    style="cursor: default"
     id="build"
   />
 )
