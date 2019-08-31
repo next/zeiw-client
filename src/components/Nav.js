@@ -35,6 +35,7 @@ const Nav = () => (
         </li>
         <li>
           <img
+            id="ds"
             className="w-50 hidden"
             data-micromodal-trigger="modal-ds"
             data-tippy="Developer Tools"
