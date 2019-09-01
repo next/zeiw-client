@@ -47,6 +47,8 @@ export default () => {
         const data = JSON.parse(this.response)
         if (data.sha !== _zeiwBuild.commitHash) {
           $('#build').innerHTML = `Patch ${data.sha.substring(0, 7)} Available`
+          $('#build').addEventListener('click', location.reload())
+          $('#build').setAttribute('data-tippy', 'Click to Update')
         }
       }
       xhr.send()
@@ -386,7 +388,7 @@ export default () => {
       )
       setInterval(() => {
         if (w.closed) {
-          window.location.reload()
+          location.reload()
         }
       }, 500)
     }
@@ -394,7 +396,7 @@ export default () => {
 
   function signOut() {
     localStorage.removeItem('auth')
-    window.location.reload()
+    location.reload()
   }
 
   function keydown(e) {
