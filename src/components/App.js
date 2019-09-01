@@ -47,9 +47,7 @@ export default () => {
         const data = JSON.parse(this.response)
         if (data.sha !== _zeiwBuild.commitHash) {
           $('#build').innerHTML = `Patch ${data.sha.substring(0, 7)} Available`
-          tippy('#build', {
-            content: 'Refresh to Update'
-          })
+          $('#build').removeAttribute('data-tippy')
         }
       }
       xhr.send()
