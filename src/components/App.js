@@ -29,15 +29,40 @@ export default () => {
   let tab = 'home'
   let user
 
+  function devCheck() {
+    setInterval(() => {
+      if (localStorage.getItem('devmode')) {
+        $('#ds').classList.add('hidden')
+        localStorage.removeItem('devmode')
+      }
+    }, 1000)
+  }
+
+  function updateManager() {
+    setInterval(() => {
+      const xhr = new XMLHttpRequest()
+      const url = 'https://api.github.com/repos/next/zeiw-client/commits/master'
+      xhr.open('GET', url, true)
+      xhr.onload = function() {
+        const data = JSON.parse(this.response)
+        if (data.sha !== _zeiwBuild.commitHash) {
+          $('#build').innerHTML = `Patch ${data.sha.substring(0, 7)} Available`
+        }
+      }
+      xhr.send()
+    }, 20 * 60 * 1000)
+  }
+
   window.addEventListener('load', () => {
-    let build = _zeiwBuild.commitHash.substring(0, 7)
+    updateManager()
+
     $('#build').innerHTML = `
     <a
       href="https://github.com/next/zeiw-client/commit/${_zeiwBuild.commitHash}"
       target="_blank"
       rel="noopener noreferrer"
     >
-      ${build}
+      ${_zeiwBuild.commitHash.substring(0, 7)}
     </a>
     `
     $('#build').classList.remove('loading')
@@ -98,12 +123,7 @@ export default () => {
               }
             })
             if (!d.flags.includes('DEV')) {
-              setInterval(() => {
-                if (localStorage.getItem('devmode')) {
-                  $('#ds').classList.add('hidden')
-                  localStorage.removeItem('devmode')
-                }
-              }, 1000)
+              devCheck()
             }
           } else {
             notification(
@@ -116,12 +136,7 @@ export default () => {
               awaitCloseAnimation: true
             })
             window.localStorage.removeItem('auth')
-            setInterval(() => {
-              if (localStorage.getItem('devmode')) {
-                $('#ds').classList.add('hidden')
-                localStorage.removeItem('devmode')
-              }
-            }, 1000)
+            devCheck()
           }
         }
       }
@@ -136,12 +151,7 @@ export default () => {
         disableScroll: true,
         awaitCloseAnimation: true
       })
-      setInterval(() => {
-        if (localStorage.getItem('devmode')) {
-          $('#ds').classList.add('hidden')
-          localStorage.removeItem('devmode')
-        }
-      }, 1000)
+      devCheck()
     }
     socket = io.connect('wss://live.zeiw.me')
     setSocketEvents()
