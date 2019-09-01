@@ -8,12 +8,7 @@ const Account = () => (
         </div>
         <div className="content center dt">
           <div className="dtc tc v-mid">
-            <img
-              alt=""
-              className="br-100 pa1 ba b--black-10 w4"
-              id="pfp"
-              src=""
-            />
+            <img className="br-100 pa1 ba b--black-10 w4" id="pfp" src="" />
             <h1 id="uname" />
             <div className="flex justify-center">
               <div

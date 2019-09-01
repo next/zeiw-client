@@ -171,11 +171,17 @@ export default () => {
       let c = process.versions['chrome']
       let e = process.versions['electron']
       let n = process.versions['node']
-      console.log(`%c🌑︎ Chrome ${c} ~ Electron ${e} ~ Node ${n}`.padEnd(61) + '🚧', primary)
+      console.log(
+        `%c🌑︎ Chrome ${c} ~ Electron ${e} ~ Node ${n}`.padEnd(61) + '🚧',
+        primary
+      )
     }
     console.log(`%c🌑︎ Client Hash:  ${_zeiwBuild.commitHash} 📌`, primary)
     if (native) {
-      console.log(`%c🌑︎ Desktop Hash: ${_zeiwNative.buildEnv.nativeVersion} 📌`, primary)
+      console.log(
+        `%c🌑︎ Desktop Hash: ${_zeiwNative.buildEnv.nativeVersion} 📌`,
+        primary
+      )
     }
     console.log(
       `%c🌑︎ Hackers may entice you to paste code here. Stay aware! ⚠️`,
@@ -317,30 +323,6 @@ export default () => {
     }
   }
   audioSwitch.addEventListener('change', switchAudio, false)
-
-  const designMode = localStorage.getItem('designMode')
-  const dMSwitch = $('#designMode')
-
-  if (designMode) {
-    dMSwitch.checked = 'true' === designMode
-    if ('true' === designMode) {
-      document.designMode = 'on'
-    }
-  } else {
-    dMSwitch.checked = false
-  }
-
-  function designModeu({ target }) {
-    if (target.checked) {
-      localStorage.setItem('designMode', true)
-      document.designMode = 'on'
-    } else {
-      localStorage.setItem('designMode', false)
-      document.designMode = 'off'
-    }
-  }
-
-  dMSwitch.addEventListener('change', designModeu, false)
 
   function tabTo(t) {
     const ct = tab
@@ -486,6 +468,10 @@ export default () => {
       draw()
     })
 
+    socket.on('uonl', u => {
+      $('#online').innerHTML = `${u} ONLINE`
+    })
+
     socket.on('err', err => {
       notification('Error', err, true)
     })
@@ -593,10 +579,6 @@ export default () => {
           cd.style.display = 'none'
         }, 1000)
       }
-    })
-
-    socket.on('uonl', u => {
-      $('#online').innerHTML = `${u} ONLINE`
     })
   }
 
@@ -802,16 +784,4 @@ export default () => {
       }
     }
   }
-
-  function updateOnlineStatus() {
-    notification('Connection established', "We're glad you're back!", false)
-  }
-
-  function updateOfflineStatus() {
-    goHome()
-    notification('Connection lost', 'Please reconnect to the Internet.', true)
-  }
-
-  window.addEventListener('online', updateOnlineStatus)
-  window.addEventListener('offline', updateOfflineStatus)
 }

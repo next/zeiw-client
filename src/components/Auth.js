@@ -14,7 +14,6 @@ const Auth = () => (
           >
             Sign in with
             <img
-              alt=""
               className="h1 pl1"
               src="https://res.cloudinary.com/zeiw/image/upload/q_auto/v1564824906/img/discord.png"
             />
