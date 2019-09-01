@@ -38,10 +38,6 @@ export default () => {
     }, 1000)
   }
 
-  function update() {
-    location.reload()
-  }
-
   function updateManager() {
     setInterval(() => {
       const xhr = new XMLHttpRequest()
@@ -51,8 +47,9 @@ export default () => {
         const data = JSON.parse(this.response)
         if (data.sha !== _zeiwBuild.commitHash) {
           $('#build').innerHTML = `Patch ${data.sha.substring(0, 7)} Available`
-          $('#build').addEventListener('click', update)
-          $('#build').setAttribute('data-tippy', 'Click to Update')
+          tippy('#build', {
+            content: 'Refresh to Update'
+          })
         }
       }
       xhr.send()
