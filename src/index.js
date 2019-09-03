@@ -1,3 +1,5 @@
+import { Circle } from 'react-preloaders'
+
 import Layout from './components/Layout'
 import Spinner from './components/Spinner'
 import Modal from './components/Modal'
@@ -27,6 +29,7 @@ const isNative = window._zeiwNative !== undefined
 
 export default () => (
   <Layout>
+    <Circle color={'#f90'} background={'#000'} />
     {isNative && <NativeFrame />}
     <Ping />
     <Build />

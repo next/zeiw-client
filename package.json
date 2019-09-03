@@ -34,6 +34,7 @@
     "micromodal": "^0.4.0",
     "preact": "^10.0.0-rc.1",
     "preact-cli": "^3.0.0-rc.5",
+    "react-preloaders": "^3.0.3",
     "socket.io-client": "^2.2.0",
     "tachyons": "^4.11.1",
     "text-spinners": "^1.0.5"
