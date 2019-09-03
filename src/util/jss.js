@@ -14,9 +14,9 @@ export default (styles, Wrap) => {
   let sheetReferences = 0
   const handleSheetReferenceChange = change => {
     sheetReferences += change
-    if (sheetReferences === 0) {
+    if (0 === sheetReferences) {
       sheet.detach()
-    } else if (sheetReferences === 1) {
+    } else if (1 === sheetReferences) {
       sheet.attach()
     }
   }

@@ -190,7 +190,7 @@ export default () => {
       )
     }
     console.log(
-      `%c🌑︎ Hackers may entice you to paste code here. Stay aware! ⚠️`,
+      '%c🌑︎ Hackers may entice you to paste code here. Stay aware! ⚠️',
       alert
     )
   })
