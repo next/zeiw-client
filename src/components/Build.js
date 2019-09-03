@@ -1,10 +1,9 @@
+import Tippy from './Tooltip'
+
 const Build = () => (
-  <div
-    className="absolute bottom-2 right-2 loading dots"
-    data-tippy="Current Build"
-    data-tippy-placement="left"
-    id="build"
-  />
+  <Tippy content="Build" placement="left">
+    <div className="absolute bottom-2 right-2 loading dots" id="build" />
+  </Tippy>
 )
 
 export default Build

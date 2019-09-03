@@ -1,3 +1,5 @@
+import Tippy from './Tooltip'
+
 const Account = () => (
   <div aria-hidden="true" className="modal slide" id="modal-ps">
     <div className="overlay" data-micromodal-close tabIndex={-1}>
@@ -11,42 +13,24 @@ const Account = () => (
             <img className="br-100 pa1 ba b--black-10 w4" id="pfp" src="" />
             <h1 id="uname" />
             <div className="flex justify-center">
-              <div
-                className="badge badgeh ma2"
-                data-tippy="ZEIW Developer"
-                data-tippy-placement="top"
-                id="dev"
-              />
-              <div
-                className="badge badgeh ma2"
-                data-tippy="ZEIW Moderator"
-                data-tippy-placement="top"
-                id="mod"
-              />
-              <div
-                className="badge badgeh ma2"
-                data-tippy="ZEIW Testpilot"
-                data-tippy-placement="top"
-                id="tp"
-              />
-              <div
-                className="badge badgeh ma2"
-                data-tippy="Phoenix Riders"
-                data-tippy-placement="top"
-                id="pr"
-              />
-              <div
-                className="badge badgeh ma2"
-                data-tippy="Winter Dragons"
-                data-tippy-placement="top"
-                id="wd"
-              />
-              <div
-                className="badge badgeh ma2"
-                data-tippy="Demon Brigade"
-                data-tippy-placement="top"
-                id="db"
-              />
+              <Tippy content="ZEIW Developer">
+                <div className="badge badgeh ma2" id="dev" />
+              </Tippy>
+              <Tippy content="ZEIW Moderator">
+                <div className="badge badgeh ma2" id="mod" />
+              </Tippy>
+              <Tippy content="ZEIW Testpilot">
+                <div className="badge badgeh ma2" id="tp" />
+              </Tippy>
+              <Tippy content="Phoenix Riders">
+                <div className="badge badgeh ma2" id="pr" />
+              </Tippy>
+              <Tippy content="Winter Dragons">
+                <div className="badge badgeh ma2" id="wd" />
+              </Tippy>
+              <Tippy content="Demon Brigade">
+                <div className="badge badgeh ma2" id="db" />
+              </Tippy>
             </div>
           </div>
         </div>

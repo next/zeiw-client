@@ -1,3 +1,5 @@
+import Tippy from './Tooltip'
+
 const Faction = () => (
   <div aria-hidden="true" className="modal slide" id="modal-fac">
     <div className="overlay" data-micromodal-close tabIndex={-1}>
@@ -8,25 +10,16 @@ const Faction = () => (
         </div>
         <div className="content center dt">
           <div className="dtc tc">
-            <div className="factions flex flex-row justify-center">
-              <div
-                className="badge ma2"
-                data-tippy="Phoenix Riders"
-                data-tippy-placement="top"
-                id="prc"
-              />
-              <div
-                className="badge ma2"
-                data-tippy="Winter Dragons"
-                data-tippy-placement="top"
-                id="wdc"
-              />
-              <div
-                className="badge ma2"
-                data-tippy="Demon Brigade"
-                data-tippy-placement="top"
-                id="dbc"
-              />
+            <div className="flex flex-row justify-center">
+              <Tippy content="Phoenix Riders">
+                <div className="badge ma2" id="prc" />
+              </Tippy>
+              <Tippy content="Winter Dragons">
+                <div className="badge ma2" id="wdc" />
+              </Tippy>
+              <Tippy content="Demon Brigade">
+                <div className="badge ma2" id="dbc" />
+              </Tippy>
             </div>
           </div>
         </div>

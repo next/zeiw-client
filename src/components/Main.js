@@ -1,3 +1,5 @@
+import Tippy from './Tooltip'
+
 const Main = () => (
   <div className="dtc tc v-mid" id="home">
     <img
@@ -7,27 +9,27 @@ const Main = () => (
     <h1 className="f4 ttu tracked mt0 mt4">
       <span className="loading dots" id="online" />
     </h1>
-    <img
-      className="w4 bg br3 pa4 ma2 shadow-4"
-      data-tippy="Find Match"
-      data-tippy-placement="bottom"
-      id="playBtn"
-      src="https://res.cloudinary.com/zeiw/image/upload/q_auto/v1564825429/icon/find.svg"
-    />
-    <img
-      className="w4 bg br3 pa4 ma2 shadow-4"
-      data-tippy="Host Party"
-      data-tippy-placement="bottom"
-      id="hostBtn"
-      src="https://res.cloudinary.com/zeiw/image/upload/q_auto/v1564825427/icon/host.svg"
-    />
-    <img
-      className="w4 bg br3 pa4 ma2 shadow-4"
-      data-tippy="Join Party"
-      data-tippy-placement="bottom"
-      id="tabJoinBtn"
-      src="https://res.cloudinary.com/zeiw/image/upload/q_auto/v1564825425/icon/join.svg"
-    />
+    <Tippy content="Find Match" placement="bottom">
+      <img
+        className="w4 bg br3 pa4 ma2 shadow-4"
+        id="playBtn"
+        src="https://res.cloudinary.com/zeiw/image/upload/q_auto/v1564825429/icon/find.svg"
+      />
+    </Tippy>
+    <Tippy content="Host Party" placement="bottom">
+      <img
+        className="w4 bg br3 pa4 ma2 shadow-4"
+        id="hostBtn"
+        src="https://res.cloudinary.com/zeiw/image/upload/q_auto/v1564825427/icon/host.svg"
+      />
+    </Tippy>
+    <Tippy content="Join Party" placement="bottom">
+      <img
+        className="w4 bg br3 pa4 ma2 shadow-4"
+        id="tabJoinBtn"
+        src="https://res.cloudinary.com/zeiw/image/upload/q_auto/v1564825425/icon/join.svg"
+      />
+    </Tippy>
   </div>
 )
 

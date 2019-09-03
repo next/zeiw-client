@@ -1,10 +1,9 @@
+import Tippy from './Tooltip'
+
 const Ping = () => (
-  <div
-    className="absolute top-2 right-2 loading dots"
-    data-tippy="Websocket Latency"
-    data-tippy-placement="left"
-    id="ping"
-  />
+  <Tippy content="Latency" placement="left">
+    <div className="absolute top-2 right-2 loading dots" id="ping" />
+  </Tippy>
 )
 
 export default Ping

@@ -1,17 +1,10 @@
 import ClipboardJS from 'clipboard'
 import MicroModal from 'micromodal'
 import io from 'socket.io-client'
-import tippy from 'tippy.js'
 import { Howl, Howler } from 'howler'
 import { $ } from '@zeiw/trump'
 
 export default () => {
-  tippy.setDefaults({
-    animation: 'fade',
-    arrow: true,
-    a11y: false
-  })
-
   new ClipboardJS('.copy')
 
   let canvas

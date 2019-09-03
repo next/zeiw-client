@@ -6,8 +6,8 @@
   "author": "Casper <pnfcre@gmail.com>",
   "main": "index.js",
   "scripts": {
-    "build": "preact build --no-prerender --no-service-worker --template src/template.html && rm -rf build/assets build/polyfills* build/*.json && cp -r src/assets/* build",
-    "dev": "preact watch --template src/template.html",
+    "build": "sh -c 'preact build --sw false --template $PWD/src/template.html && rm -rf build/assets build/polyfills* build/*.json && cp -r src/assets/* build'",
+    "dev": "sh -c 'preact watch --template $PWD/src/template.html'",
     "serve": "preact build && preact serve",
     "start": "if-env NODE_ENV=production && npm run -s serve || npm run -s dev"
   },
@@ -22,6 +22,7 @@
     "tabWidth": 2
   },
   "dependencies": {
+    "@tippy.js/react": "^2.2.3",
     "@zeiw/trump": "^1.0.6",
     "clipboard": "^2.0.4",
     "howler": "^2.1.2",
@@ -31,17 +32,16 @@
     "jss-nested": "^6.0.1",
     "jss-vendor-prefixer": "^8.0.1",
     "micromodal": "^0.4.0",
-    "preact": "^8.2.1",
+    "preact": "^10.0.0-rc.1",
+    "preact-cli": "^3.0.0-rc.5",
     "socket.io-client": "^2.2.0",
     "tachyons": "^4.11.1",
-    "text-spinners": "^1.0.5",
-    "tippy.js": "^4.3.5"
+    "text-spinners": "^1.0.5"
   },
   "devDependencies": {
     "husky": "^3.0.5",
-    "if-env": "^1.0.0",
-    "preact-cli": "^2.0.0",
-    "prettier": "1.18.2",
+    "if-env": "^1.0.4",
+    "prettier": "^1.18.2",
     "pretty-quick": "^1.11.1"
   }
 }

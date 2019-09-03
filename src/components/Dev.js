@@ -6,7 +6,15 @@ const Dev = () => (
           <h2 className="title">Developer Tools</h2>
           <button className="close" data-micromodal-close />
         </div>
-        <div className="content">Nothing here yet!</div>
+        <div className="content">
+          <div className="switch-wrapper">
+            <p>Useless Toggle</p>
+            <label className="switch">
+              <input type="checkbox" />
+              <span className="slider round" />
+            </label>
+          </div>
+        </div>
         <div className="footer">
           <button className="btn" data-micromodal-close>
             Close
