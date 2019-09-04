@@ -22,6 +22,13 @@ export default () => {
   let tab = 'home'
   let user
 
+  function modalInit() {
+    MicroModal.init({
+      disableScroll: true,
+      awaitCloseAnimation: true
+    })
+  }
+
   function devCheck() {
     setInterval(() => {
       if (localStorage.getItem('devmode')) {
@@ -33,19 +40,29 @@ export default () => {
 
   function updateManager() {
     setInterval(() => {
-      const xhr = new XMLHttpRequest()
-      const url = 'https://api.github.com/repos/next/zeiw-client/commits/master'
-      xhr.open('GET', url, true)
-      xhr.onload = function() {
-        const data = JSON.parse(this.response)
-        if (data.sha !== _zeiwBuild.commitHash) {
-          $('#build').innerHTML = `Patch ${data.sha.substring(0, 7)} Available`
-          $('#build').addEventListener('click', () => {
-            location.reload()
-          })
-        }
-      }
-      xhr.send()
+      fetch('https://api.github.com/repos/next/zeiw-client/commits/master')
+        .then(function(response) {
+          if (!response.ok) {
+            throw new Error(
+              `Error connecting to GitHub API (${response.status})`
+            )
+          }
+          return response.json()
+        })
+        .then(function(json) {
+          if (json.sha !== _zeiwBuild.commitHash) {
+            $('#build').innerHTML = `Patch ${json.sha.substring(
+              0,
+              7
+            )} Available`
+            $('#build').addEventListener('click', () => {
+              location.reload()
+            })
+          }
+        })
+        .catch(function(error) {
+          console.log(error)
+        })
     }, 20 * 60 * 1000)
   }
 
@@ -89,10 +106,7 @@ export default () => {
           if (200 === r.status) {
             d = JSON.parse(r.responseText)
             $('#psb').setAttribute('data-micromodal-trigger', 'modal-ps')
-            MicroModal.init({
-              disableScroll: true,
-              awaitCloseAnimation: true
-            })
+            modalInit()
             $('#pfp').src = d.avatar
             $('#uname').textContent = d.uname
             d.flags.forEach(e => {
@@ -127,10 +141,7 @@ export default () => {
               'Your user token is invalid. You may want to reauthenticate.',
               true
             )
-            MicroModal.init({
-              disableScroll: true,
-              awaitCloseAnimation: true
-            })
+            modalInit()
             window.localStorage.removeItem('auth')
             devCheck()
           }
@@ -143,10 +154,7 @@ export default () => {
       r.send()
       r.onreadystatechange = ud
     } else {
-      MicroModal.init({
-        disableScroll: true,
-        awaitCloseAnimation: true
-      })
+      modalInit()
       devCheck()
     }
     socket = io.connect('wss://live.zeiw.me')
