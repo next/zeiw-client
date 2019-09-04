@@ -43,18 +43,14 @@ export default () => {
       fetch('https://api.github.com/repos/next/zeiw-client/commits/master')
         .then(function(response) {
           if (!response.ok) {
-            throw new Error(
-              `Error connecting to GitHub API (${response.status})`
-            )
+            throw new Error(`Error ${response.status}`)
           }
           return response.json()
         })
         .then(function(json) {
           if (json.sha !== _zeiwBuild.commitHash) {
-            $('#build').innerHTML = `Patch ${json.sha.substring(
-              0,
-              7
-            )} Available`
+            let patch = json.sha.substring(0, 7)
+            $('#build').innerHTML = `Patch ${patch} Available`
             $('#build').addEventListener('click', () => {
               location.reload()
             })
