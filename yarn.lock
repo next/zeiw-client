@@ -1007,10 +1007,10 @@
   resolved "https://registry.yarnpkg.com/@xtuc/long/-/long-4.2.2.tgz#d291c6a4e97989b5c61d9acf396ae4fe133a718d"
   integrity sha512-NuHqBY1PB/D8xU6s/thBgOAiAP7HOYDQ32+BFZILJ8ivkUkAHQnWfn6WhL79Owj1qmUnoN/YPhktdIoucipkAQ==
 
-"@zeiw/trump@^1.0.6":
-  version "1.0.6"
-  resolved "https://registry.yarnpkg.com/@zeiw/trump/-/trump-1.0.6.tgz#68d14e4646924744db12e4552c695fcce48d5043"
-  integrity sha512-c3NqoC47qWt/Io2a4wk+1JYwmR59cHTSp9nn3xTiRIgNytr1mA45wHo7mo9w1/6WkdUUdJWm72/pYwf0sP95zg==
+"@zeiw/trump@^1.0.7":
+  version "1.0.7"
+  resolved "https://registry.yarnpkg.com/@zeiw/trump/-/trump-1.0.7.tgz#19f4dd256becffd4d3576d46d7c42948c9e05a09"
+  integrity sha512-NdiuFvH8XRpFI/8d13tCNopIWNeTO16BwbpFI1OzPhEkdP1NQW37wV5NcFfDCRSA4Kl2+t+mqKGaDHb6LF+QSQ==
 
 abab@^2.0.0:
   version "2.0.1"
