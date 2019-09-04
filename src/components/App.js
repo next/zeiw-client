@@ -41,22 +41,22 @@ export default () => {
   function updateManager() {
     setInterval(() => {
       fetch('https://api.github.com/repos/next/zeiw-client/commits/master')
-        .then(function(response) {
+        .then(response => {
           if (!response.ok) {
             throw new Error(`Error ${response.status}`)
           }
           return response.json()
         })
-        .then(function(json) {
-          if (json.sha !== _zeiwBuild.commitHash) {
-            let patch = json.sha.substring(0, 7)
+        .then(({ sha }) => {
+          if (sha !== _zeiwBuild.commitHash) {
+            let patch = sha.substring(0, 7)
             $('#build').innerHTML = `Patch ${patch} Available`
             $('#build').addEventListener('click', () => {
               location.reload()
             })
           }
         })
-        .catch(function(error) {
+        .catch(error => {
           console.log(error)
         })
     }, 20 * 60 * 1000)
@@ -182,7 +182,7 @@ export default () => {
       let e = process.versions['electron']
       let n = process.versions['node']
       console.log(
-        `%c🌑︎ Chrome ${c} ~ Electron ${e} ~ Node ${n}`.padEnd(61) + '🚧',
+        `${`%c🌑︎ Chrome ${c} ~ Electron ${e} ~ Node ${n}`.padEnd(61)}🚧`,
         primary
       )
     }
@@ -794,4 +794,34 @@ export default () => {
       }
     }
   }
+
+  const pattern = [
+    'ArrowUp',
+    'ArrowUp',
+    'ArrowDown',
+    'ArrowDown',
+    'ArrowLeft',
+    'ArrowRight',
+    'ArrowLeft',
+    'ArrowRight',
+    'b',
+    'a'
+  ]
+  let current = 0
+
+  const keyHandler = ({ key }) => {
+    if (!pattern.includes(key) || key !== pattern[current]) {
+      current = 0
+      return
+    }
+
+    current++
+
+    if (pattern.length === current) {
+      current = 0
+      window.open('https://www.youtube.com/watch?v=dQw4w9WgXcQ')
+    }
+  }
+
+  document.addEventListener('keydown', keyHandler, false)
 }
