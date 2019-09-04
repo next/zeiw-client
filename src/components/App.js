@@ -62,7 +62,7 @@ export default () => {
     }, 20 * 60 * 1000)
   }
 
-  window.addEventListener('load', () => {
+  addEventListener('load', () => {
     updateManager()
 
     $('#build').innerHTML = `
@@ -88,13 +88,13 @@ export default () => {
       Howler.mute(true)
     }
     let h
-    if ('' !== window.location.hash) {
-      h = window.location.hash.split('#')[1]
+    if ('' !== location.hash) {
+      h = location.hash.split('#')[1]
       $('#joinID').value = h
       jm()
     }
 
-    if (null !== window.localStorage.getItem('auth')) {
+    if (null !== localStorage.getItem('auth')) {
       const r = new XMLHttpRequest()
       function ud() {
         let d
@@ -138,13 +138,13 @@ export default () => {
               true
             )
             modalInit()
-            window.localStorage.removeItem('auth')
+            localStorage.removeItem('auth')
             devCheck()
           }
         }
       }
       r.timeout = 3000
-      const t = window.localStorage.getItem('auth')
+      const t = localStorage.getItem('auth')
       r.open('GET', 'https://api.zeiw.me/v1/user/')
       r.setRequestHeader('Authentication', t)
       r.send()
@@ -157,8 +157,8 @@ export default () => {
     setSocketEvents()
     canvas = $('#canvas')
     ctx = canvas.getContext('2d')
-    window.addEventListener('keydown', keydown)
-    window.addEventListener('keyup', keyup)
+    addEventListener('keydown', keydown)
+    addEventListener('keyup', keyup)
     socket.emit('getOnline')
     setInterval(() => {
       if ('home' === tab) {
@@ -229,7 +229,7 @@ export default () => {
       }
     }
     r.timeout = 3000
-    const t = window.localStorage.getItem('auth')
+    const t = localStorage.getItem('auth')
     r.open('PATCH', 'https://api.zeiw.me/v1/user/')
     r.setRequestHeader('Authentication', t)
     r.send(JSON.stringify({ faction: c }))
@@ -365,7 +365,7 @@ export default () => {
             code
           )}`
           document.body.appendChild(el)
-          window.addEventListener('storage', () => {
+          addEventListener('storage', () => {
             if (localStorage.auth !== undefined) {
               location.reload()
             }
@@ -379,7 +379,7 @@ export default () => {
           }
         })
     } else {
-      const w = window.open(
+      const w = open(
         'https://api.zeiw.me/v1/login/',
         'ZEIW Login',
         'menubar=no,location=no,resizable=no,scrollbars=yes,status=yes,width=550,height=850'
@@ -458,7 +458,7 @@ export default () => {
       drawPaddle(user.game.p1)
       drawPaddle(user.game.p2)
     }
-    window.requestAnimationFrame(draw)
+    requestAnimationFrame(draw)
   }
 
   function waitMsg(msg) {
@@ -762,7 +762,7 @@ export default () => {
   }
 
   $('#discord').addEventListener('click', () =>
-    window.open('https://discord.gg/h7NxqBe', '_blank')
+    open('https://discord.gg/h7NxqBe', '_blank')
   )
   $('#logoutBtn').addEventListener('click', () => signOut())
   $('#rh').addEventListener('click', () => goHome())
@@ -783,7 +783,7 @@ export default () => {
     }
   })
 
-  document.onkeyup = ({ which }) => {
+  onkeyup = ({ which }) => {
     if ('home' === tab && !$('#modal-mj').classList.contains('is-open')) {
       if (49 === which) {
         user.findGame()
@@ -819,9 +819,9 @@ export default () => {
 
     if (pattern.length === current) {
       current = 0
-      window.open('https://www.youtube.com/watch?v=dQw4w9WgXcQ')
+      open('https://www.youtube.com/watch?v=dQw4w9WgXcQ')
     }
   }
 
-  document.addEventListener('keydown', keyHandler, false)
+  addEventListener('keydown', keyHandler, false)
 }
