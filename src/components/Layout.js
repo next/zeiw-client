@@ -23,10 +23,7 @@ class Layout extends Component {
           --success: #19a974;
           --white: #eee;
         }
-
-        *,
-        ::after,
-        ::before {
+        *, ::after, ::before {
           box-sizing: border-box;
           color: inherit;
           font-family: inherit;
@@ -34,7 +31,6 @@ class Layout extends Component {
           margin: 0;
           padding: 0;
         }
-
         body {
           animation: stars 30s linear infinite;
           background: url("https://res.cloudinary.com/zeiw/image/upload/q_auto/v1564824906/img/stardust.png") var(--black);
@@ -42,54 +38,59 @@ class Layout extends Component {
           font-family: "Inter", sans-serif;
           overflow: hidden;
         }
-
-          @keyframes stars {
-            0% {
-              background-position: 0 0;
-            }
-            100% {
-              background-position: 798px -798px;
-            }
+        @keyframes stars {
+          0% {
+            background-position: 0 0;
           }
-
-          * {
-            cursor: default !important;
+          100% {
+            background-position: 798px -798px;
           }
-
-          ::selection {
-            background: var(--primary);
-          }
-
-          :focus {
-            outline: 0;
-          }
-
-          img {
-            -moz-user-select: none;
-            -ms-user-select: none;
-            -webkit-user-drag: none;
-            -webkit-user-select: none;
-            user-drag: none;
-            user-select: none;
-          }
-
-          .hidden,
-          .hidden > * {
-            display: none !important;
-          }
-
-          .badgeh {
-            display: none
-          }
-
-          .bg {
-            background: var(--primary)
-          }
-
-          .bg-blurple {
-            background-color: #7289da;
-          }
-          `}</style>
+        }
+        * {
+          cursor: default !important;
+        }
+        ::selection {
+          background: var(--primary);
+        }
+        :focus {
+          outline: 0;
+        }
+        img {
+          -moz-user-select: none;
+          -ms-user-select: none;
+          -webkit-user-drag: none;
+          -webkit-user-select: none;
+          user-drag: none;
+          user-select: none;
+        }
+        .hidden, .hidden>* {
+          display: none !important;
+        }
+        .badgeh {
+          display: none;
+        }
+        .bg {
+          background: var(--primary);
+        }
+        .bg-blurple {
+          background-color: #7289da;
+        }
+        .tippy-tooltip.bootstrap-theme {
+          background: black;
+        }
+        .tippy-tooltip.bootstrap-theme[x-placement^='top'] .tippy-arrow {
+          border-top-color: black;
+        }
+        .tippy-tooltip.bootstrap-theme[x-placement^='bottom'] .tippy-arrow {
+          border-bottom-color: black;
+        }
+        .tippy-tooltip.bootstrap-theme[x-placement^='left'] .tippy-arrow {
+          border-left-color: black;
+        }
+        .tippy-tooltip.bootstrap-theme[x-placement^='right'] .tippy-arrow {
+          border-right-color: black;
+        }
+        `}</style>
       </div>
     )
   }
