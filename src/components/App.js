@@ -1,23 +1,24 @@
-import ClipboardJS from 'clipboard'
-import MicroModal from 'micromodal'
-import io from 'socket.io-client'
-import { Howl, Howler } from 'howler'
+import 'unfetch/polyfill'
 import { $ } from '@zeiw/trump'
+import { Howl, Howler } from 'howler'
+import ClipboardJS from 'clipboard'
+import io from 'socket.io-client'
+import MicroModal from 'micromodal'
 
 export default () => {
   new ClipboardJS('.copy')
 
+  const keys = {}
+  const notifs = {}
   let canvas
   let cl = false
   let ctx
   let gc = false
   let jgl = false
   let kd = false
-  const keys = {}
   let native = false
   let nd = false
   let notifTimer
-  const notifs = {}
   let socket
   let tab = 'home'
   let user
@@ -65,15 +66,8 @@ export default () => {
   addEventListener('load', () => {
     updateManager()
 
-    $('#build').innerHTML = `
-    <a
-      href="https://github.com/next/zeiw-client/commit/${_zeiwBuild.commitHash}"
-      target="_blank"
-      rel="noopener noreferrer"
-    >
-      ${_zeiwBuild.commitHash.substring(0, 7)}
-    </a>
-    `
+    // prettier-ignore
+    $('#build').innerHTML = `<a href="https://github.com/next/zeiw-client/commit/${_zeiwBuild.commitHash}" target="_blank" rel="noopener noreferrer">${_zeiwBuild.commitHash.substring(0, 7)}</a>`
     $('#build').classList.remove('loading')
 
     new Howl({
@@ -361,9 +355,8 @@ export default () => {
         .getDiscordOauthCode()
         .then(code => {
           const el = document.createElement('iframe')
-          el.src = `https://api.zeiw.me/v1/login/?code=${encodeURIComponent(
-            code
-          )}`
+          // prettier-ignore
+          el.src = `https://api.zeiw.me/v1/login/?code=${encodeURIComponent(code)}`
           document.body.appendChild(el)
           addEventListener('storage', () => {
             if (localStorage.auth !== undefined) {
