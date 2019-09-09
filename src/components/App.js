@@ -117,7 +117,7 @@ export default () => {
       )}</a>`),
       $('#build').classList.remove('loading'),
       new Howl({
-        src: ['../assets/sfx/music.mp3'],
+        src: ['/sfx/music.mp3'],
         autoplay: !0,
         volume: 0.5,
         loop: !0
@@ -222,10 +222,10 @@ export default () => {
         !h && s.game && (s.game.ball = e)
       }),
       n.on('hit-p1', () => {
-        !h && s.game && new Howl({ src: ['../assets/sfx/hit-p1.mp3'] }).play()
+        !h && s.game && new Howl({ src: ['/sfx/hit-p1.mp3'] }).play()
       }),
       n.on('hit-p2', () => {
-        !h && s.game && new Howl({ src: ['../assets/sfx/hit-p2.mp3'] }).play()
+        !h && s.game && new Howl({ src: ['/sfx/hit-p2.mp3'] }).play()
       }),
       n.on('end', e => {
         const t = s.id === e ? 'You Win' : 'You Lose'
@@ -465,11 +465,11 @@ export default () => {
         ) {
           case 'You Win':
             g('Mode: 1v1 (VICTORY!)'),
-              l || new Howl({ src: ['../assets/sfx/win.mp3'] }).play()
+              l || new Howl({ src: ['/sfx/win.mp3'] }).play()
             break
           case 'You Lose':
             g('Mode: 1v1 (Loss)'),
-              l || new Howl({ src: ['../assets/sfx/loss.mp3'] }).play()
+              l || new Howl({ src: ['/sfx/loss.mp3'] }).play()
         }
         l = !0
       }
