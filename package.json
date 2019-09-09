@@ -1,10 +1,6 @@
 {
   "name": "zeiw-client",
-  "version": "1.0.0",
-  "repository": "git@github.com:next/zeiw-client.git",
   "license": "MIT",
-  "author": "Casper <pnfcre@gmail.com>",
-  "main": "index.js",
   "scripts": {
     "build": "sh -c 'preact build --sw false --template $PWD/src/template.html && rm -rf build/assets build/polyfills* build/*.json && cp -r src/assets/* build'",
     "dev": "sh -c 'preact watch --template $PWD/src/template.html'",
@@ -31,7 +27,7 @@
     "jss-camel-case": "^6.1.0",
     "jss-nested": "^6.0.1",
     "jss-vendor-prefixer": "^8.0.1",
-    "micromodal": "^0.4.0",
+    "micromodal": "0.4.0",
     "preact": "^10.0.0-rc.1",
     "preact-cli": "^3.0.0-rc.5",
     "react-preloaders": "^3.0.3",

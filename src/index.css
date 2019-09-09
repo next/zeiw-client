@@ -93,6 +93,12 @@ img {
   background-color: #7289da;
 }
 
+.w-50 {
+  display: block;
+  margin: auto;
+  margin-top: 1rem !important;
+}
+
 /* Tooltip styles */
 
 .tippy-tooltip.bootstrap-theme {

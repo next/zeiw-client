@@ -6,8 +6,8 @@ const commitHash = child_process
   .toString()
   .trim()
 
-export default config => {
-  config.plugins.push(
+export default ({ plugins }) => {
+  plugins.push(
     new webpack.DefinePlugin({
       '_zeiwBuild.commitHash': JSON.stringify(commitHash)
     })

@@ -5,34 +5,28 @@ import ClipboardJS from 'clipboard'
 import io from 'socket.io-client'
 import MicroModal from 'micromodal'
 import Swal from 'sweetalert2/dist/sweetalert2.all.js'
-
 export default () => {
   new ClipboardJS('.copy')
   const e = location.hostname
   const t = localStorage.getItem('auth')
   const o = {}
+  let i
   let a
   let n
-  let i
   let s
   let d = !1
-  let r = !1
   let l = !1
+  let r = !1
   let c = !1
   let m = !1
   let h = !1
   let p = 'home'
-
   function u(e) {
     const o = {
       method: 'PATCH',
       mode: 'cors',
-      headers: {
-        authentication: t
-      },
-      body: JSON.stringify({
-        faction: e
-      })
+      headers: { authentication: t },
+      body: JSON.stringify({ faction: e })
     }
     fetch('/api/v1/user', o)
       .then(e => e.json())
@@ -42,7 +36,7 @@ export default () => {
             position: 'top-end',
             type: 'success',
             title: 'Welcome to the club!',
-            showConfirmButton: false,
+            showConfirmButton: !1,
             timer: 1500
           }),
           $('#pr').classList.add('hidden'),
@@ -65,42 +59,35 @@ export default () => {
           position: 'top-end',
           type: 'error',
           title: 'Failed to set faction!',
-          showConfirmButton: false,
+          showConfirmButton: !1,
           timer: 1500
         }),
           console.error(e)
       })
   }
-
   function g(e, t, o) {
     if (m) {
       o = o || !1
-      const a = {
+      const i = {
         details: 'Competitive Pong',
-        assets: {
-          large_image: 'zeiw',
-          large_text: 'ZEIW'
-        },
+        assets: { large_image: 'zeiw', large_text: 'ZEIW' },
         state: e
       }
       ;(t = t || !1) &&
-        ((a.timestamps = {}),
-        (a.timestamps.start = t),
-        o && (a.timestamps.end = o)),
-        _zeiwNative.setDiscordPresence(a)
+        ((i.timestamps = {}),
+        (i.timestamps.start = t),
+        o && (i.timestamps.end = o)),
+        _zeiwNative.setDiscordPresence(i)
     }
   }
   addEventListener('load', () => {
     let o
-    ;(i = io.connect('wss://live.zeiw.me')),
+    ;(n = io.connect('wss://live.zeiw.me')),
       setInterval(() => {
         localStorage.getItem('devmode') &&
           ($('#ds').classList.add('hidden'), localStorage.removeItem('devmode'))
       }, 1e3),
-      MicroModal.init({
-        disableScroll: !0,
-        awaitCloseAnimation: !0
-      }),
+      MicroModal.init({ disableScroll: !0, awaitCloseAnimation: !0 }),
       setInterval(() => {
         fetch('https://api.github.com/repos/next/zeiw-client/commits/master')
           .then(e => {
@@ -130,28 +117,22 @@ export default () => {
       )}</a>`),
       $('#build').classList.remove('loading'),
       new Howl({
-        src: ['/sfx/music.mp3'],
+        src: ['../assets/sfx/music.mp3'],
         autoplay: !0,
         volume: 0.5,
         loop: !0
       }),
       'true' === localStorage.getItem('audiomuted') && Howler.mute(!0),
       '' !== location.hash &&
-        ((o = location.hash.split('#')[1]), ($('#joinID').value = o), D()),
+        ((o = location.hash.split('#')[1]), ($('#joinID').value = o), A()),
       null !== t &&
-        fetch('/api/v1/user', {
-          mode: 'cors',
-          headers: {
-            authentication: t
-          }
-        })
+        fetch('/api/v1/user', { mode: 'cors', headers: { authentication: t } })
           .then(e => e.json())
           .then(({ avatar: e, uname: t, flags: o }) => {
-            $('#psb').setAttribute('data-micromodal-trigger', 'modal-ps'),
-              MicroModal.init({
-                disableScroll: !0,
-                awaitCloseAnimation: !0
-              }),
+            $('#psb').addEventListener('click', () => {
+              MicroModal.show('modal-ps')
+            }),
+              MicroModal.init({ disableScroll: !0, awaitCloseAnimation: !0 }),
               ($('#pfp').src = e),
               ($('#uname').textContent = t),
               o.forEach(e => {
@@ -181,43 +162,40 @@ export default () => {
               position: 'top-end',
               type: 'error',
               title: 'Uh-oh! Please log in again!',
-              showConfirmButton: false,
+              showConfirmButton: !1,
               timer: 1500
             }),
-              MicroModal.init({
-                disableScroll: !0,
-                awaitCloseAnimation: !0
-              }),
+              MicroModal.init({ disableScroll: !0, awaitCloseAnimation: !0 }),
               localStorage.removeItem('auth'),
               console.error(e)
           }),
-      i.on('load', ({ id: e, w: t, h: o, uonl: n }) => {
-        ;(s = new H(e)), (a.width = t), (a.height = o)
-        const i = n
-        ;($('#online').innerHTML = `${i} ONLINE`),
+      n.on('load', ({ id: e, w: t, h: o, uonl: a }) => {
+        ;(s = new H(e)), (i.width = t), (i.height = o)
+        const n = a
+        ;($('#online').innerHTML = `${n} ONLINE`),
           $('#online').classList.remove('loading'),
-          N()
+          C()
       }),
-      i.on('uonl', e => {
+      n.on('uonl', e => {
         $('#online').innerHTML = `${e} ONLINE`
       }),
-      i.on('err', e => {
+      n.on('err', e => {
         Swal.fire({
           position: 'top-end',
           type: 'error',
           title: e,
-          showConfirmButton: false,
+          showConfirmButton: !1,
           timer: 1500
         })
       }),
-      i.on('gameUpdate', t => {
-        if (((s.game = Object.assign({}, t)), (l = !1), !0 === t.hosted)) {
+      n.on('gameUpdate', t => {
+        if (((s.game = Object.assign({}, t)), (r = !1), !0 === t.hosted)) {
           const o = t.code
           self.location.href = `#${o}`
-          const a = `https://${e}/#${o}`
+          const i = `https://${e}/#${o}`
           ;($('#pcpb').style.display = 'block'),
             ($('#wait').children[0].textContent = `Party URL: ${e}/#${o}`),
-            $('#pcpb').setAttribute('data-clipboard-text', a)
+            $('#pcpb').setAttribute('data-clipboard-text', i)
         }
         h ||
           (s.id === s.game.p1.id
@@ -228,61 +206,53 @@ export default () => {
               position: 'top-end',
               type: 'error',
               title: 'Opponent left game!',
-              showConfirmButton: false,
+              showConfirmButton: !1,
               timer: 1500
             }),
             L()),
           null !== s.game && ($('#stopwatch').innerHTML = s.game.secs))
       }),
-      i.on('gameTimeUpdate', e => {
+      n.on('gameTimeUpdate', e => {
         $('#stopwatch').innerHTML = e
       }),
-      i.on('paddle', e => {
+      n.on('paddle', e => {
         !h && s.game && (s.game[e.player] = Object.assign(s.game[e.player], e))
       }),
-      i.on('ball', e => {
+      n.on('ball', e => {
         !h && s.game && (s.game.ball = e)
       }),
-      i.on('hit-p1', () => {
-        !h &&
-          s.game &&
-          new Howl({
-            src: ['/sfx/hit-p1.mp3']
-          }).play()
+      n.on('hit-p1', () => {
+        !h && s.game && new Howl({ src: ['../assets/sfx/hit-p1.mp3'] }).play()
       }),
-      i.on('hit-p2', () => {
-        !h &&
-          s.game &&
-          new Howl({
-            src: ['/sfx/hit-p2.wav']
-          }).play()
+      n.on('hit-p2', () => {
+        !h && s.game && new Howl({ src: ['../assets/sfx/hit-p2.mp3'] }).play()
       }),
-      i.on('end', e => {
+      n.on('end', e => {
         const t = s.id === e ? 'You Win' : 'You Lose'
         ;(h = !0), s.leaveGame(t)
       }),
-      i.on('failjoin', e => {
+      n.on('failjoin', e => {
         b('home'),
           (self.location.href = '#'),
           Swal.fire({
             position: 'top-end',
             type: 'error',
             title: e,
-            showConfirmButton: false,
+            showConfirmButton: !1,
             timer: 1500
           })
       }),
-      i.on('disconnection', () => {
+      n.on('disconnection', () => {
         Swal.fire({
           position: 'top-end',
           type: 'error',
           title: 'Opponent left the game!',
-          showConfirmButton: false,
+          showConfirmButton: !1,
           timer: 1500
         }),
           L()
       }),
-      i.on('clientTrigger', e => {
+      n.on('clientTrigger', e => {
         if (('gameready' === e && s.startGame(), 'readyuped' === e)) {
           const e = $('#countdown')
           ;(e.style.display = 'flex'),
@@ -292,14 +262,14 @@ export default () => {
             }, 1e3)
         }
       }),
-      (a = $('#canvas')),
-      (n = a.getContext('2d')),
+      (i = $('#canvas')),
+      (a = i.getContext('2d')),
       addEventListener('keydown', E),
       addEventListener('keyup', I),
-      i.emit('getOnline'),
+      n.emit('getOnline'),
       setInterval(() => {
-        'home' === p && i.emit('getOnline'),
-          i.emit('latency', Date.now(), e => {
+        'home' === p && n.emit('getOnline'),
+          n.emit('latency', Date.now(), e => {
             const t = Date.now() - e
             ;($('#ping').innerHTML = `${t} ms`),
               $('#ping').classList.remove('loading')
@@ -345,24 +315,20 @@ export default () => {
       },
       !1
     )
-  const y = localStorage.getItem('audiomuted')
-  const f = $('#audio')
-
+  const f = localStorage.getItem('audiomuted')
+  const y = $('#audio')
   function b(e) {
     const t = p
     ;(p = e),
       ($(`#${t}`).className = 'dtc tc v-mid hidden'),
       ($(`#${e}`).className = 'dtc tc v-mid')
   }
-
   function L() {
     s.game && s.leaveGame(), k(), ($('#pcpb').style.display = 'none')
   }
-
   function k() {
     g('Staring at the Menu Screen'), b('home'), (self.location.href = '#')
   }
-
   function E(e) {
     c || 'message' !== p || (d = !0),
       (c = !0),
@@ -371,22 +337,20 @@ export default () => {
       (o.meta = e.metaKey),
       (o.ctrl = e.ctrlKey),
       (o.alt = e.altKey),
-      x()
+      M()
   }
-
   function I(e) {
     ;(c = !1),
-      'Escape' !== e.key || 'home' === p || l || (s.leaveGame(), L()),
+      'Escape' !== e.key || 'home' === p || r || (s.leaveGame(), L()),
       d && (k(), (d = !1)),
       delete o[e.keyCode],
       (o.shift = e.shiftKey),
       (o.meta = e.metaKey),
       (o.ctrl = e.ctrlKey),
       (o.alt = e.altKey),
-      x()
+      M()
   }
-
-  function x() {
+  function M() {
     s &&
       s.game &&
       ('playing' === s.game.status || 'readying' === s.game.status) &&
@@ -396,34 +360,32 @@ export default () => {
         ? (s.paddle.dir = 1)
         : (s.paddle.dir = 0))
   }
-
-  function N() {
+  function C() {
     s &&
       s.game &&
       ('playing' === s.game.status || 'readying' === s.game.status) &&
-      (n.clearRect(0, 0, a.width, a.height),
+      (a.clearRect(0, 0, i.width, i.height),
       (s.paddle.y += s.paddle.dir * s.paddle.spd),
-      i.emit('paddle', s.paddle),
-      i.emit('ball'),
-      (({ color: e, x: t, y: o, r: a }) => {
-        ;(n.fillStyle = e),
-          n.beginPath(),
-          n.arc(t, o, a, 0, 2 * Math.PI),
-          n.fill()
+      n.emit('paddle', s.paddle),
+      n.emit('ball'),
+      (({ color: e, x: t, y: o, r: i }) => {
+        ;(a.fillStyle = e),
+          a.beginPath(),
+          a.arc(t, o, i, 0, 2 * Math.PI),
+          a.fill()
       })(s.game.ball),
-      C(s.game.p1),
-      C(s.game.p2)),
-      requestAnimationFrame(N)
+      D(s.game.p1),
+      D(s.game.p2)),
+      requestAnimationFrame(C)
   }
-
-  function M(e) {
+  function S(e) {
     ;($('#wait').children[0].textContent = e), b('wait')
   }
-  y
-    ? (document.documentElement.setAttribute('data-audio', y),
-      (f.checked = 'true' !== y))
-    : (f.checked = !0),
-    f.addEventListener(
+  f
+    ? (document.documentElement.setAttribute('data-audio', f),
+      (y.checked = 'true' !== f))
+    : (y.checked = !0),
+    y.addEventListener(
       'change',
       ({ target: e }) => {
         !0 === e.checked
@@ -449,16 +411,16 @@ export default () => {
             position: 'top-end',
             type: 'error',
             title: 'Already in a game!',
-            showConfirmButton: false,
+            showConfirmButton: !1,
             timer: 1500
           })
-        : ((l = !0),
-          (r = !1),
+        : ((r = !0),
+          (l = !1),
           void 0 !== e
-            ? i.emit('findGame', this.id, e)
-            : i.emit('findGame', this.id),
+            ? n.emit('findGame', this.id, e)
+            : n.emit('findGame', this.id),
           ($('#pcpb').style.display = 'none'),
-          M('Matchmaking'),
+          S('Matchmaking'),
           g('Mode: 1v1 (Waiting...)', Number(new Date())))
     }
     startGame() {
@@ -478,9 +440,9 @@ export default () => {
         ((e, t) => {
           const o = $('#countdown')
           ;(o.style.display = 'flex'), (o.textContent = e)
-          const a = setInterval(() => {
+          const i = setInterval(() => {
             if (0 == --e)
-              return clearInterval(a), t && t(), void (o.style.display = 'none')
+              return clearInterval(i), t && t(), void (o.style.display = 'none')
             o.textContent = e
           }, 1e3)
         })(3, () => {
@@ -490,13 +452,11 @@ export default () => {
     readyUp() {
       this.game &&
         'readying' === this.game.status &&
-        (i.emit('readyup', {
-          p: this.paddle.player
-        }),
+        (n.emit('readyup', { p: this.paddle.player }),
         g('Mode: 1v1 (In Game)', Number(new Date())))
     }
     leaveGame(e) {
-      if ((i.emit('leaveGame'), (s.game = null), void 0 !== e)) {
+      if ((n.emit('leaveGame'), (s.game = null), void 0 !== e)) {
         switch (
           ((e => {
             ;($('#modal-rm-title').textContent = e), MicroModal.show('modal-rm')
@@ -505,19 +465,13 @@ export default () => {
         ) {
           case 'You Win':
             g('Mode: 1v1 (VICTORY!)'),
-              r ||
-                new Howl({
-                  src: ['/sfx/win.mp3']
-                }).play()
+              l || new Howl({ src: ['../assets/sfx/win.mp3'] }).play()
             break
           case 'You Lose':
             g('Mode: 1v1 (Loss)'),
-              r ||
-                new Howl({
-                  src: ['/sfx/loss.mp3']
-                }).play()
+              l || new Howl({ src: ['../assets/sfx/loss.mp3'] }).play()
         }
-        r = !0
+        l = !0
       }
     }
     host() {
@@ -526,12 +480,12 @@ export default () => {
             position: 'top-end',
             type: 'error',
             title: 'Already in a game!',
-            showConfirmButton: false,
+            showConfirmButton: !1,
             timer: 1500
           })
-        : ((l = !0),
-          (r = !1),
-          i.emit('host'),
+        : ((r = !0),
+          (l = !1),
+          n.emit('host'),
           b('wait'),
           g('Mode: 1v1 (Hosting...)', Number(new Date())))
     }
@@ -541,28 +495,26 @@ export default () => {
             position: 'top-end',
             type: 'error',
             title: 'Already in a game!',
-            showConfirmButton: false,
+            showConfirmButton: !1,
             timer: 1500
           })
-        : ((l = !0),
-          (r = !1),
+        : ((r = !0),
+          (l = !1),
           e.includes('#') && (e = e.split('#')[1]),
           MicroModal.close('modal-mj'),
-          M('Joining'),
+          S('Joining'),
           ($('#joinID').value = ''),
-          i.emit('join', encodeURIComponent(e)))
+          n.emit('join', encodeURIComponent(e)))
     }
   }
-
-  function C(e) {
+  function D(e) {
     0 > e.y - e.h / 2
       ? (e.y = e.h / 2)
-      : e.y + e.h / 2 > a.height && (e.y = a.height - e.h / 2),
-      (n.fillStyle = e.id === s.id ? '#ff9900' : '#cccccc'),
-      n.fillRect(e.x - e.w / 2, e.y - e.h / 2, e.w, e.h)
+      : e.y + e.h / 2 > i.height && (e.y = i.height - e.h / 2),
+      (a.fillStyle = e.id === s.id ? '#ff9900' : '#cccccc'),
+      a.fillRect(e.x - e.w / 2, e.y - e.h / 2, e.w, e.h)
   }
-
-  function D() {
+  function A() {
     MicroModal.show('modal-mj'), $('#joinID').focus()
   }
   $('#discord').addEventListener('click', () =>
@@ -610,22 +562,25 @@ export default () => {
         }
       })()
     ),
-    $('#playBtn').addEventListener('click', () => s.findGame()),
-    $('#tabJoinBtn').addEventListener('click', () => D()),
+    $('#dbc').addEventListener('click', () => u(2)),
     $('#hostBtn').addEventListener('click', () => s.host()),
     $('#joinBtn').addEventListener('click', () => s.join($('#joinID').value)),
-    $('#prc').addEventListener('click', () => u(0)),
-    $('#wdc').addEventListener('click', () => u(1)),
-    $('#dbc').addEventListener('click', () => u(2)),
     $('#joinID').addEventListener('keyup', () => {
       13 === event.keyCode && s.join($('#joinID').value)
     }),
+    $('#playBtn').addEventListener('click', () => s.findGame()),
+    $('#prc').addEventListener('click', () => u(0)),
+    $('#psb').addEventListener('click', () => {
+      MicroModal.show('modal-da')
+    }),
+    $('#tabJoinBtn').addEventListener('click', () => A()),
+    $('#wdc').addEventListener('click', () => u(1)),
     (onkeyup = ({ which: e }) => {
       'home' !== p ||
         $('#modal-mj').classList.contains('is-open') ||
-        (49 === e ? s.findGame() : 50 === e ? s.host() : 51 === e && D())
+        (49 === e ? s.findGame() : 50 === e ? s.host() : 51 === e && A())
     })
-  const S = [
+  const x = [
     'ArrowUp',
     'ArrowUp',
     'ArrowDown',
@@ -637,15 +592,15 @@ export default () => {
     'b',
     'a'
   ]
-  let G = 0
+  let B = 0
   addEventListener(
     'keydown',
     ({ key: e }) => {
-      S.includes(e) && e === S[G]
-        ? (G++,
-          S.length === G &&
-            ((G = 0), open('https://www.youtube.com/watch?v=dQw4w9WgXcQ')))
-        : (G = 0)
+      x.includes(e) && e === x[B]
+        ? (B++,
+          x.length === B &&
+            ((B = 0), open('https://www.youtube.com/watch?v=dQw4w9WgXcQ')))
+        : (B = 0)
     },
     !1
   )
