@@ -5,6 +5,7 @@ import ClipboardJS from 'clipboard'
 import io from 'socket.io-client'
 import MicroModal from 'micromodal'
 import Swal from 'sweetalert2/dist/sweetalert2.all.js'
+
 export default () => {
   new ClipboardJS('.copy')
   const e = location.hostname
@@ -147,6 +148,10 @@ export default () => {
           .then(e => e.json())
           .then(({ avatar: e, uname: t, flags: o }) => {
             $('#psb').setAttribute('data-micromodal-trigger', 'modal-ps'),
+              MicroModal.init({
+                disableScroll: !0,
+                awaitCloseAnimation: !0
+              }),
               ($('#pfp').src = e),
               ($('#uname').textContent = t),
               o.forEach(e => {
