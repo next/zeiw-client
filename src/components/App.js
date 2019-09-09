@@ -4,7 +4,7 @@ import { Howl, Howler } from 'howler'
 import ClipboardJS from 'clipboard'
 import io from 'socket.io-client'
 import MicroModal from 'micromodal'
-import Noty from 'noty'
+import Swal from 'sweetalert2/dist/sweetalert2.all.js'
 export default () => {
   new ClipboardJS('.copy')
   const e = location.hostname
@@ -21,20 +21,29 @@ export default () => {
   let m = !1
   let h = !1
   let p = 'home'
+
   function u(e) {
     const o = {
       mode: 'cors',
-      headers: { mode: 'PATCH', authentication: t },
-      body: JSON.stringify({ faction: e })
+      headers: {
+        mode: 'PATCH',
+        authentication: t
+      },
+      body: JSON.stringify({
+        faction: e
+      })
     }
     fetch('/api/v1/user', o)
       .then(e => e.json())
       .then(() => {
         switch (
-          (new Noty({
-            text: 'Faction set! Welcome to the club.',
-            type: 'success'
-          }).show(),
+          (Swal.fire({
+            position: 'top-end',
+            type: 'success',
+            title: 'Welcome to the club!',
+            showConfirmButton: false,
+            timer: 1500
+          }),
           $('#pr').classList.add('hidden'),
           $('#wd').classList.add('hidden'),
           $('#db').classList.add('hidden'),
@@ -51,19 +60,26 @@ export default () => {
         }
       })
       .catch(({ message: e }) => {
-        new Noty({
-          text: 'Failed to set faction! Please try again.',
-          type: 'error'
-        }).show(),
+        Swal.fire({
+          position: 'top-end',
+          type: 'error',
+          title: 'Failed to set faction!',
+          showConfirmButton: false,
+          timer: 1500
+        }),
           console.error(e)
       })
   }
+
   function g(e, t, o) {
     if (m) {
       o = o || !1
       const a = {
         details: 'Competitive Pong',
-        assets: { large_image: 'zeiw', large_text: 'ZEIW' },
+        assets: {
+          large_image: 'zeiw',
+          large_text: 'ZEIW'
+        },
         state: e
       }
       ;(t = t || !1) &&
@@ -80,7 +96,10 @@ export default () => {
         localStorage.getItem('devmode') &&
           ($('#ds').classList.add('hidden'), localStorage.removeItem('devmode'))
       }, 1e3),
-      MicroModal.init({ disableScroll: !0, awaitCloseAnimation: !0 }),
+      MicroModal.init({
+        disableScroll: !0,
+        awaitCloseAnimation: !0
+      }),
       setInterval(() => {
         fetch('https://api.github.com/repos/next/zeiw-client/commits/master')
           .then(e => {
@@ -97,7 +116,7 @@ export default () => {
             }
           })
           .catch(e => {
-            console.log(e)
+            console.error(e)
           })
       }, 12e5),
       ($(
@@ -119,10 +138,16 @@ export default () => {
       '' !== location.hash &&
         ((o = location.hash.split('#')[1]), ($('#joinID').value = o), D()),
       null !== t &&
-        fetch('/api/v1/user', { mode: 'cors', headers: { authentication: t } })
+        fetch('/api/v1/user', {
+          mode: 'cors',
+          headers: {
+            authentication: t
+          }
+        })
           .then(e => e.json())
           .then(({ avatar: e, uname: t, flags: o }) => {
-            ;($('#pfp').src = e),
+            $('#psb').setAttribute('data-micromodal-trigger', 'modal-ps'),
+              ($('#pfp').src = e),
               ($('#uname').textContent = t),
               o.forEach(e => {
                 switch (e) {
@@ -147,10 +172,13 @@ export default () => {
               })
           })
           .catch(({ message: e }) => {
-            new Noty({
-              text: 'Invalid user token! Please try again.',
-              type: 'error'
-            }).show(),
+            Swal.fire({
+              position: 'top-end',
+              type: 'error',
+              title: 'Uh-oh! Please log in again!',
+              showConfirmButton: false,
+              timer: 1500
+            }),
               localStorage.removeItem('auth'),
               console.error(e)
           }),
@@ -159,13 +187,19 @@ export default () => {
         const i = n
         ;($('#online').innerHTML = `${i} ONLINE`),
           $('#online').classList.remove('loading'),
-          M()
+          N()
       }),
       i.on('uonl', e => {
         $('#online').innerHTML = `${e} ONLINE`
       }),
       i.on('err', e => {
-        new Noty({ text: `Error! ${e}`, type: 'error' }).show()
+        Swal.fire({
+          position: 'top-end',
+          type: 'error',
+          title: e,
+          showConfirmButton: false,
+          timer: 1500
+        })
       }),
       i.on('gameUpdate', t => {
         if (((s.game = Object.assign({}, t)), (l = !1), !0 === t.hosted)) {
@@ -181,10 +215,13 @@ export default () => {
             ? (s.paddle = s.game.p1)
             : (s.paddle = s.game.p2),
           'disconnected' === s.game.status &&
-            (new Noty({
-              text: 'Opponent left the game!',
-              type: 'error'
-            }).show(),
+            (Swal.fire({
+              position: 'top-end',
+              type: 'error',
+              title: 'Opponent left game!',
+              showConfirmButton: false,
+              timer: 1500
+            }),
             L()),
           null !== s.game && ($('#stopwatch').innerHTML = s.game.secs))
       }),
@@ -198,18 +235,18 @@ export default () => {
         !h && s.game && (s.game.ball = e)
       }),
       i.on('hit-p1', () => {
-        if (!h && s.game) {
+        !h &&
+          s.game &&
           new Howl({
             src: ['/sfx/hit-p1.mp3']
           }).play()
-        }
       }),
       i.on('hit-p2', () => {
-        if (!h && s.game) {
+        !h &&
+          s.game &&
           new Howl({
             src: ['/sfx/hit-p2.wav']
           }).play()
-        }
       }),
       i.on('end', e => {
         const t = s.id === e ? 'You Win' : 'You Lose'
@@ -218,10 +255,23 @@ export default () => {
       i.on('failjoin', e => {
         b('home'),
           (self.location.href = '#'),
-          new Noty({ text: `Error! ${e}`, type: 'error' }).show()
+          Swal.fire({
+            position: 'top-end',
+            type: 'error',
+            title: e,
+            showConfirmButton: false,
+            timer: 1500
+          })
       }),
       i.on('disconnection', () => {
-        new Noty({ text: 'Opponent left the game!', type: 'error' }).show(), L()
+        Swal.fire({
+          position: 'top-end',
+          type: 'error',
+          title: 'Opponent left the game!',
+          showConfirmButton: false,
+          timer: 1500
+        }),
+          L()
       }),
       i.on('clientTrigger', e => {
         if (('gameready' === e && s.startGame(), 'readyuped' === e)) {
@@ -288,18 +338,22 @@ export default () => {
     )
   const y = localStorage.getItem('audiomuted')
   const f = $('#audio')
+
   function b(e) {
     const t = p
     ;(p = e),
       ($(`#${t}`).className = 'dtc tc v-mid hidden'),
       ($(`#${e}`).className = 'dtc tc v-mid')
   }
+
   function L() {
     s.game && s.leaveGame(), k(), ($('#pcpb').style.display = 'none')
   }
+
   function k() {
     g('Staring at the Menu Screen'), b('home'), (self.location.href = '#')
   }
+
   function E(e) {
     c || 'message' !== p || (d = !0),
       (c = !0),
@@ -308,8 +362,9 @@ export default () => {
       (o.meta = e.metaKey),
       (o.ctrl = e.ctrlKey),
       (o.alt = e.altKey),
-      N()
+      x()
   }
+
   function I(e) {
     ;(c = !1),
       'Escape' !== e.key || 'home' === p || l || (s.leaveGame(), L()),
@@ -319,9 +374,10 @@ export default () => {
       (o.meta = e.metaKey),
       (o.ctrl = e.ctrlKey),
       (o.alt = e.altKey),
-      N()
+      x()
   }
-  function N() {
+
+  function x() {
     s &&
       s.game &&
       ('playing' === s.game.status || 'readying' === s.game.status) &&
@@ -331,7 +387,8 @@ export default () => {
         ? (s.paddle.dir = 1)
         : (s.paddle.dir = 0))
   }
-  function M() {
+
+  function N() {
     s &&
       s.game &&
       ('playing' === s.game.status || 'readying' === s.game.status) &&
@@ -347,9 +404,10 @@ export default () => {
       })(s.game.ball),
       C(s.game.p1),
       C(s.game.p2)),
-      requestAnimationFrame(M)
+      requestAnimationFrame(N)
   }
-  function x(e) {
+
+  function M(e) {
     ;($('#wait').children[0].textContent = e), b('wait')
   }
   y
@@ -378,14 +436,20 @@ export default () => {
     }
     findGame(e) {
       s.game
-        ? new Noty({ text: "You're already in a game!", type: 'error' }).show()
+        ? Swal.fire({
+            position: 'top-end',
+            type: 'error',
+            title: 'Already in a game!',
+            showConfirmButton: false,
+            timer: 1500
+          })
         : ((l = !0),
           (r = !1),
           void 0 !== e
             ? i.emit('findGame', this.id, e)
             : i.emit('findGame', this.id),
           ($('#pcpb').style.display = 'none'),
-          x('Matchmaking'),
+          M('Matchmaking'),
           g('Mode: 1v1 (Waiting...)', Number(new Date())))
     }
     startGame() {
@@ -417,7 +481,9 @@ export default () => {
     readyUp() {
       this.game &&
         'readying' === this.game.status &&
-        (i.emit('readyup', { p: this.paddle.player }),
+        (i.emit('readyup', {
+          p: this.paddle.player
+        }),
         g('Mode: 1v1 (In Game)', Number(new Date())))
     }
     leaveGame(e) {
@@ -447,7 +513,13 @@ export default () => {
     }
     host() {
       s.game
-        ? new Noty({ text: "You're already in a game!", type: 'error' }).show()
+        ? Swal.fire({
+            position: 'top-end',
+            type: 'error',
+            title: 'Already in a game!',
+            showConfirmButton: false,
+            timer: 1500
+          })
         : ((l = !0),
           (r = !1),
           i.emit('host'),
@@ -456,16 +528,23 @@ export default () => {
     }
     join(e) {
       s.game
-        ? new Noty({ text: "You're already in a game!", type: 'error' }).show()
+        ? Swal.fire({
+            position: 'top-end',
+            type: 'error',
+            title: 'Already in a game!',
+            showConfirmButton: false,
+            timer: 1500
+          })
         : ((l = !0),
           (r = !1),
           e.includes('#') && (e = e.split('#')[1]),
           MicroModal.close('modal-mj'),
-          x('Joining'),
+          M('Joining'),
           ($('#joinID').value = ''),
           i.emit('join', encodeURIComponent(e)))
     }
   }
+
   function C(e) {
     0 > e.y - e.h / 2
       ? (e.y = e.h / 2)
@@ -473,6 +552,7 @@ export default () => {
       (n.fillStyle = e.id === s.id ? '#ff9900' : '#cccccc'),
       n.fillRect(e.x - e.w / 2, e.y - e.h / 2, e.w, e.h)
   }
+
   function D() {
     MicroModal.show('modal-mj'), $('#joinID').focus()
   }
@@ -548,15 +628,15 @@ export default () => {
     'b',
     'a'
   ]
-  let z = 0
+  let G = 0
   addEventListener(
     'keydown',
     ({ key: e }) => {
-      S.includes(e) && e === S[z]
-        ? (z++,
-          S.length === z &&
-            ((z = 0), open('https://www.youtube.com/watch?v=dQw4w9WgXcQ')))
-        : (z = 0)
+      S.includes(e) && e === S[G]
+        ? (G++,
+          S.length === G &&
+            ((G = 0), open('https://www.youtube.com/watch?v=dQw4w9WgXcQ')))
+        : (G = 0)
     },
     !1
   )
