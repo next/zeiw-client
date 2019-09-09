@@ -110,9 +110,7 @@ export default () => {
       )}</a>`),
       $('#build').classList.remove('loading'),
       new Howl({
-        src: [
-          'https://res.cloudinary.com/zeiw/video/upload/f_auto,q_auto/v1564827948/sound/theme.mp3'
-        ],
+        src: ['/sfx/music.mp3'],
         autoplay: !0,
         volume: 0.5,
         loop: !0
@@ -202,18 +200,14 @@ export default () => {
       i.on('hit-p1', () => {
         if (!h && s.game) {
           new Howl({
-            src: [
-              'https://res.cloudinary.com/zeiw/video/upload/q_auto/v1564828068/sound/p1-hit.wav'
-            ]
+            src: ['/sfx/hit-p1.mp3']
           }).play()
         }
       }),
       i.on('hit-p2', () => {
         if (!h && s.game) {
           new Howl({
-            src: [
-              'https://res.cloudinary.com/zeiw/video/upload/q_auto/v1564828067/sound/p2-hit.wav'
-            ]
+            src: ['/sfx/hit-p2.wav']
           }).play()
         }
       }),
@@ -438,18 +432,14 @@ export default () => {
             g('Mode: 1v1 (VICTORY!)'),
               r ||
                 new Howl({
-                  src: [
-                    'https://res.cloudinary.com/zeiw/video/upload/q_auto/v1564828064/sound/win.wav'
-                  ]
+                  src: ['/sfx/win.mp3']
                 }).play()
             break
           case 'You Lose':
             g('Mode: 1v1 (Loss)'),
               r ||
                 new Howl({
-                  src: [
-                    'https://res.cloudinary.com/zeiw/video/upload/q_auto/v1564828066/sound/lose.wav'
-                  ]
+                  src: ['/sfx/loss.mp3']
                 }).play()
         }
         r = !0
