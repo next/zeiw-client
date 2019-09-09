@@ -13,7 +13,12 @@ const Nav = () => (
         <img className="w-50" id="rh" src={home} />
       </Tippy>
       <Tippy content="Player Settings" placement="right">
-        <img className="w-50" id="psb" src={player} />
+        <img
+          className="w-50"
+          data-micromodal-trigger="modal-da"
+          id="psb"
+          src={player}
+        />
       </Tippy>
       <Tippy content="Game Settings" placement="right">
         <img
