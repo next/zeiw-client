@@ -25,9 +25,9 @@ export default () => {
 
   function u(e) {
     const o = {
+      method: 'PATCH',
       mode: 'cors',
       headers: {
-        mode: 'PATCH',
         authentication: t
       },
       body: JSON.stringify({
@@ -184,6 +184,10 @@ export default () => {
               showConfirmButton: false,
               timer: 1500
             }),
+              MicroModal.init({
+                disableScroll: !0,
+                awaitCloseAnimation: !0
+              }),
               localStorage.removeItem('auth'),
               console.error(e)
           }),

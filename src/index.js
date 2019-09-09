@@ -1,16 +1,16 @@
+import './index.css'
+
 import { Circle } from 'react-preloaders'
 
-import Layout from './components/Layout'
-import Spinner from './components/Spinner'
-import Modal from './components/Modal'
 import Alert from './components/Alert'
+import Build from './components/Build'
 import Find from './components/Find'
-import Host from './components/Host'
 import Game from './components/Game'
+import Host from './components/Host'
+import Layout from './components/Layout'
 import Main from './components/Main'
 import Nav from './components/Nav'
 import Ping from './components/Ping'
-import Build from './components/Build'
 
 import About from './components/About'
 import Account from './components/Account'
@@ -20,10 +20,10 @@ import Dev from './components/Dev'
 import Faction from './components/Faction'
 import Join from './components/Join'
 import Logout from './components/Logout'
+import NativeFrame from './components/NativeFrame'
 import Rematch from './components/Rematch'
 import Settings from './components/Settings'
 import UnauthErr from './components/UnauthErr'
-import NativeFrame from './components/NativeFrame'
 
 const isNative = window._zeiwNative !== undefined
 
@@ -33,8 +33,6 @@ export default () => (
     {isNative && <NativeFrame />}
     <Ping />
     <Build />
-    <Modal />
-    <Spinner />
     <Alert />
     <div className="center">
       <div className="cf w-100">

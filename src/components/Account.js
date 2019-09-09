@@ -14,22 +14,22 @@ const Account = () => (
             <h1 id="uname" />
             <div className="flex justify-center">
               <Tippy content="ZEIW Developer">
-                <div className="badge badgeh ma2" id="dev" />
+                <div className="badge hidden ma2" id="dev" />
               </Tippy>
               <Tippy content="ZEIW Moderator">
-                <div className="badge badgeh ma2" id="mod" />
+                <div className="badge hidden ma2" id="mod" />
               </Tippy>
               <Tippy content="ZEIW Testpilot">
-                <div className="badge badgeh ma2" id="tp" />
+                <div className="badge hidden ma2" id="tp" />
               </Tippy>
               <Tippy content="Phoenix Riders">
-                <div className="badge badgeh ma2" id="pr" />
+                <div className="badge hidden ma2" id="pr" />
               </Tippy>
               <Tippy content="Winter Dragons">
-                <div className="badge badgeh ma2" id="wd" />
+                <div className="badge hidden ma2" id="wd" />
               </Tippy>
               <Tippy content="Demon Brigade">
-                <div className="badge badgeh ma2" id="db" />
+                <div className="badge hidden ma2" id="db" />
               </Tippy>
             </div>
           </div>
