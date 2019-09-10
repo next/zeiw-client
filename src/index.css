@@ -68,7 +68,7 @@ body {
 
 a {
   text-decoration: none;
-  color: var(--white);
+  color: var(--primary);
 }
 
 img {
