@@ -82,13 +82,14 @@ export default () => {
     }
 
     if (null !== localStorage.getItem('auth')) {
-      $('#psb').setAttribute('data-micromodal-trigger', 'modal-ps')
       fetch('/api/v1/user', {
         mode: 'cors',
         headers: { authentication: token }
       })
         .then(e => e.json())
         .then(({ avatar, uname, flags }) => {
+          $('#psb').setAttribute('data-micromodal-trigger', 'modal-ps')
+          modalInit()
           $('#pfp').src = avatar
           $('#uname').textContent = uname
           flags.forEach(e => {
