@@ -10,6 +10,7 @@ export default () => {
   new ClipboardJS('.copy')
 
   const host = location.hostname
+  const server = 'wss://live.zeiw.me'
   const token = localStorage.getItem('auth')
 
   const keys = {}
@@ -30,15 +31,6 @@ export default () => {
       disableScroll: true,
       awaitCloseAnimation: true
     })
-  }
-
-  function devCheck() {
-    setInterval(() => {
-      if (localStorage.getItem('devmode')) {
-        $('#ds').classList.add('hidden')
-        localStorage.removeItem('devmode')
-      }
-    }, 1000)
   }
 
   function updateManager() {
@@ -66,6 +58,7 @@ export default () => {
   }
 
   addEventListener('load', () => {
+    modalInit()
     updateManager()
 
     // prettier-ignore
@@ -128,15 +121,11 @@ export default () => {
             showConfirmButton: false,
             timer: 1500
           })
-          modalInit()
           localStorage.removeItem('auth')
           console.error(e)
         })
-    } else {
-      modalInit()
-      devCheck()
     }
-    socket = io.connect('wss://live.zeiw.me')
+    socket = io.connect(server)
     setSocketEvents()
     canvas = $('#canvas')
     ctx = canvas.getContext('2d')
