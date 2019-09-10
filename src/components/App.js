@@ -88,8 +88,10 @@ export default () => {
       })
         .then(e => e.json())
         .then(({ avatar, uname, flags }) => {
-          $('#psb').setAttribute('data-micromodal-trigger', 'modal-ps')
-          modalInit()
+          $('#psb').addEventListener('click', () => {
+            MicroModal.close('modal-da')
+            MicroModal.show('modal-ps')
+          })
           $('#pfp').src = avatar
           $('#uname').textContent = uname
           flags.forEach(e => {
@@ -734,6 +736,9 @@ export default () => {
     $('#joinID').focus()
   }
 
+  $('#psb').addEventListener('click', () => {
+    MicroModal.show('modal-da')
+  })
   $('#discord').addEventListener('click', () =>
     open('https://discord.gg/h7NxqBe', '_blank')
   )
