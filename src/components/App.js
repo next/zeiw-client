@@ -10,6 +10,13 @@ export default () => {
   const server = 'wss://live.zeiw.me'
   const token = localStorage.getItem('auth')
 
+  const Toast = Swal.mixin({
+    toast: true,
+    position: 'top-end',
+    showConfirmButton: false,
+    timer: 1500
+  })
+
   const keys = {}
   let canvas
   let cl = false
@@ -30,36 +37,53 @@ export default () => {
     })
   }
 
-  function updateManager() {
-    setInterval(() => {
-      fetch('https://api.github.com/repos/next/zeiw-client/commits/master')
-        .then(response => {
-          if (!response.ok) {
-            throw new Error(`Error ${response.status}`)
-          }
-          return response.json()
-        })
-        .then(({ sha }) => {
-          if (sha !== _zeiwBuild.commitHash) {
-            let patch = sha.substring(0, 7)
-            $('#build').innerHTML = `Patch ${patch} Available`
-            $('#build').addEventListener('click', () => {
-              location.reload()
-            })
-          }
-        })
-        .catch(error => {
-          console.error(error)
-        })
-    }, 20 * 60 * 1000)
+  function updateChecker() {
+    Toast.fire(
+      {
+        title: 'Checking for updates ...',
+        type: 'info'
+      },
+      Swal.showLoading()
+    )
+    fetch('https://api.github.com/repos/next/zeiw-client/commits/master')
+      .then(response => {
+        if (!response.ok) {
+          throw new Error(`Error ${response.status}`)
+        }
+        return response.json()
+      })
+      .then(({ sha }) => {
+        if (sha !== _zeiwBuild.commitHash) {
+          let patch = sha.substring(0, 7)
+          Toast.fire({
+            title: `Patch ${patch} Available!`,
+            timer: null,
+            type: 'info'
+          })
+        } else {
+          Toast.fire({
+            title: "Nice! You're up to date.",
+            type: 'success'
+          })
+        }
+      })
+      .catch(error => {
+        console.error(error)
+      })
   }
 
   addEventListener('load', () => {
-    modalInit()
-    updateManager()
+    setInterval(() => {
+      updateChecker()
+    }, 20 * 60 * 1000)
 
-    // prettier-ignore
-    $('#build').innerHTML = `<a href="https://github.com/next/zeiw-client/commit/${_zeiwBuild.commitHash}" target="_blank" rel="noopener noreferrer">${_zeiwBuild.commitHash.substring(0, 7)}</a>`
+    $('#build').addEventListener('click', () => {
+      updateChecker()
+    })
+
+    modalInit()
+
+    $('#build').innerHTML = `${_zeiwBuild.commitHash.substring(0, 7)}`
     $('#build').classList.remove('loading')
 
     new Howl({
@@ -85,6 +109,10 @@ export default () => {
       })
         .then(e => e.json())
         .then(({ avatar, uname, flags }) => {
+          Toast.fire({
+            type: 'success',
+            title: 'Signed in successfully'
+          })
           $('#psb').addEventListener('click', () => {
             MicroModal.close('modal-da')
             MicroModal.show('modal-ps')
@@ -114,12 +142,8 @@ export default () => {
           })
         })
         .catch(({ message: e }) => {
-          Swal.fire({
-            position: 'top-end',
-            showConfirmButton: false,
-            timer: 1500,
+          Toast.fire({
             title: 'Uh-oh! Please log in again!',
-            toast: 'true',
             type: 'error'
           })
           localStorage.removeItem('auth')
@@ -173,13 +197,9 @@ export default () => {
   })
 
   function f(c) {
-    Swal.fire(
+    Toast.fire(
       {
-        position: 'top-end',
-        showConfirmButton: false,
-        timer: 1500,
         title: 'Contacting servers ...',
-        toast: 'true',
         type: 'info'
       },
       Swal.showLoading()
@@ -193,12 +213,9 @@ export default () => {
     fetch('/api/v1/user', headers)
       .then(c => c.json())
       .then(() => {
-        Swal.fire({
-          position: 'top-end',
-          showConfirmButton: false,
-          timer: 1500,
+        MicroModal.close('modal-fac')
+        Toast.fire({
           title: 'Welcome to the club!',
-          toast: 'true',
           type: 'success'
         })
         $('#pr').classList.add('hidden')
@@ -216,12 +233,8 @@ export default () => {
         }
       })
       .catch(({ message: e }) => {
-        Swal.fire({
-          position: 'top-end',
-          showConfirmButton: false,
-          timer: 1500,
+        Toast.fire({
           title: 'Failed to set faction!',
-          toast: 'true',
           type: 'error'
         }),
           console.error(e)
@@ -443,12 +456,9 @@ export default () => {
     })
 
     socket.on('err', err => {
-      Swal.fire({
-        position: 'top-end',
-        showConfirmButton: false,
-        timer: 1500,
+      Toast.fire({
         title: err,
-        toast: 'true',
+
         type: 'error'
       })
     })
@@ -477,12 +487,8 @@ export default () => {
           user.paddle = user.game.p2
         }
         if ('disconnected' === user.game.status) {
-          Swal.fire({
-            position: 'top-end',
-            showConfirmButton: false,
-            timer: 1500,
+          Toast.fire({
             title: 'Opponent left the game!',
-            toast: 'true',
             type: 'error'
           })
           goHome()
@@ -536,23 +542,15 @@ export default () => {
     socket.on('failjoin', msg => {
       tabTo('home')
       self.location.href = '#'
-      Swal.fire({
-        position: 'top-end',
-        showConfirmButton: false,
-        timer: 1500,
+      Toast.fire({
         title: msg,
-        toast: 'true',
         type: 'error'
       })
     })
 
     socket.on('disconnection', () => {
-      Swal.fire({
-        position: 'top-end',
-        showConfirmButton: false,
-        timer: 1500,
+      Toast.fire({
         title: 'Opponent left the game!',
-        toast: 'true',
         type: 'error'
       })
       goHome()
@@ -594,12 +592,8 @@ export default () => {
         waitMsg('Matchmaking')
         presenceUpdate('Mode: 1v1 (Waiting...)', Number(new Date()))
       } else {
-        Swal.fire({
-          position: 'top-end',
-          showConfirmButton: false,
-          timer: 1500,
+        Toast.fire({
           title: 'Already in a game!',
-          toast: 'true',
           type: 'error'
         })
       }
@@ -674,12 +668,8 @@ export default () => {
         tabTo('wait')
         presenceUpdate('Mode: 1v1 (Hosting...)', Number(new Date()))
       } else {
-        Swal.fire({
-          position: 'top-end',
-          showConfirmButton: false,
-          timer: 1500,
+        Toast.fire({
           title: 'Already in a game!',
-          toast: 'true',
           type: 'error'
         })
       }
@@ -697,12 +687,8 @@ export default () => {
         $('#joinID').value = ''
         socket.emit('join', encodeURIComponent(c))
       } else {
-        Swal.fire({
-          position: 'top-end',
-          showConfirmButton: false,
-          timer: 1500,
+        Toast.fire({
           title: 'Already in a game!',
-          toast: 'true',
           type: 'error'
         })
       }
