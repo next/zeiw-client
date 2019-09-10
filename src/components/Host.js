@@ -1,10 +1,6 @@
-import Tippy from './Tooltip'
-
 const Host = () => (
   <div className="dtc tc v-mid hidden" id="wait">
-    <Tippy content="Click to copy">
-      <div className="copy" id="pcpb" />
-    </Tippy>
+    <div id="pcpb" />
     <div className="spinner">
       <div className="cube1" />
       <div className="cube2" />
