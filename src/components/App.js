@@ -115,11 +115,13 @@ export default () => {
         })
         .catch(({ message: e }) => {
           Swal.fire({
+            backdrop: 'false',
             position: 'top-end',
-            type: 'error',
-            title: 'Uh-oh! Please log in again!',
             showConfirmButton: false,
-            timer: 1500
+            timer: 1500,
+            title: 'Uh-oh! Please log in again!',
+            toast: 'true',
+            type: 'error'
           })
           localStorage.removeItem('auth')
           console.error(e)
@@ -172,6 +174,18 @@ export default () => {
   })
 
   function f(c) {
+    Swal.fire(
+      {
+        backdrop: 'false',
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 1500,
+        title: 'Contacting servers ...',
+        toast: 'true',
+        type: 'info'
+      },
+      Swal.showLoading()
+    )
     const headers = {
       method: 'PATCH',
       mode: 'cors',
@@ -182,14 +196,13 @@ export default () => {
       .then(c => c.json())
       .then(() => {
         Swal.fire({
+          backdrop: 'false',
           position: 'top-end',
-          type: 'success',
-          title: 'Welcome to the club!',
           showConfirmButton: false,
           timer: 1500,
-          onBeforeOpen: () => {
-            Swal.showLoading()
-          }
+          title: 'Welcome to the club!',
+          toast: 'true',
+          type: 'success'
         })
         $('#pr').classList.add('hidden')
         $('#wd').classList.add('hidden')
@@ -207,11 +220,13 @@ export default () => {
       })
       .catch(({ message: e }) => {
         Swal.fire({
+          backdrop: 'false',
           position: 'top-end',
-          type: 'error',
-          title: 'Failed to set faction!',
           showConfirmButton: false,
-          timer: 1500
+          timer: 1500,
+          title: 'Failed to set faction!',
+          toast: 'true',
+          type: 'error'
         }),
           console.error(e)
       })
@@ -433,11 +448,13 @@ export default () => {
 
     socket.on('err', err => {
       Swal.fire({
+        backdrop: 'false',
         position: 'top-end',
-        type: 'error',
-        title: err,
         showConfirmButton: false,
-        timer: 1500
+        timer: 1500,
+        title: err,
+        toast: 'true',
+        type: 'error'
       })
     })
 
@@ -466,11 +483,13 @@ export default () => {
         }
         if ('disconnected' === user.game.status) {
           Swal.fire({
+            backdrop: 'false',
             position: 'top-end',
-            type: 'error',
-            title: 'Opponent left the game!',
             showConfirmButton: false,
-            timer: 1500
+            timer: 1500,
+            title: 'Opponent left the game!',
+            toast: 'true',
+            type: 'error'
           })
           goHome()
         }
@@ -524,21 +543,25 @@ export default () => {
       tabTo('home')
       self.location.href = '#'
       Swal.fire({
+        backdrop: 'false',
         position: 'top-end',
-        type: 'error',
-        title: msg,
         showConfirmButton: false,
-        timer: 1500
+        timer: 1500,
+        title: msg,
+        toast: 'true',
+        type: 'error'
       })
     })
 
     socket.on('disconnection', () => {
       Swal.fire({
+        backdrop: 'false',
         position: 'top-end',
-        type: 'error',
-        title: 'Opponent left the game!',
         showConfirmButton: false,
-        timer: 1500
+        timer: 1500,
+        title: 'Opponent left the game!',
+        toast: 'true',
+        type: 'error'
       })
       goHome()
     })
@@ -580,11 +603,13 @@ export default () => {
         presenceUpdate('Mode: 1v1 (Waiting...)', Number(new Date()))
       } else {
         Swal.fire({
+          backdrop: 'false',
           position: 'top-end',
-          type: 'error',
-          title: 'Already in a game!',
           showConfirmButton: false,
-          timer: 1500
+          timer: 1500,
+          title: 'Already in a game!',
+          toast: 'true',
+          type: 'error'
         })
       }
     }
@@ -659,11 +684,13 @@ export default () => {
         presenceUpdate('Mode: 1v1 (Hosting...)', Number(new Date()))
       } else {
         Swal.fire({
+          backdrop: 'false',
           position: 'top-end',
-          type: 'error',
-          title: 'Already in a game!',
           showConfirmButton: false,
-          timer: 1500
+          timer: 1500,
+          title: 'Already in a game!',
+          toast: 'true',
+          type: 'error'
         })
       }
     }
@@ -681,11 +708,13 @@ export default () => {
         socket.emit('join', encodeURIComponent(c))
       } else {
         Swal.fire({
+          backdrop: 'false',
           position: 'top-end',
-          type: 'error',
-          title: 'Already in a game!',
           showConfirmButton: false,
-          timer: 1500
+          timer: 1500,
+          title: 'Already in a game!',
+          toast: 'true',
+          type: 'error'
         })
       }
     }
