@@ -115,7 +115,6 @@ export default () => {
         })
         .catch(({ message: e }) => {
           Swal.fire({
-            backdrop: 'false',
             position: 'top-end',
             showConfirmButton: false,
             timer: 1500,
@@ -176,7 +175,6 @@ export default () => {
   function f(c) {
     Swal.fire(
       {
-        backdrop: 'false',
         position: 'top-end',
         showConfirmButton: false,
         timer: 1500,
@@ -196,7 +194,6 @@ export default () => {
       .then(c => c.json())
       .then(() => {
         Swal.fire({
-          backdrop: 'false',
           position: 'top-end',
           showConfirmButton: false,
           timer: 1500,
@@ -220,7 +217,6 @@ export default () => {
       })
       .catch(({ message: e }) => {
         Swal.fire({
-          backdrop: 'false',
           position: 'top-end',
           showConfirmButton: false,
           timer: 1500,
@@ -448,7 +444,6 @@ export default () => {
 
     socket.on('err', err => {
       Swal.fire({
-        backdrop: 'false',
         position: 'top-end',
         showConfirmButton: false,
         timer: 1500,
@@ -483,7 +478,6 @@ export default () => {
         }
         if ('disconnected' === user.game.status) {
           Swal.fire({
-            backdrop: 'false',
             position: 'top-end',
             showConfirmButton: false,
             timer: 1500,
@@ -543,7 +537,6 @@ export default () => {
       tabTo('home')
       self.location.href = '#'
       Swal.fire({
-        backdrop: 'false',
         position: 'top-end',
         showConfirmButton: false,
         timer: 1500,
@@ -555,7 +548,6 @@ export default () => {
 
     socket.on('disconnection', () => {
       Swal.fire({
-        backdrop: 'false',
         position: 'top-end',
         showConfirmButton: false,
         timer: 1500,
@@ -603,7 +595,6 @@ export default () => {
         presenceUpdate('Mode: 1v1 (Waiting...)', Number(new Date()))
       } else {
         Swal.fire({
-          backdrop: 'false',
           position: 'top-end',
           showConfirmButton: false,
           timer: 1500,
@@ -684,7 +675,6 @@ export default () => {
         presenceUpdate('Mode: 1v1 (Hosting...)', Number(new Date()))
       } else {
         Swal.fire({
-          backdrop: 'false',
           position: 'top-end',
           showConfirmButton: false,
           timer: 1500,
@@ -708,7 +698,6 @@ export default () => {
         socket.emit('join', encodeURIComponent(c))
       } else {
         Swal.fire({
-          backdrop: 'false',
           position: 'top-end',
           showConfirmButton: false,
           timer: 1500,
