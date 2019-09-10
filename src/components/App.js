@@ -56,9 +56,13 @@ export default () => {
         if (sha !== _zeiwBuild.commitHash) {
           let patch = sha.substring(0, 7)
           Toast.fire({
-            title: `Patch ${patch} Available!`,
+            confirmButtonText: 'Update!',
+            showConfirmButton: true,
             timer: null,
+            title: `Patch ${patch} Available!`,
             type: 'info'
+          }).then(() => {
+            location.reload()
           })
         } else {
           Toast.fire({
