@@ -1,14 +1,11 @@
 import 'unfetch/polyfill'
 import { $ } from '@zeiw/trump'
 import { Howl, Howler } from 'howler'
-import ClipboardJS from 'clipboard'
 import io from 'socket.io-client'
 import MicroModal from 'micromodal'
 import Swal from 'sweetalert2/dist/sweetalert2.all.js'
 
 export default () => {
-  new ClipboardJS('.copy')
-
   const host = location.hostname
   const server = 'wss://live.zeiw.me'
   const token = localStorage.getItem('auth')
@@ -189,7 +186,10 @@ export default () => {
           type: 'success',
           title: 'Welcome to the club!',
           showConfirmButton: false,
-          timer: 1500
+          timer: 1500,
+          onBeforeOpen: () => {
+            Swal.showLoading()
+          }
         })
         $('#pr').classList.add('hidden')
         $('#wd').classList.add('hidden')
@@ -450,7 +450,12 @@ export default () => {
         const url = `https://${host}/#${c}`
         $('#pcpb').style.display = 'block'
         $('#wait').children[0].textContent = `Party URL: ${host}/#${c}`
-        $('#pcpb').setAttribute('data-clipboard-text', url)
+        $('#pcpb').addEventListener('click', () => {
+          navigator.clipboard
+            .writeText(url)
+            .then(() => ($('#pcpb').textContent = 'Copied!'))
+            .catch(() => ($('#pcpb').textContent = 'Error!'))
+        })
       }
 
       if (!nd) {
