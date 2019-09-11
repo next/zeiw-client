@@ -16,7 +16,6 @@ import Account from './components/Account'
 import Auth from './components/Auth'
 import Dev from './components/Dev'
 import Faction from './components/Faction'
-import Join from './components/Join'
 import NativeFrame from './components/NativeFrame'
 import Settings from './components/Settings'
 
@@ -42,7 +41,6 @@ export default () => (
         <Auth />
         <Dev />
         <Faction />
-        <Join />
         <Settings />
       </div>
     </div>
