@@ -360,6 +360,7 @@ export default () => {
         .catch(({ kind }) => {
           if ('net' === kind) {
             Swal.fire({
+              allowOutsideClick: false,
               confirmButtonText: 'Restart ZEIW',
               text:
                 "We couldn't connect to Discord. Make sure your Discord app is running.",
@@ -370,6 +371,7 @@ export default () => {
             })
           } else {
             Swal.fire({
+              allowOutsideClick: false,
               confirmButtonText: 'Restart ZEIW',
               text: 'You can login by authorizing ZEIW on Discord.',
               title: 'Authorization failed',
@@ -395,13 +397,16 @@ export default () => {
 
   function signOut() {
     Swal.fire({
+      confirmButtonColor: '#f04747',
       showCancelButton: true,
-      text: 'Are you absolutely sure?',
+      text: 'Are you really sure?',
       title: 'Log out',
       type: 'warning'
-    }).then(() => {
-      localStorage.removeItem('auth')
-      location.reload()
+    }).then(({ value }) => {
+      if (value) {
+        localStorage.removeItem('auth')
+        location.reload()
+      }
     })
   }
 
@@ -508,8 +513,18 @@ export default () => {
         $('#pcpb').addEventListener('click', () => {
           navigator.clipboard
             .writeText(url)
-            .then(() => ($('#pcpb').textContent = 'Copied!'))
-            .catch(() => ($('#pcpb').textContent = 'Error!'))
+            .then(() => {
+              Toast.fire({
+                title: 'Copied to clipboard!',
+                type: 'success'
+              })
+            })
+            .catch(() => {
+              Toast.fire({
+                title: 'Something went wrong!',
+                type: 'error'
+              })
+            })
         })
       }
 
