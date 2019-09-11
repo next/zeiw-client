@@ -359,9 +359,24 @@ export default () => {
         })
         .catch(({ kind }) => {
           if ('net' === kind) {
-            MicroModal.show('modal-oauth-conn-error')
+            Swal.fire({
+              confirmButtonText: 'Restart ZEIW',
+              text:
+                "We couldn't connect to Discord. Make sure your Discord app is running.",
+              title: 'Authorization failed',
+              type: 'error'
+            }).then(() => {
+              location.reload()
+            })
           } else {
-            MicroModal.show('modal-oauth-unauth-error')
+            Swal.fire({
+              confirmButtonText: 'Restart ZEIW',
+              text: 'You can login by authorizing ZEIW on Discord.',
+              title: 'Authorization failed',
+              type: 'error'
+            }).then(() => {
+              location.reload()
+            })
           }
         })
     } else {
