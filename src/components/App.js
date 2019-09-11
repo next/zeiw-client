@@ -379,8 +379,15 @@ export default () => {
   }
 
   function signOut() {
-    localStorage.removeItem('auth')
-    location.reload()
+    Swal.fire({
+      showCancelButton: true,
+      text: 'Are you absolutely sure?',
+      title: 'Log out',
+      type: 'warning'
+    }).then(() => {
+      localStorage.removeItem('auth')
+      location.reload()
+    })
   }
 
   function keydown(e) {
@@ -762,7 +769,7 @@ export default () => {
   $('#discord').addEventListener('click', () =>
     open('https://discord.gg/h7NxqBe', '_blank')
   )
-  $('#logoutBtn').addEventListener('click', () => signOut())
+  $('#logout').addEventListener('click', () => signOut())
   $('#rh').addEventListener('click', () => goHome())
   $('#returnHome').addEventListener('click', () => goHome())
   $('#rematch').addEventListener('click', () => rematch())

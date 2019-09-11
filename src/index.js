@@ -19,7 +19,6 @@ import ConnErr from './components/ConnErr'
 import Dev from './components/Dev'
 import Faction from './components/Faction'
 import Join from './components/Join'
-import Logout from './components/Logout'
 import NativeFrame from './components/NativeFrame'
 import Rematch from './components/Rematch'
 import Settings from './components/Settings'
@@ -50,7 +49,6 @@ export default () => (
         <Dev />
         <Faction />
         <Join />
-        <Logout />
         <Rematch />
         <Settings />
         <UnauthErr />

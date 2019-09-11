@@ -35,10 +35,7 @@ const Account = () => (
           </div>
         </div>
         <div className="footer">
-          <button
-            className="btn btn-danger mr2"
-            data-micromodal-trigger="modal-logout"
-          >
+          <button className="btn btn-danger mr2" id="logout">
             Sign Out
           </button>
           <button className="btn" data-micromodal-trigger="modal-fac">
