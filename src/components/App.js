@@ -809,7 +809,6 @@ export default () => {
   )
   $('#logout').addEventListener('click', () => signOut())
   $('#rh').addEventListener('click', () => goHome())
-  $('#returnHome').addEventListener('click', () => goHome())
   $('#dab').addEventListener('click', () => au())
   $('#playBtn').addEventListener('click', () => user.findGame())
   $('#tabJoinBtn').addEventListener('click', () => jm())
