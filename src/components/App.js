@@ -23,7 +23,6 @@ export default () => {
   let cl = false
   let ctx
   let gc = false
-  let h
   let jgl = false
   let kd = false
   let native = false
@@ -101,12 +100,6 @@ export default () => {
 
     if ('true' === localStorage.getItem('silent')) {
       Howler.mute(true)
-    }
-
-    if ('' !== location.hash) {
-      h = location.hash.split('#')[1]
-      $('#joinID').value = h
-      jm()
     }
 
     if (null !== localStorage.getItem('auth')) {
@@ -747,7 +740,6 @@ export default () => {
         if (c.includes('#')) {
           c = c.split('#')[1]
         }
-        MicroModal.close('modal-mj')
         waitMsg('Joining')
         $('#joinID').value = ''
         socket.emit('join', encodeURIComponent(c))
@@ -814,8 +806,32 @@ export default () => {
   }
 
   function jm() {
-    MicroModal.show('modal-mj')
-    $('#joinID').focus()
+    Swal.fire({
+      title: 'Join a game',
+      input: 'text',
+      inputAttributes: {
+        autoComplete: 'off',
+        id: 'joinID',
+        placeholder: 'abcd123',
+        required: '',
+        spellCheck: 'false'
+      },
+      inputValue: location.hash.slice(1),
+      showCancelButton: true,
+      confirmButtonText: 'Connect'
+    })
+      .then(({ value }) => {
+        if (value) {
+          user.join($('#joinID').value)
+        }
+      })
+      .catch(error => {
+        Swal.showValidationMessage(error)
+      })
+  }
+
+  if ('' !== location.hash) {
+    jm()
   }
 
   $('#psb').addEventListener('click', () => {
@@ -830,7 +846,6 @@ export default () => {
   $('#playBtn').addEventListener('click', () => user.findGame())
   $('#tabJoinBtn').addEventListener('click', () => jm())
   $('#hostBtn').addEventListener('click', () => user.host())
-  $('#joinBtn').addEventListener('click', () => user.join($('#joinID').value))
   $('#prc').addEventListener('click', () => f(0))
   $('#wdc').addEventListener('click', () => f(1))
   $('#dbc').addEventListener('click', () => f(2))
@@ -841,7 +856,7 @@ export default () => {
   })
 
   onkeyup = ({ which }) => {
-    if ('home' === tab && !$('#modal-mj').classList.contains('is-open')) {
+    if ('home' === tab && !Swal.isVisible()) {
       if (49 === which) {
         user.findGame()
       } else if (50 === which) {
