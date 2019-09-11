@@ -96,7 +96,7 @@ export default () => {
       volume: 0.5,
       loop: true
     })
-    if ('true' === localStorage.getItem('audiomuted')) {
+    if ('true' === localStorage.getItem('silent')) {
       Howler.mute(true)
     }
     let h
@@ -301,23 +301,23 @@ export default () => {
 
   dmSwitch.addEventListener('change', devmodeu, false)
 
-  const audio = localStorage.getItem('audiomuted')
+  const audio = localStorage.getItem('silent')
   const audioSwitch = $('#audio')
 
   if (audio) {
-    document.documentElement.setAttribute('data-audio', audio)
+    document.documentElement.setAttribute('audio', audio)
     audioSwitch.checked = 'true' !== audio
   } else {
     audioSwitch.checked = true
   }
   function switchAudio({ target }) {
     if (true === target.checked) {
-      document.documentElement.setAttribute('data-audio', false)
-      localStorage.setItem('audiomuted', false)
+      document.documentElement.setAttribute('audio', false)
+      localStorage.setItem('silent', false)
       Howler.mute(false)
     } else {
-      document.documentElement.setAttribute('data-audio', true)
-      localStorage.setItem('audiomuted', true)
+      document.documentElement.setAttribute('audio', true)
+      localStorage.setItem('silent', true)
       Howler.mute(true)
     }
   }
@@ -566,7 +566,7 @@ export default () => {
     socket.on('hit-p1', () => {
       if (!nd && user.game) {
         const p1 = new Howl({
-          src: ['/sfx/hit-hit.mp3']
+          src: ['/sfx/hit-p1.mp3']
         })
         p1.play()
       }

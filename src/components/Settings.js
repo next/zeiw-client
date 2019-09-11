@@ -8,7 +8,7 @@ const Settings = () => (
         </div>
         <div className="content">
           <div className="audio switch-wrapper">
-            <p>Play Audio</p>
+            <p>Silent Mode</p>
             <label className="switch" htmlFor="audio">
               <input id="audio" type="checkbox" />
               <span className="slider round" />
