@@ -111,7 +111,12 @@ export default () => {
         mode: 'cors',
         headers: { authentication: token }
       })
-        .then(e => e.json())
+        .then(response => {
+          if (!response.ok) {
+            throw new Error(`Error ${response.status}`)
+          }
+          return response.json()
+        })
         .then(({ avatar, uname, flags }) => {
           Toast.fire({
             type: 'success',
@@ -145,13 +150,13 @@ export default () => {
             }
           })
         })
-        .catch(({ message: e }) => {
+        .catch(error => {
           Toast.fire({
             title: 'Uh-oh! Please log in again!',
             type: 'error'
           })
           localStorage.removeItem('auth')
-          console.error(e)
+          console.error(error)
         })
     }
     socket = io.connect(server)
@@ -215,9 +220,13 @@ export default () => {
       body: JSON.stringify({ faction: c })
     }
     fetch('/api/v1/user', headers)
-      .then(c => c.json())
+      .then(response => {
+        if (!response.ok) {
+          throw new Error(`Error ${response.status}`)
+        }
+        return response.json()
+      })
       .then(() => {
-        MicroModal.close('modal-fac')
         Toast.fire({
           title: 'Welcome to the club!',
           type: 'success'
@@ -236,12 +245,12 @@ export default () => {
             $('#db').classList.remove('hidden')
         }
       })
-      .catch(({ message: e }) => {
+      .catch(error => {
         Toast.fire({
           title: 'Failed to set faction!',
           type: 'error'
         }),
-          console.error(e)
+          console.error(error)
       })
   }
 
@@ -390,11 +399,10 @@ export default () => {
   function keyup(e) {
     kd = false
     if ('Escape' === e.key && 'home' !== tab && !jgl) {
-      user.leaveGame()
       goHome()
     }
     if (cl) {
-      hmnh()
+      goHome()
       cl = false
     }
     delete keys[e.keyCode]
@@ -462,7 +470,6 @@ export default () => {
     socket.on('err', err => {
       Toast.fire({
         title: err,
-
         type: 'error'
       })
     })
