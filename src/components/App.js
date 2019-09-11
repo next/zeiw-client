@@ -321,13 +321,15 @@ export default () => {
     betaSwitch.checked = false
   }
   function switchBeta({ target }) {
+    const timeNow = new Date()
+    timeNow.setFullYear(timeNow.getFullYear() + 10)
     if (true === target.checked) {
       localStorage.setItem('beta', true)
-      document.cookie = `nf_ab=${release};`
+      document.cookie = `nf_ab=canary; Expires=${timeNow.toUTCString()}`
       location.reload()
     } else {
       localStorage.setItem('beta', false)
-      document.cookie = `nf_ab=${release};`
+      document.cookie = `nf_ab=master; Expires=${timeNow.toUTCString()}`
       location.reload()
     }
   }
