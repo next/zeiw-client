@@ -327,7 +327,7 @@ export default () => {
       location.reload()
     } else {
       localStorage.setItem('beta', false)
-      document.cookie = 'nf_ab=;'
+      document.cookie = `nf_ab=${release};`
       location.reload()
     }
   }
