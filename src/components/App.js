@@ -779,13 +779,21 @@ export default () => {
   }
 
   function message(msg) {
-    $('#modal-rm-title').textContent = msg
-    MicroModal.show('modal-rm')
-  }
-
-  function rematch() {
-    goHome()
-    user.findGame(user.previousGameOpponentId)
+    Swal.fire({
+      allowOutsideClick: false,
+      cancelButtonText: 'Return Home',
+      showCancelButton: true,
+      text: 'Do you want a rematch?',
+      title: msg,
+      type: 'question'
+    }).then(({ value, dismiss }) => {
+      if (value) {
+        goHome()
+        user.findGame(user.previousGameOpponentId)
+      } else if (dismiss === Swal.DismissReason.cancel) {
+        goHome()
+      }
+    })
   }
 
   function jm() {
@@ -802,7 +810,6 @@ export default () => {
   $('#logout').addEventListener('click', () => signOut())
   $('#rh').addEventListener('click', () => goHome())
   $('#returnHome').addEventListener('click', () => goHome())
-  $('#rematch').addEventListener('click', () => rematch())
   $('#dab').addEventListener('click', () => au())
   $('#playBtn').addEventListener('click', () => user.findGame())
   $('#tabJoinBtn').addEventListener('click', () => jm())

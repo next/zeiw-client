@@ -18,7 +18,6 @@ import Dev from './components/Dev'
 import Faction from './components/Faction'
 import Join from './components/Join'
 import NativeFrame from './components/NativeFrame'
-import Rematch from './components/Rematch'
 import Settings from './components/Settings'
 
 const isNative = window._zeiwNative !== undefined
@@ -44,7 +43,6 @@ export default () => (
         <Dev />
         <Faction />
         <Join />
-        <Rematch />
         <Settings />
       </div>
     </div>
