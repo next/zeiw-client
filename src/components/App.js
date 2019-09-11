@@ -849,11 +849,6 @@ export default () => {
   $('#prc').addEventListener('click', () => f(0))
   $('#wdc').addEventListener('click', () => f(1))
   $('#dbc').addEventListener('click', () => f(2))
-  $('#joinID').addEventListener('keyup', () => {
-    if (13 === event.keyCode) {
-      user.join($('#joinID').value)
-    }
-  })
 
   onkeyup = ({ which }) => {
     if ('home' === tab && !Swal.isVisible()) {
