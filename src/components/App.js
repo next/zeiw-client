@@ -7,6 +7,7 @@ import Swal from 'sweetalert2/dist/sweetalert2.all.js'
 
 export default () => {
   const host = location.hostname
+  const release = 'true' === localStorage.getItem('beta') ? 'canary' : 'master'
   const server = 'wss://live.zeiw.me'
   const token = localStorage.getItem('auth')
 
@@ -22,6 +23,7 @@ export default () => {
   let cl = false
   let ctx
   let gc = false
+  let h
   let jgl = false
   let kd = false
   let native = false
@@ -45,7 +47,7 @@ export default () => {
       },
       Swal.showLoading()
     )
-    fetch('https://api.github.com/repos/next/zeiw-client/commits/master')
+    fetch(`https://api.github.com/repos/next/zeiw-client/commits/${release}`)
       .then(response => {
         if (!response.ok) {
           throw new Error(`Error ${response.status}`)
@@ -96,10 +98,11 @@ export default () => {
       volume: 0.5,
       loop: true
     })
+
     if ('true' === localStorage.getItem('silent')) {
       Howler.mute(true)
     }
-    let h
+
     if ('' !== location.hash) {
       h = location.hash.split('#')[1]
       $('#joinID').value = h
@@ -279,7 +282,6 @@ export default () => {
 
   const devmode = localStorage.getItem('devmode')
   const dmSwitch = $('#devmode')
-
   if (devmode) {
     dmSwitch.checked = 'true' === devmode
     if ('true' === devmode) {
@@ -288,7 +290,6 @@ export default () => {
   } else {
     dmSwitch.checked = false
   }
-
   function devmodeu({ target }) {
     if (target.checked) {
       localStorage.setItem('devmode', true)
@@ -298,12 +299,10 @@ export default () => {
       $('#ds').classList.add('hidden')
     }
   }
-
   dmSwitch.addEventListener('change', devmodeu, false)
 
   const audio = localStorage.getItem('silent')
   const audioSwitch = $('#audio')
-
   if (audio) {
     document.documentElement.setAttribute('audio', audio)
     audioSwitch.checked = 'true' !== audio
@@ -312,16 +311,34 @@ export default () => {
   }
   function switchAudio({ target }) {
     if (true === target.checked) {
-      document.documentElement.setAttribute('audio', false)
       localStorage.setItem('silent', false)
       Howler.mute(false)
     } else {
-      document.documentElement.setAttribute('audio', true)
       localStorage.setItem('silent', true)
       Howler.mute(true)
     }
   }
   audioSwitch.addEventListener('change', switchAudio, false)
+
+  const beta = localStorage.getItem('beta')
+  const betaSwitch = $('#beta')
+  if (beta) {
+    betaSwitch.checked = 'true' === beta
+  } else {
+    betaSwitch.checked = false
+  }
+  function switchBeta({ target }) {
+    if (true === target.checked) {
+      localStorage.setItem('beta', true)
+      document.cookie = `nf_ab=${release};`
+      location.reload()
+    } else {
+      localStorage.setItem('beta', false)
+      document.cookie = 'nf_ab=;'
+      location.reload()
+    }
+  }
+  betaSwitch.addEventListener('change', switchBeta, false)
 
   function tabTo(t) {
     const ct = tab
