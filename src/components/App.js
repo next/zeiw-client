@@ -88,8 +88,10 @@ export default () => {
 
     modalInit()
 
-    $('#build').innerHTML = `${_zeiwBuild.commitHash.substring(0, 7)}`
-    $('#build').classList.remove('loading')
+    $('#build').innerHTML = `${_zeiwBuild.commitHash.substring(
+      0,
+      7
+    )} ${release}`
 
     new Howl({
       src: ['/sfx/music.mp3'],
