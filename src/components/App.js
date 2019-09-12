@@ -6,6 +6,7 @@ import MicroModal from 'micromodal'
 import Swal from 'sweetalert2/dist/sweetalert2.all.js'
 
 export default () => {
+  const commitID = _zeiwBuild.commitHash.substring(0, 7)
   const host = location.hostname
   const release = 'true' === localStorage.getItem('beta') ? 'canary' : 'master'
   const server = 'wss://live.zeiw.me'
@@ -88,10 +89,7 @@ export default () => {
 
     modalInit()
 
-    $('#build').innerHTML = `${_zeiwBuild.commitHash.substring(
-      0,
-      7
-    )} ${release}`
+    $('#build').innerHTML = `${release}@${commitID}`
 
     new Howl({
       src: ['/sfx/music.mp3'],
