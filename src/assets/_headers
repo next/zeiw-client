@@ -1,5 +1,5 @@
 /*
-  Content-Security-Policy: connect-src 'self' res.cloudinary.com api.github.com api.zeiw.me live.zeiw.me wss://live.zeiw.me; default-src 'self'; frame-src 'self' api.zeiw.me; img-src 'self' res.cloudinary.com, cdn.discordapp.com, discordapp.com; media-src 'self' res.cloudinary.com; style-src 'self' 'unsafe-inline'
+  Content-Security-Policy: connect-src 'self' res.cloudinary.com api.github.com api.zeiw.me live.zeiw.me wss://live.zeiw.me; default-src 'self'; frame-src 'self' api.zeiw.me; img-src 'self' res.cloudinary.com *.discordapp.com; media-src 'self' res.cloudinary.com; style-src 'self' 'unsafe-inline'
   Feature-Policy: accelerometer 'none'; camera 'none'; geolocation 'none'; gyroscope 'none'; magnetometer 'none'; microphone 'none'; payment 'none'; usb 'none'
   Referrer-Policy: strict-origin-when-cross-origin
   Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
