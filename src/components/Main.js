@@ -26,7 +26,7 @@ const Main = () => (
     <Tippy content="Join Party" placement="bottom">
       <img
         className="w4 bg br3 pa4 ma2 shadow-4"
-        id="tabJoinBtn"
+        id="joinBtn"
         src="https://res.cloudinary.com/zeiw/image/upload/q_auto/v1564825425/icon/join.svg"
       />
     </Tippy>

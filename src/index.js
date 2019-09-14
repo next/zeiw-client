@@ -2,8 +2,6 @@ import './index.css'
 import { Circle } from 'react-preloaders'
 import About from './components/About'
 import Account from './components/Account'
-import Auth from './components/Auth'
-import Dev from './components/Dev'
 import Faction from './components/Faction'
 import Find from './components/Find'
 import Game from './components/Game'
@@ -21,10 +19,10 @@ export default () => (
   <Layout>
     <Circle color={'#f90'} background={'#000'} />
     {isNative && <NativeFrame />}
-    <Tippy content="Latency" placement="left">
+    <Tippy content="Latency" placement="bottom">
       <div className="absolute top-2 right-2 loading dots" id="ping" />
     </Tippy>
-    <Tippy content="Build" placement="left">
+    <Tippy content="Build" placement="top">
       <div className="absolute bottom-2 right-2" id="build" />
     </Tippy>
     <div className="center">
@@ -38,8 +36,6 @@ export default () => (
         </div>
         <About />
         <Account />
-        <Auth />
-        <Dev />
         <Faction />
         <Settings />
       </div>

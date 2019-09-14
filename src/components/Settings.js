@@ -21,13 +21,6 @@ const Settings = () => (
               <span className="slider round" />
             </label>
           </div>
-          <div id="dmodeswitch" className="devmode switch-wrapper hidden">
-            <p>Developer Mode</p>
-            <label className="switch" htmlFor="devmode">
-              <input id="devmode" type="checkbox" />
-              <span className="slider round" />
-            </label>
-          </div>
         </div>
         <div className="footer">
           <button className="btn" data-micromodal-close>

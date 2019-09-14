@@ -118,8 +118,7 @@ export default () => {
             type: 'success',
             title: 'Signed in successfully'
           })
-          $('#psb').addEventListener('click', () => {
-            MicroModal.close('modal-da')
+          $('#user').addEventListener('click', () => {
             MicroModal.show('modal-ps')
           })
           $('#pfp').src = avatar
@@ -223,6 +222,7 @@ export default () => {
         return response.json()
       })
       .then(() => {
+        MicroModal.close('modal-fac')
         Toast.fire({
           title: 'Welcome to the club!',
           type: 'success'
@@ -272,27 +272,6 @@ export default () => {
       _zeiwNative.setDiscordPresence(a)
     }
   }
-
-  const devmode = localStorage.getItem('devmode')
-  const dmSwitch = $('#devmode')
-  if (devmode) {
-    dmSwitch.checked = 'true' === devmode
-    if ('true' === devmode) {
-      $('#ds').classList.remove('hidden')
-    }
-  } else {
-    dmSwitch.checked = false
-  }
-  function devmodeu({ target }) {
-    if (target.checked) {
-      localStorage.setItem('devmode', true)
-      $('#ds').classList.remove('hidden')
-    } else {
-      localStorage.setItem('devmode', false)
-      $('#ds').classList.add('hidden')
-    }
-  }
-  dmSwitch.addEventListener('change', devmodeu, false)
 
   const audio = localStorage.getItem('silent')
   const audioSwitch = $('#audio')
@@ -836,18 +815,33 @@ export default () => {
     jm()
   }
 
-  $('#psb').addEventListener('click', () => {
-    MicroModal.show('modal-da')
+  $('#user').addEventListener('click', () => {
+    if (null === localStorage.getItem('auth')) {
+      Swal.fire({
+        confirmButtonText: 'Login',
+        imageHeight: 200,
+        imageUrl:
+          'https://discordapp.com/assets/f8389ca1a741a115313bede9ac02e2c0.svg',
+        showCancelButton: true,
+        text: 'Sign in with Discord and unlock new features!',
+        title: 'Authenticate'
+      }).then(({ value }) => {
+        if (value) {
+          au()
+        }
+      })
+    }
   })
+
   $('#discord').addEventListener('click', () =>
     open('https://discord.gg/h7NxqBe', '_blank')
   )
-  $('#logout').addEventListener('click', () => signOut())
-  $('#rh').addEventListener('click', () => goHome())
-  $('#dab').addEventListener('click', () => au())
-  $('#playBtn').addEventListener('click', () => user.findGame())
-  $('#tabJoinBtn').addEventListener('click', () => jm())
+  $('#goHome').addEventListener('click', () => goHome())
   $('#hostBtn').addEventListener('click', () => user.host())
+  $('#joinBtn').addEventListener('click', () => jm())
+  $('#logout').addEventListener('click', () => signOut())
+  $('#playBtn').addEventListener('click', () => user.findGame())
+
   $('#prc').addEventListener('click', () => f(0))
   $('#wdc').addEventListener('click', () => f(1))
   $('#dbc').addEventListener('click', () => f(2))
