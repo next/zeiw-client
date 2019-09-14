@@ -222,7 +222,6 @@ export default () => {
         return response.json()
       })
       .then(() => {
-        MicroModal.close('modal-fac')
         Toast.fire({
           title: 'Welcome to the club!',
           type: 'success'
