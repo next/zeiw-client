@@ -6,7 +6,7 @@ import MicroModal from 'micromodal'
 import Swal from 'sweetalert2/dist/sweetalert2.all.js'
 
 export default () => {
-  const commitID = _zeiwBuild.commitHash.substring(0, 7)
+  const commit = _zeiwBuild.commitHash.substring(0, 7)
   const host = location.hostname
   const release = 'true' === localStorage.getItem('beta') ? 'canary' : 'master'
   const server = 'wss://live.zeiw.me'
@@ -34,8 +34,8 @@ export default () => {
 
   function modalInit() {
     MicroModal.init({
-      disableScroll: true,
-      awaitCloseAnimation: true
+      awaitCloseAnimation: true,
+      disableScroll: true
     })
   }
 
@@ -89,7 +89,7 @@ export default () => {
 
     modalInit()
 
-    $('#build').innerHTML = `${release}@${commitID}`
+    $('#build').innerHTML = `${release}@${commit}`
 
     new Howl({
       src: ['https://cdn.zeiw.me/music.mp3'],
@@ -119,7 +119,10 @@ export default () => {
             title: `Welcome back, ${uname}!`
           })
           $('#user').addEventListener('click', () => {
-            MicroModal.show('modal-ps')
+            MicroModal.show('modal-ps', {
+              awaitCloseAnimation: true,
+              disableScroll: true
+            })
           })
           $('#pfp').src = avatar
           $('#uname').textContent = uname
