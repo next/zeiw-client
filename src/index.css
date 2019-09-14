@@ -20,7 +20,7 @@
   padding: 0;
 }
 body {
-  background: var(--dark-blue);
+  background: var(--black);
   color: var(--white);
   font-family: 'Inter', sans-serif;
   overflow: hidden;
