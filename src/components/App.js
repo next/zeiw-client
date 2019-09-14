@@ -92,7 +92,7 @@ export default () => {
     $('#build').innerHTML = `${release}@${commitID}`
 
     new Howl({
-      src: ['/sfx/music.mp3'],
+      src: ['https://cdn.zeiw.me/music.mp3'],
       autoplay: true,
       volume: 0.5,
       loop: true
@@ -116,7 +116,7 @@ export default () => {
         .then(({ avatar, uname, flags }) => {
           Toast.fire({
             type: 'success',
-            title: 'Signed in successfully'
+            title: `Welcome back, ${uname}!`
           })
           $('#user').addEventListener('click', () => {
             MicroModal.show('modal-ps')
@@ -167,7 +167,7 @@ export default () => {
       }
       socket.emit('latency', Date.now(), startTime => {
         const ping = Date.now() - startTime
-        $('#ping').innerHTML = `${ping} ms`
+        $('#ping').innerHTML = ping
         $('#ping').classList.remove('loading')
       })
     }, 3500)
@@ -556,7 +556,7 @@ export default () => {
     socket.on('hit-p1', () => {
       if (!nd && user.game) {
         const p1 = new Howl({
-          src: ['/sfx/hit-p1.mp3']
+          src: ['https://cdn.zeiw.me/hit-p1.mp3']
         })
         p1.play()
       }
@@ -565,7 +565,7 @@ export default () => {
     socket.on('hit-p2', () => {
       if (!nd && user.game) {
         const p2 = new Howl({
-          src: ['/sfx/hit-p2.mp3']
+          src: ['https://cdn.zeiw.me/hit-p2.mp3']
         })
         p2.play()
       }
@@ -677,7 +677,7 @@ export default () => {
             presenceUpdate('Mode: 1v1 (VICTORY!)')
             if (!gc) {
               const win = new Howl({
-                src: ['/sfx/win.mp3']
+                src: ['https://cdn.zeiw.me/win.mp3']
               })
               win.play()
             }
@@ -686,7 +686,7 @@ export default () => {
             presenceUpdate('Mode: 1v1 (Loss)')
             if (!gc) {
               const lose = new Howl({
-                src: ['/sfx/loss.mp3']
+                src: ['https://cdn.zeiw.me/loss.mp3']
               })
               lose.play()
             }
@@ -738,7 +738,7 @@ export default () => {
     } else if (p.y + p.h / 2 > canvas.height) {
       p.y = canvas.height - p.h / 2
     }
-    ctx.fillStyle = p.id === user.id ? '#ff9900' : '#cccccc'
+    ctx.fillStyle = p.id === user.id ? '#ff9900' : '#eeeeee'
     ctx.fillRect(p.x - p.w / 2, p.y - p.h / 2, p.w, p.h)
   }
 
@@ -813,6 +813,13 @@ export default () => {
   if ('' !== location.hash) {
     jm()
   }
+
+  $('#latency').addEventListener('click', () => {
+    Swal.fire(
+      'Server latency',
+      "You're connected to a server located in Gravelines, France. We currently don't offer any other locations."
+    )
+  })
 
   $('#user').addEventListener('click', () => {
     if (null === localStorage.getItem('auth')) {

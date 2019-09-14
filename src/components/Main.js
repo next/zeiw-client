@@ -2,10 +2,7 @@ import Tippy from './Tooltip'
 
 const Main = () => (
   <div className="dtc tc v-mid" id="home">
-    <img
-      className="w-30"
-      src="https://res.cloudinary.com/zeiw/image/upload/q_auto/v1564824906/img/logo.png"
-    />
+    <img className="w-30" src="https://cdn.zeiw.me/logo.png" />
     <h1 className="f4 ttu tracked mt0 mt4">
       <span className="loading dots" id="online" />
     </h1>
@@ -13,21 +10,21 @@ const Main = () => (
       <img
         className="w4 bg br3 pa4 ma2 shadow-4"
         id="playBtn"
-        src="https://res.cloudinary.com/zeiw/image/upload/q_auto/v1564825429/icon/find.svg"
+        src="https://cdn.zeiw.me/find.svg"
       />
     </Tippy>
     <Tippy content="Host Party" placement="bottom">
       <img
         className="w4 bg br3 pa4 ma2 shadow-4"
         id="hostBtn"
-        src="https://res.cloudinary.com/zeiw/image/upload/q_auto/v1564825427/icon/host.svg"
+        src="https://cdn.zeiw.me/host.svg"
       />
     </Tippy>
     <Tippy content="Join Party" placement="bottom">
       <img
         className="w4 bg br3 pa4 ma2 shadow-4"
         id="joinBtn"
-        src="https://res.cloudinary.com/zeiw/image/upload/q_auto/v1564825425/icon/join.svg"
+        src="https://cdn.zeiw.me/join.svg"
       />
     </Tippy>
   </div>

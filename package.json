@@ -2,8 +2,8 @@
   "name": "zeiw-client",
   "license": "MIT",
   "scripts": {
-    "build": "sh -c 'preact build --sw false --template $PWD/src/template.html && rm -rf build/assets build/polyfills* build/*.json && cp -r src/assets/* build'",
-    "dev": "sh -c 'preact watch --template $PWD/src/template.html'",
+    "build": "sh -c 'preact build --sw false --template $PWD/src/template.html && rm -rf build/assets build/polyfills* build/*.json && cp -r src/cb.html build'",
+    "dev": "sh -c 'preact watch --template $PWD/src/index.html'",
     "serve": "preact build && preact serve",
     "start": "if-env NODE_ENV=production && npm run -s serve || npm run -s dev"
   },

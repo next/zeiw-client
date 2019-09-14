@@ -75,7 +75,7 @@ img {
   border-right-color: black;
 }
 canvas {
-  border-color: var(--gray);
+  border-color: var(--white);
   position: relative;
   width: 45%;
 }
@@ -328,25 +328,25 @@ input:checked + .slider:before {
   width: 32px;
 }
 #dev {
-  background-image: url('https://res.cloudinary.com/zeiw/image/upload/c_scale,q_auto,h_32/v1567190586/icon/dev.svg');
+  background-image: url('https://cdn.zeiw.me/dev.svg');
 }
 #mod {
-  background-image: url('https://res.cloudinary.com/zeiw/image/upload/c_scale,q_auto,h_32/v1564826121/icon/moderator.svg');
+  background-image: url('https://cdn.zeiw.me/mod.svg');
 }
 #tp {
-  background-image: url('https://res.cloudinary.com/zeiw/image/upload/c_scale,q_auto,h_32/v1564826121/icon/testpilot.svg');
+  background-image: url('https://cdn.zeiw.me/tp.svg');
 }
 #pr,
 #prc {
-  background-image: url('https://res.cloudinary.com/zeiw/image/upload/c_scale,q_auto,h_32/v1564826121/icon/phoenix-riders.svg');
+  background-image: url('https://cdn.zeiw.me/pr.svg');
 }
 #wd,
 #wdc {
-  background-image: url('https://res.cloudinary.com/zeiw/image/upload/c_scale,q_auto,h_32/v1564826121/icon/winter-dragons.svg');
+  background-image: url('https://cdn.zeiw.me/wd.svg');
 }
 #db,
 #dbc {
-  background-image: url('https://res.cloudinary.com/zeiw/image/upload/c_scale,q_auto,h_32/v1564826121/icon/demon-brigade.svg');
+  background-image: url('https://cdn.zeiw.me/db.svg');
 }
 #prc,
 #wdc,

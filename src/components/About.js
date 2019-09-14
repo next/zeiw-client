@@ -23,7 +23,7 @@ const About = () => (
               target="_blank"
               rel="noopener noreferrer"
             >
-              <img src="https://res.cloudinary.com/zeiw/image/upload/c_scale,h_32,q_auto/v1567231866/icon/discord_k7yw8p.svg" />
+              <img src="https://cdn.zeiw.me/discord_k7yw8p.svg" />
             </a>
             <a
               className="dib h2 w2 mr3 pa2"
@@ -31,7 +31,7 @@ const About = () => (
               target="_blank"
               rel="noopener noreferrer"
             >
-              <img src="https://res.cloudinary.com/zeiw/image/upload/c_scale,h_32,q_auto/v1567231837/icon/github_wj1nnw.svg" />
+              <img src="https://cdn.zeiw.me/github_wj1nnw.svg" />
             </a>
             <a
               className="dib h2 w2 mr3 pa2"
@@ -39,7 +39,7 @@ const About = () => (
               target="_blank"
               rel="noopener noreferrer"
             >
-              <img src="https://res.cloudinary.com/zeiw/image/upload/c_scale,h_32,q_auto/v1567231965/icon/medium_o9mzq9.svg" />
+              <img src="https://cdn.zeiw.me/medium_o9mzq9.svg" />
             </a>
             <a
               className="dib h2 w2 pa2"
@@ -47,7 +47,7 @@ const About = () => (
               target="_blank"
               rel="noopener noreferrer"
             >
-              <img src="https://res.cloudinary.com/zeiw/image/upload/c_scale,h_32,q_auto/v1567231973/icon/twitter_kre0nx.svg" />
+              <img src="https://cdn.zeiw.me/twitter_kre0nx.svg" />
             </a>
           </div>
           <div className="mid-gray">

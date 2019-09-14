@@ -20,7 +20,18 @@ export default () => (
     <Circle color={'#f90'} background={'#000'} />
     {isNative && <NativeFrame />}
     <Tippy content="Latency" placement="bottom">
-      <div className="absolute top-2 right-2 loading dots" id="ping" />
+      <div
+        className="absolute top-2 right-2"
+        id="latency"
+        style={{
+          alignItems: 'center',
+          display: 'flex',
+          whiteSpace: 'pre-wrap'
+        }}
+      >
+        <span id="ping" className="loading dots" /> ms{' '}
+        <img src="https://cdn.zeiw.me/france.png" height="16" />
+      </div>
     </Tippy>
     <Tippy content="Build" placement="top">
       <div className="absolute bottom-2 right-2" id="build" />
