@@ -47,7 +47,9 @@ export default () => {
       },
       Swal.showLoading()
     )
-    fetch(`https://api.github.com/repos/next/zeiw-client/commits/${release}`)
+    fetch(`https://api.github.com/repos/next/zeiw-client/commits/${release}`, {
+      headers: { 'cache-control': 'no-cache' }
+    })
       .then(response => {
         if (!response.ok) {
           throw new Error(`Error ${response.status}`)
