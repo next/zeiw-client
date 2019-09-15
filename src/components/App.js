@@ -817,8 +817,8 @@ export default () => {
 
   $('#latency').addEventListener('click', () => {
     Swal.fire(
-      'Server latency',
-      "You're connected to a server located in Gravelines, France. We currently don't offer any other locations."
+      'Server Connection',
+      "ZEIW is connected to a server in Gravelines, France. We currently don't offer any other locations."
     )
   })
 

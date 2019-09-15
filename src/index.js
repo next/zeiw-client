@@ -19,7 +19,7 @@ export default () => (
   <Layout>
     <Circle color={'#f90'} background={'#000'} />
     {isNative && <NativeFrame />}
-    <Tippy content="Latency" placement="bottom">
+    <Tippy content="Connection Info" placement="bottom">
       <div
         className="absolute top-2 right-2"
         id="latency"
@@ -33,7 +33,7 @@ export default () => (
         <img src="https://cdn.zeiw.me/france.png" height="16" />
       </div>
     </Tippy>
-    <Tippy content="Build" placement="top">
+    <Tippy content="Current Build" placement="top">
       <div className="absolute bottom-2 right-2" id="build" />
     </Tippy>
     <div className="center">
