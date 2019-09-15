@@ -32,13 +32,6 @@ export default () => {
   let tab = 'home'
   let user
 
-  function modalInit() {
-    MicroModal.init({
-      awaitCloseAnimation: true,
-      disableScroll: true
-    })
-  }
-
   function updateChecker() {
     Toast.fire(
       {
@@ -89,7 +82,10 @@ export default () => {
       updateChecker()
     })
 
-    modalInit()
+    MicroModal.init({
+      awaitCloseAnimation: true,
+      disableScroll: true
+    })
 
     $('#build').innerHTML = `${release}@${commit}`
 
