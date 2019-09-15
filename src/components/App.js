@@ -53,10 +53,10 @@ export default () => {
         if (sha !== _zeiwBuild.commitHash) {
           let patch = sha.substring(0, 7)
           Toast.fire({
-            confirmButtonText: 'Update!',
+            confirmButtonText: 'Update',
             showConfirmButton: true,
             timer: null,
-            title: `Patch ${patch} Available!`,
+            title: `Patch ${patch} Available`,
             type: 'info'
           }).then(() => {
             location.reload()
@@ -101,7 +101,7 @@ export default () => {
     }
 
     if (null !== localStorage.getItem('auth')) {
-      fetch('/api/v1/user', {
+      fetch('https://play.zeiw.me/api/v1/user', {
         mode: 'cors',
         headers: { authentication: token }
       })
@@ -215,7 +215,7 @@ export default () => {
       headers: { authentication: token },
       body: JSON.stringify({ faction: c })
     }
-    fetch('/api/v1/user', headers)
+    fetch('https://play.zeiw.me/api/v1/user', headers)
       .then(response => {
         if (!response.ok) {
           throw new Error(`Error ${response.status}`)
