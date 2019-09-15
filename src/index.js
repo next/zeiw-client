@@ -1,5 +1,4 @@
 import './index.css'
-import { Circle } from 'react-preloaders'
 import About from './components/About'
 import Account from './components/Account'
 import Faction from './components/Faction'
@@ -17,7 +16,6 @@ const isNative = window._zeiwNative !== undefined
 
 export default () => (
   <Layout>
-    <Circle color={'#f90'} background={'#000'} />
     {isNative && <NativeFrame />}
     <Tippy content="Connection Info" placement="bottom">
       <div
