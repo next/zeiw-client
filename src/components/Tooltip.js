@@ -3,12 +3,11 @@ import Tippy from '@tippy.js/react'
 export default props => (
   <Tippy
     a11y={false}
-    placement="top"
-    arrow={true}
     animation="fade"
-    theme="bootstrap"
+    arrow={true}
     distance={7}
-    hideOnClick={false}
+    hideOnClick={true}
+    placement="top"
     {...props}
   />
 )

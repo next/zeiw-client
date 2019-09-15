@@ -42,7 +42,7 @@ img {
   -ms-user-select: none;
   -webkit-user-drag: none;
   -webkit-user-select: none;
-  user-drag: none;
+  /*user-drag: none;*/
   user-select: none;
 }
 .hidden,
@@ -59,21 +59,6 @@ img {
   display: block;
   margin: auto;
   margin-top: 1rem !important;
-}
-.tippy-tooltip.bootstrap-theme {
-  background: black;
-}
-.tippy-tooltip.bootstrap-theme[x-placement^='top'] .tippy-arrow {
-  border-top-color: black;
-}
-.tippy-tooltip.bootstrap-theme[x-placement^='bottom'] .tippy-arrow {
-  border-bottom-color: black;
-}
-.tippy-tooltip.bootstrap-theme[x-placement^='left'] .tippy-arrow {
-  border-left-color: black;
-}
-.tippy-tooltip.bootstrap-theme[x-placement^='right'] .tippy-arrow {
-  border-right-color: black;
 }
 canvas {
   border-color: var(--white);
