@@ -41,3 +41,16 @@
   to = "https://play.zeiw.me/:splat"
   status = 302
   force = true
+
+# Traffic to the master subdomain on Netlify is not allowed.
+[[redirects]]
+  from = "https://master--zeiw.netlify.com"
+  to = "https://play.zeiw.me"
+  status = 302
+  force = true
+
+[[redirects]]
+  from = "https://master--zeiw.netlify.com/*"
+  to = "https://play.zeiw.me/:splat"
+  status = 302
+  force = true
