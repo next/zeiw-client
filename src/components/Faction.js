@@ -12,13 +12,13 @@ const Faction = () => (
           <div className="dtc tc">
             <div className="flex flex-row justify-center">
               <Tippy content="Phoenix Riders">
-                <div className="badge ma2" id="prc" />
+                <div className="badge ma2" id="prc" data-micromodal-close />
               </Tippy>
               <Tippy content="Winter Dragons">
-                <div className="badge ma2" id="wdc" />
+                <div className="badge ma2" id="wdc" data-micromodal-close />
               </Tippy>
               <Tippy content="Demon Brigade">
-                <div className="badge ma2" id="dbc" />
+                <div className="badge ma2" id="dbc" data-micromodal-close />
               </Tippy>
             </div>
           </div>
