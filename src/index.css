@@ -73,7 +73,7 @@ canvas:before {
   background: rgba(0, 0, 0, 0.6);
   bottom: 0;
   display: flex;
-  font-size: 16em;
+  font-size: 8em;
   justify-content: center;
   left: 0;
   position: fixed;
