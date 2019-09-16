@@ -25,6 +25,9 @@ body {
   font-family: 'Inter', sans-serif;
   overflow: hidden;
 }
+.swal2-top-end {
+  margin-top: 1rem;
+}
 * {
   cursor: default !important;
 }
@@ -42,7 +45,6 @@ img {
   -ms-user-select: none;
   -webkit-user-drag: none;
   -webkit-user-select: none;
-  /*user-drag: none;*/
   user-select: none;
 }
 .hidden,
