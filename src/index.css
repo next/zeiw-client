@@ -9,6 +9,14 @@
   --white: #eeeeee;
   --yellow: #ff9900;
 }
+body {
+  background: var(--black);
+  color: var(--white);
+  font-family: proxima-nova, sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  overflow: hidden;
+}
 *,
 ::after,
 ::before {
@@ -18,12 +26,6 @@
   font-size: inherit;
   margin: 0;
   padding: 0;
-}
-body {
-  background: var(--black);
-  color: var(--white);
-  font-family: 'Inter', sans-serif;
-  overflow: hidden;
 }
 .swal2-top-end {
   margin-top: 1rem;

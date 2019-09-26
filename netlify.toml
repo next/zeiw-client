@@ -2,7 +2,7 @@
 [[headers]]
   for = "/*"
   [headers.values]
-    Content-Security-Policy = "connect-src 'self' api.github.com api.zeiw.me cdn.zeiw.me live.zeiw.me wss://live.zeiw.me; default-src 'self'; frame-src 'self' api.zeiw.me; img-src 'self' cdn.zeiw.me cdn.discordapp.com discordapp.com; manifest-src 'self' cdn.zeiw.me; media-src 'self' cdn.zeiw.me; style-src 'self' 'unsafe-inline'"
+    Content-Security-Policy = "connect-src 'self' api.github.com api.zeiw.me cdn.zeiw.me live.zeiw.me wss://live.zeiw.me; default-src 'self'; font-src 'self' use.typekit.net; frame-src 'self' api.zeiw.me; img-src 'self' cdn.zeiw.me cdn.discordapp.com discordapp.com; manifest-src 'self' cdn.zeiw.me; media-src 'self' cdn.zeiw.me; style-src 'self' 'unsafe-inline' use.typekit.net"
     Feature-Policy = "accelerometer 'none'; camera 'none'; geolocation 'none'; gyroscope 'none'; magnetometer 'none'; microphone 'none'; payment 'none'; usb 'none'"
     Referrer-Policy = "strict-origin-when-cross-origin"
     Strict-Transport-Security = "max-age=31536000; includeSubDomains; preload"

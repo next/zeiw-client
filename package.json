@@ -21,7 +21,6 @@
     "@tippy.js/react": "^2.2.3",
     "@zeiw/trump": "^1.0.7",
     "howler": "^2.1.2",
-    "inter-ui": "^3.10.0",
     "jss": "^9.8.7",
     "jss-camel-case": "^6.1.0",
     "jss-nested": "^6.0.1",

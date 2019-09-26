@@ -1,4 +1,3 @@
-import 'inter-ui'
 import 'tachyons'
 import 'text-spinners'
 import { Component } from 'preact'
