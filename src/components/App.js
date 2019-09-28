@@ -108,11 +108,6 @@ export default () => {
       handleThemeUpdate({
         '--primary': localStorage.getItem('theme')
       })
-    } else {
-      localStorage.setItem('theme', '#ff9900')
-      handleThemeUpdate({
-        '--primary': localStorage.getItem('theme')
-      })
     }
 
     setInterval(() => {
