@@ -37,7 +37,7 @@ const Customize = () => (
             marginRight: '2rem'
           }}
         >
-          <Tippy content="Yeet Yellow">
+          <Tippy content="Original Orange">
             <span
               data-color="#ff9900"
               style={{
