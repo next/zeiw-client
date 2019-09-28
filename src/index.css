@@ -87,7 +87,6 @@ canvas:before {
   margin: 100px auto;
   position: relative;
   width: 40px;
-  z-index: -1;
 }
 .cube1,
 .cube2 {

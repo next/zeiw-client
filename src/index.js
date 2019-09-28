@@ -1,4 +1,5 @@
 import './index.css'
+
 import About from './components/About'
 import Account from './components/Account'
 import Customize from './components/Customize'
@@ -17,7 +18,6 @@ const isNative = window._zeiwNative !== undefined
 
 export default () => (
   <Layout>
-    <Customize />
     {isNative && <NativeFrame />}
     <Tippy content="Connection Info" placement="bottom">
       <div
@@ -47,6 +47,7 @@ export default () => (
         </div>
         <About />
         <Account />
+        <Customize />
         <Faction />
         <Settings />
       </div>

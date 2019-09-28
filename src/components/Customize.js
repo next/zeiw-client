@@ -61,7 +61,7 @@ const Customize = () => (
               }}
             ></span>
           </Tippy>
-          <Tippy content="Baby Blue">
+          <Tippy content="Beautiful Blue">
             <span
               data-color="#0066ff"
               style={{
@@ -75,12 +75,12 @@ const Customize = () => (
           </Tippy>
           <Tippy content="Fancy Fuchsia">
             <span
-              data-color="#FF00FF"
+              data-color="#ff00ff"
               style={{
                 borderRadius: 9999,
                 height: '2.5rem',
                 width: '2.5rem',
-                backgroundColor: '#FF00FF'
+                backgroundColor: '#ff99ff'
               }}
             ></span>
           </Tippy>
