@@ -129,7 +129,7 @@ export default () => {
     if (null !== localStorage.getItem('auth')) {
       fetch('/api/v1/user/', {
         mode: 'cors',
-        headers: { authentication: token }
+        headers: { Authorization: token }
       })
         .then(response => {
           if (!response.ok) {
@@ -238,7 +238,7 @@ export default () => {
     const headers = {
       method: 'PATCH',
       mode: 'cors',
-      headers: { authentication: token },
+      headers: { Authorization: token },
       body: JSON.stringify({ faction: c })
     }
     fetch('/api/v1/user/', headers)
