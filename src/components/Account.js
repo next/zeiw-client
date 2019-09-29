@@ -39,7 +39,7 @@ const Account = () => (
             Sign Out
           </button>
           <button className="btn" data-micromodal-trigger="modal-fac">
-            Faction
+            Choose Faction
           </button>
         </div>
       </div>
