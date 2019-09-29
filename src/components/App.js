@@ -73,25 +73,17 @@ export default () => {
       })
   }
 
-  function ready(fn) {
-    if (document.readyState != 'loading') {
-      fn()
-    } else {
-      document.addEventListener('DOMContentLoaded', fn)
+  addEventListener('load', () => {
+    const handleThemeUpdate = cssVars => {
+      const root = $(':root')
+      const keys = Object.keys(cssVars)
+      keys.forEach(key => {
+        root.style.setProperty(key, cssVars[key])
+      })
     }
-  }
 
-  const handleThemeUpdate = cssVars => {
-    const root = $(':root')
-    const keys = Object.keys(cssVars)
-    keys.forEach(key => {
-      root.style.setProperty(key, cssVars[key])
-    })
-  }
+    const themeSwitchers = $$('[data-color]')
 
-  ready(() => {
-    const themeSwitchers = $$('span')
-    // Adapted from https://codepen.io/Nirajanbasnet/pen/OeZpjo
     themeSwitchers.forEach(item => {
       item.addEventListener('click', ({ target }) => {
         const color = target.getAttribute('data-color')
@@ -101,9 +93,7 @@ export default () => {
         localStorage.setItem('theme', color)
       })
     })
-  })
 
-  addEventListener('load', () => {
     if (null !== localStorage.getItem('theme')) {
       handleThemeUpdate({
         '--primary': localStorage.getItem('theme')

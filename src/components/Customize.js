@@ -1,24 +1,5 @@
 import Tippy from './Tooltip'
 
-const Checkmark = () => (
-  <svg
-    name="Checkmark"
-    aria-hidden="false"
-    width="32"
-    height="24"
-    viewBox="0 0 18 18"
-    xmlns="http://www.w3.org/2000/svg"
-  >
-    <g fill="none" fill-rule="evenodd">
-      <polyline
-        stroke="#ffffff"
-        stroke-width="2"
-        points="3.5 9.5 7 13 15 5"
-      ></polyline>
-    </g>
-  </svg>
-)
-
 const Customize = () => (
   <div aria-hidden="true" className="modal slide" id="modal-c">
     <div className="overlay" data-micromodal-close tabIndex={-1}>
