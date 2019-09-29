@@ -1,19 +1,14 @@
 <!DOCTYPE html>
-
 <html lang="en">
   <head>
-    <title>Play ZEIW</title>
     <meta charset="utf-8" />
-    <meta
-      content="width=device-width, initial-scale=1.0, user-scalable=no"
-      name="viewport"
-    />
+    <meta content="ie=edge" http-equiv="x-ua-compatible" />
+    <meta content="width=device-width, initial-scale=1" name="viewport" />
+    <title>Play ZEIW</title>
     <meta
       content="Open source community-based game 🏓"
       property="description"
     />
-
-    <!-- Favicon -->
     <link
       href="https://cdn.zeiw.me/apple-touch-icon.png"
       rel="apple-touch-icon"
@@ -34,8 +29,6 @@
     <link href="https://cdn.zeiw.me/manifest.json" rel="manifest" />
     <link href="https://cdn.zeiw.me/safari-pinned-tab.svg" rel="mask-icon" />
     <meta content="#ff9900" name="theme-color" />
-
-    <!-- SEO -->
     <meta content="https://cdn.zeiw.me/og-image.jpg" property="og:image" />
     <meta content="279" property="og:image:width" />
     <meta content="279" property="og:image:height" />
@@ -45,11 +38,7 @@
     />
     <meta content="ZEIW" property="og:title" />
     <meta content="https://play.zeiw.me" property="og:url" />
-
-    <!-- Proxima Nova -->
-    <link rel="stylesheet" href="https://use.typekit.net/mkc6ddh.css" />
-
-    <!-- Preact -->
+    <link href="https://use.typekit.net/mkc6ddh.css" rel="stylesheet" />
     <% for (var chunk of webpack.chunks) { %> <% if (chunk.names.length === 1 &&
     chunk.names[0] === 'polyfills') continue; %> <% for (var file of
     chunk.files) { %> <% if (htmlWebpackPlugin.options.preload &&
@@ -61,7 +50,6 @@
     />
     <% } %> <% } %> <% } %>
   </head>
-
   <body translate="no">
     <script
       defer
