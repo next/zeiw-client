@@ -1,6 +1,8 @@
 import './index.css'
+
 import About from './components/About'
 import Account from './components/Account'
+import Customize from './components/Customize'
 import Faction from './components/Faction'
 import Find from './components/Find'
 import Game from './components/Game'
@@ -10,7 +12,7 @@ import Main from './components/Main'
 import NativeFrame from './components/NativeFrame'
 import Nav from './components/Nav'
 import Settings from './components/Settings'
-import Tippy from './components/Tooltip.js'
+import Tippy from './components/Tooltip'
 
 const isNative = window._zeiwNative !== undefined
 
@@ -45,6 +47,7 @@ export default () => (
         </div>
         <About />
         <Account />
+        <Customize />
         <Faction />
         <Settings />
       </div>

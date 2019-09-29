@@ -1,13 +1,11 @@
 :root {
   --black: #111111;
   --blue: #0066ff;
-  --dark-blue: #003dcb;
   --gray: #cccccc;
-  --green: #19a974;
-  --light-blue: #6b93ff;
+  --green: #19a874;
+  --primary: #ff9900;
   --red: #f04747;
   --white: #eeeeee;
-  --yellow: #ff9900;
 }
 body {
   background: var(--black);
@@ -34,7 +32,7 @@ body {
   cursor: default !important;
 }
 ::selection {
-  background: var(--yellow);
+  background: var(--primary);
 }
 :focus {
   outline: 0;
@@ -54,10 +52,10 @@ img {
   display: none !important;
 }
 .bg {
-  background: var(--yellow);
+  background: var(--primary);
 }
 .bg-blurple {
-  background-color: #7289da;
+  background: #7188d9;
 }
 .w-50 {
   display: block;
@@ -93,7 +91,7 @@ canvas:before {
 .cube1,
 .cube2 {
   animation: sk-cubemove 1.8s infinite ease-in-out;
-  background-color: var(--yellow);
+  background: var(--primary);
   height: 15px;
   left: 0;
   position: absolute;
@@ -132,7 +130,7 @@ canvas:before {
   top: 0;
 }
 .container {
-  background-color: var(--white);
+  background: var(--white);
   border-radius: 4px;
   box-sizing: border-box;
   max-height: 100vh;
@@ -170,7 +168,7 @@ canvas:before {
 }
 .btn {
   backface-visibility: hidden;
-  background-color: var(--gray);
+  background: var(--gray);
   border-radius: 0.25rem;
   border-style: none;
   border-width: 0;
@@ -189,11 +187,11 @@ canvas:before {
   will-change: transform;
 }
 .btn-primary {
-  background-color: var(--blue);
+  background: var(--blue);
   color: var(--white);
 }
 .btn-danger {
-  background-color: var(--red);
+  background: var(--red);
   color: var(--white);
 }
 @keyframes mmfadeIn {
@@ -280,7 +278,7 @@ canvas:before {
   display: none;
 }
 .slider {
-  background-color: var(--gray);
+  background: var(--gray);
   bottom: 0;
   left: 0;
   position: absolute;
@@ -289,7 +287,7 @@ canvas:before {
   transition: 0.4s;
 }
 .slider:before {
-  background-color: var(--white);
+  background: var(--white);
   bottom: 4px;
   content: '';
   height: 26px;
@@ -299,7 +297,7 @@ canvas:before {
   width: 26px;
 }
 input:checked + .slider {
-  background-color: var(--blue);
+  background: var(--blue);
 }
 input:checked + .slider:before {
   transform: translateX(26px);

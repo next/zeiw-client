@@ -23,6 +23,13 @@ const Settings = () => (
           </div>
         </div>
         <div className="footer">
+          <button
+            className="btn btn-primary"
+            data-micromodal-close
+            data-micromodal-trigger="modal-c"
+          >
+            Customize
+          </button>
           <button className="btn" data-micromodal-close>
             Close
           </button>

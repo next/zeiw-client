@@ -1,5 +1,5 @@
 import 'unfetch/polyfill'
-import { $ } from '@zeiw/trump'
+import { $, $$ } from '@zeiw/trump'
 import { Howl, Howler } from 'howler'
 import io from 'socket.io-client'
 import MicroModal from 'micromodal'
@@ -73,7 +73,43 @@ export default () => {
       })
   }
 
+  function ready(fn) {
+    if (document.readyState != 'loading') {
+      fn()
+    } else {
+      document.addEventListener('DOMContentLoaded', fn)
+    }
+  }
+
+  const handleThemeUpdate = cssVars => {
+    const root = $(':root')
+    const keys = Object.keys(cssVars)
+    keys.forEach(key => {
+      root.style.setProperty(key, cssVars[key])
+    })
+  }
+
+  ready(() => {
+    const themeSwitchers = $$('span')
+    // Adapted from https://codepen.io/Nirajanbasnet/pen/OeZpjo
+    themeSwitchers.forEach(item => {
+      item.addEventListener('click', ({ target }) => {
+        const color = target.getAttribute('data-color')
+        handleThemeUpdate({
+          '--primary': color
+        })
+        localStorage.setItem('theme', color)
+      })
+    })
+  })
+
   addEventListener('load', () => {
+    if (null !== localStorage.getItem('theme')) {
+      handleThemeUpdate({
+        '--primary': localStorage.getItem('theme')
+      })
+    }
+
     setInterval(() => {
       updateChecker()
     }, 20 * 60 * 1000)
