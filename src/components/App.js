@@ -101,7 +101,7 @@ export default () => {
     }
 
     if (null !== localStorage.getItem('auth')) {
-      fetch('https://play.zeiw.me/api/v1/user', {
+      fetch('https://play.zeiw.me/api/v1/user/', {
         mode: 'cors',
         headers: { authentication: token }
       })
@@ -215,7 +215,7 @@ export default () => {
       headers: { authentication: token },
       body: JSON.stringify({ faction: c })
     }
-    fetch('https://play.zeiw.me/api/v1/user', headers)
+    fetch('https://play.zeiw.me/api/v1/user/', headers)
       .then(response => {
         if (!response.ok) {
           throw new Error(`Error ${response.status}`)
