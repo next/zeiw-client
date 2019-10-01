@@ -1,4 +1,5 @@
 import Tippy from '@tippy.js/react'
+import 'tippy.js/dist/tippy.css'
 
 export default props => (
   <Tippy
