@@ -188,7 +188,7 @@ export default () => {
     }
 
     if ('true' === localStorage.getItem('devMode')) {
-      socket = io.connect('localhost:1337')
+      socket = io.connect('ws://localhost:1337')
       $('#flag').classList.add('hidden')
     } else {
       socket = io.connect(server)
