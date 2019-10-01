@@ -100,6 +100,10 @@ export default () => {
       })
     }
 
+    if ('localhost' === host) {
+      $('.devMode').classList.remove('hidden')
+    }
+
     setInterval(() => {
       updateChecker()
     }, 20 * 60 * 1000)
@@ -154,6 +158,7 @@ export default () => {
             switch (e) {
               case 'DEV':
                 $('#dev').classList.remove('hidden')
+                $('.devMode').classList.remove('hidden')
                 break
               case 'MOD':
                 $('#mod').classList.remove('hidden')
@@ -181,13 +186,25 @@ export default () => {
           console.error(error)
         })
     }
-    socket = io.connect(server)
+
+    if ('true' === localStorage.getItem('devMode')) {
+      socket = io.connect('localhost:1337')
+      $('#flag').classList.add('hidden')
+    } else {
+      socket = io.connect(server)
+      $('#flag').classList.remove('hidden')
+    }
+
     setSocketEvents()
+
     canvas = $('#canvas')
     ctx = canvas.getContext('2d')
+
     addEventListener('keydown', keydown)
     addEventListener('keyup', keyup)
+
     socket.emit('getOnline')
+
     setInterval(() => {
       if ('home' === tab) {
         socket.emit('getOnline')
@@ -339,6 +356,24 @@ export default () => {
     }
   }
   betaSwitch.addEventListener('change', switchBeta, false)
+
+  const devMode = localStorage.getItem('devMode')
+  const devModeSwitch = $('#devMode')
+  if (devMode) {
+    devModeSwitch.checked = 'true' === devMode
+  } else {
+    devModeSwitch.checked = false
+  }
+  function switchDevMode({ target }) {
+    if (true === target.checked) {
+      localStorage.setItem('devMode', true)
+      location.reload()
+    } else {
+      localStorage.setItem('devMode', false)
+      location.reload()
+    }
+  }
+  devModeSwitch.addEventListener('change', switchDevMode, false)
 
   function tabTo(t) {
     const ct = tab

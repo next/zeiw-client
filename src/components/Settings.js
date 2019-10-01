@@ -21,6 +21,13 @@ const Settings = () => (
               <span className="slider round" />
             </label>
           </div>
+          <div className="devMode switch-wrapper hidden">
+            <p>Developer Mode</p>
+            <label className="switch" htmlFor="devMode">
+              <input id="devMode" type="checkbox" />
+              <span className="slider round" />
+            </label>
+          </div>
         </div>
         <div className="footer">
           <button

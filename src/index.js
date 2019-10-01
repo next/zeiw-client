@@ -30,7 +30,7 @@ export default () => (
         }}
       >
         <span id="ping" className="loading dots" /> ms{' '}
-        <img src="https://cdn.zeiw.me/france.png" height="16" />
+        <img id="flag" src="https://cdn.zeiw.me/france.png" height="16" />
       </div>
     </Tippy>
     <Tippy content="Current Build" placement="top">
