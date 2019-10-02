@@ -18,7 +18,7 @@
     "tabWidth": 2
   },
   "dependencies": {
-    "@tippy.js/react": "^3.0.0",
+    "@tippy.js/react": "^3.0.1",
     "@zeiw/trump": "^1.0.7",
     "howler": "^2.1.2",
     "jss": "^9.8.7",
