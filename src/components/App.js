@@ -6,11 +6,27 @@ import MicroModal from 'micromodal'
 import Swal from 'sweetalert2/dist/sweetalert2.all.js'
 
 export default () => {
+  const api = 'localhost' === location.hostname ? 'https://api.zeiw.me' : '/api'
   const commit = _zeiwBuild.commitHash.substring(0, 7)
-  const host = location.hostname
   const release = 'true' === localStorage.getItem('beta') ? 'canary' : 'master'
   const server = 'wss://live.zeiw.me'
   const token = localStorage.getItem('auth')
+
+  function getUsername() {
+    return fetch(`${api}/v1/user/`, {
+      mode: 'cors',
+      headers: { Authorization: token }
+    })
+      .then(response => {
+        if (!response.ok) {
+          throw new Error(`Error ${response.status}`)
+        }
+        return response.json()
+      })
+      .then(({ uname }) => uname)
+  }
+
+  const username = null !== token ? getUsername() : 'Guest'
 
   const Toast = Swal.mixin({
     toast: true,
@@ -100,7 +116,7 @@ export default () => {
       })
     }
 
-    if ('localhost' === host) {
+    if ('localhost' === location.hostname) {
       $('.devMode').classList.remove('hidden')
     }
 
@@ -130,8 +146,8 @@ export default () => {
       Howler.mute(true)
     }
 
-    if (null !== localStorage.getItem('auth')) {
-      fetch('/api/v1/user/', {
+    if (null !== token) {
+      fetch(`${api}/v1/user/`, {
         mode: 'cors',
         headers: { Authorization: token }
       })
@@ -258,7 +274,7 @@ export default () => {
       headers: { Authorization: token },
       body: JSON.stringify({ faction: c })
     }
-    fetch('/api/v1/user/', headers)
+    fetch(`${api}/v1/user/`, headers)
       .then(response => {
         if (!response.ok) {
           throw new Error(`Error ${response.status}`)
@@ -700,6 +716,11 @@ export default () => {
     }
 
     startGame() {
+      socket.emit('opponent username', { username })
+      socket.on('opponent username', msg => {
+        $('#you').innerHTML = username
+        $('#opponent').innerHTML = msg
+      })
       tabTo('game')
       const self = this
       if (this.id === this.game.p1.id) {
@@ -885,7 +906,7 @@ export default () => {
   })
 
   $('#user').addEventListener('click', () => {
-    if (null === localStorage.getItem('auth')) {
+    if (null === token) {
       Swal.fire({
         confirmButtonText: 'Login',
         imageHeight: 200,
