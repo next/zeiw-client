@@ -4,7 +4,7 @@ const Game = () => (
       Opponent: <span id="opponent" className="fw9"></span> |{' '}
       <span id="stopwatch" className="fw9"></span> seconds
     </div>
-    <div className="hidden items-center ma1">
+    <div className="hidden items-center mt3">
       <canvas className="br3 ba bw3 ma2 shadow-4" id="canvas" />
     </div>
     <div id="countdown" />
