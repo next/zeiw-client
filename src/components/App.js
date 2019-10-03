@@ -12,22 +12,6 @@ export default () => {
   const server = 'wss://live.zeiw.me'
   const token = localStorage.getItem('auth')
 
-  function getUsername() {
-    return fetch(`${api}/v1/user/`, {
-      mode: 'cors',
-      headers: { Authorization: token }
-    })
-      .then(response => {
-        if (!response.ok) {
-          throw new Error(`Error ${response.status}`)
-        }
-        return response.json()
-      })
-      .then(({ uname }) => uname)
-  }
-
-  const username = null !== token ? getUsername() : 'Guest'
-
   const Toast = Swal.mixin({
     toast: true,
     position: 'top-end',
@@ -47,6 +31,7 @@ export default () => {
   let socket
   let tab = 'home'
   let user
+  let username
 
   function updateChecker() {
     Toast.fire(
@@ -716,11 +701,16 @@ export default () => {
     }
 
     startGame() {
-      socket.emit('opponent username', { username })
+      username = null !== token ? $('#uname').textContent : 'Guest'
+
+      if (username) {
+        socket.emit('opponent username', username)
+      }
+
       socket.on('opponent username', msg => {
-        $('#you').innerHTML = username
         $('#opponent').innerHTML = msg
       })
+
       tabTo('game')
       const self = this
       if (this.id === this.game.p1.id) {

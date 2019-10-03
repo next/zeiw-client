@@ -1,11 +1,10 @@
 const Game = () => (
   <div className="dtc tc v-mid hidden" id="game">
-    <div className="f4" id="gameInfo">
-      <span id="opponent"></span>
-      <span id="stopwatch"></span>
-      <span id="you"></span>
+    <div className="f4 ttu tracked">
+      Opponent: <span id="opponent" className="fw9"></span> |{' '}
+      <span id="stopwatch" className="fw9"></span> seconds
     </div>
-    <div className="hidden items-center ma4">
+    <div className="hidden items-center ma1">
       <canvas className="br3 ba bw3 ma2 shadow-4" id="canvas" />
     </div>
     <div id="countdown" />
