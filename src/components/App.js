@@ -559,6 +559,7 @@ export default () => {
       jgl = false
       if (true === g.hosted) {
         const c = g.code
+        const host = location.hostname
         self.location.href = `#${c}`
         const url = `https://${host}/#${c}`
         $('#pcpb').style.display = 'block'
