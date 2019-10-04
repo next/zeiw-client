@@ -731,6 +731,7 @@ export default () => {
 
     startGame() {
       username = null !== GLOBAL_ENV.TOKEN ? $('#uname').textContent : 'Guest'
+      $('#you').innerHTML = username
 
       if (username) {
         socket.emit('opponent username', username)
