@@ -6,11 +6,13 @@ import MicroModal from 'micromodal'
 import Swal from 'sweetalert2/dist/sweetalert2.all.js'
 
 export default () => {
-  const api = 'localhost' === location.hostname ? 'https://api.zeiw.me' : '/api'
-  const commit = _zeiwBuild.commitHash.substring(0, 7)
-  const release = 'true' === localStorage.getItem('beta') ? 'canary' : 'master'
-  const server = 'wss://live.zeiw.me'
-  const token = localStorage.getItem('auth')
+  window.GLOBAL_ENV = {
+    API: 'localhost' === location.hostname ? 'https://api.zeiw.me' : '/api',
+    COMMIT: _zeiwBuild.commitHash.substring(0, 7),
+    LIVE: 'wss://live.zeiw.me',
+    RELEASE: 'true' === localStorage.getItem('beta') ? 'canary' : 'master',
+    TOKEN: localStorage.getItem('auth')
+  }
 
   const Toast = Swal.mixin({
     toast: true,
@@ -41,9 +43,12 @@ export default () => {
       },
       Swal.showLoading()
     )
-    fetch(`https://api.github.com/repos/next/zeiw-client/commits/${release}`, {
-      headers: { 'If-None-Match': '' }
-    })
+    fetch(
+      `https://api.github.com/repos/next/zeiw-client/commits/${GLOBAL_ENV.RELEASE}`,
+      {
+        headers: { 'If-None-Match': '' }
+      }
+    )
       .then(response => {
         if (!response.ok) {
           throw new Error(`Error ${response.status}`)
@@ -118,7 +123,7 @@ export default () => {
       disableScroll: true
     })
 
-    $('#build').innerHTML = `${release}@${commit}`
+    $('#build').innerHTML = `${GLOBAL_ENV.RELEASE}@${GLOBAL_ENV.COMMIT}`
 
     new Howl({
       src: ['https://cdn.zeiw.me/music.mp3'],
@@ -131,10 +136,10 @@ export default () => {
       Howler.mute(true)
     }
 
-    if (null !== token) {
-      fetch(`${api}/v1/user/`, {
+    if (null !== GLOBAL_ENV.TOKEN) {
+      fetch(`${GLOBAL_ENV.API}/v1/user/`, {
         mode: 'cors',
-        headers: { Authorization: token }
+        headers: { Authorization: GLOBAL_ENV.TOKEN }
       })
         .then(response => {
           if (!response.ok) {
@@ -192,7 +197,7 @@ export default () => {
       socket = io.connect('ws://localhost:1337')
       $('#flag').classList.add('hidden')
     } else {
-      socket = io.connect(server)
+      socket = io.connect(GLOBAL_ENV.LIVE)
       $('#flag').classList.remove('hidden')
     }
 
@@ -243,6 +248,7 @@ export default () => {
       '%c🌑︎ Hackers may entice you to paste code here. Stay aware! ⚠️',
       alert
     )
+    console.table(GLOBAL_ENV)
   })
 
   function f(c) {
@@ -256,10 +262,10 @@ export default () => {
     const headers = {
       method: 'PATCH',
       mode: 'cors',
-      headers: { Authorization: token },
+      headers: { Authorization: GLOBAL_ENV.TOKEN },
       body: JSON.stringify({ faction: c })
     }
-    fetch(`${api}/v1/user/`, headers)
+    fetch(`${GLOBAL_ENV.API}/v1/user/`, headers)
       .then(response => {
         if (!response.ok) {
           throw new Error(`Error ${response.status}`)
@@ -402,7 +408,7 @@ export default () => {
         .then(code => {
           const el = document.createElement('iframe')
           // prettier-ignore
-          el.src = `https://api.zeiw.me/v1/login/?code=${encodeURIComponent(code)}`
+          el.src = GLOBAL_ENV.API + `/v1/login/?code=${encodeURIComponent(code)}`
           document.body.appendChild(el)
           addEventListener('storage', () => {
             if (localStorage.auth !== undefined) {
@@ -436,7 +442,7 @@ export default () => {
         })
     } else {
       const w = open(
-        'https://api.zeiw.me/v1/login/',
+        `${GLOBAL_ENV.API}/v1/login/`,
         'ZEIW Login',
         'menubar=no,location=no,resizable=no,scrollbars=yes,status=yes,width=550,height=850'
       )
@@ -702,7 +708,7 @@ export default () => {
     }
 
     startGame() {
-      username = null !== token ? $('#uname').textContent : 'Guest'
+      username = null !== GLOBAL_ENV.TOKEN ? $('#uname').textContent : 'Guest'
 
       if (username) {
         socket.emit('opponent username', username)
@@ -897,7 +903,7 @@ export default () => {
   })
 
   $('#user').addEventListener('click', () => {
-    if (null === token) {
+    if (null === GLOBAL_ENV.TOKEN) {
       Swal.fire({
         confirmButtonText: 'Login',
         imageHeight: 200,
