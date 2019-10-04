@@ -9,6 +9,7 @@ export default () => {
   window.GLOBAL_ENV = {
     API: 'localhost' === location.hostname ? 'https://api.zeiw.me' : '/api',
     COMMIT: _zeiwBuild.commitHash.substring(0, 7),
+    DEBUG: 'true' === localStorage.getItem('debugMode') ? true : false,
     LIVE: 'wss://live.zeiw.me',
     RELEASE: 'true' === localStorage.getItem('beta') ? 'canary' : 'master',
     TOKEN: localStorage.getItem('auth')
@@ -248,7 +249,10 @@ export default () => {
       '%c🌑︎ Hackers may entice you to paste code here. Stay aware! ⚠️',
       alert
     )
-    console.table(GLOBAL_ENV)
+
+    if (GLOBAL_ENV.DEBUG) {
+      console.table(GLOBAL_ENV)
+    }
   })
 
   function f(c) {
@@ -381,6 +385,24 @@ export default () => {
     }
   }
   devModeSwitch.addEventListener('change', switchDevMode, false)
+
+  const debugMode = localStorage.getItem('debugMode')
+  const debugModeSwitch = $('#debugMode')
+  if (debugMode) {
+    debugModeSwitch.checked = 'true' === debugMode
+  } else {
+    debugModeSwitch.checked = false
+  }
+  function switchDebugMode({ target }) {
+    if (true === target.checked) {
+      localStorage.setItem('debugMode', true)
+      location.reload()
+    } else {
+      localStorage.setItem('debugMode', false)
+      location.reload()
+    }
+  }
+  debugModeSwitch.addEventListener('change', switchDebugMode, false)
 
   function tabTo(t) {
     const ct = tab

@@ -7,13 +7,6 @@ const Settings = () => (
           <button className="close" data-micromodal-close />
         </div>
         <div className="content">
-          <div className="audio switch-wrapper">
-            <p>Play Audio</p>
-            <label className="switch" htmlFor="audio">
-              <input id="audio" type="checkbox" />
-              <span className="slider round" />
-            </label>
-          </div>
           <div className="beta switch-wrapper">
             <p>Beta Features</p>
             <label className="switch" htmlFor="beta">
@@ -21,10 +14,24 @@ const Settings = () => (
               <span className="slider round" />
             </label>
           </div>
+          <div className="debugMode switch-wrapper">
+            <p>Debug Mode</p>
+            <label className="switch" htmlFor="debugMode">
+              <input id="debugMode" type="checkbox" />
+              <span className="slider round" />
+            </label>
+          </div>
           <div className="devMode switch-wrapper hidden">
             <p>Developer Mode</p>
             <label className="switch" htmlFor="devMode">
               <input id="devMode" type="checkbox" />
+              <span className="slider round" />
+            </label>
+          </div>
+          <div className="audio switch-wrapper">
+            <p>Play Audio</p>
+            <label className="switch" htmlFor="audio">
+              <input id="audio" type="checkbox" />
               <span className="slider round" />
             </label>
           </div>
