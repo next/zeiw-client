@@ -27,6 +27,9 @@ We welcome security research on ZEIW under the terms of our [vulnerability discl
 
 Contributions, issues, and feature requests are welcome! Feel free to check out the [issues-only repository](https://github.com/next/zeiw-issues/issues).
 
+ZEIW has adopted a [Code of Conduct](./.github/CODE_OF_CONDUCT.md) that we expect project participants to adhere to.<br />
+Please read the full text so that you can understand what actions will and will not be tolerated.
+
 ## License
 
 [MIT License](./LICENSE).
