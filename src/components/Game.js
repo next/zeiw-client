@@ -1,7 +1,7 @@
 const Game = () => (
   <div className="dtc tc v-mid hidden" id="game">
     <div className="f4 ttu tracked">
-      <span id="you" className="fw9"></span> vs{' '}
+      <span id="you" className="fw9" style={{ color: '#ff9900' }}></span> vs{' '}
       <span id="opponent" className="fw9"></span> |{' '}
       <span id="stopwatch" className="fw9"></span> seconds
     </div>

@@ -768,7 +768,10 @@ export default () => {
         })
         addEventListener('keydown', ({ keyCode }) => {
           if (keyCode === 32) {
-            socket.emit('ballSpeedUpdate')
+            console.log('Ball speed update event was emitted!')
+            socket.emit('update ball speed', {
+              speed: 0.25
+            })
           }
         })
         presenceUpdate('Mode: 1v1 (In Game)', Number(new Date()))
