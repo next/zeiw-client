@@ -10,6 +10,7 @@ export default () => {
     API: 'localhost' === location.hostname ? 'https://api.zeiw.me' : '/api',
     COMMIT: _zeiwBuild.commitHash.substring(0, 7),
     DEBUG: 'true' === localStorage.getItem('debugMode') ? true : false,
+    DEV: 'true' === localStorage.getItem('isDeveloper') ? true : false,
     LIVE: 'wss://live.zeiw.me',
     RELEASE: 'true' === localStorage.getItem('beta') ? 'canary' : 'master',
     TOKEN: localStorage.getItem('auth')
@@ -166,6 +167,7 @@ export default () => {
               case 'DEV':
                 $('#dev').classList.remove('hidden')
                 $('.devMode').classList.remove('hidden')
+                localStorage.setItem('isDeveloper', true)
                 break
               case 'MOD':
                 $('#mod').classList.remove('hidden')
@@ -766,12 +768,13 @@ export default () => {
         socket.emit('readyup', {
           p: this.paddle.player
         })
-        addEventListener('keydown', ({ keyCode }) => {
-          if (keyCode === 32) {
-            console.log('Ball speed update event was emitted!')
-            socket.emit('update ball speed')
-          }
-        })
+        if (GLOBAL_ENV.DEV) {
+          addEventListener('keydown', ({ keyCode }) => {
+            if (keyCode === 32) {
+              socket.emit('update ball speed')
+            }
+          })
+        }
         presenceUpdate('Mode: 1v1 (In Game)', Number(new Date()))
       }
     }
