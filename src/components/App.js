@@ -766,6 +766,11 @@ export default () => {
         socket.emit('readyup', {
           p: this.paddle.player
         })
+        addEventListener('keydown', ({ keyCode }) => {
+          if (keyCode === 32) {
+            socket.emit('ballSpeedUpdate')
+          }
+        })
         presenceUpdate('Mode: 1v1 (In Game)', Number(new Date()))
       }
     }
