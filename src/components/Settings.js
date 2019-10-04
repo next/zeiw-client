@@ -14,13 +14,6 @@ const Settings = () => (
               <span className="slider round" />
             </label>
           </div>
-          <div className="debugMode switch-wrapper">
-            <p>Debug Mode</p>
-            <label className="switch" htmlFor="debugMode">
-              <input id="debugMode" type="checkbox" />
-              <span className="slider round" />
-            </label>
-          </div>
           <div className="devMode switch-wrapper hidden">
             <p>Developer Mode</p>
             <label className="switch" htmlFor="devMode">

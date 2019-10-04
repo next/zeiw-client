@@ -9,9 +9,7 @@ export default () => {
   window.GLOBAL_ENV = {
     API: 'localhost' === location.hostname ? 'https://api.zeiw.me' : '/api',
     COMMIT: _zeiwBuild.commitHash.substring(0, 7),
-    DEBUG: 'true' === localStorage.getItem('debugMode') ? true : false,
     DEV: 'true' === localStorage.getItem('isDeveloper') ? true : false,
-    LIVE: 'wss://live.zeiw.me',
     RELEASE: 'true' === localStorage.getItem('beta') ? 'canary' : 'master',
     TOKEN: localStorage.getItem('auth')
   }
@@ -167,7 +165,6 @@ export default () => {
               case 'DEV':
                 $('#dev').classList.remove('hidden')
                 $('.devMode').classList.remove('hidden')
-                localStorage.setItem('isDeveloper', true)
                 break
               case 'MOD':
                 $('#mod').classList.remove('hidden')
@@ -185,6 +182,9 @@ export default () => {
                 $('#db').classList.remove('hidden')
             }
           })
+          if (flags.includes('DEV')) {
+            localStorage.setItem('isDeveloper', true)
+          }
         })
         .catch(error => {
           Toast.fire({
@@ -200,7 +200,7 @@ export default () => {
       socket = io.connect('ws://localhost:1337')
       $('#flag').classList.add('hidden')
     } else {
-      socket = io.connect(GLOBAL_ENV.LIVE)
+      socket = io.connect('wss://live.zeiw.me')
       $('#flag').classList.remove('hidden')
     }
 
@@ -251,10 +251,6 @@ export default () => {
       '%c🌑︎ Hackers may entice you to paste code here. Stay aware! ⚠️',
       alert
     )
-
-    if (GLOBAL_ENV.DEBUG) {
-      console.table(GLOBAL_ENV)
-    }
   })
 
   function f(c) {
@@ -387,24 +383,6 @@ export default () => {
     }
   }
   devModeSwitch.addEventListener('change', switchDevMode, false)
-
-  const debugMode = localStorage.getItem('debugMode')
-  const debugModeSwitch = $('#debugMode')
-  if (debugMode) {
-    debugModeSwitch.checked = 'true' === debugMode
-  } else {
-    debugModeSwitch.checked = false
-  }
-  function switchDebugMode({ target }) {
-    if (true === target.checked) {
-      localStorage.setItem('debugMode', true)
-      location.reload()
-    } else {
-      localStorage.setItem('debugMode', false)
-      location.reload()
-    }
-  }
-  debugModeSwitch.addEventListener('change', switchDebugMode, false)
 
   function tabTo(t) {
     const ct = tab
@@ -771,7 +749,7 @@ export default () => {
         if (GLOBAL_ENV.DEV) {
           addEventListener('keydown', ({ keyCode }) => {
             if (keyCode === 32) {
-              socket.emit('update ball speed')
+              socket.emit('update ball speed', 0.1)
             }
           })
         }
