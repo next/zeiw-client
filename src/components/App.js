@@ -909,15 +909,11 @@ export default () => {
       inputValue: location.hash.slice(1),
       showCancelButton: true,
       confirmButtonText: 'Connect'
+    }).then(({ value }) => {
+      if (value) {
+        user.join($('#joinID').value)
+      }
     })
-      .then(({ value }) => {
-        if (value) {
-          user.join($('#joinID').value)
-        }
-      })
-      .catch(error => {
-        Swal.showValidationMessage(error)
-      })
   }
 
   if ('' !== location.hash) {
