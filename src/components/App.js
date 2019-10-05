@@ -270,7 +270,10 @@ export default () => {
     const headers = {
       method: 'PATCH',
       mode: 'cors',
-      headers: { Authorization: GLOBAL_ENV.TOKEN },
+      headers: {
+        Authorization: GLOBAL_ENV.TOKEN,
+        'Content-Type': 'application/json'
+      },
       body: JSON.stringify({ faction: c })
     }
     fetch(`${GLOBAL_ENV.API}/v1/user/`, headers)
