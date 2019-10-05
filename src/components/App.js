@@ -281,7 +281,7 @@ export default () => {
         if (!response.ok) {
           throw new Error(`Error ${response.status}`)
         }
-        return response.json()
+        return response.text()
       })
       .then(() => {
         Toast.fire({
