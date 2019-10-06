@@ -7,11 +7,7 @@ import Swal from 'sweetalert2/dist/sweetalert2.all.js'
 
 export default () => {
   window.GLOBAL_ENV = {
-    API:
-      'localhost' === location.hostname ||
-      'true' === localStorage.getItem('forcedAPI')
-        ? 'https://api.zeiw.me'
-        : '/api',
+    API: 'localhost' === location.hostname ? 'https://api.zeiw.me' : '/api',
     COMMIT: _zeiwBuild.commitHash.substring(0, 7),
     DEV: 'true' === localStorage.getItem('isDeveloper') ? true : false,
     RELEASE: 'true' === localStorage.getItem('beta') ? 'canary' : 'master',
@@ -392,24 +388,6 @@ export default () => {
     }
   }
   devModeSwitch.addEventListener('change', switchDevMode, false)
-
-  const forcedAPI = localStorage.getItem('forcedAPI')
-  const forcedAPISwitch = $('#forcedAPI')
-  if (forcedAPI) {
-    forcedAPISwitch.checked = 'true' === forcedAPI
-  } else {
-    forcedAPISwitch.checked = false
-  }
-  function switchForcedAPI({ target }) {
-    if (true === target.checked) {
-      localStorage.setItem('forcedAPI', true)
-      location.reload()
-    } else {
-      localStorage.setItem('forcedAPI', false)
-      location.reload()
-    }
-  }
-  forcedAPISwitch.addEventListener('change', switchForcedAPI, false)
 
   function tabTo(t) {
     const ct = tab

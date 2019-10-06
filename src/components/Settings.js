@@ -21,13 +21,6 @@ const Settings = () => (
               <span className="slider round" />
             </label>
           </div>
-          <div className="forcedAPI switch-wrapper hidden">
-            <p>Enable Forced API</p>
-            <label className="switch" htmlFor="forcedAPI">
-              <input id="forcedAPI" type="checkbox" />
-              <span className="slider round" />
-            </label>
-          </div>
           <div className="audio switch-wrapper">
             <p>Play Audio</p>
             <label className="switch" htmlFor="audio">
