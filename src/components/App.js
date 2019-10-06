@@ -108,7 +108,6 @@ export default () => {
 
     if ('localhost' === location.hostname) {
       $('.devMode').classList.remove('hidden')
-      $('.forcedAPI').classList.remove('hidden')
     }
 
     setInterval(() => {
@@ -166,7 +165,6 @@ export default () => {
               case 'DEV':
                 $('#dev').classList.remove('hidden')
                 $('.devMode').classList.remove('hidden')
-                $('.forcedAPI').classList.remove('hidden')
                 break
               case 'MOD':
                 $('#mod').classList.remove('hidden')
