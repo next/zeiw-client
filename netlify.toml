@@ -8,12 +8,11 @@
 [[headers]]
   for = "/*"
   [headers.values]
-    Content-Security-Policy = "connect-src 'self' api.github.com api.zeiw.me cdn.zeiw.me live.zeiw.me wss://live.zeiw.me http://localhost:1337 ws://localhost:1337; default-src 'self'; font-src 'self' *.typekit.net; frame-src 'self' api.zeiw.me; img-src 'self' cdn.zeiw.me cdn.discordapp.com discordapp.com; manifest-src 'self' cdn.zeiw.me; media-src 'self' cdn.zeiw.me; style-src 'self' 'unsafe-inline' *.typekit.net"
+    Content-Security-Policy = "connect-src 'self' api.github.com api.zeiw.me cdn.zeiw.me live.zeiw.me wss://live.zeiw.me http://localhost:1337 ws://localhost:1337; default-src 'self'; font-src 'self' *.typekit.net; frame-src 'self' api.zeiw.me; img-src 'self' cdn.zeiw.me cdn.discordapp.com discordapp.com; manifest-src 'self' cdn.zeiw.me; media-src 'self' cdn.zeiw.me; style-src 'self' 'unsafe-inline' *.typekit.net; frame-ancestors 'self' *.zeiw.me *.ssis.nu"
     Feature-Policy = "accelerometer 'none'; camera 'none'; geolocation 'none'; gyroscope 'none'; magnetometer 'none'; microphone 'none'; payment 'none'; usb 'none'"
     Referrer-Policy = "strict-origin-when-cross-origin"
     Strict-Transport-Security = "max-age=31536000; includeSubDomains; preload"
     X-Content-Type-Options = "nosniff"
-    X-Frame-Options = "sameorigin"
     X-XSS-Protection = "1; mode=block"
 
 # To not break the login process, /cb.html has access to inline scripts.
