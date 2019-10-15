@@ -6279,10 +6279,10 @@ postcss@^7.0.0, postcss@^7.0.1, postcss@^7.0.14, postcss@^7.0.16, postcss@^7.0.1
     source-map "^0.6.1"
     supports-color "^6.1.0"
 
-preact-cli@^3.0.0-rc.5:
-  version "3.0.0-rc.5"
-  resolved "https://registry.yarnpkg.com/preact-cli/-/preact-cli-3.0.0-rc.5.tgz#d9820d7c1b3e9de3d7446ff29ce53013fc865927"
-  integrity sha512-lIb1XY1+XFZgxu8ELT8WdFLL6DXhOTZ8Q06BPYPWI8aQXmqi21dq6C7lMumkMYB+c1IOsoRzy8HZ08bVZlYcww==
+preact-cli@^3.0.0-rc.6:
+  version "3.0.0-rc.6"
+  resolved "https://registry.yarnpkg.com/preact-cli/-/preact-cli-3.0.0-rc.6.tgz#7c23bc5105651a24c9d528014ff0917d9ddcbe15"
+  integrity sha512-HJ/8WgNW23Cy74l+jRR+tOoX771xF2bpuHNXlWGi7qlM1LQLgnbgWQt5PeRtsUbSFRbe2fl6pEXDX4tMnmQrAg==
   dependencies:
     "@babel/core" "^7.5.5"
     "@babel/plugin-proposal-class-properties" "^7.5.5"
