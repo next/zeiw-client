@@ -35,7 +35,7 @@
     "unfetch": "^4.1.0"
   },
   "devDependencies": {
-    "husky": "^3.0.8",
+    "husky": "^3.0.9",
     "if-env": "^1.0.4",
     "prettier": "^1.18.2",
     "pretty-quick": "^2.0.0"
