@@ -549,13 +549,13 @@ export default () => {
       canvas.width = w
       canvas.height = h
       const onlineusers = uonl
-      $('#online').innerHTML = `${onlineusers} ONLINE`
+      $('#online').innerHTML = `${onlineusers} CONNECTED`
       $('#online').classList.remove('loading')
       draw()
     })
 
     socket.on('uonl', u => {
-      $('#online').innerHTML = `${u} ONLINE`
+      $('#online').innerHTML = `${u} CONNECTED`
     })
 
     socket.on('err', err => {
