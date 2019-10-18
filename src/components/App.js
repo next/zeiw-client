@@ -862,13 +862,12 @@ export default () => {
 
   function message(msg) {
     Swal.fire({
-      animation: false,
       allowOutsideClick: false,
       cancelButtonText: 'Return Home',
       showCancelButton: true,
       text: 'Do you want a rematch?',
       title: msg,
-      type: 'question'
+      type: 'You Win' === msg ? 'success' : 'error'
     }).then(({ value, dismiss }) => {
       if (value) {
         goHome()
