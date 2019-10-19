@@ -21,13 +21,6 @@
   [headers.values]
     Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline'"
 
-# https://bit.ly/2MvNJCR.
-[[redirects]]
-  from = "/*"
-  to = "/index.html"
-  status = 200
-  force = false
-
 # Redirect Netlify subdomain to play.zeiw.me.
 [[redirects]]
   from = "https://zeiw.netlify.com/*"
