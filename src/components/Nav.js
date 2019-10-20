@@ -24,11 +24,7 @@ const Nav = () => (
         />
       </Tippy>
       <Tippy content="Join our Discord" placement="right">
-        <img
-          className="w-50"
-          id="discord"
-          src="https://cdn.zeiw.me/discord.svg"
-        />
+        <img className="w-50" id="discord" src="https://cdn.zeiw.me/discord.svg" />
       </Tippy>
     </div>
   </div>

@@ -9,11 +9,10 @@ const About = () => (
         <div className="content">
           <div className="pa2">
             <p className="f5 lh-copy measure-wide">
-              ZEIW is obviously inspired by Pong, with the main difference of
-              being online — featuring social integrations of many kinds! Join
-              the matchmaking queue to randomly be assigned an opponent, or host
-              a party to compete against your friends. Also choose one of three
-              factions and compete against other factions during events!
+              ZEIW is obviously inspired by Pong, with the main difference of being online —
+              featuring social integrations of many kinds! Join the matchmaking queue to randomly be
+              assigned an opponent, or host a party to compete against your friends. Also choose one
+              of three factions and compete against other factions during events!
             </p>
           </div>
           <div className="pv4 ph3 tc">
@@ -64,35 +63,19 @@ const About = () => (
               <br />
               All trademarks are property of their respective owners.
               <br />
-              <a
-                href="https://zeiw.me/terms"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
+              <a href="https://zeiw.me/terms" target="_blank" rel="noopener noreferrer">
                 Terms
               </a>{' '}
               |{' '}
-              <a
-                href="https://zeiw.me/privacy"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
+              <a href="https://zeiw.me/privacy" target="_blank" rel="noopener noreferrer">
                 Privacy
               </a>{' '}
               |{' '}
-              <a
-                href="https://zeiw.me/security"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
+              <a href="https://zeiw.me/security" target="_blank" rel="noopener noreferrer">
                 Security
               </a>{' '}
               |{' '}
-              <a
-                href="mailto:support@zeiw.me"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
+              <a href="mailto:support@zeiw.me" target="_blank" rel="noopener noreferrer">
                 Contact
               </a>
             </small>

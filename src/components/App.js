@@ -7,7 +7,6 @@ import Swal from 'sweetalert2/dist/sweetalert2.all.js'
 
 export default () => {
   window.GLOBAL_ENV = {
-    API: 'localhost' === location.hostname ? 'https://api.zeiw.me' : '/api',
     COMMIT: _zeiwBuild.commitHash.substring(0, 7),
     DEV: 'true' === localStorage.getItem('isDeveloper') ? true : false,
     RELEASE: 'true' === localStorage.getItem('beta') ? 'canary' : 'master',
@@ -43,12 +42,9 @@ export default () => {
       },
       Swal.showLoading()
     )
-    fetch(
-      `https://api.github.com/repos/next/zeiw-client/commits/${GLOBAL_ENV.RELEASE}`,
-      {
-        headers: { 'If-None-Match': '' }
-      }
-    )
+    fetch(`https://api.github.com/repos/next/zeiw-client/commits/${GLOBAL_ENV.RELEASE}`, {
+      headers: { 'If-None-Match': '' }
+    })
       .then(response => {
         if (!response.ok) {
           throw new Error(`Error ${response.status}`)
@@ -137,7 +133,7 @@ export default () => {
     }
 
     if (null !== GLOBAL_ENV.TOKEN) {
-      fetch(`${GLOBAL_ENV.API}/v1/user/`, {
+      fetch('https://api.zeiw.me/v1/user/', {
         mode: 'cors',
         headers: { Authorization: GLOBAL_ENV.TOKEN }
       })
@@ -225,32 +221,21 @@ export default () => {
       })
     }, 3500)
 
-    const primary =
-      'background:#070B13;color:#fff;display:block;padding:0.5em 1em;font-size:1em'
-    const alert =
-      'background:#FFCC4D;color:#000;display:block;padding:0.5em 1em;font-size:1em'
+    const primary = 'background:#070B13;color:#fff;display:block;padding:0.5em 1em;font-size:1em'
+    const alert = 'background:#FFCC4D;color:#000;display:block;padding:0.5em 1em;font-size:1em'
 
     if (window._zeiwNative !== undefined) {
       native = true
       let c = process.versions['chrome']
       let e = process.versions['electron']
       let n = process.versions['node']
-      console.log(
-        `${`%c🌑︎ Chrome ${c} ~ Electron ${e} ~ Node ${n}`.padEnd(61)}🚧`,
-        primary
-      )
+      console.log(`${`%c🌑︎ Chrome ${c} ~ Electron ${e} ~ Node ${n}`.padEnd(61)}🚧`, primary)
     }
     console.log(`%c🌑︎ Client Hash:  ${_zeiwBuild.commitHash} 📌`, primary)
     if (native) {
-      console.log(
-        `%c🌑︎ Desktop Hash: ${_zeiwNative.buildEnv.nativeVersion} 📌`,
-        primary
-      )
+      console.log(`%c🌑︎ Desktop Hash: ${_zeiwNative.buildEnv.nativeVersion} 📌`, primary)
     }
-    console.log(
-      '%c🌑︎ Hackers may entice you to paste code here. Stay aware! ⚠️',
-      alert
-    )
+    console.log('%c🌑︎ Hackers may entice you to paste code here. Stay aware! ⚠️', alert)
   })
 
   function f(c) {
@@ -270,7 +255,7 @@ export default () => {
       },
       body: JSON.stringify({ faction: c })
     }
-    fetch(`${GLOBAL_ENV.API}/v1/user/`, headers)
+    fetch('https://api.zeiw.me/v1/user/', headers)
       .then(response => {
         if (!response.ok) {
           throw new Error(`Error ${response.status}`)
@@ -412,8 +397,7 @@ export default () => {
         .getDiscordOauthCode()
         .then(code => {
           const el = document.createElement('iframe')
-          // prettier-ignore
-          el.src = GLOBAL_ENV.API + `/v1/login/?code=${encodeURIComponent(code)}`
+          el.src = `https://api.zeiw.me/v1/login/?code=${encodeURIComponent(code)}`
           document.body.appendChild(el)
           addEventListener('storage', () => {
             if (localStorage.auth !== undefined) {
@@ -426,8 +410,7 @@ export default () => {
             Swal.fire({
               allowOutsideClick: false,
               confirmButtonText: 'Restart ZEIW',
-              text:
-                "We couldn't connect to Discord. Make sure your Discord app is running.",
+              text: "We couldn't connect to Discord. Make sure your Discord app is running.",
               title: 'Authorization failed',
               type: 'error'
             }).then(() => {
@@ -447,7 +430,7 @@ export default () => {
         })
     } else {
       const w = open(
-        `${GLOBAL_ENV.API}/v1/login/`,
+        'https://api.zeiw.me/v1/login/',
         'ZEIW Login',
         'menubar=no,location=no,resizable=no,scrollbars=yes,status=yes,width=550,height=850'
       )
@@ -505,11 +488,7 @@ export default () => {
   }
 
   function hotkeys() {
-    if (
-      user &&
-      user.game &&
-      ('playing' === user.game.status || 'readying' === user.game.status)
-    ) {
+    if (user && user.game && ('playing' === user.game.status || 'readying' === user.game.status)) {
       if (keys[87] || keys[38]) {
         user.paddle.dir = -1
       } else if (keys[83] || keys[40]) {
@@ -521,11 +500,7 @@ export default () => {
   }
 
   function draw() {
-    if (
-      user &&
-      user.game &&
-      ('playing' === user.game.status || 'readying' === user.game.status)
-    ) {
+    if (user && user.game && ('playing' === user.game.status || 'readying' === user.game.status)) {
       ctx.clearRect(0, 0, canvas.width, canvas.height)
       user.paddle.y += user.paddle.dir * user.paddle.spd
       socket.emit('paddle', user.paddle)
@@ -734,11 +709,7 @@ export default () => {
       nd = false
       $('#game').classList.remove('hidden')
       $('#game').children[1].classList.remove('hidden')
-      presenceUpdate(
-        'Mode: 1v1 (Readying...)',
-        Number(new Date()),
-        Number(new Date()) + 3100
-      )
+      presenceUpdate('Mode: 1v1 (Readying...)', Number(new Date()), Number(new Date()) + 3100)
       countdown(3, () => {
         self.readyUp()
       })
@@ -916,8 +887,7 @@ export default () => {
       Swal.fire({
         confirmButtonText: 'Login',
         imageHeight: 200,
-        imageUrl:
-          'https://discordapp.com/assets/f8389ca1a741a115313bede9ac02e2c0.svg',
+        imageUrl: 'https://discordapp.com/assets/f8389ca1a741a115313bede9ac02e2c0.svg',
         showCancelButton: true,
         text: 'Sign in with Discord and unlock new features!',
         title: 'Authenticate'
@@ -929,9 +899,7 @@ export default () => {
     }
   })
 
-  $('#discord').addEventListener('click', () =>
-    open('https://discord.gg/h7NxqBe', '_blank')
-  )
+  $('#discord').addEventListener('click', () => open('https://discord.gg/h7NxqBe', '_blank'))
   $('#goHome').addEventListener('click', () => goHome())
   $('#hostBtn').addEventListener('click', () => user.host())
   $('#joinBtn').addEventListener('click', () => jm())

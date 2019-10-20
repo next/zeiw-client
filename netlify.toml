@@ -28,13 +28,6 @@
   status = 301
   force = true
 
-# To avoid CORS issues, the API is proxied to /api.
-[[redirects]]
-  from = "/api/*"
-  to = "https://api.zeiw.me/:splat"
-  status = 200
-  force = true
-
 # Traffic to the canary subdomain on Netlify is not allowed.
 [[redirects]]
   from = "https://canary--zeiw.netlify.com"

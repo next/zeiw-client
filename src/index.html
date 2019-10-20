@@ -5,44 +5,23 @@
     <meta content="ie=edge" http-equiv="x-ua-compatible" />
     <meta content="width=device-width, initial-scale=1" name="viewport" />
     <title>Play ZEIW</title>
-    <meta
-      content="Open source community-based game 🏓"
-      property="description"
-    />
-    <link
-      href="https://cdn.zeiw.me/apple-touch-icon.png"
-      rel="apple-touch-icon"
-      sizes="180x180"
-    />
-    <link
-      href="https://cdn.zeiw.me/favicon-32x32.png"
-      rel="icon"
-      sizes="32x32"
-      type="image/png"
-    />
-    <link
-      href="https://cdn.zeiw.me/favicon-16x16.png"
-      rel="icon"
-      sizes="16x16"
-      type="image/png"
-    />
+    <meta content="Open source community-based game 🏓" property="description" />
+    <link href="https://cdn.zeiw.me/apple-touch-icon.png" rel="apple-touch-icon" sizes="180x180" />
+    <link href="https://cdn.zeiw.me/favicon-32x32.png" rel="icon" sizes="32x32" type="image/png" />
+    <link href="https://cdn.zeiw.me/favicon-16x16.png" rel="icon" sizes="16x16" type="image/png" />
     <link href="https://cdn.zeiw.me/manifest.json" rel="manifest" />
     <link href="https://cdn.zeiw.me/safari-pinned-tab.svg" rel="mask-icon" />
     <meta content="#ff9900" name="theme-color" />
     <meta content="https://cdn.zeiw.me/og-image.jpg" property="og:image" />
     <meta content="279" property="og:image:width" />
     <meta content="279" property="og:image:height" />
-    <meta
-      content="Open source community-based game 🏓"
-      property="og:description"
-    />
+    <meta content="Open source community-based game 🏓" property="og:description" />
     <meta content="ZEIW" property="og:title" />
     <meta content="https://play.zeiw.me" property="og:url" />
     <link href="https://use.typekit.net/mkc6ddh.css" rel="stylesheet" />
-    <% for (var chunk of webpack.chunks) { %> <% if (chunk.names.length === 1 &&
-    chunk.names[0] === 'polyfills') continue; %> <% for (var file of
-    chunk.files) { %> <% if (htmlWebpackPlugin.options.preload &&
-    file.match(/\.(js|css)$/)) { %>
+    <% for (var chunk of webpack.chunks) { %> <% if (chunk.names.length === 1 && chunk.names[0] ===
+    'polyfills') continue; %> <% for (var file of chunk.files) { %> <% if
+    (htmlWebpackPlugin.options.preload && file.match(/\.(js|css)$/)) { %>
     <link
       rel="preload"
       href="<%= htmlWebpackPlugin.files.publicPath + file %>"
@@ -51,9 +30,6 @@
     <% } %> <% } %> <% } %>
   </head>
   <body translate="no">
-    <script
-      defer
-      src="<%= htmlWebpackPlugin.files.chunks['bundle'].entry %>"
-    ></script>
+    <script defer src="<%= htmlWebpackPlugin.files.chunks['bundle'].entry %>"></script>
   </body>
 </html>
