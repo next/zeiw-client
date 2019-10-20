@@ -829,7 +829,7 @@ export default () => {
 
   function message(msg) {
     Swal.fire({
-      animate: false,
+      animation: false,
       allowOutsideClick: false,
       cancelButtonText: 'Return Home',
       showCancelButton: true,
