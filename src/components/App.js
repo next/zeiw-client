@@ -8,7 +8,6 @@ import Swal from 'sweetalert2/dist/sweetalert2.all.js'
 export default () => {
   window.GLOBAL_ENV = {
     COMMIT: _zeiwBuild.commitHash.substring(0, 7),
-    DEV: 'true' === localStorage.getItem('isDeveloper') ? true : false,
     RELEASE: 'true' === localStorage.getItem('beta') ? 'canary' : 'master',
     TOKEN: localStorage.getItem('auth')
   }
@@ -178,9 +177,6 @@ export default () => {
                 $('#db').classList.remove('hidden')
             }
           })
-          if (flags.includes('DEV')) {
-            localStorage.setItem('isDeveloper', true)
-          }
         })
         .catch(error => {
           Toast.fire({
@@ -720,7 +716,7 @@ export default () => {
         socket.emit('readyup', {
           p: this.paddle.player
         })
-        if (GLOBAL_ENV.DEV) {
+        if (!$('#dev').classList.contains('hidden')) {
           addEventListener('keydown', ({ keyCode }) => {
             if (keyCode === 32) {
               socket.emit('update ball speed', 0.1)
