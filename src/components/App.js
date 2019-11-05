@@ -37,7 +37,7 @@ export default () => {
     Toast.fire(
       {
         title: 'Checking for updates ...',
-        type: 'info'
+        icon: 'info'
       },
       Swal.showLoading()
     )
@@ -58,14 +58,14 @@ export default () => {
             showConfirmButton: true,
             timer: null,
             title: `Patch ${patch} Available`,
-            type: 'info'
+            icon: 'info'
           }).then(() => {
             location.reload()
           })
         } else {
           Toast.fire({
             title: "Nice! You're up to date.",
-            type: 'success'
+            icon: 'success'
           })
         }
       })
@@ -144,7 +144,7 @@ export default () => {
         })
         .then(({ avatar, uname, flags }) => {
           Toast.fire({
-            type: 'success',
+            icon: 'success',
             title: `Welcome back, ${uname}!`
           })
           $('#user').addEventListener('click', () => {
@@ -181,7 +181,7 @@ export default () => {
         .catch(error => {
           Toast.fire({
             title: 'Uh-oh! Please log in again!',
-            type: 'error'
+            icon: 'error'
           })
           localStorage.removeItem('auth')
           console.error(error)
@@ -238,7 +238,7 @@ export default () => {
     Toast.fire(
       {
         title: 'Contacting servers ...',
-        type: 'info'
+        icon: 'info'
       },
       Swal.showLoading()
     )
@@ -261,7 +261,7 @@ export default () => {
       .then(() => {
         Toast.fire({
           title: 'Welcome to the club!',
-          type: 'success'
+          icon: 'success'
         })
         $('#pr').classList.add('hidden')
         $('#wd').classList.add('hidden')
@@ -280,7 +280,7 @@ export default () => {
       .catch(error => {
         Toast.fire({
           title: 'Failed to set faction!',
-          type: 'error'
+          icon: 'error'
         }),
           console.error(error)
       })
@@ -408,7 +408,7 @@ export default () => {
               confirmButtonText: 'Restart ZEIW',
               text: "We couldn't connect to Discord. Make sure your Discord app is running.",
               title: 'Authorization failed',
-              type: 'error'
+              icon: 'error'
             }).then(() => {
               location.reload()
             })
@@ -418,7 +418,7 @@ export default () => {
               confirmButtonText: 'Restart ZEIW',
               text: 'You can login by authorizing ZEIW on Discord.',
               title: 'Authorization failed',
-              type: 'error'
+              icon: 'error'
             }).then(() => {
               location.reload()
             })
@@ -444,7 +444,7 @@ export default () => {
       showCancelButton: true,
       text: 'Are you really sure?',
       title: 'Log out',
-      type: 'warning'
+      icon: 'warning'
     }).then(({ value }) => {
       if (value) {
         localStorage.removeItem('auth')
@@ -532,7 +532,7 @@ export default () => {
     socket.on('err', err => {
       Toast.fire({
         title: err,
-        type: 'error'
+        icon: 'error'
       })
     })
 
@@ -552,13 +552,13 @@ export default () => {
             .then(() => {
               Toast.fire({
                 title: 'Copied to clipboard!',
-                type: 'success'
+                icon: 'success'
               })
             })
             .catch(() => {
               Toast.fire({
                 title: 'Something went wrong!',
-                type: 'error'
+                icon: 'error'
               })
             })
         })
@@ -573,7 +573,7 @@ export default () => {
         if ('disconnected' === user.game.status) {
           Toast.fire({
             title: 'Opponent left the game!',
-            type: 'error'
+            icon: 'error'
           })
           goHome()
         }
@@ -628,14 +628,14 @@ export default () => {
       self.location.href = '#'
       Toast.fire({
         title: msg,
-        type: 'error'
+        icon: 'error'
       })
     })
 
     socket.on('disconnection', () => {
       Toast.fire({
         title: 'Opponent left the game!',
-        type: 'error'
+        icon: 'error'
       })
       goHome()
     })
@@ -678,7 +678,7 @@ export default () => {
       } else {
         Toast.fire({
           title: 'Already in a game!',
-          type: 'error'
+          icon: 'error'
         })
       }
     }
@@ -768,7 +768,7 @@ export default () => {
       } else {
         Toast.fire({
           title: 'Already in a game!',
-          type: 'error'
+          icon: 'error'
         })
       }
     }
@@ -786,7 +786,7 @@ export default () => {
       } else {
         Toast.fire({
           title: 'Already in a game!',
-          type: 'error'
+          icon: 'error'
         })
       }
     }
@@ -835,7 +835,7 @@ export default () => {
       showCancelButton: true,
       text: 'Do you want a rematch?',
       title: msg,
-      type: 'You Win' === msg ? 'success' : 'error'
+      icon: 'You Win' === msg ? 'success' : 'error'
     }).then(({ value, dismiss }) => {
       if (value) {
         goHome()
