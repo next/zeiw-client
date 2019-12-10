@@ -29,7 +29,7 @@
     "preact": "^10.1.0",
     "preact-cli": "^3.0.0-rc.6",
     "socket.io-client": "^2.3.0",
-    "sweetalert2": "^9.4.3",
+    "sweetalert2": "^9.5.2",
     "tachyons": "^4.11.1",
     "text-spinners": "^1.0.5",
     "unfetch": "^4.1.0"
