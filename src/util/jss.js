@@ -1,6 +1,6 @@
 import { Component } from 'preact'
-import { create as jssCreate } from 'jss'
 import jssCamelCase from 'jss-camel-case'
+import { create as jssCreate } from 'jss'
 import jssNested from 'jss-nested'
 import jssVendorPrefixer from 'jss-vendor-prefixer'
 

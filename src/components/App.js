@@ -1,37 +1,58 @@
-import 'unfetch/polyfill'
-import { $, $$ } from '@zeiw/trump'
 import { Howl, Howler } from 'howler'
-import io from 'socket.io-client'
+
+import Cookies from 'js-cookie/dist/js.cookie.min.mjs'
 import MicroModal from 'micromodal'
 import Swal from 'sweetalert2/dist/sweetalert2.all.js'
+import io from 'socket.io-client'
+
+const $ = (selector, parent = document) => parent.querySelector(selector)
 
 export default () => {
-  window.GLOBAL_ENV = {
-    COMMIT: _zeiwBuild.commitHash.substring(0, 7),
-    RELEASE: 'true' === localStorage.getItem('beta') ? 'canary' : 'master',
-    TOKEN: localStorage.getItem('auth')
+  let ctx
+  let user
+  let server
+  let canvas
+  let username
+
+  let cl = false
+  let gc = false
+  let kd = false
+  let nd = false
+
+  const keys = {}
+
+  let jgl = false
+  let tab = 'home'
+
+  canvas = $('#canvas')
+  ctx = canvas.getContext('2d')
+
+  const isNative = window._zeiwNative !== undefined
+  const isDev = process.env.NODE_ENV === 'development'
+
+  if (localStorage.server !== undefined) {
+    server = localStorage.server
+  } else {
+    if (isDev) {
+      server = 'http://localhost:1337'
+    } else {
+      server = 'wss://live.zeiw.me'
+    }
   }
+
+  const socket = io.connect(server)
 
   const Toast = Swal.mixin({
     toast: true,
+    timer: 3000,
     position: 'top-end',
+    timerProgressBar: true,
     showConfirmButton: false,
-    timer: 1500
+    onOpen: toast => {
+      toast.addEventListener('mouseenter', Swal.stopTimer)
+      toast.addEventListener('mouseleave', Swal.resumeTimer)
+    }
   })
-
-  const keys = {}
-  let canvas
-  let cl = false
-  let ctx
-  let gc = false
-  let jgl = false
-  let kd = false
-  let native = false
-  let nd = false
-  let socket
-  let tab = 'home'
-  let user
-  let username
 
   function updateChecker() {
     Toast.fire(
@@ -41,31 +62,30 @@ export default () => {
       },
       Swal.showLoading()
     )
-    fetch(`https://api.github.com/repos/next/zeiw-client/commits/${GLOBAL_ENV.RELEASE}`, {
-      headers: { 'If-None-Match': '' }
-    })
-      .then(response => {
-        if (!response.ok) {
-          throw new Error(`Error ${response.status}`)
-        }
-        return response.json()
-      })
+    fetch(
+      `https://api.github.com/repos/next/zeiw-client/commits/${
+        localStorage.beta === 'true' ? 'canary' : 'master'
+      }`,
+      {
+        headers: { 'If-None-Match': '' }
+      }
+    )
+      .then(response => response.json())
       .then(({ sha }) => {
         if (sha !== _zeiwBuild.commitHash) {
-          let patch = sha.substring(0, 7)
           Toast.fire({
-            confirmButtonText: 'Update',
-            showConfirmButton: true,
             timer: null,
-            title: `Patch ${patch} Available`,
-            icon: 'info'
+            icon: 'info',
+            showConfirmButton: true,
+            confirmButtonText: 'Update',
+            title: `Patch ${sha.substring(0, 7)} Available`
           }).then(() => {
             location.reload()
           })
         } else {
           Toast.fire({
-            title: "Nice! You're up to date.",
-            icon: 'success'
+            icon: 'success',
+            title: "Nice! You're up to date."
           })
         }
       })
@@ -74,222 +94,147 @@ export default () => {
       })
   }
 
-  addEventListener('load', () => {
-    const handleThemeUpdate = cssVars => {
-      const root = $(':root')
-      const keys = Object.keys(cssVars)
-      keys.forEach(key => {
-        root.style.setProperty(key, cssVars[key])
-      })
+  setInterval(() => {
+    if (tab === 'home') {
+      socket.emit('getOnline')
     }
 
-    const themeSwitchers = $$('[data-color]')
-
-    themeSwitchers.forEach(item => {
-      item.addEventListener('click', ({ target }) => {
-        const color = target.getAttribute('data-color')
-        handleThemeUpdate({
-          '--primary': color
-        })
-        localStorage.setItem('theme', color)
-      })
+    socket.emit('latency', Date.now(), startTime => {
+      const ping = Date.now() - startTime
+      $('#ping').innerHTML = `${ping} ms`
     })
+  }, 1000)
 
-    if (null !== localStorage.getItem('theme')) {
-      handleThemeUpdate({
-        '--primary': localStorage.getItem('theme')
-      })
-    }
+  MicroModal.init({
+    awaitCloseAnimation: true,
+    disableScroll: true
+  })
 
-    if ('localhost' === location.hostname) {
-      $('.devMode').classList.remove('hidden')
-    }
-
-    setInterval(() => {
-      updateChecker()
-    }, 20 * 60 * 1000)
-
-    $('#build').addEventListener('click', () => {
-      updateChecker()
-    })
-
-    MicroModal.init({
-      awaitCloseAnimation: true,
-      disableScroll: true
-    })
-
-    $('#build').innerHTML = `${GLOBAL_ENV.RELEASE}@${GLOBAL_ENV.COMMIT}`
-
+  if (!isDev) {
     new Howl({
-      src: ['https://cdn.zeiw.me/music.mp3'],
+      src: ['https://play.zeiw.me/music.mp3'],
       autoplay: true,
       volume: 0.5,
       loop: true
     })
+  }
 
-    if ('true' === localStorage.getItem('silent')) {
-      Howler.mute(true)
-    }
-
-    if (null !== GLOBAL_ENV.TOKEN) {
-      fetch('https://api.zeiw.me/v1/user/', {
-        mode: 'cors',
-        headers: { Authorization: GLOBAL_ENV.TOKEN }
-      })
-        .then(response => {
-          if (!response.ok) {
-            throw new Error(`Error ${response.status}`)
+  if (localStorage.auth !== undefined) {
+    ;(async () => {
+      try {
+        const response = await fetch('https://api.zeiw.me/v1/user/', {
+          mode: 'cors',
+          headers: {
+            Authorization: localStorage.auth
           }
-          return response.json()
         })
-        .then(({ avatar, uname, flags }) => {
+
+        const { avatar, uname, flags } = await response.json()
+
+        localStorage.username = uname
+
+        if (location.hash === '') {
           Toast.fire({
             icon: 'success',
             title: `Welcome back, ${uname}!`
           })
-          $('#user').addEventListener('click', () => {
-            MicroModal.show('modal-ps', {
-              awaitCloseAnimation: true,
-              disableScroll: true
-            })
-          })
-          $('#pfp').src = avatar
-          $('#uname').textContent = uname
-          flags.forEach(e => {
-            switch (e) {
-              case 'DEV':
-                $('#dev').classList.remove('hidden')
-                $('.devMode').classList.remove('hidden')
-                break
-              case 'MOD':
-                $('#mod').classList.remove('hidden')
-                break
-              case 'BETA':
-                $('#tp').classList.remove('hidden')
-                break
-              case 'PHOENIX_RIDERS':
-                $('#pr').classList.remove('hidden')
-                break
-              case 'WINTER_DRAGONS':
-                $('#wd').classList.remove('hidden')
-                break
-              case 'DEMON_BRIGADE':
-                $('#db').classList.remove('hidden')
-            }
-          })
-        })
-        .catch(error => {
-          Toast.fire({
-            title: 'Uh-oh! Please log in again!',
-            icon: 'error'
-          })
-          localStorage.removeItem('auth')
-          console.error(error)
-        })
-    }
-
-    if ('true' === localStorage.getItem('devMode')) {
-      socket = io.connect('ws://localhost:1337')
-      $('#flag').classList.add('hidden')
-    } else {
-      socket = io.connect('wss://live.zeiw.me')
-      $('#flag').classList.remove('hidden')
-    }
-
-    setSocketEvents()
-
-    canvas = $('#canvas')
-    ctx = canvas.getContext('2d')
-
-    addEventListener('keydown', keydown)
-    addEventListener('keyup', keyup)
-
-    socket.emit('getOnline')
-
-    setInterval(() => {
-      if ('home' === tab) {
-        socket.emit('getOnline')
-      }
-      socket.emit('latency', Date.now(), startTime => {
-        const ping = Date.now() - startTime
-        $('#ping').innerHTML = ping
-        $('#ping').classList.remove('loading')
-      })
-    }, 3500)
-
-    const primary = 'background:#070B13;color:#fff;display:block;padding:0.5em 1em;font-size:1em'
-    const alert = 'background:#FFCC4D;color:#000;display:block;padding:0.5em 1em;font-size:1em'
-
-    if (window._zeiwNative !== undefined) {
-      native = true
-      let c = process.versions['chrome']
-      let e = process.versions['electron']
-      let n = process.versions['node']
-      console.log(`${`%c🌑︎ Chrome ${c} ~ Electron ${e} ~ Node ${n}`.padEnd(61)}🚧`, primary)
-    }
-    console.log(`%c🌑︎ Client Hash:  ${_zeiwBuild.commitHash} 📌`, primary)
-    if (native) {
-      console.log(`%c🌑︎ Desktop Hash: ${_zeiwNative.buildEnv.nativeVersion} 📌`, primary)
-    }
-    console.log('%c🌑︎ Hackers may entice you to paste code here. Stay aware! ⚠️', alert)
-  })
-
-  function f(c) {
-    Toast.fire(
-      {
-        title: 'Contacting servers ...',
-        icon: 'info'
-      },
-      Swal.showLoading()
-    )
-    const headers = {
-      method: 'PATCH',
-      mode: 'cors',
-      headers: {
-        Authorization: GLOBAL_ENV.TOKEN,
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ faction: c })
-    }
-    fetch('https://api.zeiw.me/v1/user/', headers)
-      .then(response => {
-        if (!response.ok) {
-          throw new Error(`Error ${response.status}`)
+        } else {
+          joinGame()
         }
-        return response.text()
-      })
-      .then(() => {
-        Toast.fire({
-          title: 'Welcome to the club!',
-          icon: 'success'
+
+        $('#user').addEventListener('click', () => {
+          MicroModal.show('modal-ps', {
+            awaitCloseAnimation: true,
+            disableScroll: true
+          })
         })
-        $('#pr').classList.add('hidden')
-        $('#wd').classList.add('hidden')
-        $('#db').classList.add('hidden')
-        switch (c) {
-          case 0:
-            $('#pr').classList.remove('hidden')
-            break
-          case 1:
-            $('#wd').classList.remove('hidden')
-            break
-          case 2:
-            $('#db').classList.remove('hidden')
-        }
-      })
-      .catch(error => {
+
+        $('#pfp').src = avatar
+        $('#uname').textContent = uname
+
+        flags.forEach(e => {
+          switch (e) {
+            case 'DEV':
+              $('#dev').classList.remove('hidden')
+              break
+            case 'MOD':
+              $('#mod').classList.remove('hidden')
+              break
+            case 'BETA':
+              $('#tp').classList.remove('hidden')
+              break
+            case 'PHOENIX_RIDERS':
+              $('#pr').classList.remove('hidden')
+              break
+            case 'WINTER_DRAGONS':
+              $('#wd').classList.remove('hidden')
+              break
+            case 'DEMON_BRIGADE':
+              $('#db').classList.remove('hidden')
+          }
+        })
+      } catch (error) {
         Toast.fire({
-          title: 'Failed to set faction!',
+          title: 'Uh-oh! Please log in again!',
           icon: 'error'
-        }),
-          console.error(error)
+        })
+
+        localStorage.removeItem('auth')
+        console.error(error)
+      }
+    })()
+  }
+
+  async function setFaction(id) {
+    try {
+      const response = await fetch('https://api.zeiw.me/v1/user/', {
+        method: 'PATCH',
+        mode: 'cors',
+        headers: {
+          Authorization: localStorage.auth,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          faction: id
+        })
       })
+
+      await response.text()
+
+      Toast.fire({
+        title: 'Welcome to the club!',
+        icon: 'success'
+      })
+
+      $('#pr').classList.add('hidden')
+      $('#wd').classList.add('hidden')
+      $('#db').classList.add('hidden')
+
+      switch (id) {
+        case 0:
+          $('#pr').classList.remove('hidden')
+          break
+        case 1:
+          $('#wd').classList.remove('hidden')
+          break
+        case 2:
+          $('#db').classList.remove('hidden')
+      }
+    } catch (error) {
+      Toast.fire({
+        title: 'Failed to set faction!',
+        icon: 'error'
+      })
+
+      console.error(error)
+    }
   }
 
   function presenceUpdate(s, t, e) {
-    if (native) {
+    if (isNative) {
       t = t || false
       e = e || false
+
       const a = {
         details: 'Competitive Pong',
         assets: {
@@ -298,6 +243,7 @@ export default () => {
         },
         state: s
       }
+
       if (t) {
         a.timestamps = {}
         a.timestamps.start = t
@@ -305,72 +251,61 @@ export default () => {
           a.timestamps.end = e
         }
       }
+
       _zeiwNative.setDiscordPresence(a)
     }
   }
 
-  const audio = localStorage.getItem('silent')
   const audioSwitch = $('#audio')
-  if (audio) {
-    document.documentElement.setAttribute('audio', audio)
-    audioSwitch.checked = 'true' !== audio
-  } else {
+
+  if (localStorage.audio === 'true') {
     audioSwitch.checked = true
+    Howler.mute(false)
+  } else {
+    localStorage.audio = false
+    Howler.mute(true)
   }
+
   function switchAudio({ target }) {
-    if (true === target.checked) {
-      localStorage.setItem('silent', false)
+    if (target.checked) {
+      localStorage.audio = true
       Howler.mute(false)
     } else {
-      localStorage.setItem('silent', true)
+      localStorage.audio = false
       Howler.mute(true)
     }
   }
+
   audioSwitch.addEventListener('change', switchAudio, false)
 
-  const beta = localStorage.getItem('beta')
   const betaSwitch = $('#beta')
-  if (beta) {
-    betaSwitch.checked = 'true' === beta
+
+  if (localStorage.beta === 'true') {
+    betaSwitch.checked = true
   } else {
     betaSwitch.checked = false
   }
-  function switchBeta({ target }) {
-    const timeNow = new Date()
-    timeNow.setFullYear(timeNow.getFullYear() + 10)
-    if (true === target.checked) {
-      localStorage.setItem('beta', true)
-      document.cookie = `nf_ab=canary; Expires=${timeNow.toUTCString()}`
-      location.reload()
-    } else {
-      localStorage.setItem('beta', false)
-      document.cookie = `nf_ab=master; Expires=${timeNow.toUTCString()}`
-      location.reload()
-    }
-  }
-  betaSwitch.addEventListener('change', switchBeta, false)
 
-  const devMode = localStorage.getItem('devMode')
-  const devModeSwitch = $('#devMode')
-  if (devMode) {
-    devModeSwitch.checked = 'true' === devMode
-  } else {
-    devModeSwitch.checked = false
-  }
-  function switchDevMode({ target }) {
-    if (true === target.checked) {
-      localStorage.setItem('devMode', true)
+  function switchBeta({ target }) {
+    if (target.checked) {
+      localStorage.beta = true
+      Cookies.set('nf_ab', 'canary')
+
       location.reload()
     } else {
-      localStorage.setItem('devMode', false)
+      localStorage.beta = false
+      Cookies.set('nf_ab', 'master')
+
       location.reload()
     }
   }
-  devModeSwitch.addEventListener('change', switchDevMode, false)
+
+  betaSwitch.addEventListener('change', switchBeta, false)
 
   function tabTo(t) {
     const ct = tab
     tab = t
+
     $(`#${ct}`).className = 'dtc tc v-mid hidden'
     $(`#${t}`).className = 'dtc tc v-mid'
   }
@@ -381,55 +316,39 @@ export default () => {
     }
 
     presenceUpdate('Staring at the Menu Screen')
+    history.replaceState(null, null, ' ')
     tabTo('home')
-    self.location.href = '#'
 
     $('#pcpb').style.display = 'none'
   }
 
-  function au() {
-    if (native) {
+  function authUser() {
+    if (isNative) {
       _zeiwNative
         .getDiscordOauthCode()
         .then(code => {
           const el = document.createElement('iframe')
+
           el.src = `https://api.zeiw.me/v1/login/?code=${encodeURIComponent(code)}`
           document.body.appendChild(el)
+
           addEventListener('storage', () => {
             if (localStorage.auth !== undefined) {
               location.reload()
             }
           })
         })
-        .catch(({ kind }) => {
-          if ('net' === kind) {
-            Swal.fire({
-              allowOutsideClick: false,
-              confirmButtonText: 'Restart ZEIW',
-              text: "We couldn't connect to Discord. Make sure your Discord app is running.",
-              title: 'Authorization failed',
-              icon: 'error'
-            }).then(() => {
-              location.reload()
-            })
-          } else {
-            Swal.fire({
-              allowOutsideClick: false,
-              confirmButtonText: 'Restart ZEIW',
-              text: 'You can login by authorizing ZEIW on Discord.',
-              title: 'Authorization failed',
-              icon: 'error'
-            }).then(() => {
-              location.reload()
-            })
-          }
+        .catch(error => {
+          Toast.fire({
+            icon: 'error',
+            title: 'Something went wrong!'
+          })
+
+          console.error(error)
         })
     } else {
-      const w = open(
-        'https://api.zeiw.me/v1/login/',
-        'ZEIW Login',
-        'menubar=no,location=no,resizable=no,scrollbars=yes,status=yes,width=550,height=850'
-      )
+      const w = open('https://api.zeiw.me/v1/login/', 'ZEIW Login')
+
       setInterval(() => {
         if (w.closed) {
           location.reload()
@@ -440,11 +359,11 @@ export default () => {
 
   function signOut() {
     Swal.fire({
-      confirmButtonColor: '#f04747',
+      icon: 'warning',
+      title: 'Log out',
       showCancelButton: true,
       text: 'Are you really sure?',
-      title: 'Log out',
-      icon: 'warning'
+      confirmButtonColor: '#f04747'
     }).then(({ value }) => {
       if (value) {
         localStorage.removeItem('auth')
@@ -453,38 +372,64 @@ export default () => {
     })
   }
 
+  function factoryReset() {
+    Swal.fire({
+      icon: 'warning',
+      title: 'Factory reset',
+      showCancelButton: true,
+      confirmButtonColor: '#f04747',
+      text: 'This will completely wipe your client!'
+    }).then(({ value }) => {
+      if (value) {
+        Object.keys(Cookies.get()).forEach(cookieName => {
+          Cookies.remove(cookieName)
+        })
+        localStorage.clear()
+
+        location.reload()
+      }
+    })
+  }
+
   function keydown(e) {
-    if (!kd && 'message' === tab) {
+    if (!kd && tab === 'message') {
       cl = true
     }
+
     kd = true
+
     keys[e.keyCode] = true
     ;(keys.shift = e.shiftKey),
       (keys.meta = e.metaKey),
       (keys.ctrl = e.ctrlKey),
       (keys.alt = e.altKey)
+
     hotkeys()
   }
 
   function keyup(e) {
     kd = false
-    if ('Escape' === e.key && 'home' !== tab && !jgl) {
+
+    if (e.key === 'Escape' && tab !== 'home' && !jgl) {
       goHome()
     }
+
     if (cl) {
-      goHome()
       cl = false
+      goHome()
     }
+
     delete keys[e.keyCode]
     ;(keys.shift = e.shiftKey),
       (keys.meta = e.metaKey),
       (keys.ctrl = e.ctrlKey),
       (keys.alt = e.altKey)
+
     hotkeys()
   }
 
   function hotkeys() {
-    if (user && user.game && ('playing' === user.game.status || 'readying' === user.game.status)) {
+    if (user && user.game && (user.game.status === 'playing' || user.game.status === 'readying')) {
       if (keys[87] || keys[38]) {
         user.paddle.dir = -1
       } else if (keys[83] || keys[40]) {
@@ -496,32 +441,39 @@ export default () => {
   }
 
   function draw() {
-    if (user && user.game && ('playing' === user.game.status || 'readying' === user.game.status)) {
+    if (user && user.game && (user.game.status === 'playing' || user.game.status === 'readying')) {
       ctx.clearRect(0, 0, canvas.width, canvas.height)
+
       user.paddle.y += user.paddle.dir * user.paddle.spd
+
       socket.emit('paddle', user.paddle)
       socket.emit('ball')
+
       drawBall(user.game.ball)
+
       drawPaddle(user.game.p1)
       drawPaddle(user.game.p2)
     }
+
     requestAnimationFrame(draw)
   }
 
   function waitMsg(msg) {
-    const w = $('#wait')
-    w.children[0].textContent = msg
+    $('#wait').children[0].textContent = msg
     tabTo('wait')
   }
 
   function setSocketEvents() {
     socket.on('load', ({ id, w, h, uonl }) => {
       user = new User(id)
+
       canvas.width = w
       canvas.height = h
+
       const onlineusers = uonl
+
       $('#online').innerHTML = `${onlineusers} CONNECTED`
-      $('#online').classList.remove('loading')
+
       draw()
     })
 
@@ -537,15 +489,19 @@ export default () => {
     })
 
     socket.on('gameUpdate', g => {
-      user.game = Object.assign({}, g)
       jgl = false
-      if (true === g.hosted) {
-        const c = g.code
-        const host = location.hostname
-        self.location.href = `#${c}`
-        const url = `https://${host}/#${c}`
+
+      user.game = Object.assign({}, g)
+
+      if (g.hosted) {
+        self.location.href = `#${g.code}`
+
+        const port = location.port !== '' ? `:${location.port}` : ''
+        const url = `${location.protocol}//${location.hostname + port}/#${g.code}`
+
         $('#pcpb').style.display = 'block'
-        $('#wait').children[0].textContent = `Party URL: ${host}/#${c}`
+        $('#wait').children[0].textContent = `Party URL: ${url}`
+
         $('#pcpb').addEventListener('click', () => {
           navigator.clipboard
             .writeText(url)
@@ -565,19 +521,21 @@ export default () => {
       }
 
       if (!nd) {
-        if (user.id === user.game.p1.id) {
+        if (user.game.p1.id === user.id) {
           user.paddle = user.game.p1
         } else {
           user.paddle = user.game.p2
         }
-        if ('disconnected' === user.game.status) {
+
+        if (user.game.status === 'disconnected') {
           Toast.fire({
             title: 'Opponent left the game!',
             icon: 'error'
           })
           goHome()
         }
-        if (null !== user.game) {
+
+        if (user.game !== null) {
           $('#stopwatch').innerHTML = user.game.secs
         }
       }
@@ -601,31 +559,30 @@ export default () => {
 
     socket.on('hit-p1', () => {
       if (!nd && user.game) {
-        const p1 = new Howl({
-          src: ['https://cdn.zeiw.me/hit-p1.mp3']
-        })
-        p1.play()
+        new Howl({
+          src: ['https://play.zeiw.me/hit-p1.mp3']
+        }).play()
       }
     })
 
     socket.on('hit-p2', () => {
       if (!nd && user.game) {
-        const p2 = new Howl({
-          src: ['https://cdn.zeiw.me/hit-p2.mp3']
-        })
-        p2.play()
+        new Howl({
+          src: ['https://play.zeiw.me/hit-p2.mp3']
+        }).play()
       }
     })
 
     socket.on('end', id => {
       const msg = user.id === id ? 'You Win' : 'You Lose'
-      nd = true
       user.leaveGame(msg)
+      nd = true
     })
 
     socket.on('failjoin', msg => {
+      history.replaceState(null, null, ' ')
       tabTo('home')
-      self.location.href = '#'
+
       Toast.fire({
         title: msg,
         icon: 'error'
@@ -637,17 +594,21 @@ export default () => {
         title: 'Opponent left the game!',
         icon: 'error'
       })
+
       goHome()
     })
 
     socket.on('clientTrigger', t => {
-      if ('gameready' === t) {
+      if (t === 'gameready') {
         user.startGame()
       }
-      if ('readyuped' === t) {
+
+      if (t === 'readyuped') {
         const cd = $('#countdown')
+
         cd.style.display = 'flex'
         cd.textContent = 'GO'
+
         setTimeout(() => {
           cd.style.display = 'none'
         }, 1000)
@@ -658,8 +619,8 @@ export default () => {
   class User {
     constructor(id) {
       this.id = id
-      this.paddle = null
       this.game = null
+      this.paddle = null
       this.previousGameOpponentId = null
     }
 
@@ -667,14 +628,17 @@ export default () => {
       if (!user.game) {
         jgl = true
         gc = false
+
         if (opponentId !== undefined) {
           socket.emit('findGame', this.id, opponentId)
         } else {
           socket.emit('findGame', this.id)
         }
-        $('#pcpb').style.display = 'none'
+
         waitMsg('Matchmaking')
-        presenceUpdate('Mode: 1v1 (Waiting...)', Number(new Date()))
+        $('#pcpb').style.display = 'none'
+
+        presenceUpdate('Mode: 1v1 (Waiting ...)', Number(new Date()))
       } else {
         Toast.fire({
           title: 'Already in a game!',
@@ -684,10 +648,10 @@ export default () => {
     }
 
     startGame() {
-      username = null !== GLOBAL_ENV.TOKEN ? $('#uname').textContent : 'Guest'
+      username = localStorage.auth !== undefined ? localStorage.username : 'Guest'
       $('#you').innerHTML = username
 
-      if (username) {
+      if (username !== undefined) {
         socket.emit('opponent username', username)
       }
 
@@ -696,75 +660,77 @@ export default () => {
       })
 
       tabTo('game')
+
       const self = this
-      if (this.id === this.game.p1.id) {
+
+      if (this.game.p1.id === this.id) {
         this.previousGameOpponentId = this.game.p2.id
       } else {
         this.previousGameOpponentId = this.game.p1.id
       }
+
       nd = false
+
       $('#game').classList.remove('hidden')
       $('#game').children[1].classList.remove('hidden')
-      presenceUpdate('Mode: 1v1 (Readying...)', Number(new Date()), Number(new Date()) + 3100)
+
+      presenceUpdate('Mode: 1v1 (Readying ...)', Number(new Date()), Number(new Date()) + 3100)
+
       countdown(3, () => {
         self.readyUp()
       })
     }
 
     readyUp() {
-      if (this.game && 'readying' === this.game.status) {
+      if (this.game && this.game.status === 'readying') {
         socket.emit('readyup', {
           p: this.paddle.player
         })
-        if (!$('#dev').classList.contains('hidden')) {
-          addEventListener('keydown', ({ keyCode }) => {
-            if (keyCode === 32) {
-              socket.emit('update ball speed', 0.1)
-            }
-          })
-        }
+
         presenceUpdate('Mode: 1v1 (In Game)', Number(new Date()))
       }
     }
 
     leaveGame(msg) {
-      socket.emit('leaveGame')
       user.game = null
+      socket.emit('leaveGame')
+
       if (msg !== undefined) {
-        message(msg)
-        switch (msg) {
-          case 'You Win':
-            presenceUpdate('Mode: 1v1 (VICTORY!)')
-            if (!gc) {
-              const win = new Howl({
-                src: ['https://cdn.zeiw.me/win.mp3']
-              })
-              win.play()
-            }
-            break
-          case 'You Lose':
-            presenceUpdate('Mode: 1v1 (Loss)')
-            if (!gc) {
-              const lose = new Howl({
-                src: ['https://cdn.zeiw.me/loss.mp3']
-              })
-              lose.play()
-            }
-            break
-          default:
-            break
-        }
-        gc = true
+        Swal.fire({
+          title: msg,
+          showCancelButton: true,
+          allowOutsideClick: false,
+          text: 'Do you want a rematch?',
+          cancelButtonText: 'Return Home',
+          icon: 'You Win' === msg ? 'success' : 'error'
+        }).then(({ value, dismiss }) => {
+          if (value) {
+            goHome()
+            user.findGame(user.previousGameOpponentId)
+          } else if (dismiss === Swal.DismissReason.cancel) {
+            goHome()
+          }
+        })
       }
+
+      if (msg === 'You Win') {
+        presenceUpdate('Mode: 1v1 (VICTORY!)')
+      } else {
+        presenceUpdate('Mode: 1v1 (Loss)')
+      }
+
+      gc = true
     }
 
     host() {
       if (!user.game) {
         jgl = true
         gc = false
-        socket.emit('host')
+
         tabTo('wait')
-        presenceUpdate('Mode: 1v1 (Hosting...)', Number(new Date()))
+        socket.emit('host')
+
+        presenceUpdate('Mode: 1v1 (Hosting ...)', Number(new Date()))
       } else {
         Toast.fire({
           title: 'Already in a game!',
@@ -777,11 +743,12 @@ export default () => {
       if (!user.game) {
         jgl = true
         gc = false
+
         if (c.includes('#')) {
           c = c.split('#')[1]
         }
+
         waitMsg('Joining')
-        $('#joinID').value = ''
         socket.emit('join', encodeURIComponent(c))
       } else {
         Toast.fire({
@@ -798,6 +765,7 @@ export default () => {
     } else if (p.y + p.h / 2 > canvas.height) {
       p.y = canvas.height - p.h / 2
     }
+
     ctx.fillStyle = p.id === user.id ? '#ff9900' : '#eeeeee'
     ctx.fillRect(p.x - p.w / 2, p.y - p.h / 2, p.w, p.h)
   }
@@ -811,15 +779,19 @@ export default () => {
 
   function countdown(sec, callback) {
     const cd = $('#countdown')
+
     cd.style.display = 'flex'
     cd.textContent = sec
+
     const int = setInterval(() => {
       sec--
       if (0 === sec) {
         clearInterval(int)
+
         if (callback) {
           callback()
         }
+
         cd.style.display = 'none'
         return
       }
@@ -827,39 +799,20 @@ export default () => {
     }, 1000)
   }
 
-  function message(msg) {
+  function joinGame() {
     Swal.fire({
-      animation: false,
-      allowOutsideClick: false,
-      cancelButtonText: 'Return Home',
-      showCancelButton: true,
-      text: 'Do you want a rematch?',
-      title: msg,
-      icon: 'You Win' === msg ? 'success' : 'error'
-    }).then(({ value, dismiss }) => {
-      if (value) {
-        goHome()
-        user.findGame(user.previousGameOpponentId)
-      } else if (dismiss === Swal.DismissReason.cancel) {
-        goHome()
-      }
-    })
-  }
-
-  function jm() {
-    Swal.fire({
-      title: 'Join a game',
       input: 'text',
       inputAttributes: {
-        autoComplete: 'off',
         id: 'joinID',
-        placeholder: 'abcd123',
-        required: '',
-        spellCheck: 'false'
+        required: true,
+        spellCheck: 'false',
+        autoComplete: 'off',
+        placeholder: 'abcd123'
       },
-      inputValue: location.hash.slice(1),
+      title: 'Join a game',
       showCancelButton: true,
-      confirmButtonText: 'Connect'
+      confirmButtonText: 'Connect',
+      inputValue: location.hash.slice(1)
     }).then(({ value }) => {
       if (value) {
         user.join($('#joinID').value)
@@ -867,44 +820,61 @@ export default () => {
     })
   }
 
-  if ('' !== location.hash) {
-    jm()
-  }
-
-  $('#latency').addEventListener('click', () => {
-    Swal.fire(
-      'Server Connection',
-      "ZEIW is connected to a server in Gravelines, France. We currently don't offer any other locations."
-    )
-  })
-
   $('#user').addEventListener('click', () => {
-    if (null === GLOBAL_ENV.TOKEN) {
+    if (localStorage.auth === undefined) {
       Swal.fire({
-        confirmButtonText: 'Login',
-        imageHeight: 200,
-        imageUrl: 'https://discordapp.com/assets/f8389ca1a741a115313bede9ac02e2c0.svg',
+        icon: 'info',
+        title: 'Authenticate',
         showCancelButton: true,
-        text: 'Sign in with Discord and unlock new features!',
-        title: 'Authenticate'
+        confirmButtonText: 'Login',
+        text: 'Sign in with Discord and unlock new features!'
       }).then(({ value }) => {
         if (value) {
-          au()
+          authUser()
         }
       })
     }
   })
 
-  $('#discord').addEventListener('click', () => open('https://discord.gg/h7NxqBe', '_blank'))
-  $('#goHome').addEventListener('click', () => goHome())
-  $('#hostBtn').addEventListener('click', () => user.host())
-  $('#joinBtn').addEventListener('click', () => jm())
-  $('#logout').addEventListener('click', () => signOut())
-  $('#playBtn').addEventListener('click', () => user.findGame())
+  function chooseServer() {
+    Swal.fire({
+      input: 'text',
+      inputAttributes: {
+        required: true,
+        id: 'serverInput',
+        spellCheck: 'false',
+        autoComplete: 'off',
+        placeholder: 'wss://live.zeiw.me'
+      },
+      showCancelButton: true,
+      title: 'Connect to a server',
+      confirmButtonText: 'Connect',
+      inputValue: location.hash.slice(1)
+    }).then(({ value }) => {
+      if (value) {
+        localStorage.server = $('#serverInput').value
+        location.reload()
+      }
+    })
+  }
 
-  $('#prc').addEventListener('click', () => f(0))
-  $('#wdc').addEventListener('click', () => f(1))
-  $('#dbc').addEventListener('click', () => f(2))
+  setSocketEvents()
+
+  addEventListener('keyup', keyup)
+  addEventListener('keydown', keydown)
+
+  $('#goHome').addEventListener('click', () => goHome())
+  $('#logout').addEventListener('click', () => signOut())
+  $('#prc').addEventListener('click', () => setFaction(0))
+  $('#wdc').addEventListener('click', () => setFaction(1))
+  $('#dbc').addEventListener('click', () => setFaction(2))
+  $('#joinBtn').addEventListener('click', () => joinGame())
+  $('#hostBtn').addEventListener('click', () => user.host())
+  $('#reset').addEventListener('click', () => factoryReset())
+  $('#server').addEventListener('click', () => chooseServer())
+  $('#build').addEventListener('click', () => updateChecker())
+  $('#playBtn').addEventListener('click', () => user.findGame())
+  $('#discord').addEventListener('click', () => open('https://discord.gg/h7NxqBe', '_blank'))
 
   onkeyup = ({ which }) => {
     if ('home' === tab && !Swal.isVisible()) {
@@ -913,38 +883,8 @@ export default () => {
       } else if (50 === which) {
         user.host()
       } else if (51 === which) {
-        jm()
+        joinGame()
       }
     }
   }
-
-  const pattern = [
-    'ArrowUp',
-    'ArrowUp',
-    'ArrowDown',
-    'ArrowDown',
-    'ArrowLeft',
-    'ArrowRight',
-    'ArrowLeft',
-    'ArrowRight',
-    'b',
-    'a'
-  ]
-  let current = 0
-
-  const keyHandler = ({ key }) => {
-    if (!pattern.includes(key) || key !== pattern[current]) {
-      current = 0
-      return
-    }
-
-    current++
-
-    if (pattern.length === current) {
-      current = 0
-      open('https://www.youtube.com/watch?v=dQw4w9WgXcQ')
-    }
-  }
-
-  addEventListener('keydown', keyHandler, false)
 }

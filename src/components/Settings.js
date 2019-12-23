@@ -1,43 +1,32 @@
 const Settings = () => (
-  <div aria-hidden="true" className="modal slide" id="modal-gs">
-    <div className="overlay" data-micromodal-close tabIndex={-1}>
-      <div className="container" role="dialog">
-        <div className="header">
-          <h2 className="title">Game Settings</h2>
-          <button className="close" data-micromodal-close />
+  <div aria-hidden='true' className='modal slide' id='modal-gs'>
+    <div className='overlay' data-micromodal-close tabIndex={-1}>
+      <div className='container' role='dialog'>
+        <div className='header'>
+          <h2 className='title'>Settings</h2>
+          <button className='close' data-micromodal-close />
         </div>
-        <div className="content">
-          <div className="beta switch-wrapper">
+        <div className='content'>
+          <div className='beta switch-wrapper'>
             <p>Beta Features</p>
-            <label className="switch" htmlFor="beta">
-              <input id="beta" type="checkbox" />
-              <span className="slider round" />
+            <label className='switch' htmlFor='beta'>
+              <input id='beta' type='checkbox' />
+              <span className='slider round' />
             </label>
           </div>
-          <div className="devMode switch-wrapper hidden">
-            <p>Developer Mode</p>
-            <label className="switch" htmlFor="devMode">
-              <input id="devMode" type="checkbox" />
-              <span className="slider round" />
-            </label>
-          </div>
-          <div className="audio switch-wrapper">
+          <div className='audio switch-wrapper'>
             <p>Play Audio</p>
-            <label className="switch" htmlFor="audio">
-              <input id="audio" type="checkbox" />
-              <span className="slider round" />
+            <label className='switch' htmlFor='audio'>
+              <input id='audio' type='checkbox' />
+              <span className='slider round' />
             </label>
           </div>
         </div>
-        <div className="footer">
-          <button
-            className="btn btn-primary"
-            data-micromodal-close
-            data-micromodal-trigger="modal-c"
-          >
-            Customize
+        <div className='footer'>
+          <button className='btn btn-danger' id='reset'>
+            Factory Reset
           </button>
-          <button className="btn" data-micromodal-close>
+          <button className='btn' data-micromodal-close>
             Close
           </button>
         </div>

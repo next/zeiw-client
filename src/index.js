@@ -1,53 +1,44 @@
 import './index.css'
 
-import About from './components/About'
-import Account from './components/Account'
-import Customize from './components/Customize'
-import Faction from './components/Faction'
-import Find from './components/Find'
-import Game from './components/Game'
-import Host from './components/Host'
-import Layout from './components/Layout'
-import Main from './components/Main'
-import NativeFrame from './components/NativeFrame'
-import Nav from './components/Nav'
-import Settings from './components/Settings'
-import Tippy from './components/Tooltip'
+import {
+  Account,
+  Faction,
+  Find,
+  Game,
+  Host,
+  Layout,
+  Main,
+  Native,
+  Nav,
+  Settings,
+  Tippy
+} from './components'
 
 const isNative = window._zeiwNative !== undefined
+const commit = _zeiwBuild.commitHash.substring(0, 7)
+const release = localStorage.beta === 'true' ? 'canary' : 'master'
 
 export default () => (
   <Layout>
-    {isNative && <NativeFrame />}
-    <Tippy content="Connection Info" placement="bottom">
-      <div
-        className="absolute top-2 right-2"
-        id="latency"
-        style={{
-          alignItems: 'center',
-          display: 'flex',
-          whiteSpace: 'pre-wrap'
-        }}
-      >
-        <span id="ping" className="loading dots" /> ms{' '}
-        <img id="flag" src="https://cdn.zeiw.me/france.png" height="16" />
+    {isNative && <Native />}
+    <Tippy content='Latency' placement='bottom'>
+      <div className='absolute top-2 right-2' id='ping' />
+    </Tippy>
+    <Tippy content='Click to check for updates' placement='top'>
+      <div className='absolute bottom-2 right-2' id='build'>
+        {release}@{commit}
       </div>
     </Tippy>
-    <Tippy content="Current Build" placement="top">
-      <div className="absolute bottom-2 right-2" id="build" />
-    </Tippy>
-    <div className="center">
-      <div className="cf w-100">
+    <div className='center'>
+      <div className='cf w-100'>
         <Nav />
-        <div className="fl w-90 vh-100 dt">
+        <div className='fl w-90 vh-100 dt'>
           <Find />
           <Host />
           <Game />
           <Main />
         </div>
-        <About />
         <Account />
-        <Customize />
         <Faction />
         <Settings />
       </div>

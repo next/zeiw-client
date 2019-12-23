@@ -2,25 +2,14 @@
   "name": "zeiw-client",
   "license": "MIT",
   "scripts": {
-    "build": "preact build --sw false --template src/index.html && npm run post-build",
-    "post-build": "rm -rf build/{assets,polyfills*,manifest*} && cp -r src/cb.html build",
+    "post-build": "rm -rf build/{assets,polyfills*} && cp -r src/assets/* build",
+    "build": "preact build --template src/index.html && npm run post-build",
     "start": "preact watch --template src/index.html"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "pretty-quick --staged"
-    }
-  },
-  "prettier": {
-    "printWidth": 100,
-    "semi": false,
-    "singleQuote": true,
-    "tabWidth": 2
   },
   "dependencies": {
     "@tippy.js/react": "^3.1.1",
-    "@zeiw/trump": "^1.0.7",
     "howler": "^2.1.2",
+    "js-cookie": "^3.0.0-beta.3",
     "jss": "^10.0.0",
     "jss-camel-case": "^6.1.0",
     "jss-nested": "^6.0.1",
@@ -30,13 +19,22 @@
     "preact-cli": "^3.0.0-rc.6",
     "socket.io-client": "^2.3.0",
     "sweetalert2": "^9.5.3",
-    "tachyons": "^4.11.1",
-    "text-spinners": "^1.0.5",
-    "unfetch": "^4.1.0"
+    "tachyons": "^4.11.1"
   },
   "devDependencies": {
     "husky": "^3.1.0",
     "prettier": "^1.19.1",
     "pretty-quick": "^2.0.1"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "pretty-quick --staged"
+    }
+  },
+  "prettier": {
+    "semi": false,
+    "printWidth": 100,
+    "singleQuote": true,
+    "jsxSingleQuote": true
   }
 }

@@ -1,55 +1,20 @@
-# Netlify development environment.
-[dev]
-  command = "yarn start"
-  port = 3000
-  publish = "build"
-
-# Global security headers.
 [[headers]]
   for = "/*"
   [headers.values]
-    Content-Security-Policy = "connect-src 'self' api.github.com api.zeiw.me cdn.zeiw.me live.zeiw.me wss://live.zeiw.me http://localhost:1337 ws://localhost:1337; default-src 'self'; font-src 'self' *.typekit.net; frame-src 'self' api.zeiw.me; img-src 'self' cdn.zeiw.me cdn.discordapp.com discordapp.com; manifest-src 'self' cdn.zeiw.me; media-src 'self' cdn.zeiw.me; style-src 'self' 'unsafe-inline' *.typekit.net; frame-ancestors 'self' *.zeiw.me *.ssis.nu"
-    Feature-Policy = "accelerometer 'none'; camera 'none'; geolocation 'none'; gyroscope 'none'; magnetometer 'none'; microphone 'none'; payment 'none'; usb 'none'"
-    Referrer-Policy = "strict-origin-when-cross-origin"
-    Strict-Transport-Security = "max-age=31536000; includeSubDomains; preload"
     X-Content-Type-Options = "nosniff"
     X-XSS-Protection = "1; mode=block"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Strict-Transport-Security = "max-age=31536000; includeSubDomains; preload"
+    Feature-Policy = "accelerometer 'none'; camera 'none'; geolocation 'none'; gyroscope 'none'; magnetometer 'none'; microphone 'none'; payment 'none'; usb 'none'"
+    Content-Security-Policy = "connect-src *; default-src 'self'; frame-ancestors 'self' *.zeiw.me; frame-src 'self' *.zeiw.me; img-src 'self' data: *.discordapp.com; script-src 'self' storage.googleapis.com; style-src 'self' 'unsafe-inline'"
 
-# To not break the login process, /cb.html has access to inline scripts.
 [[headers]]
   for = "/cb.html"
   [headers.values]
     Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline'"
 
-# Redirect Netlify subdomain to play.zeiw.me.
 [[redirects]]
-  from = "https://zeiw.netlify.com/*"
-  to = "https://play.zeiw.me/:splat"
   status = 301
   force = true
-
-# Traffic to the canary subdomain on Netlify is not allowed.
-[[redirects]]
-  from = "https://canary--zeiw.netlify.com"
-  to = "https://play.zeiw.me"
-  status = 302
-  force = true
-
-[[redirects]]
-  from = "https://canary--zeiw.netlify.com/*"
   to = "https://play.zeiw.me/:splat"
-  status = 302
-  force = true
-
-# Traffic to the master subdomain on Netlify is not allowed.
-[[redirects]]
-  from = "https://master--zeiw.netlify.com"
-  to = "https://play.zeiw.me"
-  status = 302
-  force = true
-
-[[redirects]]
-  from = "https://master--zeiw.netlify.com/*"
-  to = "https://play.zeiw.me/:splat"
-  status = 302
-  force = true
+  from = "https://zeiw.netlify.com/*"
