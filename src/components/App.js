@@ -110,7 +110,7 @@ export default () => {
     disableScroll: true
   })
 
-  if (!isDev) {
+  if (!isDev && localStorage.audio !== 'false') {
     new Howl({
       src: ['https://play.zeiw.me/music.mp3'],
       autoplay: true,
@@ -347,10 +347,32 @@ export default () => {
           console.error(error)
         })
     } else {
-      const w = open('https://api.zeiw.me/v1/login/', 'ZEIW Login')
+      const windowArea = {
+        width: Math.floor(window.outerWidth * 0.8),
+        height: Math.floor(window.outerHeight * 0.5)
+      }
+
+      if (windowArea.width < 1000) {
+        windowArea.width = 1000
+      }
+
+      if (windowArea.height < 630) {
+        windowArea.height = 630
+      }
+
+      windowArea.left = Math.floor(window.screenX + (window.outerWidth - windowArea.width) / 2)
+      windowArea.top = Math.floor(window.screenY + (window.outerHeight - windowArea.height) / 8)
+
+      const authWindow = window.open(
+        'https://api.zeiw.me/v1/login',
+        'zeiwLogin',
+        `toolbar=0,scrollbars=1,status=1,resizable=1,location=1,menuBar=0,
+        width=${windowArea.width},height=${windowArea.height},
+        left=${windowArea.left},top=${windowArea.top}`
+      )
 
       setInterval(() => {
-        if (w.closed) {
+        if (authWindow.closed) {
           location.reload()
         }
       }, 500)
