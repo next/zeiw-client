@@ -7,17 +7,17 @@ const Settings = () => (
           <button className='close' data-micromodal-close />
         </div>
         <div className='content'>
-          <div className='beta switch-wrapper'>
-            <p>Beta Features</p>
-            <label className='switch' htmlFor='beta'>
-              <input id='beta' type='checkbox' />
-              <span className='slider round' />
-            </label>
-          </div>
           <div className='audio switch-wrapper'>
             <p>Play Audio</p>
             <label className='switch' htmlFor='audio'>
               <input id='audio' type='checkbox' />
+              <span className='slider round' />
+            </label>
+          </div>
+          <div className='beta switch-wrapper'>
+            <p>Beta Features</p>
+            <label className='switch' htmlFor='beta'>
+              <input id='beta' type='checkbox' />
               <span className='slider round' />
             </label>
           </div>
