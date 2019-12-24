@@ -110,7 +110,7 @@ export default () => {
     disableScroll: true
   })
 
-  if (!isDev && localStorage.audio !== 'false') {
+  if (isDev) {
     new Howl({
       src: ['https://play.zeiw.me/music.mp3'],
       autoplay: true,
@@ -122,7 +122,7 @@ export default () => {
   if (localStorage.auth !== undefined) {
     ;(async () => {
       try {
-        const response = await fetch('https://api.zeiw.me/v1/user/', {
+        const response = await fetch('https://api.zeiw.me/v1/user', {
           mode: 'cors',
           headers: {
             Authorization: localStorage.auth
@@ -131,7 +131,7 @@ export default () => {
 
         const { avatar, uname, flags } = await response.json()
 
-        localStorage.username = uname
+        username = uname
 
         if (location.hash === '') {
           Toast.fire({
@@ -187,7 +187,7 @@ export default () => {
 
   async function setFaction(id) {
     try {
-      const response = await fetch('https://api.zeiw.me/v1/user/', {
+      const response = await fetch('https://api.zeiw.me/v1/user', {
         method: 'PATCH',
         mode: 'cors',
         headers: {
@@ -347,28 +347,16 @@ export default () => {
           console.error(error)
         })
     } else {
-      const windowArea = {
-        width: Math.floor(window.outerWidth * 0.8),
-        height: Math.floor(window.outerHeight * 0.5)
-      }
+      let width = 500
+      let height = 500
 
-      if (windowArea.width < 1000) {
-        windowArea.width = 1000
-      }
-
-      if (windowArea.height < 630) {
-        windowArea.height = 630
-      }
-
-      windowArea.left = Math.floor(window.screenX + (window.outerWidth - windowArea.width) / 2)
-      windowArea.top = Math.floor(window.screenY + (window.outerHeight - windowArea.height) / 8)
+      const left = window.screenX + (window.outerWidth - width) / 2
+      const top = window.screenY + (window.outerHeight - height) / 2.5
 
       const authWindow = window.open(
         'https://api.zeiw.me/v1/login',
         'zeiwLogin',
-        `toolbar=0,scrollbars=1,status=1,resizable=1,location=1,menuBar=0,
-        width=${windowArea.width},height=${windowArea.height},
-        left=${windowArea.left},top=${windowArea.top}`
+        `width=${width},height=${height},left=${left},top=${top}`
       )
 
       setInterval(() => {
@@ -580,7 +568,7 @@ export default () => {
     })
 
     socket.on('hit-p1', () => {
-      if (!nd && user.game) {
+      if (!isDev && !nd && user.game) {
         new Howl({
           src: ['https://play.zeiw.me/hit-p1.mp3']
         }).play()
@@ -588,7 +576,7 @@ export default () => {
     })
 
     socket.on('hit-p2', () => {
-      if (!nd && user.game) {
+      if (!isDev && !nd && user.game) {
         new Howl({
           src: ['https://play.zeiw.me/hit-p2.mp3']
         }).play()
@@ -670,7 +658,10 @@ export default () => {
     }
 
     startGame() {
-      username = localStorage.auth !== undefined ? localStorage.username : 'Guest'
+      if (username === undefined) {
+        username = 'Guest'
+      }
+
       $('#you').innerHTML = username
 
       if (username !== undefined) {
