@@ -5,12 +5,14 @@ import MicroModal from 'micromodal'
 import Swal from 'sweetalert2/dist/sweetalert2.all.js'
 import io from 'socket.io-client'
 
+const isNative = window._zeiwNative !== undefined
+const isDev = process.env.NODE_ENV === 'development'
+
 const $ = (selector, parent = document) => parent.querySelector(selector)
 
 export default () => {
   let ctx
   let user
-  let server
   let canvas
   let username
 
@@ -27,20 +29,15 @@ export default () => {
   canvas = $('#canvas')
   ctx = canvas.getContext('2d')
 
-  const isNative = window._zeiwNative !== undefined
-  const isDev = process.env.NODE_ENV === 'development'
-
-  if (localStorage.server !== undefined) {
-    server = localStorage.server
-  } else {
-    if (isDev) {
-      server = 'http://localhost:1337'
-    } else {
-      server = 'wss://live.zeiw.me'
-    }
-  }
+  const server =
+    localStorage.server !== undefined
+      ? localStorage.server
+      : isDev
+      ? 'http://localhost:1337'
+      : 'wss://live.zeiw.me'
 
   const socket = io.connect(server)
+  localStorage.server = server
 
   const Toast = Swal.mixin({
     toast: true,
@@ -347,16 +344,13 @@ export default () => {
           console.error(error)
         })
     } else {
-      let width = 500
-      let height = 500
-
-      const left = window.screenX + (window.outerWidth - width) / 2
-      const top = window.screenY + (window.outerHeight - height) / 2.5
+      const left = window.screenX + (window.outerWidth - 500) / 2
+      const top = window.screenY + (window.outerHeight - 500) / 2.5
 
       const authWindow = window.open(
         'https://api.zeiw.me/v1/login',
         'zeiwLogin',
-        `width=${width},height=${height},left=${left},top=${top}`
+        `width=500,height=500,left=${left},top=${top}`
       )
 
       setInterval(() => {
@@ -395,7 +389,6 @@ export default () => {
           Cookies.remove(cookieName)
         })
         localStorage.clear()
-
         location.reload()
       }
     })
@@ -480,15 +473,11 @@ export default () => {
       canvas.width = w
       canvas.height = h
 
-      const onlineusers = uonl
-
-      $('#online').innerHTML = `${onlineusers} CONNECTED`
+      socket.on('uonl', u => {
+        $('#online').innerHTML = `${u} CONNECTED`
+      })
 
       draw()
-    })
-
-    socket.on('uonl', u => {
-      $('#online').innerHTML = `${u} CONNECTED`
     })
 
     socket.on('err', err => {
@@ -658,9 +647,7 @@ export default () => {
     }
 
     startGame() {
-      if (username === undefined) {
-        username = 'Guest'
-      }
+      username = username === undefined ? 'Guest' : username
 
       $('#you').innerHTML = username
 
@@ -712,14 +699,15 @@ export default () => {
         Swal.fire({
           title: msg,
           showCancelButton: true,
+          hideClass: { popup: '' },
           allowOutsideClick: false,
           text: 'Do you want a rematch?',
           cancelButtonText: 'Return Home',
-          icon: 'You Win' === msg ? 'success' : 'error'
+          showClass: { popup: '', icon: '' },
+          icon: msg === 'You Win' ? 'success' : 'error'
         }).then(({ value, dismiss }) => {
           if (value) {
-            goHome()
-            user.findGame(user.previousGameOpponentId)
+            user.findGame(user.previousGameOpponentId) && goHome()
           } else if (dismiss === Swal.DismissReason.cancel) {
             goHome()
           }
@@ -816,7 +804,6 @@ export default () => {
     Swal.fire({
       input: 'text',
       inputAttributes: {
-        id: 'joinID',
         required: true,
         spellCheck: 'false',
         autoComplete: 'off',
@@ -828,7 +815,7 @@ export default () => {
       inputValue: location.hash.slice(1)
     }).then(({ value }) => {
       if (value) {
-        user.join($('#joinID').value)
+        user.join(value)
       }
     })
   }
@@ -854,18 +841,16 @@ export default () => {
       input: 'text',
       inputAttributes: {
         required: true,
-        id: 'serverInput',
         spellCheck: 'false',
-        autoComplete: 'off',
-        placeholder: 'wss://live.zeiw.me'
+        autoComplete: 'off'
       },
       showCancelButton: true,
       title: 'Connect to a server',
       confirmButtonText: 'Connect',
-      inputValue: location.hash.slice(1)
+      inputValue: localStorage.server
     }).then(({ value }) => {
       if (value) {
-        localStorage.server = $('#serverInput').value
+        localStorage.server = value
         location.reload()
       }
     })
