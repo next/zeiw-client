@@ -110,7 +110,7 @@ export default () => {
     disableScroll: true
   })
 
-  if (isDev) {
+  if (!isDev) {
     new Howl({
       src: ['https://play.zeiw.me/music.mp3'],
       autoplay: true,
