@@ -109,10 +109,10 @@ export default () => {
 
   if (!isDev) {
     new Howl({
-      src: ['https://play.zeiw.me/music.mp3'],
-      autoplay: true,
+      loop: true,
       volume: 0.5,
-      loop: true
+      autoplay: true,
+      src: ['music.mp3']
     })
   }
 
@@ -558,17 +558,13 @@ export default () => {
 
     socket.on('hit-p1', () => {
       if (!isDev && !nd && user.game) {
-        new Howl({
-          src: ['https://play.zeiw.me/hit-p1.mp3']
-        }).play()
+        new Howl({ src: ['hit-p1.mp3'] }).play()
       }
     })
 
     socket.on('hit-p2', () => {
       if (!isDev && !nd && user.game) {
-        new Howl({
-          src: ['https://play.zeiw.me/hit-p2.mp3']
-        }).play()
+        new Howl({ src: ['hit-p2.mp3'] }).play()
       }
     })
 
@@ -707,9 +703,9 @@ export default () => {
           icon: msg === 'You Win' ? 'success' : 'error'
         }).then(({ value, dismiss }) => {
           if (value) {
-            user.findGame(user.previousGameOpponentId)
             goHome()
-          } else if (dismiss === Swal.DismissReason.cancel) {
+            user.findGame(user.previousGameOpponentId)
+          } else if (Swal.DismissReason.cancel === dismiss) {
             goHome()
           }
         })
