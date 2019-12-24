@@ -707,7 +707,8 @@ export default () => {
           icon: msg === 'You Win' ? 'success' : 'error'
         }).then(({ value, dismiss }) => {
           if (value) {
-            user.findGame(user.previousGameOpponentId) && goHome()
+            user.findGame(user.previousGameOpponentId)
+            goHome()
           } else if (dismiss === Swal.DismissReason.cancel) {
             goHome()
           }
