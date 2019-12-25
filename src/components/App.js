@@ -5,7 +5,7 @@ import MicroModal from 'micromodal'
 import Swal from 'sweetalert2/dist/sweetalert2.all.js'
 import io from 'socket.io-client'
 
-const isNative = window._zeiwNative !== undefined
+const isNative = _zeiwNative !== undefined
 const isDev = 'development' === process.env.NODE_ENV
 
 const $ = (selector, parent = document) => parent.querySelector(selector)
@@ -71,7 +71,7 @@ export default () => {
     )
       .then(response => response.json())
       .then(({ sha }) => {
-        if (sha !== window._zeiwBuild.commitHash) {
+        if (sha !== _zeiwBuild.commitHash) {
           Toast.fire({
             timer: null,
             icon: 'info',
@@ -252,7 +252,7 @@ export default () => {
         }
       }
 
-      window._zeiwNative.setDiscordPresence(a)
+      _zeiwNative.setDiscordPresence(a)
     }
   }
 
@@ -324,7 +324,7 @@ export default () => {
 
   function authUser() {
     if (isNative) {
-      window._zeiwNative
+      _zeiwNative
         .getDiscordOauthCode()
         .then(code => {
           const el = document.createElement('iframe')
