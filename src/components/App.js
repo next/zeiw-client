@@ -6,7 +6,7 @@ import Swal from 'sweetalert2/dist/sweetalert2.all.js'
 import io from 'socket.io-client'
 
 const isNative = window._zeiwNative !== undefined
-const isDev = process.env.NODE_ENV === 'development'
+const isDev = 'development' === process.env.NODE_ENV
 
 const $ = (selector, parent = document) => parent.querySelector(selector)
 
@@ -17,6 +17,7 @@ export default () => {
   let username
 
   let cl = false
+  // eslint-disable-next-line no-unused-vars
   let gc = false
   let kd = false
   let nd = false
@@ -38,6 +39,7 @@ export default () => {
 
   const socket = io.connect(server)
   localStorage.server = server
+  setSocketEvents()
 
   const Toast = Swal.mixin({
     toast: true,
@@ -61,7 +63,7 @@ export default () => {
     )
     fetch(
       `https://api.github.com/repos/next/zeiw-client/commits/${
-        localStorage.beta === 'true' ? 'canary' : 'master'
+        'true' === localStorage.beta ? 'canary' : 'master'
       }`,
       {
         headers: { 'If-None-Match': '' }
@@ -69,7 +71,7 @@ export default () => {
     )
       .then(response => response.json())
       .then(({ sha }) => {
-        if (sha !== _zeiwBuild.commitHash) {
+        if (sha !== window._zeiwBuild.commitHash) {
           Toast.fire({
             timer: null,
             icon: 'info',
@@ -92,7 +94,7 @@ export default () => {
   }
 
   setInterval(() => {
-    if (tab === 'home') {
+    if ('home' === tab) {
       socket.emit('getOnline')
     }
 
@@ -117,6 +119,7 @@ export default () => {
   }
 
   if (localStorage.auth !== undefined) {
+    // eslint-disable-next-line no-extra-semi
     ;(async () => {
       try {
         const response = await fetch('https://api.zeiw.me/v1/user', {
@@ -130,7 +133,7 @@ export default () => {
 
         username = uname
 
-        if (location.hash === '') {
+        if ('' === location.hash) {
           Toast.fire({
             icon: 'success',
             title: `Welcome back, ${uname}!`
@@ -249,13 +252,13 @@ export default () => {
         }
       }
 
-      _zeiwNative.setDiscordPresence(a)
+      window._zeiwNative.setDiscordPresence(a)
     }
   }
 
   const audioSwitch = $('#audio')
 
-  if (localStorage.audio === 'true') {
+  if ('true' === localStorage.audio) {
     audioSwitch.checked = true
     Howler.mute(false)
   } else {
@@ -277,7 +280,7 @@ export default () => {
 
   const betaSwitch = $('#beta')
 
-  if (localStorage.beta === 'true') {
+  if ('true' === localStorage.beta) {
     betaSwitch.checked = true
   } else {
     betaSwitch.checked = false
@@ -321,7 +324,7 @@ export default () => {
 
   function authUser() {
     if (isNative) {
-      _zeiwNative
+      window._zeiwNative
         .getDiscordOauthCode()
         .then(code => {
           const el = document.createElement('iframe')
@@ -395,7 +398,7 @@ export default () => {
   }
 
   function keydown(e) {
-    if (!kd && tab === 'message') {
+    if (!kd && 'message' === tab) {
       cl = true
     }
 
@@ -413,7 +416,7 @@ export default () => {
   function keyup(e) {
     kd = false
 
-    if (e.key === 'Escape' && tab !== 'home' && !jgl) {
+    if ('Escape' === e.key && 'home' !== tab && !jgl) {
       goHome()
     }
 
@@ -432,7 +435,7 @@ export default () => {
   }
 
   function hotkeys() {
-    if (user && user.game && (user.game.status === 'playing' || user.game.status === 'readying')) {
+    if (user && user.game && ('playing' === user.game.status || 'readying' === user.game.status)) {
       if (keys[87] || keys[38]) {
         user.paddle.dir = -1
       } else if (keys[83] || keys[40]) {
@@ -444,7 +447,7 @@ export default () => {
   }
 
   function draw() {
-    if (user && user.game && (user.game.status === 'playing' || user.game.status === 'readying')) {
+    if (user && user.game && ('playing' === user.game.status || 'readying' === user.game.status)) {
       ctx.clearRect(0, 0, canvas.width, canvas.height)
 
       user.paddle.y += user.paddle.dir * user.paddle.spd
@@ -467,7 +470,7 @@ export default () => {
   }
 
   function setSocketEvents() {
-    socket.on('load', ({ id, w, h, uonl }) => {
+    socket.on('load', ({ id, w, h }) => {
       user = new User(id)
 
       canvas.width = w
@@ -495,7 +498,7 @@ export default () => {
       if (g.hosted) {
         self.location.href = `#${g.code}`
 
-        const port = location.port !== '' ? `:${location.port}` : ''
+        const port = '' !== location.port ? `:${location.port}` : ''
         const url = `${location.protocol}//${location.hostname + port}/#${g.code}`
 
         $('#pcpb').style.display = 'block'
@@ -526,7 +529,7 @@ export default () => {
           user.paddle = user.game.p2
         }
 
-        if (user.game.status === 'disconnected') {
+        if ('disconnected' === user.game.status) {
           Toast.fire({
             title: 'Opponent left the game!',
             icon: 'error'
@@ -534,7 +537,7 @@ export default () => {
           goHome()
         }
 
-        if (user.game !== null) {
+        if (null !== user.game) {
           $('#stopwatch').innerHTML = user.game.secs
         }
       }
@@ -594,11 +597,11 @@ export default () => {
     })
 
     socket.on('clientTrigger', t => {
-      if (t === 'gameready') {
+      if ('gameready' === t) {
         user.startGame()
       }
 
-      if (t === 'readyuped') {
+      if ('readyuped' === t) {
         const cd = $('#countdown')
 
         cd.style.display = 'flex'
@@ -678,7 +681,7 @@ export default () => {
     }
 
     readyUp() {
-      if (this.game && this.game.status === 'readying') {
+      if (this.game && 'readying' === this.game.status) {
         socket.emit('readyup', {
           p: this.paddle.player
         })
@@ -700,7 +703,7 @@ export default () => {
           text: 'Do you want a rematch?',
           cancelButtonText: 'Return Home',
           showClass: { popup: '', icon: '' },
-          icon: msg === 'You Win' ? 'success' : 'error'
+          icon: 'You Win' === msg ? 'success' : 'error'
         }).then(({ value, dismiss }) => {
           if (value) {
             goHome()
@@ -711,7 +714,7 @@ export default () => {
         })
       }
 
-      if (msg === 'You Win') {
+      if ('You Win' === msg) {
         presenceUpdate('Mode: 1v1 (VICTORY!)')
       } else {
         presenceUpdate('Mode: 1v1 (Loss)')
@@ -852,8 +855,6 @@ export default () => {
       }
     })
   }
-
-  setSocketEvents()
 
   addEventListener('keyup', keyup)
   addEventListener('keydown', keydown)
