@@ -5,7 +5,7 @@ import MicroModal from 'micromodal'
 import Swal from 'sweetalert2/dist/sweetalert2.all.js'
 import io from 'socket.io-client'
 
-const isNative = _zeiwNative !== undefined
+const isNative = window._zeiwNative !== undefined
 const isDev = 'development' === process.env.NODE_ENV
 
 const $ = (selector, parent = document) => parent.querySelector(selector)
