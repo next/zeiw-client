@@ -34,10 +34,13 @@ export default () => {
     localStorage.server !== undefined
       ? localStorage.server
       : isDev
-      ? 'http://localhost:1337'
+      ? 'ws://localhost:1337'
       : 'wss://live.zeiw.me'
 
-  const socket = io.connect(server)
+  const socket = io(server, {
+    transports: ['websocket']
+  })
+
   localStorage.server = server
   setSocketEvents()
 
