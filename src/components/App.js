@@ -37,6 +37,8 @@ export default () => {
       ? 'ws://localhost:1337'
       : 'wss://live.zeiw.me'
 
+  const endpoint = isDev ? 'https://api.zeiw.me' : 'http://localhost:3000'
+
   const socket = io(server, {
     transports: ['websocket']
   })
@@ -125,7 +127,7 @@ export default () => {
     // eslint-disable-next-line no-extra-semi
     ;(async () => {
       try {
-        const response = await fetch('https://api.zeiw.me/v1/user', {
+        const response = await fetch(`${endpoint}/v1/user`, {
           mode: 'cors',
           headers: {
             Authorization: localStorage.auth
@@ -190,7 +192,7 @@ export default () => {
 
   async function setFaction(id) {
     try {
-      const response = await fetch('https://api.zeiw.me/v1/user', {
+      const response = await fetch(`${endpoint}/v1/user`, {
         method: 'PATCH',
         mode: 'cors',
         headers: {
@@ -332,7 +334,7 @@ export default () => {
         .then(code => {
           const el = document.createElement('iframe')
 
-          el.src = `https://api.zeiw.me/v1/login/?code=${encodeURIComponent(code)}`
+          el.src = `${endpoint}/v1/login/?code=${encodeURIComponent(code)}`
           document.body.appendChild(el)
 
           addEventListener('storage', () => {
@@ -354,7 +356,7 @@ export default () => {
       const top = window.screenY + (window.outerHeight - 500) / 2.5
 
       const authWindow = window.open(
-        'https://api.zeiw.me/v1/login',
+        `${endpoint}/v1/login`,
         'zeiwLogin',
         `width=500,height=500,left=${left},top=${top}`
       )
