@@ -4841,10 +4841,10 @@ jss-vendor-prefixer@^8.0.1:
   dependencies:
     css-vendor "^1.1.0"
 
-jss@^10.0.2:
-  version "10.0.2"
-  resolved "https://registry.yarnpkg.com/jss/-/jss-10.0.2.tgz#8895474542bbd47cd78c435a75f6901e474d1557"
-  integrity sha512-KHvrm43BSKx3D0k7+IOqsG9tsBlMpDdxx2mpleAtJVyAu5smKqaPg0Cg8ieElraYPrJT/d6xd1tYef/E1PvTaQ==
+jss@^10.0.3:
+  version "10.0.3"
+  resolved "https://registry.yarnpkg.com/jss/-/jss-10.0.3.tgz#5c160f96aa8ce8b9f851ee0b33505dcd37f490a4"
+  integrity sha512-AcDvFdOk16If9qvC9KN3oFXsrkHWM9+TaPMpVB9orm3z+nq1Xw3ofHyflRe/mkSucRZnaQtlhZs1hdP3DR9uRw==
   dependencies:
     "@babel/runtime" "^7.3.1"
     csstype "^2.6.5"
