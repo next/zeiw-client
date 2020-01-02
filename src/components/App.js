@@ -37,7 +37,7 @@ export default () => {
       ? 'ws://localhost:1337'
       : 'wss://live.zeiw.me'
 
-  const endpoint = isDev ? 'https://api.zeiw.me' : 'http://localhost:3000'
+  const endpoint = isDev ? 'http://localhost:3000' : 'https://api.zeiw.me'
 
   const socket = io(server, {
     transports: ['websocket']
