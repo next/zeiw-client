@@ -10,12 +10,7 @@ const Account = () => (
         </div>
         <div className='content center dt'>
           <div className='dtc tc v-mid'>
-            <img
-              src=''
-              id='pfp'
-              style='background:#7289DA'
-              className='br-100 pa1 ba b--black-10 w4'
-            />
+            <img id='pfp' className='br-100 pa1 ba b--black-10 w4' />
             <h1 id='uname' />
             <div className='flex justify-center'>
               <Tippy content='ZEIW Developer'>

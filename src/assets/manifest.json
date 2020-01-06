@@ -1,20 +1,20 @@
 {
-  "background_color": "#000",
-  "display": "standalone",
   "name": "ZEIW",
-  "short_name": "ZEIW",
-  "start_url": "/",
-  "theme_color": "#000",
   "icons": [
     {
-      "sizes": "192x192",
-      "src": "192x192.png",
-      "type": "image/png"
+      "src": "images/192x192.png",
+      "type": "image/png",
+      "sizes": "192x192"
     },
     {
-      "sizes": "512x512",
-      "src": "512x512.png",
-      "type": "image/png"
+      "src": "images/512x512.png",
+      "type": "image/png",
+      "sizes": "512x512"
     }
-  ]
+  ],
+  "display": "standalone",
+  "start_url": "/",
+  "short_name": "ZEIW",
+  "theme_color": "#000",
+  "background_color": "#000"
 }

@@ -107,21 +107,19 @@ export default () => {
       const ping = Date.now() - startTime
       $('#ping').innerHTML = `${ping} ms`
     })
-  }, 1000)
+  }, 3000)
 
   MicroModal.init({
     awaitCloseAnimation: true,
     disableScroll: true
   })
 
-  if (!isDev) {
-    new Howl({
-      loop: true,
-      volume: 0.5,
-      autoplay: true,
-      src: ['music.mp3']
-    })
-  }
+  new Howl({
+    loop: true,
+    volume: 0.5,
+    autoplay: true,
+    src: ['https://play.zeiw.me/audio/music.mp3']
+  })
 
   if (localStorage.auth !== undefined) {
     // eslint-disable-next-line no-extra-semi
@@ -565,14 +563,14 @@ export default () => {
     })
 
     socket.on('hit-p1', () => {
-      if (!isDev && !nd && user.game) {
-        new Howl({ src: ['hit-p1.mp3'] }).play()
+      if (!nd && user.game) {
+        new Howl({ src: ['https://play.zeiw.me/audio/hit-p1.mp3'] }).play()
       }
     })
 
     socket.on('hit-p2', () => {
-      if (!isDev && !nd && user.game) {
-        new Howl({ src: ['hit-p2.mp3'] }).play()
+      if (!nd && user.game) {
+        new Howl({ src: ['https://play.zeiw.me/audio/hit-p2.mp3'] }).play()
       }
     })
 

@@ -4,11 +4,11 @@ import Tippy from '@tippy.js/react'
 
 export default props => (
   <Tippy
-    arrow={true}
+    arrow
     distance={7}
     placement='top'
     animation='fade'
-    hideOnClick={true}
+    hideOnClick
     trigger='mouseenter'
     {...props}
   />
