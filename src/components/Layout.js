@@ -9,7 +9,7 @@ class Layout extends Component {
   }
 
   render({ children }) {
-    return <div>{children}</div>
+    return children
   }
 }
 

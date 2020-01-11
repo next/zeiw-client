@@ -2,10 +2,7 @@ import Tippy from './Tooltip'
 
 const Main = () => (
   <div className='dtc tc v-mid' id='home'>
-    <img
-      className='w-30'
-      src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAA5cAAAEcBAMAAAChU13kAAAAD1BMVEVHcEwAMJKYZQD/qgAAVP/6WA7oAAAAAXRSTlMAQObYZgAABCpJREFUeNrt3V1u4jAUBtAAWQBIXUDFChDdQCux/zWNqlEHgRLie2MnDD3fu7F9T3ix/NN137k0TzeZjwo5dUXZBVr1+RnVSKJ7mDBhwoQJEyZMmDBhwoQJEyZMmC+MeVkwLR0LbXZjrSKFXEh0svdPmDBhwoQJEyZMmDBhwoQJ84Uxdx9tckp9MzBhwoQJEyZMmDBhwoQJEyZMmDBn5vCTfUvM8/EnYcyBVn10RoX1/ZyJebgNTJgwYcKECRMmTJgwYcKE+SKY1/nvGjkeB0QLMW9b9alvtLC0n+nFn3vMv93DhAkTJkyYMGHChAkTJkyYMGHCfHXMhdb0xvrepYDCCWN+5x0mTJgwYcKECRMmTJgwYcKEec0hmqfHzK0A/cOcsatruipfdxuyUnu5htrDhAkTJkyYMGHChAkTJkyYMGFWwsw7LoSZO9IXxrxl2RcuAo6J5goKEyZMmDBhwoQJEyZMmDBhNscsFK3h2KUwZ1zGCxMmTJgwYcKECRMmTJgwYcKECbPSo0aPHf9LzGnRhTC/6jnChAkTJkyYMGHChAkTJkyYMGHCfHXM8Oimbx6qdhP0aV3Mu4m/pTBzpYUJEyZMmDBhwoQJEyZMmDDXxewrOA51W/f5qNMTYEYc7xbMYMKECRMmTJgwYcKECRMmTJgw18Js5dgA87Hoy2Hun+dPCRMmTJgwYcKECRMmTJgwfx1mU8cGmOcxiBqYhaeHWmF+Te6nggkTJkyYMGHChAkTJkyYMGHChPl7MfvIKFKOdTHPLR92i5elfmDChAkTJkyYMGHChAkTJsxnwFzGsRBzxmvwd6IwYcKECRMmTJgwYcKECRMmTJgwazlG9hk1xWywnBcpUnibT2SP1VJ/SpgwYcKECRMmTJgwYcKECbN8caOaY1PMVgeHYMKECRMmTJgwYcKECRMmTJgwYcJcHfOyhmMOs8sHJkyYMGHChAkTJkyYMGHChAkTZvT3ZjrCTGLO3mAJEyZMmDBhwoQJEyZMmDBh1sScG5gwYcKECRMmTJgwYcKECRMmTJirYV4WTAozktMymOHC3WK85R1hwoQJEyZMmDBhwoQJEyZMmC1EYcKECRMmTJgwYcKECRMmTJgwYcKEmZjTviXmqChMmDBhwoQJEyZMmDBhwoQJ8+kx70TrOp4fnRjblTkWYBZWb+zapD7fFCZMmDBhwoQJEyZMmDBhwoQJM3NN89KOQwOr63gMiJ4Dj5BHqjd9cXafbwoTJkyYMGHChAkTJkyYMGEug3nNYbkMDezYKANdbScbvQfqtslPfDOzZjBhwoQJEyZMmDBhwoQJEyZMmDBhroTZQPThdLepVjNE83Xfx8cDEyZMmDBhwoQJEyZMmDBhwoS5ouj0wLbNHUf76uZlE3Wcrvt+znhgwoQJEyZMmDBhwoQJEybMJOYftAJ/zOFYPFsAAAAASUVORK5CYII='
-    />
+    <img className='w-30' src='https://play.zeiw.me/images/logo.png' />
     <Tippy content='Amount of current server connections' placement='bottom'>
       <h1 className='f4 ttu tracked mt0 mt4' id='online'>
         CONNECTING ...

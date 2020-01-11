@@ -114,12 +114,14 @@ export default () => {
     disableScroll: true
   })
 
-  new Howl({
-    loop: true,
-    volume: 0.5,
-    autoplay: true,
-    src: ['https://play.zeiw.me/audio/music.mp3']
-  })
+  if (!isDev) {
+    new Howl({
+      loop: true,
+      volume: 0.5,
+      autoplay: true,
+      src: ['https://play.zeiw.me/audio/music.mp3']
+    })
+  }
 
   if (localStorage.auth !== undefined) {
     // eslint-disable-next-line no-extra-semi
@@ -563,14 +565,14 @@ export default () => {
     })
 
     socket.on('hit-p1', () => {
-      if (!nd && user.game) {
-        new Howl({ src: ['https://play.zeiw.me/audio/hit-p1.mp3'] }).play()
+      if (!isDev && !nd && user.game) {
+        new Howl({ src: ['https://play.zeiw.me/audio/hit-p1.mp3'] })
       }
     })
 
     socket.on('hit-p2', () => {
-      if (!nd && user.game) {
-        new Howl({ src: ['https://play.zeiw.me/audio/hit-p2.mp3'] }).play()
+      if (!isDev && !nd && user.game) {
+        new Howl({ src: ['https://play.zeiw.me/audio/hit-p2.mp3'] })
       }
     })
 
