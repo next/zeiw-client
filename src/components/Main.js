@@ -2,7 +2,7 @@ import Tippy from './Tooltip'
 
 const Main = () => (
   <div className='dtc tc v-mid' id='home'>
-    <img className='w-30' src='https://play.zeiw.me/images/logo.png' />
+    <img className='w-30' src='https://play.pnfc.re/images/logo.png' />
     <Tippy content='Amount of current server connections' placement='bottom'>
       <h1 className='f4 ttu tracked mt0 mt4' id='online'>
         CONNECTING ...

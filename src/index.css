@@ -363,30 +363,30 @@ input:checked + .slider:before {
 }
 
 #dev {
-  background-image: url('https://play.zeiw.me/images/developer.svg');
+  background-image: url('https://play.pnfc.re/images/developer.svg');
 }
 
 #mod {
-  background-image: url('https://play.zeiw.me/images/moderator.svg');
+  background-image: url('https://play.pnfc.re/images/moderator.svg');
 }
 
 #tp {
-  background-image: url('https://play.zeiw.me/images/testpilot.svg');
+  background-image: url('https://play.pnfc.re/images/testpilot.svg');
 }
 
 #pr,
 #prc {
-  background-image: url('https://play.zeiw.me/images/phoenix-riders.svg');
+  background-image: url('https://play.pnfc.re/images/phoenix-riders.svg');
 }
 
 #wd,
 #wdc {
-  background-image: url('https://play.zeiw.me/images/winter-dragons.svg');
+  background-image: url('https://play.pnfc.re/images/winter-dragons.svg');
 }
 
 #db,
 #dbc {
-  background-image: url('https://play.zeiw.me/images/demon-brigade.svg');
+  background-image: url('https://play.pnfc.re/images/demon-brigade.svg');
 }
 
 #prc,

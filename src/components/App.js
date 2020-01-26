@@ -34,10 +34,10 @@ export default () => {
     localStorage.server !== undefined
       ? localStorage.server
       : isDev
-      ? 'ws://localhost:1337'
-      : 'wss://live.zeiw.me'
+      ? 'ws://localhost:9000'
+      : 'wss://live.pnfc.re'
 
-  const endpoint = isDev ? 'http://localhost:3000' : 'https://api.zeiw.me'
+  const endpoint = isDev ? 'http://localhost:3000' : 'https://api.pnfc.re'
 
   const socket = io(server, {
     transports: ['websocket']
@@ -119,7 +119,7 @@ export default () => {
       loop: true,
       volume: 0.5,
       autoplay: true,
-      src: ['https://play.zeiw.me/audio/music.mp3']
+      src: ['https://play.pnfc.re/audio/music.mp3']
     })
   }
 
@@ -566,13 +566,13 @@ export default () => {
 
     socket.on('hit-p1', () => {
       if (!isDev && !nd && user.game) {
-        new Howl({ src: ['https://play.zeiw.me/audio/hit-p1.mp3'] })
+        new Howl({ src: ['https://play.pnfc.re/audio/hit-p1.mp3'] })
       }
     })
 
     socket.on('hit-p2', () => {
       if (!isDev && !nd && user.game) {
-        new Howl({ src: ['https://play.zeiw.me/audio/hit-p2.mp3'] })
+        new Howl({ src: ['https://play.pnfc.re/audio/hit-p2.mp3'] })
       }
     })
 
