@@ -4,7 +4,8 @@
   "scripts": {
     "post-build": "rm -rf build/{assets,polyfills*} && cp -r src/assets/* build",
     "build": "preact build --template src/index.html && npm run post-build",
-    "start": "preact watch --template src/index.html"
+    "start": "preact watch --template src/index.html",
+    "test": "echo 👀"
   },
   "dependencies": {
     "@tippy.js/react": "^3.1.1",
