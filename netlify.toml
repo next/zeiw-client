@@ -18,3 +18,9 @@
   force = true
   to = "https://play.pnfc.re/:splat"
   from = "https://zeiw.netlify.com/*"
+
+[[redirects]]
+  status = 200
+  force = true
+  from = "/api/*"
+  to = "https://api.pnfc.re/:splat"

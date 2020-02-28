@@ -37,7 +37,7 @@ export default () => {
       ? 'ws://localhost:9000'
       : 'wss://live.pnfc.re'
 
-  const endpoint = isDev ? 'http://localhost:3000' : 'https://api.pnfc.re'
+  const endpoint = isDev ? 'http://localhost:3000' : '/api'
 
   const socket = io(server, {
     transports: ['websocket']
