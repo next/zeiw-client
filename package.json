@@ -17,7 +17,7 @@
     "jss-vendor-prefixer": "8.0.1",
     "micromodal": "0.4.0",
     "preact": "10.3.3",
-    "preact-cli": "3.0.0-rc.9",
+    "preact-cli": "3.0.0-rc.7",
     "socket.io-client": "2.3.0",
     "sweetalert2": "9.9.0",
     "tachyons": "4.11.1"
