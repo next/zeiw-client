@@ -11,7 +11,7 @@ import {
   Native,
   Nav,
   Settings,
-  Tippy
+  Tippy,
 } from './components'
 
 const isNative = window._zeiwNative !== undefined

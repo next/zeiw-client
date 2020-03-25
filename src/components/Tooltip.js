@@ -2,7 +2,7 @@ import 'tippy.js/dist/tippy.css'
 
 import Tippy from '@tippy.js/react'
 
-export default props => (
+export default (props) => (
   <Tippy
     arrow
     distance={7}

@@ -30,33 +30,33 @@ export default withStyles(
       position: 'fixed',
       width: 'calc(100% - 4px)',
       gridTemplateColumns: '1fr repeat(3, 25px)',
-      marginLeft: '4px'
+      marginLeft: '4px',
     },
     draggable: {
       marginTop: '4px',
       height: 'calc(100% - 4px)',
-      WebkitAppRegion: 'drag'
+      WebkitAppRegion: 'drag',
     },
     frameIcon: {
       width: '100%',
       display: 'grid',
       '& > svg': {
-        margin: 'auto'
+        margin: 'auto',
       },
       '&:hover': {
-        background: 'rgba(255, 255, 255, 0.05)'
-      }
+        background: 'rgba(255, 255, 255, 0.05)',
+      },
     },
     dangerIcon: {
       width: '100%',
       display: 'grid',
       '& > svg': {
-        margin: 'auto'
+        margin: 'auto',
       },
       '&:hover': {
-        background: '#f04747'
-      }
-    }
+        background: '#f04747',
+      },
+    },
   },
   ({ classes }) => (
     <div class={classes.root}>

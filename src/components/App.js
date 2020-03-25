@@ -40,7 +40,7 @@ export default () => {
   const endpoint = isDev ? 'http://localhost:3000' : '/api'
 
   const socket = io(server, {
-    transports: ['websocket']
+    transports: ['websocket'],
   })
 
   localStorage.server = server
@@ -52,17 +52,17 @@ export default () => {
     position: 'top-end',
     timerProgressBar: true,
     showConfirmButton: false,
-    onOpen: toast => {
+    onOpen: (toast) => {
       toast.addEventListener('mouseenter', Swal.stopTimer)
       toast.addEventListener('mouseleave', Swal.resumeTimer)
-    }
+    },
   })
 
   function updateChecker() {
     Toast.fire(
       {
         title: 'Checking for updates ...',
-        icon: 'info'
+        icon: 'info',
       },
       Swal.showLoading()
     )
@@ -71,10 +71,10 @@ export default () => {
         'true' === localStorage.beta ? 'canary' : 'master'
       }`,
       {
-        headers: { 'If-None-Match': '' }
+        headers: { 'If-None-Match': '' },
       }
     )
-      .then(response => response.json())
+      .then((response) => response.json())
       .then(({ sha }) => {
         if (sha !== _zeiwBuild.commitHash) {
           Toast.fire({
@@ -82,18 +82,18 @@ export default () => {
             icon: 'info',
             showConfirmButton: true,
             confirmButtonText: 'Update',
-            title: `Patch ${sha.substring(0, 7)} Available`
+            title: `Patch ${sha.substring(0, 7)} Available`,
           }).then(() => {
             location.reload()
           })
         } else {
           Toast.fire({
             icon: 'success',
-            title: "Nice! You're up to date."
+            title: "Nice! You're up to date.",
           })
         }
       })
-      .catch(error => {
+      .catch((error) => {
         console.error(error)
       })
   }
@@ -103,7 +103,7 @@ export default () => {
       socket.emit('getOnline')
     }
 
-    socket.emit('latency', Date.now(), startTime => {
+    socket.emit('latency', Date.now(), (startTime) => {
       const ping = Date.now() - startTime
       $('#ping').innerHTML = `${ping} ms`
     })
@@ -111,7 +111,7 @@ export default () => {
 
   MicroModal.init({
     awaitCloseAnimation: true,
-    disableScroll: true
+    disableScroll: true,
   })
 
   if (!isDev) {
@@ -119,7 +119,7 @@ export default () => {
       loop: true,
       volume: 0.5,
       autoplay: true,
-      src: ['https://play.pnfc.re/audio/music.mp3']
+      src: ['https://play.pnfc.re/audio/music.mp3'],
     })
   }
 
@@ -130,8 +130,8 @@ export default () => {
         const response = await fetch(`${endpoint}/v1/user`, {
           mode: 'cors',
           headers: {
-            Authorization: localStorage.auth
-          }
+            Authorization: localStorage.auth,
+          },
         })
 
         const { avatar, uname, flags } = await response.json()
@@ -141,7 +141,7 @@ export default () => {
         if ('' === location.hash) {
           Toast.fire({
             icon: 'success',
-            title: `Welcome back, ${uname}!`
+            title: `Welcome back, ${uname}!`,
           })
         } else {
           joinGame()
@@ -150,14 +150,14 @@ export default () => {
         $('#user').addEventListener('click', () => {
           MicroModal.show('modal-ps', {
             awaitCloseAnimation: true,
-            disableScroll: true
+            disableScroll: true,
           })
         })
 
         $('#pfp').src = avatar
         $('#uname').textContent = uname
 
-        flags.forEach(e => {
+        flags.forEach((e) => {
           switch (e) {
             case 'DEV':
               $('#dev').classList.remove('hidden')
@@ -181,7 +181,7 @@ export default () => {
       } catch (error) {
         Toast.fire({
           title: 'Uh-oh! Please log in again!',
-          icon: 'error'
+          icon: 'error',
         })
 
         localStorage.removeItem('auth')
@@ -197,18 +197,18 @@ export default () => {
         mode: 'cors',
         headers: {
           Authorization: localStorage.auth,
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          faction: id
-        })
+          faction: id,
+        }),
       })
 
       await response.text()
 
       Toast.fire({
         title: 'Welcome to the club!',
-        icon: 'success'
+        icon: 'success',
       })
 
       $('#pr').classList.add('hidden')
@@ -228,7 +228,7 @@ export default () => {
     } catch (error) {
       Toast.fire({
         title: 'Failed to set faction!',
-        icon: 'error'
+        icon: 'error',
       })
 
       console.error(error)
@@ -244,9 +244,9 @@ export default () => {
         details: 'Competitive Pong',
         assets: {
           large_image: 'zeiw',
-          large_text: 'ZEIW'
+          large_text: 'ZEIW',
         },
-        state: s
+        state: s,
       }
 
       if (t) {
@@ -331,7 +331,7 @@ export default () => {
     if (isNative) {
       _zeiwNative
         .getDiscordOauthCode()
-        .then(code => {
+        .then((code) => {
           const el = document.createElement('iframe')
 
           el.src = `${endpoint}/v1/login/?code=${encodeURIComponent(code)}`
@@ -343,10 +343,10 @@ export default () => {
             }
           })
         })
-        .catch(error => {
+        .catch((error) => {
           Toast.fire({
             icon: 'error',
-            title: 'Something went wrong!'
+            title: 'Something went wrong!',
           })
 
           console.error(error)
@@ -375,7 +375,7 @@ export default () => {
       title: 'Log out',
       showCancelButton: true,
       text: 'Are you really sure?',
-      confirmButtonColor: '#f04747'
+      confirmButtonColor: '#f04747',
     }).then(({ value }) => {
       if (value) {
         localStorage.removeItem('auth')
@@ -390,10 +390,10 @@ export default () => {
       title: 'Factory reset',
       showCancelButton: true,
       confirmButtonColor: '#f04747',
-      text: 'This will completely wipe your client!'
+      text: 'This will completely wipe your client!',
     }).then(({ value }) => {
       if (value) {
-        Object.keys(Cookies.get()).forEach(cookieName => {
+        Object.keys(Cookies.get()).forEach((cookieName) => {
           Cookies.remove(cookieName)
         })
         localStorage.clear()
@@ -481,21 +481,21 @@ export default () => {
       canvas.width = w
       canvas.height = h
 
-      socket.on('uonl', u => {
+      socket.on('uonl', (u) => {
         $('#online').innerHTML = `${u} CONNECTED`
       })
 
       draw()
     })
 
-    socket.on('err', err => {
+    socket.on('err', (err) => {
       Toast.fire({
         title: err,
-        icon: 'error'
+        icon: 'error',
       })
     })
 
-    socket.on('gameUpdate', g => {
+    socket.on('gameUpdate', (g) => {
       jgl = false
 
       user.game = Object.assign({}, g)
@@ -515,13 +515,13 @@ export default () => {
             .then(() => {
               Toast.fire({
                 title: 'Copied to clipboard!',
-                icon: 'success'
+                icon: 'success',
               })
             })
             .catch(() => {
               Toast.fire({
                 title: 'Something went wrong!',
-                icon: 'error'
+                icon: 'error',
               })
             })
         })
@@ -537,7 +537,7 @@ export default () => {
         if ('disconnected' === user.game.status) {
           Toast.fire({
             title: 'Opponent left the game!',
-            icon: 'error'
+            icon: 'error',
           })
           goHome()
         }
@@ -548,17 +548,17 @@ export default () => {
       }
     })
 
-    socket.on('gameTimeUpdate', d => {
+    socket.on('gameTimeUpdate', (d) => {
       $('#stopwatch').innerHTML = d
     })
 
-    socket.on('paddle', p => {
+    socket.on('paddle', (p) => {
       if (!nd && user.game) {
         user.game[p.player] = Object.assign(user.game[p.player], p)
       }
     })
 
-    socket.on('ball', b => {
+    socket.on('ball', (b) => {
       if (!nd && user.game) {
         user.game.ball = b
       }
@@ -576,32 +576,32 @@ export default () => {
       }
     })
 
-    socket.on('end', id => {
+    socket.on('end', (id) => {
       const msg = user.id === id ? 'You Win' : 'You Lose'
       user.leaveGame(msg)
       nd = true
     })
 
-    socket.on('failjoin', msg => {
+    socket.on('failjoin', (msg) => {
       history.replaceState(null, null, ' ')
       tabTo('home')
 
       Toast.fire({
         title: msg,
-        icon: 'error'
+        icon: 'error',
       })
     })
 
     socket.on('disconnection', () => {
       Toast.fire({
         title: 'Opponent left the game!',
-        icon: 'error'
+        icon: 'error',
       })
 
       goHome()
     })
 
-    socket.on('clientTrigger', t => {
+    socket.on('clientTrigger', (t) => {
       if ('gameready' === t) {
         user.startGame()
       }
@@ -645,7 +645,7 @@ export default () => {
       } else {
         Toast.fire({
           title: 'Already in a game!',
-          icon: 'error'
+          icon: 'error',
         })
       }
     }
@@ -659,7 +659,7 @@ export default () => {
         socket.emit('opponent username', username)
       }
 
-      socket.on('opponent username', msg => {
+      socket.on('opponent username', (msg) => {
         $('#opponent').innerHTML = msg
       })
 
@@ -688,7 +688,7 @@ export default () => {
     readyUp() {
       if (this.game && 'readying' === this.game.status) {
         socket.emit('readyup', {
-          p: this.paddle.player
+          p: this.paddle.player,
         })
 
         presenceUpdate('Mode: 1v1 (In Game)', Number(new Date()))
@@ -708,7 +708,7 @@ export default () => {
           text: 'Do you want a rematch?',
           cancelButtonText: 'Return Home',
           showClass: { popup: '', icon: '' },
-          icon: 'You Win' === msg ? 'success' : 'error'
+          icon: 'You Win' === msg ? 'success' : 'error',
         }).then(({ value, dismiss }) => {
           if (value) {
             goHome()
@@ -740,7 +740,7 @@ export default () => {
       } else {
         Toast.fire({
           title: 'Already in a game!',
-          icon: 'error'
+          icon: 'error',
         })
       }
     }
@@ -759,7 +759,7 @@ export default () => {
       } else {
         Toast.fire({
           title: 'Already in a game!',
-          icon: 'error'
+          icon: 'error',
         })
       }
     }
@@ -812,12 +812,12 @@ export default () => {
         required: true,
         spellCheck: 'false',
         autoComplete: 'off',
-        placeholder: 'abcd123'
+        placeholder: 'abcd123',
       },
       title: 'Join a game',
       showCancelButton: true,
       confirmButtonText: 'Connect',
-      inputValue: location.hash.slice(1)
+      inputValue: location.hash.slice(1),
     }).then(({ value }) => {
       if (value) {
         user.join(value)
@@ -832,7 +832,7 @@ export default () => {
         title: 'Authenticate',
         showCancelButton: true,
         confirmButtonText: 'Login',
-        text: 'Sign in with Discord and unlock new features!'
+        text: 'Sign in with Discord and unlock new features!',
       }).then(({ value }) => {
         if (value) {
           authUser()
@@ -847,12 +847,12 @@ export default () => {
       inputAttributes: {
         required: true,
         spellCheck: 'false',
-        autoComplete: 'off'
+        autoComplete: 'off',
       },
       showCancelButton: true,
       title: 'Connect to a server',
       confirmButtonText: 'Connect',
-      inputValue: localStorage.server
+      inputValue: localStorage.server,
     }).then(({ value }) => {
       if (value) {
         localStorage.server = value
