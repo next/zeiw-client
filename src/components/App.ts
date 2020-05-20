@@ -302,12 +302,12 @@ export default () => {
 	function switchBeta({ target }) {
 		if (target.checked) {
 			localStorage.beta = true
-			Cookies.set("nf_ab", "canary")
+			Cookies.set("nf_ab", "canary", { sameSite: "strict" })
 
 			location.reload()
 		} else {
 			localStorage.beta = false
-			Cookies.set("nf_ab", "master")
+			Cookies.set("nf_ab", "master", { sameSite: "strict" })
 
 			location.reload()
 		}
