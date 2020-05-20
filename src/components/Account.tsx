@@ -1,4 +1,5 @@
 import Tippy from "./Tooltip"
+import { h } from "preact"
 
 const Account = () => (
 	<div aria-hidden="true" className="modal slide" id="modal-ps">

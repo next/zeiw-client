@@ -23,8 +23,7 @@ declare global {
 }
 
 const isNative = window._zeiwNative !== undefined
-// @ts-ignore
-const commit = _zeiwBuild.commitHash.substring(0, 7)
+const version = process.env.VERSION.substring(0, 7)
 const release = localStorage.beta === "true" ? "canary" : "master"
 
 export default () => (
@@ -37,7 +36,7 @@ export default () => (
 
 		<Tippy content="Click to check for updates" placement="top">
 			<div className="absolute bottom-2 right-2" id="build">
-				{release}@{commit}
+				{release}@{version}
 			</div>
 		</Tippy>
 

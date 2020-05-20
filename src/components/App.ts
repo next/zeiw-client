@@ -10,7 +10,6 @@ const isDev = "development" === process.env.NODE_ENV
 
 const $ = (selector, parent = document) => parent.querySelector(selector)
 
-let _zeiwBuild
 let _zeiwNative
 
 export default () => {
@@ -84,7 +83,7 @@ export default () => {
 		)
 			.then((response) => response.json())
 			.then(({ sha }) => {
-				if (sha !== _zeiwBuild.commitHash) {
+				if (sha !== process.env.VERSION) {
 					Toast.fire({
 						timer: null,
 						icon: "info",
