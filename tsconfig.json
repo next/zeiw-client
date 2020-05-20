@@ -1,0 +1,13 @@
+{
+	"include": ["src/**/*.tsx", "src/**/*.ts"],
+	"compilerOptions": {
+		"jsx": "react",
+		"target": "es5",
+		"module": "esnext",
+		"strict": false,
+		"allowJs": true,
+		"jsxFactory": "h",
+		"esModuleInterop": true,
+		"moduleResolution": "node"
+	}
+}

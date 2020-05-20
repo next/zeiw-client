@@ -1,32 +1,52 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <title>ZEIW</title>
-    <meta property="og:url" content="https://play.pnfc.re" />
-    <meta property="og:title" content="ZEIW" />
-    <meta property="og:image" content="https://play.pnfc.re/images/og-image.jpg" />
-    <meta property="og:image:width" content="279" />
-    <meta property="og:image:height" content="279" />
-    <meta property="og:description" content="Open source community-based game." />
-    <meta content="width=device-width,initial-scale=1" name="viewport" />
-    <meta content="Open source community-based game." name="description" />
-    <meta content="#000000" name="theme-color" />
-    <link href="https://play.pnfc.re/images/safari-pinned-tab.svg" rel="mask-icon" />
-    <link href="https://play.pnfc.re/images/apple-touch-icon.png" rel="apple-touch-icon" />
-    <link href="https://play.pnfc.re/images/192x192.png" rel="icon" sizes="192x192" />
-    <link href="/manifest.json" rel="manifest" />
-    <% for (var chunk of webpack.chunks) { %> <% if (chunk.names.length === 1 && chunk.names[0] ===
-    'polyfills') continue; %> <% for (var file of chunk.files) { %> <% if
-    (htmlWebpackPlugin.options.preload && file.match(/\.(js|css)$/)) { %>
-    <link
-      rel="preload"
-      href="<%= htmlWebpackPlugin.files.publicPath + file %>"
-      as="<%= file.match(/\.css$/)?'style':'script' %>"
-    />
-    <% } %> <% } %> <% } %>
-  </head>
-  <body translate="no">
-    <script defer src="<%= htmlWebpackPlugin.files.chunks['bundle'].entry %>"></script>
-  </body>
+	<head>
+		<meta charset="utf-8" />
+		<title>ZEIW</title>
+		<meta property="og:url" content="https://play.pnfc.re" />
+		<meta property="og:title" content="ZEIW" />
+		<meta
+			property="og:image"
+			content="https://play.pnfc.re/images/og-image.jpg"
+		/>
+		<meta property="og:image:width" content="279" />
+		<meta property="og:image:height" content="279" />
+		<meta
+			property="og:description"
+			content="Open source community-based game."
+		/>
+		<meta content="width=device-width,initial-scale=1" name="viewport" />
+		<meta content="Open source community-based game." name="description" />
+		<meta content="#000000" name="theme-color" />
+		<link
+			href="https://play.pnfc.re/images/safari-pinned-tab.svg"
+			rel="mask-icon"
+		/>
+		<link
+			href="https://play.pnfc.re/images/apple-touch-icon.png"
+			rel="apple-touch-icon"
+		/>
+		<link
+			href="https://play.pnfc.re/images/192x192.png"
+			rel="icon"
+			sizes="192x192"
+		/>
+		<link href="/manifest.json" rel="manifest" />
+		<% for (var chunk of webpack.chunks) { %> <% if (chunk.names.length === 1 &&
+		chunk.names[0] === 'polyfills') continue; %> <% for (var file of
+		chunk.files) { %> <% if (htmlWebpackPlugin.options.preload &&
+		file.match(/\.(js|css)$/)) { %>
+		<link
+			rel="preload"
+			href="<%= htmlWebpackPlugin.files.publicPath + file %>"
+			as="<%= file.match(/\.css$/)?'style':'script' %>"
+		/>
+		<% } %> <% } %> <% } %>
+	</head>
+	<body translate="no">
+		<script
+			defer
+			src="<%= htmlWebpackPlugin.files.chunks['bundle'].entry %>"
+		></script>
+	</body>
 </html>

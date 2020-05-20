@@ -1,9 +1,9 @@
 ---
 name: 🐛 Bug Report
 about: Found something that's not working correctly?
-title: ''
-labels: 'Bug Report'
-assignees: ''
+title: ""
+labels: "Bug Report"
+assignees: ""
 ---
 
 ## Short Description
