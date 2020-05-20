@@ -299,16 +299,18 @@ export default () => {
 		betaSwitch.checked = false
 	}
 
+	function setAbCookie(branch: string) {
+		Cookies.set("nf_ab", branch, { sameSite: "strict", secure: true })
+	}
+
 	function switchBeta({ target }) {
 		if (target.checked) {
 			localStorage.beta = true
-			Cookies.set("nf_ab", "canary", { sameSite: "strict" })
-
+			setAbCookie("canary")
 			location.reload()
 		} else {
 			localStorage.beta = false
-			Cookies.set("nf_ab", "master", { sameSite: "strict" })
-
+			setAbCookie("master")
 			location.reload()
 		}
 	}
