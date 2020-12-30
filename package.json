@@ -24,7 +24,7 @@
 	"devDependencies": {
 		"@types/howler": "2.2.1",
 		"@types/js-cookie": "2.2.6",
-		"@types/micromodal": "0.3.1",
+		"@types/micromodal": "0.3.2",
 		"@types/node": "14.14.16",
 		"@types/prettier": "2.1.6",
 		"@types/react": "17.0.0",
