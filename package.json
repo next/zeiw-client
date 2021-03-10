@@ -7,7 +7,7 @@
 		"start": "preact watch --template src/index.html"
 	},
 	"dependencies": {
-		"@tippyjs/react": "4.2.0",
+		"@tippyjs/react": "4.2.4",
 		"howler": "2.2.1",
 		"js-cookie": "3.0.0-rc.1",
 		"jss": "10.5.0",
